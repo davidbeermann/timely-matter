@@ -1,2 +1,8 @@
+# system files
 .DS_Store
+# gem bundler files
 Gemfile.lock
+# jekyll files and folders
+_site
+.sass-cache
+.jekyll-metadata

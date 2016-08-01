@@ -1,0 +1,15 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    <David Beermann> -- <Project Owner> -- <davidbeermann>
+
+# THANKS
+
+    <HTML5Boilerplate>
+
+# TECHNOLOGY COLOPHON
+
+    CSS3, HTML5
+    Modernizr, Normalize.css

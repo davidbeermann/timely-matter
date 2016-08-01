@@ -1,0 +1,9 @@
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>{% if page.title %}{{ page.title }} &mdash; {% endif %}{{ site.title }}</title>
+<meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="apple-touch-icon" href="{{ "/static/images/apple-touch-icon.png" | prepend: site.baseurl }}">
+<link rel="stylesheet" href="{{ "/css/normalize.css" | prepend: site.baseurl }}">
+<link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
+<script src="{{ "/js/vendor/modernizr-2.8.3.min.js" | prepend: site.baseurl }}"></script>
