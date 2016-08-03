@@ -1,0 +1,12 @@
+<Parameters>
+	<Kinect>
+		<depth_near>500</depth_near>
+		<depth_far>1260</depth_far>
+	</Kinect>
+	<Vector_Field>
+		<meter_points>1</meter_points>
+		<meter_values>0</meter_values>
+		<vectors>1</vectors>
+	</Vector_Field>
+<Parameters/>
+</Parameters>
