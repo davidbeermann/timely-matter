@@ -1,0 +1,13 @@
+.page-container
+  @include outer-container
+
+.content-container
+  @include fill-parent
+  @include pad($padding: em(10))
+  margin-top: em(200)
+
+.page-navigation
+  @include span-columns(3)
+
+.page-content
+  @include span-columns(9)

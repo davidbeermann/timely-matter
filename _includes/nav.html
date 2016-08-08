@@ -1,0 +1,14 @@
+<nav class="page-navigation">
+  {% comment %}
+  Page sorting solution found here:
+  http://stackoverflow.com/questions/9053066/sorted-navigation-menu-with-jekyll-and-liquid
+  {% endcomment %}
+  {% assign pages = site.pages | sort:"position" %}
+  {% for node in pages %}
+    {% if node.layout == "default" and node.title != null %}
+    <li {% if page.url == node.url %}class="active"{% endif %}>
+      <a href="{{node.url | prepend: site.baseurl}}">{{ node.title }}</a>
+    </li>
+    {% endif %}
+  {% endfor %}
+</nav>

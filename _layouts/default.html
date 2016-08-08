@@ -3,14 +3,19 @@
     <head>
         {% include head.html %}
     </head>
-    <body>
+    <body class="page-container">
       <header class="page-header">
-        <h1>timely matter</h1>
-        <h2>Experiments on the entanglements of technology,<br/>
-time and the present moment</h2>
+        <a href="{{ "/" | prepend: site.baseurl }}">
+          <h1>timely matter</h1>
+          <h2>Experiments on the entanglements of technology,<br/>
+  time and the present moment</h2>
+        </a>
       </header>
-      <section class="content">
-          {{  content }}  
+      <section class="content-container">
+        {% include nav.html %}
+        <section class="page-content">
+            {{  content }}  
+        </section>
       </section>
     </body>
 </html>
