@@ -1,12 +1,18 @@
-// HTML5 Boilerplate – before user styles
-@import "h5bp_pre"
-
 // prepare Bourbon and Neat
 @import "bourbon"
 @import "neat"
 
+// include Norwester font
+// set the correct file formats for the included fonts
+@include font-face("norwester", "./fonts/norwester/norwester", $file-formats: eot woff ttf svg)
+
+// HTML5 Boilerplate – before user styles
+@import "h5bp_pre"
+
 // User Styles
 @import "base/base"
+@import "layout/layout"
+@import "modules/modules"
 
 // HTML5 Boilerplate – after user styles
 @import "h5bp_post"

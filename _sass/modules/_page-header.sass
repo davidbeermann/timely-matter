@@ -1,0 +1,25 @@
+@import "../fonts"
+
+$h1-size: 48px
+
+// was .site-header but needed to be renamed due to bug!!!
+// https://github.com/jekyll/jekyll/issues/4876
+.page-header
+  border-bottom: solid 1px rgb(128,128,128)
+  padding: em(32) 0 em(37)
+  text-align: center
+  h1
+    border-bottom: none
+    display: block
+    font-family: $norwester
+    font-size: em($h1-size)
+    line-height: 1
+    margin: 0 0 em(8, $h1-size) 0
+  h2
+    color: rgb(128,128,128)
+    font-family: $roboto
+    font-size: em(18)
+    font-style: italic
+    font-weight: 400
+    line-height: 1.1667
+    margin: 0
