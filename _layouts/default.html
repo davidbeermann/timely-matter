@@ -4,16 +4,10 @@
         {% include head.html %}
     </head>
     <body>
-      <header class="page-header">
-        <a href="{{ "/" | prepend: site.baseurl }}">
-          <h1>timely matter</h1>
-          <h2>Experiments on the entanglements of technology,<br/>
-  time and the present moment</h2>
-        </a>
-      </header>
+      {% include page-header.html %}
       <section class="page-container">
         <section class="content-container">
-          {% include nav.html %}
+          {% include page-navigation.html %}
           <section class="page-content">
               {{  content }}  
           </section>
