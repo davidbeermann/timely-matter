@@ -5,6 +5,7 @@
   "description": "Website for documentating the 'Timely Matter' project on GitHub Pages",
   "main": "index.js",
   "scripts": {
+    "preinstall": "./scripts/preinstall",
     "postinstall": "./scripts/postinstall"
   },
   "repository": {

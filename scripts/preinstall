@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "Preinstall – removing all library source files"
+source ./scripts/.config
+rm -dfr ${SASS_LIB}

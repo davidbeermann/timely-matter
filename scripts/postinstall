@@ -1,3 +1,6 @@
 #!/bin/sh
-cp -R ./node_modules/bourbon/app/assets/stylesheets ./_sass/bourbon
-cp -R ./node_modules/bourbon-neat/app/assets/stylesheets ./_sass/neat
+echo "Postinstall – adding the latest versions of library source files"
+source ./scripts/.config
+mkdir -p ${SASS_LIB}
+cp -R ${BOURBON_IN} ${BOURBON_OUT}
+cp -R ${NEAT_IN} ${NEAT_OUT}
