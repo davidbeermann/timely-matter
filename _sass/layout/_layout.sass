@@ -9,7 +9,7 @@ body
 
 .page-container
   @include outer-container
-  @include pad($padding: em(10))
+  padding: 0 em(20)
 
 .content-container
   @include fill-parent
@@ -17,6 +17,7 @@ body
 
 .page-navigation
   @include span-columns(3)
+  margin-top: em(10)
 
 .page-content
   @include span-columns(9)
