@@ -6,15 +6,14 @@ $h1-size: 48px
 // was .site-header but needed to be renamed due to bug!!!
 // https://github.com/jekyll/jekyll/issues/4876
 .page-header
-  background-color: #fff
-  border-bottom: solid 1px $mid-gray
-  margin: 0 auto
-  padding: em(32) 0 em(37)
-  position: fixed
-  text-align: center
-  top: 0
-  width: em(1100)
+  text-align: center 
   a
+    background-color: #fff
+    border-bottom: solid 1px $mid-gray
+    display: block
+    margin: 0 auto
+    padding: em(32) 0 em(37)
+    width: $max-width
     &, &:visited, &:active
       color: $dark-gray
       text-decoration: none

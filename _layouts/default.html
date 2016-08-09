@@ -3,7 +3,7 @@
     <head>
         {% include head.html %}
     </head>
-    <body class="page-container">
+    <body>
       <header class="page-header">
         <a href="{{ "/" | prepend: site.baseurl }}">
           <h1>timely matter</h1>
@@ -11,10 +11,12 @@
   time and the present moment</h2>
         </a>
       </header>
-      <section class="content-container">
-        {% include nav.html %}
-        <section class="page-content">
-            {{  content }}  
+      <section class="page-container">
+        <section class="content-container">
+          {% include nav.html %}
+          <section class="page-content">
+              {{  content }}  
+          </section>
         </section>
       </section>
     </body>

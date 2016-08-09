@@ -1,9 +1,17 @@
+body
+  position: relative
+
+.page-header
+  position: fixed
+  top: 0
+  width: 100%
+
 .page-container
   @include outer-container
+  @include pad($padding: em(10))
 
 .content-container
   @include fill-parent
-  @include pad($padding: em(10))
   margin-top: em(200)
 
 .page-navigation
