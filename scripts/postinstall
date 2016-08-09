@@ -1,0 +1,3 @@
+#!/bin/sh
+cp -R ./node_modules/bourbon/app/assets/stylesheets ./_sass/bourbon
+cp -R ./node_modules/bourbon-neat/app/assets/stylesheets ./_sass/neat
