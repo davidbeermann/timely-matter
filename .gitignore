@@ -4,10 +4,8 @@
 Gemfile.lock
 # jekyll files and folders
 _site
-_sass/_lib
 .sass-cache
 .jekyll-metadata
 # npm related files
 node_modules
 npm-debug.log
-
