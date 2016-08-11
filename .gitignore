@@ -1,8 +1,15 @@
 .DS_Store
-*.app
-**/*/*.xcodeproj/project.xcworkspace
-**/*/*.xcodeproj/xcuserdata
 
-application/timely-matter/*
-!application/timely-matter/bin
-!application/timely-matter/src
+# ignore all files
+# except for *.md and all files in src and bin
+examples/*/*
+!examples/*/*.md
+!examples/*/bin
+!examples/*/src
+application/*/*
+!application/*/*.md
+!application/*/bin
+!application/*/src
+
+# ignore all *.app files inside of bin folders
+*.app
