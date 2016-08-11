@@ -2,3 +2,7 @@
 *.app
 **/*/*.xcodeproj/project.xcworkspace
 **/*/*.xcodeproj/xcuserdata
+
+application/timely-matter/*
+!application/timely-matter/bin
+!application/timely-matter/src
