@@ -70,19 +70,29 @@ void VectorField::update(const ofPixels &pixels, const float maxStrength) {
             int sw = pixels[ (bottomPos * mWidth + leftPos) * pixels.getNumChannels() ];
             int _w = pixels[ (yPos * mWidth + leftPos) * pixels.getNumChannels() ];
             
+            //
+            int pixelValue = (int) pixels[(yPos * mWidth + xPos) * pixels.getNumChannels()];
+            
             // calcualte the difference between all subdivisions at the top and bottom and to the left and right.
             float diffX = (nw + _w + sw) - (ne + _e + se);
             float diffY = (nw + n_ + ne) - (sw + s_ + se);
             
             // update field position
-            mField[fieldIndex].x = diffX;
-            mField[fieldIndex].y = diffY;
-            
-            int pixelValue = (int) pixels[(yPos * mWidth + xPos) * pixels.getNumChannels()];
+            if ((float) pixelValue >= 127.5f) {
+                mField[fieldIndex].x = diffX;
+                mField[fieldIndex].y = diffY;
+            } else {
+                mField[fieldIndex].x = -diffX;
+                mField[fieldIndex].y = -diffY;
+            }
             
             // apply max strength
             mField[fieldIndex].normalize();
-            mField[fieldIndex] *= ofMap((float) pixelValue, 0.f, 255.f, 0.f, maxStrength);
+            if ((float) pixelValue >= 127.5f) {
+                mField[fieldIndex] *= ofMap((float) pixelValue, 127.5f, 255.f, 0.f, maxStrength);
+            } else {
+                mField[fieldIndex] *= ofMap((float) pixelValue, 0.f, 127.5f, -maxStrength, 0.f);
+            }
             
             // store pixel value in z dimension
             mField[fieldIndex].z = pixelValue;
@@ -110,13 +120,13 @@ void VectorField::draw() {
             ofTranslate(x, y);
             
             if (mGuiDebugMeterPoints) {
-                ofSetColor(255, 0, 0);
+                ofSetColor(127, 0, 0);
                 ofNoFill();
                 ofDrawCircle(0, 0, 2);
             }
             
             if (mGuiDebugMeterValues) {
-                ofSetColor(123, 123, 123);
+                ofSetColor(0, 0, 127);
                 ofFill();
                 mFont.drawString(to_string((int) mField[index].z), 0, textOffsetY);
             }
