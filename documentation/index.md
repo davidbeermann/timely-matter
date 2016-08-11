@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: mainpage
 title: Documentation
 position: 2
 ---

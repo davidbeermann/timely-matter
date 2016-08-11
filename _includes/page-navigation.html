@@ -7,7 +7,8 @@
     http://stackoverflow.com/questions/9053066/sorted-navigation-menu-with-jekyll-and-liquid
     {% endcomment %}
     {% for node in pages %}
-      {% if node.layout == "default" and node.title != null %}
+      {% assign depth = node.dir | split:"/" | size %}
+      {% if node.layout == "mainpage" and node.title != null and depth <= 2 %}
       <li {% if page.url == node.url %}class="active"{% endif %}>
         <a href="{{node.url | prepend: site.baseurl}}">{{ node.title }}</a>
       </li>

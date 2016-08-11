@@ -1,0 +1,11 @@
+---
+layout: default
+---
+
+<header>
+  {% assign l = page.dir | size | minus:2 %}
+  {% assign p = page.dir | slice:1,l | strip %}
+  <a href="{{ p | split:"/" | first | prepend:"/" | append:"/" | prepend:site.baseurl }}">back</a>
+</header>
+
+{{ content }}

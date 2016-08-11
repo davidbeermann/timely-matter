@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: mainpage
 title: Introduction
 position: 0
 ---

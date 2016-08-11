@@ -1,0 +1,34 @@
+{% comment %}
+This creates an empty array.
+https://talk.jekyllrb.com/t/how-do-you-add-items-to-an-array-in-jekyll/324/2
+{% endcomment %}
+{% assign sub_pages = "" | split:"|" %}
+
+{% comment %} store the size of the directory string for filtering {% endcomment %}
+{% assign dir_size = page.dir | size %}
+{% comment %} get sorted pages {% endcomment %}
+{% assign pages = site.pages | sort:"position" %}
+
+{% comment %} filter out sub pages of current page {% endcomment %}
+{% if pages.size > 0 %}
+  {% for p in pages %}
+    {% if p.layout == "subpage" %}
+      {% assign parent_dir = p.dir | slice:0,dir_size %}
+      {% if p != page and parent_dir == page.dir %}
+        {% comment %} add foundpage to array {% endcomment %}
+        {% assign sub_pages = sub_pages | push:p %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% comment %} display sub pages {% endcomment %}
+{% if sub_pages.size > 0 %}
+<nav>
+  <ul>
+    {% for sp in sub_pages %}
+      <li><a href="{{ sp.url | prepend:site.baseurl }}">{{ sp.title }}</a></li>
+    {% endfor %}
+  </ul>
+</nav>
+{% endif %}
