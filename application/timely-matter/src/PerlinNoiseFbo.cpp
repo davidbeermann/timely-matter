@@ -13,6 +13,9 @@ void PerlinNoiseFbo::setup(const unsigned int width, const unsigned int height) 
     ofClear(0);
     mFbo.end();
     
+    // allocate image buffer for pixel access
+    mImage.allocate(width, height, OF_IMAGE_COLOR_ALPHA);
+    
     // setup GUI settings
     mGuiParams.setName("Perlin Noise Params");
     mGuiParams.add(mGuiOffsetX.set("offset x", 5.43, 0.0, 15.0));
@@ -49,4 +52,11 @@ void PerlinNoiseFbo::draw() {
 
 const ofParameterGroup& PerlinNoiseFbo::getGuiParams() {
     return mGuiParams;
+}
+
+
+const ofPixels& PerlinNoiseFbo::getPixels() {
+    // write FBO pixel data into image buffer
+    mFbo.readToPixels(mImage.getPixels());
+    return mImage.getPixels();
 }

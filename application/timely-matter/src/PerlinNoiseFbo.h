@@ -5,6 +5,7 @@
 class PerlinNoiseFbo {
     ofShader mShader;
     ofFbo mFbo;
+    ofImage mImage;
     ofParameterGroup mGuiParams;
     ofParameter<float> mGuiOffsetX;
     ofParameter<float> mGuiOffsetY;
@@ -15,4 +16,5 @@ public:
     void update();
     void draw();
     const ofParameterGroup& getGuiParams();
+    const ofPixels& getPixels();
 };

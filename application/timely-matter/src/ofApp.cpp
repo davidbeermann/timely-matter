@@ -7,9 +7,14 @@ void ofApp::setup() {
     
     mFbo.setup(KINECT_CAM_WIDTH, KINECT_CAM_HEIGHT);
     
+    mVectorField.setup(KINECT_CAM_WIDTH, KINECT_CAM_HEIGHT, 32);
+    mFieldMaxStrength = 8.0f;
+    mShowField = true;
+    
     // setup GUI
     mGui.setup("Timely Matter Controls");
     mGui.add(mFbo.getGuiParams());
+    mGui.add(mVectorField.getGuiParams());
     mShowGui = false;
     
     // set initial centered position
@@ -18,7 +23,10 @@ void ofApp::setup() {
 
 
 void ofApp::update() {
+    // uupdate FBO first ...
     mFbo.update();
+    // ... before retrieving pixel data to update vector field.
+    mVectorField.update(mFbo.getPixels(), mFieldMaxStrength);
 }
 
 
@@ -28,11 +36,16 @@ void ofApp::draw() {
     
     mFbo.draw();
     
+    if (mShowField) {
+        mVectorField.draw();
+    }
+    
     ofPopMatrix();
     
     // define debug info string
     string debugInfo = "FPS " + to_string((int) ofGetFrameRate());
-    debugInfo += "\nPress 'g' to toggle GUI";
+    debugInfo += "\nPress 'g' to toggle GUI display";
+    debugInfo += "\nPress 'f' to toggle Vector Field drawing";
     
     // show debug info
     ofDrawBitmapString(debugInfo, 10, 20);
@@ -49,6 +62,9 @@ void ofApp::keyPressed(int key) {
             // toggle gui display
             mShowGui = !mShowGui;
             break;
+        case 'f':
+            // toggle vector field display
+            mShowField = !mShowField;
         default:
             break;
     }

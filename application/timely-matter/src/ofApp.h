@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxGui.h"
 #include "PerlinNoiseFbo.h"
+#include "VectorField.h"
 
 class ofApp : public ofBaseApp {
     const unsigned int KINECT_CAM_WIDTH = 640;
@@ -11,6 +12,9 @@ class ofApp : public ofBaseApp {
     bool mShowGui;
     ofxPanel mGui;
     PerlinNoiseFbo mFbo;
+    float mFieldMaxStrength;
+    bool mShowField;
+    VectorField mVectorField;
 public:
     void setup();
     void update();
