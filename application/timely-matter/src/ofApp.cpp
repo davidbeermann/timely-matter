@@ -11,6 +11,8 @@ void ofApp::setup() {
     mFieldMaxStrength = 8.0f;
     mShowField = true;
     
+    mParticleSystem.setup(1, ofVec3f(KINECT_CAM_WIDTH, KINECT_CAM_HEIGHT, 0.f));
+    
     // setup GUI
     mGui.setup("Timely Matter Controls");
     mGui.add(mFbo.getGuiParams());
@@ -27,6 +29,9 @@ void ofApp::update() {
     mFbo.update();
     // ... before retrieving pixel data to update vector field.
     mVectorField.update(mFbo.getPixels(), mFieldMaxStrength);
+    
+    mParticleSystem.applyVectorField(mVectorField);
+    mParticleSystem.update();
 }
 
 
@@ -39,6 +44,8 @@ void ofApp::draw() {
     if (mShowField) {
         mVectorField.draw();
     }
+    
+    mParticleSystem.draw();
     
     ofPopMatrix();
     

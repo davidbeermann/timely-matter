@@ -78,21 +78,24 @@ void VectorField::update(const ofPixels &pixels, const float maxStrength) {
             float diffY = (nw + n_ + ne) - (sw + s_ + se);
             
             // update field position
-            if ((float) pixelValue >= 127.5f) {
-                mField[fieldIndex].x = diffX;
-                mField[fieldIndex].y = diffY;
-            } else {
-                mField[fieldIndex].x = -diffX;
-                mField[fieldIndex].y = -diffY;
-            }
+            mField[fieldIndex].x = diffX;
+            mField[fieldIndex].y = diffY;
+//            if ((float) pixelValue >= 127.5f) {
+//                mField[fieldIndex].x = diffX;
+//                mField[fieldIndex].y = diffY;
+//            } else {
+//                mField[fieldIndex].x = -diffX;
+//                mField[fieldIndex].y = -diffY;
+//            }
             
             // apply max strength
             mField[fieldIndex].normalize();
-            if ((float) pixelValue >= 127.5f) {
-                mField[fieldIndex] *= ofMap((float) pixelValue, 127.5f, 255.f, 0.f, maxStrength);
-            } else {
-                mField[fieldIndex] *= ofMap((float) pixelValue, 0.f, 127.5f, -maxStrength, 0.f);
-            }
+            mField[fieldIndex] *= ofMap((float) pixelValue, 0.f, 255.f, 0.f, maxStrength);
+//            if ((float) pixelValue >= 127.5f) {
+//                mField[fieldIndex] *= ofMap((float) pixelValue, 127.5f, 255.f, 0.f, maxStrength);
+//            } else {
+//                mField[fieldIndex] *= ofMap((float) pixelValue, 0.f, 127.5f, -maxStrength, 0.f);
+//            }
             
             // store pixel value in z dimension
             mField[fieldIndex].z = pixelValue;
@@ -145,6 +148,20 @@ void VectorField::draw() {
             ofPopStyle();
         }
     }
+}
+
+
+ofVec3f nullForce = ofVec3f(0.1f,0.2f,0);
+const ofVec3f& VectorField::getForceForPosition(const ofVec3f& position) const {
+    float relX = round(position.x / (float) mIncX);
+    float relY = round(position.y / (float) mIncY);
+    
+//    ofVec3f tl = mField[floor(relY) * mSubdivision + floor(relX)];
+//    ofVec3f tr = mField[floor(relY) * mSubdivision + ceil(relX)];
+//    ofVec3f br = mField[ceil(relY) * mSubdivision + ceil(relX)];
+//    ofVec3f bl = mField[ceil(relY) * mSubdivision + floor(relX)];
+    
+    return mField[relY * mSubdivision + relX];
 }
 
 

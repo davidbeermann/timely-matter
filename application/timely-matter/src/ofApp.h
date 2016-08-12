@@ -4,6 +4,8 @@
 #include "ofxGui.h"
 #include "PerlinNoiseFbo.h"
 #include "VectorField.h"
+#include "ParticleSystem.h"
+
 
 class ofApp : public ofBaseApp {
     const unsigned int KINECT_CAM_WIDTH = 640;
@@ -15,6 +17,7 @@ class ofApp : public ofBaseApp {
     float mFieldMaxStrength;
     bool mShowField;
     VectorField mVectorField;
+    ParticleSystem mParticleSystem;
 public:
     void setup();
     void update();

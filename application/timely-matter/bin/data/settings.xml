@@ -1,0 +1,14 @@
+<Timely_Matter_Controls>
+	<Perlin_Noise_Params>
+		<offset_x>7.42347</offset_x>
+		<offset_y>4.97449</offset_y>
+		<scale>0.00265306</scale>
+		<speed>0.17398</speed>
+	</Perlin_Noise_Params>
+	<Vector_Field>
+		<meter_points>0</meter_points>
+		<meter_values>0</meter_values>
+		<vectors>1</vectors>
+	</Vector_Field>
+<Timely_Matter_Controls/>
+</Timely_Matter_Controls>

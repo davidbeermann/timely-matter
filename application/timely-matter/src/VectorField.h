@@ -19,5 +19,6 @@ public:
     void setup(const int width, const int height, const int subdivisionX, const int subdivisionY);
     void update(const ofPixels &pixels, const float maxStrength);
     void draw();
+    const ofVec3f& getForceForPosition(const ofVec3f& position) const;
     const ofParameterGroup& getGuiParams();
 };
