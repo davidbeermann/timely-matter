@@ -18,7 +18,7 @@ class VectorFieldMark {
     // stores the absolute force based on the measurement at its realtive position.
     ofVec3f mForce = ofVec3f(0.f, 0.f, 0.f);
     // stores the measurement value derived from the vector field input
-    float mDatum = 0.f;
+    int mDatum = 0;
     // defines whether the mark has a fixed force
     bool mFixed = false;
     // map to store neighbors for this mark according to their position in the grid
@@ -27,13 +27,14 @@ public:
     void setup(unsigned int id, float posX, float posY);
     void setFixed(const ofVec3f& referencePoint, float maxForce);
     void setNeighbor(Directions direction, VectorFieldMark* mark);
+    void setDatum(int value);
     void reset();
-    void update();
+    void update(const float maxStrength);
     void drawDebug();
     const unsigned int& getID();
-    const ofVec3f& getPosition();
-    const ofVec3f& getForce();
-    const float& getDatum();
+    const ofVec3f& getPosition() const;
+    const ofVec3f& getForce() const;
+    const int getDatum();
     const int getNeighborCount();
     const bool hasForce();
     const bool& isFixed();

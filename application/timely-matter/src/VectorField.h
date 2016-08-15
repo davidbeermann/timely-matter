@@ -7,13 +7,12 @@ class VectorField {
     unsigned int mWidth, mHeight;
     unsigned int mSubdivisionX, mSubdivisionY;
     float mIncX, mIncY;
-    vector<ofVec3f> mField;
+    unsigned int mMarksPerRow, mMarksPerColumn;
     vector<VectorFieldMark> mMarks;
     ofParameterGroup mGuiParams;
     ofParameter<bool> mGuiDebugMeterPoints;
     ofParameter<bool> mGuiDebugMeterValues;
     ofParameter<bool> mGuiDebugVector;
-    void clearField();
 public:
     void setup(const unsigned int width, const unsigned int height, const unsigned int subdivision);
     void setup(const unsigned int width, const unsigned int height, const unsigned int subdivisionX, const unsigned int subdivisionY);

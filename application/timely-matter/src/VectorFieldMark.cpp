@@ -26,12 +26,35 @@ void VectorFieldMark::setNeighbor(Directions direction, VectorFieldMark* mark) {
 
 void VectorFieldMark::reset() {
     mForce.set(0.f);
-    mDatum = 0.f;
+    mDatum = 0;
 }
 
 
-void VectorFieldMark::update() {
+void VectorFieldMark::setDatum(int value) {
+    mDatum = value;
+}
+
+void VectorFieldMark::update(const float maxStrength) {
+    // get measurement readings of all neighboring marks
+    const int nw = mNeighbors.at(Directions::NORTH_WEST)->getDatum();
+    const int n = mNeighbors.at(Directions::NORTH)->getDatum();
+    const int ne = mNeighbors.at(Directions::NORTH_EAST)->getDatum();
+    const int e = mNeighbors.at(Directions::EAST)->getDatum();
+    const int se = mNeighbors.at(Directions::SOUTH_EAST)->getDatum();
+    const int s = mNeighbors.at(Directions::SOUTH)->getDatum();
+    const int sw = mNeighbors.at(Directions::SOUTH_WEST)->getDatum();
+    const int w = mNeighbors.at(Directions::WEST)->getDatum();
     
+    // calculate the difference between all neighbors at the top and bottom and to the left and right.
+    int diffX = (nw + w + sw) - (ne + e + se);
+    int diffY = (nw + n + ne) - (sw + s + se);
+    
+    // update force vector
+    mForce.set((float) diffX, (float) diffY);
+    
+    // apply max strength to force vector
+    mForce.normalize();
+    mForce *= ofMap((float) mDatum, 0.f, 255.f, 0.f, maxStrength);
 }
 
 
@@ -72,17 +95,17 @@ const unsigned int& VectorFieldMark::getID() {
 }
 
 
-const ofVec3f& VectorFieldMark::getPosition() {
+const ofVec3f& VectorFieldMark::getPosition() const {
     return mPosition;
 }
 
 
-const ofVec3f& VectorFieldMark::getForce() {
+const ofVec3f& VectorFieldMark::getForce() const {
     return mForce;
 }
 
 
-const float& VectorFieldMark::getDatum() {
+const int VectorFieldMark::getDatum() {
     return mDatum;
 }
 

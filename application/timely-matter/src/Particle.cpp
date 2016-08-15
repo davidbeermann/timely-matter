@@ -11,6 +11,7 @@ void Particle::setup(const ofVec3f& position) {
 
 
 void Particle::applyForce(const ofVec3f& force) {
+//    ofLog() << "Particle::applyForce() -> force: " << force;
     mAcceleration += force;
 }
 
