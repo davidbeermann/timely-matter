@@ -4,11 +4,9 @@
 #include "VectorFieldMark.h"
 
 class VectorField {
-    int mWidth;
-    int mHeight;
-    int mSubdivision;
-    int mIncX;
-    int mIncY;
+    unsigned int mWidth, mHeight;
+    unsigned int mSubdivisionX, mSubdivisionY;
+    float mIncX, mIncY;
     vector<ofVec3f> mField;
     vector<VectorFieldMark> mMarks;
     ofParameterGroup mGuiParams;
@@ -17,8 +15,8 @@ class VectorField {
     ofParameter<bool> mGuiDebugVector;
     void clearField();
 public:
-    void setup(const int width, const int height, const int subdivision);
-    void setup(const int width, const int height, const int subdivisionX, const int subdivisionY);
+    void setup(const unsigned int width, const unsigned int height, const unsigned int subdivision);
+    void setup(const unsigned int width, const unsigned int height, const unsigned int subdivisionX, const unsigned int subdivisionY);
     void update(const ofPixels &pixels, const float maxStrength);
     void draw();
     const ofVec3f& getForceForPosition(const ofVec3f& position) const;

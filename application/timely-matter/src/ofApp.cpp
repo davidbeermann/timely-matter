@@ -25,7 +25,7 @@ void ofApp::setup() {
 
 
 void ofApp::update() {
-    // uupdate FBO first ...
+    // update FBO first ...
     mFbo.update();
     // ... before retrieving pixel data to update vector field.
     mVectorField.update(mFbo.getPixels(), mFieldMaxStrength);

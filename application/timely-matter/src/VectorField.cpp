@@ -9,25 +9,31 @@ typedef vector<VectorFieldMark>::iterator MIt;
 
 
 
-void VectorField::setup(const int width, const int height, const int subdivision) {
+void VectorField::setup(const unsigned int width, const unsigned int height, const unsigned int subdivision) {
+    setup(width, height, subdivision, subdivision);
+}
+
+
+void VectorField::setup(const unsigned int width, const unsigned int height, const unsigned int subdivisionX, const unsigned int subdivisionY) {
     // store field configuration
     mWidth = width;
     mHeight = height;
-    mSubdivision = subdivision;
+    mSubdivisionX = subdivisionX;
+    mSubdivisionY = subdivisionY;
     
     // calculate field increments
-    mIncX = (int) (width / subdivision);
-    mIncY = (int) (height / subdivision);
+    mIncX = (float) width / (float) subdivisionX;
+    mIncY = (float) height / (float) subdivisionY;
     
     // setup all measuring marks
     ofVec3f center = ofVec3f(width * 0.5f, height * 0.5f);
-    for (int y = 0; y <= subdivision; ++y) {
-        for (int x = 0; x <= subdivision; ++x) {
+    for (int y = 0; y <= subdivisionY; ++y) {
+        for (int x = 0; x <= subdivisionX; ++x) {
             VectorFieldMark mark;
-            unsigned int id = y * (subdivision + 1) + x;
+            unsigned int id = y * (subdivisionX + 1) + x;
             mark.setup(id, x * mIncX, y * mIncY);
             
-            if(x == 0 || y == 0 || x == subdivision || y == subdivision) {
+            if(x == 0 || y == 0 || x == subdivisionX || y == subdivisionY) {
                 mark.setFixed(center, 12.0f);
             }
             
@@ -36,9 +42,9 @@ void VectorField::setup(const int width, const int height, const int subdivision
     }
     
     // set pointers to neighboring marks
-    int marksPerRow = subdivision + 1; // see setup loop: y <= subdivision; and x <= subdivision;
-    for (int y = 1; y < subdivision; ++y) {
-        for (int x = 1; x < subdivision; ++x) {
+    int marksPerRow = subdivisionX + 1; // see setup loop: y <= subdivision; and x <= subdivision;
+    for (int y = 1; y < subdivisionY; ++y) {
+        for (int x = 1; x < subdivisionX; ++x) {
             // This has to be a reference: VectorFieldMark&!!!!
             // Otherwise a copy of the instance in the vector is created!!!!
             VectorFieldMark& mark = mMarks[y * marksPerRow + x];
@@ -51,13 +57,13 @@ void VectorField::setup(const int width, const int height, const int subdivision
             mark.setNeighbor(Directions::SOUTH, &mMarks[(y+1) * marksPerRow + (x)]);
             mark.setNeighbor(Directions::SOUTH_WEST, &mMarks[(y+1) * marksPerRow + (x-1)]);
             mark.setNeighbor(Directions::WEST, &mMarks[(y) * marksPerRow + (x-1)]);
-//            ofLog() << "mark " << mark.getID() << " has " << mark.getNeighborCount() << " neighbor(s)";
+            //            ofLog() << "mark " << mark.getID() << " has " << mark.getNeighborCount() << " neighbor(s)";
         }
     }
     
     
     // calculate total amount of vectors in the field.
-    int fieldSize = (mSubdivision - 1) * (mSubdivision - 1);
+    int fieldSize = (mSubdivisionX - 1) * (mSubdivisionY - 1);
     
     // fill field with vector instances
     for (int i = 0; i < fieldSize; ++i) {
@@ -69,11 +75,6 @@ void VectorField::setup(const int width, const int height, const int subdivision
     mGuiParams.add(mGuiDebugMeterPoints.set("meter points", false));
     mGuiParams.add(mGuiDebugMeterValues.set("meter values", false));
     mGuiParams.add(mGuiDebugVector.set("vectors", false));
-}
-
-
-void VectorField::setup(const int width, const int height, const int subdivisionX, const int subdivisionY) {
-    ofLog() << "This variant of the setup() methos not yet implemented";
 }
 
 
@@ -230,21 +231,21 @@ void VectorField::draw() {
 
 
 const ofVec3f& VectorField::getForceForPosition(const ofVec3f& position) const {
-    float relX = round(position.x / (float) mIncX);
-    float relY = round(position.y / (float) mIncY);
+    float relX = round(position.x / mIncX);
+    float relY = round(position.y / mIncY);
     
 //    ofVec3f tl = mField[floor(relY) * mSubdivision + floor(relX)];
 //    ofVec3f tr = mField[floor(relY) * mSubdivision + ceil(relX)];
 //    ofVec3f br = mField[ceil(relY) * mSubdivision + ceil(relX)];
 //    ofVec3f bl = mField[ceil(relY) * mSubdivision + floor(relX)];
     
-    return mField[relY * mSubdivision + relX];
+    return mField[relY * mSubdivisionX + relX];
 }
 
 
 const ofVec3f VectorField::getMeterPointForPosition(const ofVec3f& position) const {
-    float relX = round(position.x / (float) mIncX);
-    float relY = round(position.y / (float) mIncY);    
+    float relX = round(position.x / mIncX);
+    float relY = round(position.y / mIncY);    
     return ofVec3f(relX * mIncX, relY * mIncY, 0.f);
 }
 
