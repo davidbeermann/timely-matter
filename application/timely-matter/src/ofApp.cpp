@@ -17,6 +17,7 @@ void ofApp::setup() {
     mGui.setup("Timely Matter Controls");
     mGui.add(mFbo.getGuiParams());
     mGui.add(mVectorField.getGuiParams());
+    mGui.add(mParticleSystem.getGuiParams());
     mShowGui = false;
     
     // set initial centered position

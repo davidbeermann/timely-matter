@@ -1,12 +1,14 @@
 #include "Particle.h"
 
 
-void Particle::setup(const ofVec3f& position) {
-    mPosition.set(position);
-    
-    mMaxVelocity = 50.0f;
+Particle::Particle(ofParameter<float>& maxVelocity, ofParameter<float>& velocityDecay)
+: mMaxVelocity(maxVelocity), mDecay(velocityDecay) {
     mMaxVelocitySquared = mMaxVelocity * mMaxVelocity;
-    mDecay = 0.99f;
+}
+
+
+void Particle::setup(ofVec3f position) {
+    mPosition = position;
 }
 
 

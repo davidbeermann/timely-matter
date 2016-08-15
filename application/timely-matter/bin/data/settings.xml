@@ -6,9 +6,13 @@
 		<speed>0.17398</speed>
 	</Perlin_Noise_Params>
 	<Vector_Field>
-		<meter_points>0</meter_points>
+		<meter_points>1</meter_points>
 		<meter_values>0</meter_values>
-		<vectors>1</vectors>
+		<vectors>0</vectors>
 	</Vector_Field>
 <Timely_Matter_Controls/>
+<Particle_System>
+		<max_velocity>4.07653</max_velocity>
+		<velocity_decay>0.980816</velocity_decay>
+	</Particle_System>
 </Timely_Matter_Controls>
