@@ -12,4 +12,5 @@ public:
     void applyVectorField(const VectorField& vectorField);
     void update();
     void draw();
+    void drawDebug(const VectorField& vectorField);
 };

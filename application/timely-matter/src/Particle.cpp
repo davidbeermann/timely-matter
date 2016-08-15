@@ -41,10 +41,14 @@ void Particle::update(const ofRectangle& bounds) {
 
 
 void Particle::draw() {
-    ofPushMatrix();
+    ofPushStyle();
     ofSetColor(255);
+    
+//    ofPushMatrix();
     ofDrawCircle(mPosition.x, mPosition.y, 5);
-    ofPopMatrix();
+//    ofPopMatrix();
+    
+    ofPopStyle();
 }
 
 

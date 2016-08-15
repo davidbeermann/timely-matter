@@ -17,6 +17,7 @@ void ParticleSystem::setup(const unsigned int numParticles, const ofVec3f size) 
 void ParticleSystem::applyVectorField(const VectorField& vectorField) {
     for (PIt p = mParticles.begin(); p != mParticles.end(); ++p) {
         ofVec3f force = vectorField.getForceForPosition(p->getPosition());
+//        ofLog() << force;
         p->applyForce(force);
     }
 }
@@ -32,5 +33,20 @@ void ParticleSystem::update() {
 void ParticleSystem::draw() {
     for (PIt p = mParticles.begin(); p != mParticles.end(); ++p) {
         p->draw();
+    }
+}
+
+
+void ParticleSystem::drawDebug(const VectorField& vectorField) {
+    for (PIt p = mParticles.begin(); p != mParticles.end(); ++p) {
+        
+        p->draw();
+        
+        ofVec3f pos = vectorField.getMeterPointForPosition(p->getPosition());
+        
+        ofPushStyle();
+        ofSetColor(255, 0, 0, 128);
+        ofDrawCircle(pos, 5);
+        ofPopStyle();
     }
 }

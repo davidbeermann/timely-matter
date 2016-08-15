@@ -45,7 +45,8 @@ void ofApp::draw() {
         mVectorField.draw();
     }
     
-    mParticleSystem.draw();
+//    mParticleSystem.draw();
+    mParticleSystem.drawDebug(mVectorField);
     
     ofPopMatrix();
     

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "VectorFieldMark.h"
 
 class VectorField {
     int mWidth;
@@ -9,6 +10,7 @@ class VectorField {
     int mIncX;
     int mIncY;
     vector<ofVec3f> mField;
+    vector<VectorFieldMark> mMarks;
     ofParameterGroup mGuiParams;
     ofParameter<bool> mGuiDebugMeterPoints;
     ofParameter<bool> mGuiDebugMeterValues;
@@ -20,5 +22,6 @@ public:
     void update(const ofPixels &pixels, const float maxStrength);
     void draw();
     const ofVec3f& getForceForPosition(const ofVec3f& position) const;
+    const ofVec3f getMeterPointForPosition(const ofVec3f& position) const;
     const ofParameterGroup& getGuiParams();
 };
