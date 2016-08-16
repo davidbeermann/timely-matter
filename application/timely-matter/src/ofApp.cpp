@@ -5,18 +5,21 @@ void ofApp::setup() {
     ofSetFrameRate(60);
     ofSetBackgroundColor(33);
     
-    mFbo.setup(KINECT_CAM_WIDTH, KINECT_CAM_HEIGHT);
+    mInputProvider->setup();
+    
+//    mFbo.setup(KINECT_CAM_WIDTH, KINECT_CAM_HEIGHT);
     
     mVectorField.setup(KINECT_CAM_WIDTH, KINECT_CAM_HEIGHT, 32);
     mFieldMaxStrength = 8.0f;
     
-    mParticleSystem.setup(500, ofVec3f(KINECT_CAM_WIDTH, KINECT_CAM_HEIGHT, 0.f));
+    mParticleSystem.setup(50, ofVec3f(KINECT_CAM_WIDTH, KINECT_CAM_HEIGHT, 0.f));
     
     // setup GUI
     mGui.setDefaultWidth(250);
     mGui.setWidthElements(250);
     mGui.setup("Timely Matter Controls");
-    mGui.add(mFbo.getGuiParams());
+//    mGui.add(mFbo.getGuiParams());
+    mGui.add(mInputProvider->getGuiParams());
     mGui.add(mVectorField.getGuiParams());
     mGui.add(mParticleSystem.getGuiParams());
     mGui.loadFromFile("settings.xml");
@@ -29,9 +32,11 @@ void ofApp::setup() {
 
 void ofApp::update() {
     // update FBO first ...
-    mFbo.update();
+    mInputProvider->update();
+//    mFbo.update();
     // ... before retrieving pixel data to update vector field.
-    mVectorField.update(mFbo.getPixels(), mFieldMaxStrength);
+    mVectorField.update(mInputProvider->getPixels(), mFieldMaxStrength);
+//    mVectorField.update(mFbo.getPixels(), mFieldMaxStrength);
     
     mParticleSystem.applyVectorField(mVectorField);
     mParticleSystem.update();
@@ -47,7 +52,8 @@ void ofApp::draw() {
     ofDrawRectangle(0, 0, KINECT_CAM_WIDTH, KINECT_CAM_HEIGHT);
     ofPopStyle();
     
-    mFbo.draw();
+//    mFbo.draw();
+    mInputProvider->draw();
     mVectorField.draw();
     mParticleSystem.draw(mVectorField);
     

@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 #include "ofxGui.h"
+#include "VectorFieldInputProvider.h"
+#include "KinectInputProvider.h"
 #include "PerlinNoiseFbo.h"
 #include "VectorField.h"
 #include "ParticleSystem.h"
@@ -17,6 +19,7 @@ class ofApp : public ofBaseApp {
     float mFieldMaxStrength;
     VectorField mVectorField;
     ParticleSystem mParticleSystem;
+    VectorFieldInputProvider* mInputProvider = new KinectInputProvider();
 public:
     void setup();
     void update();
