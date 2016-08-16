@@ -2,24 +2,21 @@
 
 #include "ofMain.h"
 #include "ofxGui.h"
+#include "VectorFieldInputFactory.h"
 #include "VectorFieldInputProvider.h"
-#include "KinectInputProvider.h"
-#include "PerlinNoiseFbo.h"
 #include "VectorField.h"
 #include "ParticleSystem.h"
 
 
 class ofApp : public ofBaseApp {
-    const unsigned int KINECT_CAM_WIDTH = 640;
-    const unsigned int KINECT_CAM_HEIGHT = 480;
     ofVec2f mCenteredPos;
     bool mShowGui;
     ofxPanel mGui;
-    PerlinNoiseFbo mFbo;
     float mFieldMaxStrength;
+    VectorFieldInputFactory mInputFactory;
+    VectorFieldInputProvider* mInputProvider;
     VectorField mVectorField;
     ParticleSystem mParticleSystem;
-    VectorFieldInputProvider* mInputProvider = new KinectInputProvider();
 public:
     void setup();
     void update();

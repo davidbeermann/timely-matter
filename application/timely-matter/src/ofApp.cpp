@@ -5,20 +5,19 @@ void ofApp::setup() {
     ofSetFrameRate(60);
     ofSetBackgroundColor(33);
     
+    mInputProvider = mInputFactory.get(VectorFieldInputType::NOISE);
+//    mInputProvider = mInputFactory.get(VectorFieldInputType::KINECT);
     mInputProvider->setup();
     
-//    mFbo.setup(KINECT_CAM_WIDTH, KINECT_CAM_HEIGHT);
-    
-    mVectorField.setup(KINECT_CAM_WIDTH, KINECT_CAM_HEIGHT, 32);
+    mVectorField.setup(mInputProvider->getWidth(), mInputProvider->getHeight(), 32);
     mFieldMaxStrength = 8.0f;
     
-    mParticleSystem.setup(50, ofVec3f(KINECT_CAM_WIDTH, KINECT_CAM_HEIGHT, 0.f));
+    mParticleSystem.setup(50, ofVec3f(mInputProvider->getWidth(), mInputProvider->getHeight(), 0.f));
     
     // setup GUI
     mGui.setDefaultWidth(250);
     mGui.setWidthElements(250);
-    mGui.setup("Timely Matter Controls");
-//    mGui.add(mFbo.getGuiParams());
+    mGui.setup("Timely Matter");
     mGui.add(mInputProvider->getGuiParams());
     mGui.add(mVectorField.getGuiParams());
     mGui.add(mParticleSystem.getGuiParams());
@@ -31,14 +30,14 @@ void ofApp::setup() {
 
 
 void ofApp::update() {
-    // update FBO first ...
+    // update input provider first ...
     mInputProvider->update();
-//    mFbo.update();
     // ... before retrieving pixel data to update vector field.
     mVectorField.update(mInputProvider->getPixels(), mFieldMaxStrength);
-//    mVectorField.update(mFbo.getPixels(), mFieldMaxStrength);
     
+    // apply forces of vector field to particl system...
     mParticleSystem.applyVectorField(mVectorField);
+    // ...and update all particles within the system.
     mParticleSystem.update();
 }
 
@@ -49,10 +48,9 @@ void ofApp::draw() {
     
     ofPushStyle();
     ofSetColor(0);
-    ofDrawRectangle(0, 0, KINECT_CAM_WIDTH, KINECT_CAM_HEIGHT);
+    ofDrawRectangle(0, 0, mInputProvider->getWidth(), mInputProvider->getHeight());
     ofPopStyle();
     
-//    mFbo.draw();
     mInputProvider->draw();
     mVectorField.draw();
     mParticleSystem.draw(mVectorField);
@@ -76,7 +74,7 @@ void ofApp::keyPressed(int key) {
     switch (key) {
         case 'g':
             if (!mShowGui) {
-                float x = (((ofGetWidth() - KINECT_CAM_WIDTH) / 2.f) - mGui.getWidth()) / 2.f;
+                float x = (((ofGetWidth() - mInputProvider->getWidth()) / 2.f) - mGui.getWidth()) / 2.f;
                 float y = (ofGetHeight() - mGui.getHeight()) / 2.f;
                 mGui.setPosition(x, y);
             }
@@ -90,5 +88,5 @@ void ofApp::keyPressed(int key) {
 
 
 void ofApp::windowResized(int w, int h) {
-    mCenteredPos.set((w - KINECT_CAM_WIDTH) * 0.5f, (h - KINECT_CAM_HEIGHT) * 0.5f);
+    mCenteredPos.set((w - mInputProvider->getWidth()) * 0.5f, (h - mInputProvider->getHeight()) * 0.5f);
 }

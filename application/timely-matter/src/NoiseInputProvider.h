@@ -2,10 +2,9 @@
 
 #include "ofMain.h"
 #include "VectorFieldInputProvider.h"
-#include "ofxKinect.h"
 
 
-class KinectInputProvider : public VectorFieldInputProvider {
+class NoiseInputProvider : public VectorFieldInputProvider {
     // implementations of abstract class methods
     void doSetup();
     void doUpdate();
@@ -14,8 +13,12 @@ class KinectInputProvider : public VectorFieldInputProvider {
     const unsigned int doGetWidth();
     const unsigned int doGetHeight();
     // private class attributes
-    ofxKinect mKinect;
-    ofParameter<bool> mGuiShowDepthImage;
-    ofParameter<int> mGuiDepthNearPlane;
-    ofParameter<int> mGuiDepthFarPlane;
+    ofShader mShader;
+    ofFbo mFbo;
+    ofImage mImage;
+    ofParameter<float> mGuiOffsetX;
+    ofParameter<float> mGuiOffsetY;
+    ofParameter<float> mGuiScale;
+    ofParameter<float> mGuiSpeed;
+    ofParameter<bool> mGuiDrawOutput;
 };

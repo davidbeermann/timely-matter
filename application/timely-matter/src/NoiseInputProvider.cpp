@@ -1,12 +1,12 @@
-#include "PerlinNoiseFbo.h"
+#include "NoiseInputProvider.h"
 
 
-void PerlinNoiseFbo::setup(const unsigned int width, const unsigned int height) {
+void NoiseInputProvider::doSetup() {
     // loads vertex and fragment shader named perlin.vert and perlin.frag
     mShader.load("perlin");
     
     // allocate memory for FBO
-    mFbo.allocate(width, height);
+    mFbo.allocate(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     
     // clear FBO contents
     mFbo.begin();
@@ -14,10 +14,10 @@ void PerlinNoiseFbo::setup(const unsigned int width, const unsigned int height) 
     mFbo.end();
     
     // allocate image buffer for pixel access
-    mImage.allocate(width, height, OF_IMAGE_COLOR_ALPHA);
+    mImage.allocate(mFbo.getWidth(), mFbo.getHeight(), OF_IMAGE_COLOR_ALPHA);
     
     // setup GUI settings
-    mGuiParams.setName("Perlin Noise Params");
+    mGuiParams.setName("Perlin Noise");
     mGuiParams.add(mGuiOffsetX.set("offset x", 5.43, 0.0, 15.0));
     mGuiParams.add(mGuiOffsetY.set("offset y", 2.34, 0.0, 15.0));
     mGuiParams.add(mGuiScale.set("scale", 0.0055, 0.001, 0.01));
@@ -26,7 +26,7 @@ void PerlinNoiseFbo::setup(const unsigned int width, const unsigned int height) 
 }
 
 
-void PerlinNoiseFbo::update() {
+void NoiseInputProvider::doUpdate() {
     // draw shader into FBO
     mFbo.begin();
     mShader.begin();
@@ -45,21 +45,27 @@ void PerlinNoiseFbo::update() {
 }
 
 
-void PerlinNoiseFbo::draw() {
-    // draw FBO to stage
+void NoiseInputProvider::doDraw() {
     if(mGuiDrawOutput) {
+        // draw FBO to stage
         mFbo.draw(0, 0);
     }
 }
 
 
-const ofParameterGroup& PerlinNoiseFbo::getGuiParams() {
-    return mGuiParams;
-}
-
-
-const ofPixels& PerlinNoiseFbo::getPixels() {
+const ofPixels& NoiseInputProvider::doGetPixels() {
     // write FBO pixel data into image buffer
     mFbo.readToPixels(mImage.getPixels());
     return mImage.getPixels();
 }
+
+
+const unsigned int NoiseInputProvider::doGetWidth() {
+    return mFbo.getWidth();
+}
+
+
+const unsigned int NoiseInputProvider::doGetHeight() {
+    return mFbo.getHeight();
+}
+

@@ -11,6 +11,8 @@ private:
     virtual void doUpdate() = 0;
     virtual void doDraw() = 0;
     virtual const ofPixels& doGetPixels() = 0;
+    virtual const unsigned int doGetWidth() = 0;
+    virtual const unsigned int doGetHeight() = 0;
 protected:
     const unsigned int DEFAULT_WIDTH = 640;
     const unsigned int DEFAULT_HEIGHT = 480;
@@ -23,4 +25,6 @@ public:
     void draw() { doDraw(); };
     const ofParameterGroup& getGuiParams() { return mGuiParams; };
     const ofPixels& getPixels() { return doGetPixels(); };
+    const unsigned int getWidth() { return doGetWidth(); };
+    const unsigned int getHeight() { return doGetHeight(); };
 };

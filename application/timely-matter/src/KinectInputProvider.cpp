@@ -42,3 +42,13 @@ const ofPixels& KinectInputProvider::doGetPixels() {
     return mKinect.getDepthPixels();
 }
 
+
+const unsigned int KinectInputProvider::doGetWidth() {
+    return (unsigned int) mKinect.getWidth();
+}
+
+
+const unsigned int KinectInputProvider::doGetHeight() {
+    return (unsigned int) mKinect.getHeight();
+}
+

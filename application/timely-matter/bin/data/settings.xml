@@ -1,21 +1,25 @@
-<Timely_Matter_Controls>
-	<Perlin_Noise_Params>
+<Timely_Matter>
+	<Perlin_Noise>
 		<offset_x>7.42347</offset_x>
 		<offset_y>4.97449</offset_y>
 		<scale>0.00401224</scale>
 		<speed>0.443061</speed>
-	<draw_FBO>0</draw_FBO>
-	</Perlin_Noise_Params>
+		<draw_FBO>0</draw_FBO>
+	</Perlin_Noise>
+	<Kinect>
+		<show_depth_image>1</show_depth_image>
+		<depth_near_plane>813</depth_near_plane>
+		<depth_far_plane>1619</depth_far_plane>
+	</Kinect>
 	<Vector_Field>
 		<meter_points>0</meter_points>
 		<meter_values>0</meter_values>
 		<vectors>0</vectors>
 	</Vector_Field>
-<Timely_Matter_Controls/>
-<Particle_System>
+	<Particle_System>
 		<max_velocity>4.74694</max_velocity>
 		<velocity_decay>0.985665</velocity_decay>
-	<show_mark_ref>0</show_mark_ref>
-	<show_particles>1</show_particles>
+		<show_mark_ref>0</show_mark_ref>
+		<show_particles>1</show_particles>
 	</Particle_System>
-</Timely_Matter_Controls>
+</Timely_Matter>
