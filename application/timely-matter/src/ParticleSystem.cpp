@@ -9,8 +9,10 @@ void ParticleSystem::setup(const unsigned int numParticles, const ofVec3f size) 
     
     // setup GUI parameters
     mGuiParams.setName("Particle System");
+    mGuiParams.add(mGuiShowParticles.set("show particles", true));
     mGuiParams.add(mGuiMaxVelocity.set("max velocity", 5.f, 1.f, 10.f));
     mGuiParams.add(mGuiVelocityDecay.set("velocity decay", 0.99f, 0.9f, 0.999f));
+    mGuiParams.add(mGuiShowMarkReference.set("show mark ref", true));
     
     // add particles to system.
     // this has to happen after the GUI setup, due to the max velocity parameter.
@@ -23,38 +25,38 @@ void ParticleSystem::setup(const unsigned int numParticles, const ofVec3f size) 
 
 
 void ParticleSystem::applyVectorField(const VectorField& vectorField) {
-    for (PIt p = mParticles.begin(); p != mParticles.end(); ++p) {
-        ofVec3f force = vectorField.getForceForPosition(p->getPosition());
-        p->applyForce(force);
+    if (mGuiShowParticles) {
+        for (PIt p = mParticles.begin(); p != mParticles.end(); ++p) {
+            ofVec3f force = vectorField.getForceForPosition(p->getPosition());
+            p->applyForce(force);
+        }
     }
 }
 
 
 void ParticleSystem::update() {
-    for (PIt p = mParticles.begin(); p != mParticles.end(); ++p) {
-        p->update(mBounds);
+    if (mGuiShowParticles) {
+        for (PIt p = mParticles.begin(); p != mParticles.end(); ++p) {
+            p->update(mBounds);
+        }
     }
 }
 
 
-void ParticleSystem::draw() {
-    for (PIt p = mParticles.begin(); p != mParticles.end(); ++p) {
-        p->draw();
-    }
-}
-
-
-void ParticleSystem::drawDebug(const VectorField& vectorField) {
-    for (PIt p = mParticles.begin(); p != mParticles.end(); ++p) {
-        
-        p->draw();
-        
-        ofVec3f pos = vectorField.getMeterPointForPosition(p->getPosition());
-        
-        ofPushStyle();
-        ofSetColor(255, 0, 0, 128);
-        ofDrawCircle(pos, 5);
-        ofPopStyle();
+void ParticleSystem::draw(const VectorField& vectorField) {
+    if (mGuiShowParticles) {
+        for (PIt p = mParticles.begin(); p != mParticles.end(); ++p) {
+            
+            p->draw();
+            
+            if(mGuiShowMarkReference) {
+                ofVec3f pos = vectorField.getMeterPointForPosition(p->getPosition());
+                ofPushStyle();
+                ofSetColor(255, 0, 0, 128);
+                ofDrawCircle(pos, 5);
+                ofPopStyle();
+            }
+        }
     }
 }
 

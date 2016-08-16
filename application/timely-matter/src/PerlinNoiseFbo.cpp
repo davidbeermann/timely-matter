@@ -22,6 +22,7 @@ void PerlinNoiseFbo::setup(const unsigned int width, const unsigned int height) 
     mGuiParams.add(mGuiOffsetY.set("offset y", 2.34, 0.0, 15.0));
     mGuiParams.add(mGuiScale.set("scale", 0.0055, 0.001, 0.01));
     mGuiParams.add(mGuiSpeed.set("speed", 0.5, 0.05, 0.95));
+    mGuiParams.add(mGuiDrawOutput.set("draw FBO", true));
 }
 
 
@@ -46,7 +47,9 @@ void PerlinNoiseFbo::update() {
 
 void PerlinNoiseFbo::draw() {
     // draw FBO to stage
-    mFbo.draw(0, 0);
+    if(mGuiDrawOutput) {
+        mFbo.draw(0, 0);
+    }
 }
 
 

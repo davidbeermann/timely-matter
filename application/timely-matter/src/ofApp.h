@@ -15,7 +15,6 @@ class ofApp : public ofBaseApp {
     ofxPanel mGui;
     PerlinNoiseFbo mFbo;
     float mFieldMaxStrength;
-    bool mShowField;
     VectorField mVectorField;
     ParticleSystem mParticleSystem;
 public:

@@ -11,6 +11,7 @@ class PerlinNoiseFbo {
     ofParameter<float> mGuiOffsetY;
     ofParameter<float> mGuiScale;
     ofParameter<float> mGuiSpeed;
+    ofParameter<bool> mGuiDrawOutput;
 public:
     void setup(const unsigned int width, const unsigned int height);
     void update();

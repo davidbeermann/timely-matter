@@ -8,13 +8,14 @@ class ParticleSystem {
     ofRectangle mBounds;
     vector<Particle> mParticles;
     ofParameterGroup mGuiParams;
+    ofParameter<bool> mGuiShowParticles;
     ofParameter<float> mGuiMaxVelocity;
     ofParameter<float> mGuiVelocityDecay;
+    ofParameter<bool> mGuiShowMarkReference;
 public:
     void setup(const unsigned int numParticles, const ofVec3f size);
     void applyVectorField(const VectorField& vectorField);
     void update();
-    void draw();
-    void drawDebug(const VectorField& vectorField);
+    void draw(const VectorField& vectorField);
     const ofParameterGroup& getGuiParams();
 };

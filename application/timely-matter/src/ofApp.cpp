@@ -9,15 +9,17 @@ void ofApp::setup() {
     
     mVectorField.setup(KINECT_CAM_WIDTH, KINECT_CAM_HEIGHT, 32);
     mFieldMaxStrength = 8.0f;
-    mShowField = true;
     
-    mParticleSystem.setup(1, ofVec3f(KINECT_CAM_WIDTH, KINECT_CAM_HEIGHT, 0.f));
+    mParticleSystem.setup(500, ofVec3f(KINECT_CAM_WIDTH, KINECT_CAM_HEIGHT, 0.f));
     
     // setup GUI
+    mGui.setDefaultWidth(250);
+    mGui.setWidthElements(250);
     mGui.setup("Timely Matter Controls");
     mGui.add(mFbo.getGuiParams());
     mGui.add(mVectorField.getGuiParams());
     mGui.add(mParticleSystem.getGuiParams());
+    mGui.loadFromFile("settings.xml");
     mShowGui = false;
     
     // set initial centered position
@@ -40,21 +42,20 @@ void ofApp::draw() {
     ofPushMatrix();
     ofTranslate(mCenteredPos);
     
+    ofPushStyle();
+    ofSetColor(0);
+    ofDrawRectangle(0, 0, KINECT_CAM_WIDTH, KINECT_CAM_HEIGHT);
+    ofPopStyle();
+    
     mFbo.draw();
-    
-    if (mShowField) {
-        mVectorField.draw();
-    }
-    
-//    mParticleSystem.draw();
-    mParticleSystem.drawDebug(mVectorField);
+    mVectorField.draw();
+    mParticleSystem.draw(mVectorField);
     
     ofPopMatrix();
     
     // define debug info string
     string debugInfo = "FPS " + to_string((int) ofGetFrameRate());
     debugInfo += "\nPress 'g' to toggle GUI display";
-    debugInfo += "\nPress 'f' to toggle Vector Field drawing";
     
     // show debug info
     ofDrawBitmapString(debugInfo, 10, 20);
@@ -68,12 +69,14 @@ void ofApp::draw() {
 void ofApp::keyPressed(int key) {
     switch (key) {
         case 'g':
+            if (!mShowGui) {
+                float x = (((ofGetWidth() - KINECT_CAM_WIDTH) / 2.f) - mGui.getWidth()) / 2.f;
+                float y = (ofGetHeight() - mGui.getHeight()) / 2.f;
+                mGui.setPosition(x, y);
+            }
             // toggle gui display
             mShowGui = !mShowGui;
             break;
-        case 'f':
-            // toggle vector field display
-            mShowField = !mShowField;
         default:
             break;
     }
