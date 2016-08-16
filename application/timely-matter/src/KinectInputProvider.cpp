@@ -1,6 +1,12 @@
 #include "KinectInputProvider.h"
 
 
+KinectInputProvider::~KinectInputProvider() {
+//    ofLog() << "~KinectInputProvider()";
+    mKinect.close();
+}
+
+
 void KinectInputProvider::doSetup() {
     // Kinect method signature: init(bool infrared, bool video, bool texture)
     // enable Kinect eith infrared video and texture
@@ -50,5 +56,15 @@ const unsigned int KinectInputProvider::doGetWidth() {
 
 const unsigned int KinectInputProvider::doGetHeight() {
     return (unsigned int) mKinect.getHeight();
+}
+
+
+const VectorFieldInputType KinectInputProvider::doGetType() {
+    return VectorFieldInputType::NOISE;
+}
+
+
+const string KinectInputProvider::doGetName() {
+    return "Kinect";
 }
 

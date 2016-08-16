@@ -13,9 +13,13 @@ class KinectInputProvider : public VectorFieldInputProvider {
     const ofPixels& doGetPixels();
     const unsigned int doGetWidth();
     const unsigned int doGetHeight();
+    const VectorFieldInputType doGetType();
+    const string doGetName();
     // private class attributes
     ofxKinect mKinect;
     ofParameter<bool> mGuiShowDepthImage;
     ofParameter<int> mGuiDepthNearPlane;
     ofParameter<int> mGuiDepthFarPlane;
+public:
+    ~KinectInputProvider();
 };

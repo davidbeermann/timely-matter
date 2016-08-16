@@ -9,10 +9,14 @@
 
 
 class ofApp : public ofBaseApp {
+    void updateGuiPosition();
+    void updateGui();
+    void updateInputProvider(const VectorFieldInputType type);
     ofVec2f mCenteredPos;
     bool mShowGui;
     ofxPanel mGui;
     float mFieldMaxStrength;
+    VectorFieldInputType mDefaultType = VectorFieldInputType::NOISE;
     VectorFieldInputFactory mInputFactory;
     VectorFieldInputProvider* mInputProvider;
     VectorField mVectorField;

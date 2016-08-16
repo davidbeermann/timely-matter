@@ -69,3 +69,13 @@ const unsigned int NoiseInputProvider::doGetHeight() {
     return mFbo.getHeight();
 }
 
+
+const VectorFieldInputType NoiseInputProvider::doGetType() {
+    return VectorFieldInputType::NOISE;
+}
+
+
+const string NoiseInputProvider::doGetName() {
+    return "Perlin Noise";
+}
+

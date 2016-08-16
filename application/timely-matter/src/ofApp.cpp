@@ -5,8 +5,7 @@ void ofApp::setup() {
     ofSetFrameRate(60);
     ofSetBackgroundColor(33);
     
-    mInputProvider = mInputFactory.get(VectorFieldInputType::NOISE);
-//    mInputProvider = mInputFactory.get(VectorFieldInputType::KINECT);
+    mInputProvider = mInputFactory.get(mDefaultType);
     mInputProvider->setup();
     
     mVectorField.setup(mInputProvider->getWidth(), mInputProvider->getHeight(), 32);
@@ -59,7 +58,10 @@ void ofApp::draw() {
     
     // define debug info string
     string debugInfo = "FPS " + to_string((int) ofGetFrameRate());
-    debugInfo += "\nPress 'g' to toggle GUI display";
+    debugInfo += "\nActive Input Provider: " + mInputProvider->getName();
+    debugInfo += "\n\nPress 'g' to toggle GUI";
+    debugInfo += "\nPress '1' to switch to noise input";
+    debugInfo += "\nPress '2' to switch to Kinect input";
     
     // show debug info
     ofDrawBitmapString(debugInfo, 10, 20);
@@ -74,12 +76,16 @@ void ofApp::keyPressed(int key) {
     switch (key) {
         case 'g':
             if (!mShowGui) {
-                float x = (((ofGetWidth() - mInputProvider->getWidth()) / 2.f) - mGui.getWidth()) / 2.f;
-                float y = (ofGetHeight() - mGui.getHeight()) / 2.f;
-                mGui.setPosition(x, y);
+                updateGuiPosition();
             }
             // toggle gui display
             mShowGui = !mShowGui;
+            break;
+        case '1':
+            updateInputProvider(VectorFieldInputType::NOISE);
+            break;
+        case '2':
+            updateInputProvider(VectorFieldInputType::KINECT);
             break;
         default:
             break;
@@ -90,3 +96,34 @@ void ofApp::keyPressed(int key) {
 void ofApp::windowResized(int w, int h) {
     mCenteredPos.set((w - mInputProvider->getWidth()) * 0.5f, (h - mInputProvider->getHeight()) * 0.5f);
 }
+
+
+void ofApp::updateGuiPosition() {
+    float x = (((ofGetWidth() - mInputProvider->getWidth()) / 2.f) - mGui.getWidth()) / 2.f;
+    float y = (ofGetHeight() - mGui.getHeight()) / 2.f;
+    mGui.setPosition(x, y);
+}
+
+
+void ofApp::updateGui() {
+    mGui.clear();
+    mGui.setup("Timely Matter");
+    mGui.add(mInputProvider->getGuiParams());
+    mGui.add(mVectorField.getGuiParams());
+    mGui.add(mParticleSystem.getGuiParams());
+    mGui.loadFromFile("settings.xml");
+    
+    updateGuiPosition();
+}
+
+
+void ofApp::updateInputProvider(const VectorFieldInputType type) {
+    //
+    delete mInputProvider;
+    //
+    mInputProvider = mInputFactory.get(type);
+    mInputProvider->setup();
+    //
+    updateGui();
+}
+
