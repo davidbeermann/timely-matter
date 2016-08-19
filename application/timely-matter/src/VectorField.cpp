@@ -28,8 +28,8 @@ void VectorField::setup(const unsigned int width, const unsigned int height, con
     mGuiParams.add(mGuiDebugVector.set("vectors", false));
     
     // setup listeners for changes in field strength
-    mMaxEdgeForce.addListener(this, &VectorField::onMaxEdgeForceChanged);
-    mMaxFieldForce.addListener(this, &VectorField::onMaxFieldForceChanged);
+//    mMaxEdgeForce.addListener(this, &VectorField::onMaxEdgeForceChanged);
+//    mMaxFieldForce.addListener(this, &VectorField::onMaxFieldForceChanged);
     
     // calculate field increments
     mIncX = (float) width / (float) subdivisionX;
