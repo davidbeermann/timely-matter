@@ -1,25 +1,26 @@
 #include "VectorFieldMark.h"
 
 
-void VectorFieldMark::setup(unsigned int id, float posX, float posY) {
+void VectorFieldMark::setup(unsigned int id, float posX, float posY, unsigned int column, unsigned int row) {
     mID = id;
     mPosition.set(posX, posY, 0.f);
+    mGridPosition.set(column, row);
     mFixed = false;
     
     reset();
 }
 
 
-void VectorFieldMark::setFixed(const ofVec3f& referencePoint, float maxForce) {
-    mForce = referencePoint - mPosition;
-    mForce.normalize();
-    mForce *= maxForce;
+void VectorFieldMark::setFixed(const ofVec3f& referencePoint) {
+    mFixedForce = referencePoint - mPosition;
+    mFixedForce.normalize();
     
     mFixed = true;
 }
 
 
-void VectorFieldMark::setNeighbor(Directions direction, VectorFieldMark* mark) {
+void VectorFieldMark::addNeighbor(Directions direction, VectorFieldMark* mark) {
+    mNeighborIndex += (unsigned int) direction;
     mNeighbors.insert(NeighborMapPair(direction, mark));
 }
 
@@ -34,27 +35,113 @@ void VectorFieldMark::setDatum(int value) {
     mDatum = value;
 }
 
-void VectorFieldMark::update(const float maxStrength) {
-    // get measurement readings of all neighboring marks
-    const int nw = mNeighbors.at(Directions::NORTH_WEST)->getDatum();
-    const int n = mNeighbors.at(Directions::NORTH)->getDatum();
-    const int ne = mNeighbors.at(Directions::NORTH_EAST)->getDatum();
-    const int e = mNeighbors.at(Directions::EAST)->getDatum();
-    const int se = mNeighbors.at(Directions::SOUTH_EAST)->getDatum();
-    const int s = mNeighbors.at(Directions::SOUTH)->getDatum();
-    const int sw = mNeighbors.at(Directions::SOUTH_WEST)->getDatum();
-    const int w = mNeighbors.at(Directions::WEST)->getDatum();
+void VectorFieldMark::update(const float maxFieldForce, const float maxEdgeForce) {
+    int diffX = 0;
+    int diffY = 0;
+    int nw, n, ne, e, se, s, sw, w;
     
-    // calculate the difference between all neighbors at the top and bottom and to the left and right.
-    int diffX = (nw + w + sw) - (ne + e + se);
-    int diffY = (nw + n + ne) - (sw + s + se);
+    switch (mNeighborIndex) {
+        case DirectionIndex::TOP_LEFT:
+            e = mNeighbors.at(Directions::EAST)->getDatum();
+            se = mNeighbors.at(Directions::SOUTH_EAST)->getDatum();
+            s = mNeighbors.at(Directions::SOUTH)->getDatum();
+            
+            diffX = e + se;
+            diffY = se + s;
+            break;
+        case DirectionIndex::TOP_RIGHT:
+            s = mNeighbors.at(Directions::SOUTH)->getDatum();
+            sw = mNeighbors.at(Directions::SOUTH_WEST)->getDatum();
+            w = mNeighbors.at(Directions::WEST)->getDatum();
+            
+            diffX = -(sw + w);
+            diffY = s + sw;
+            break;
+        case DirectionIndex::BOTTOM_RIGHT:
+            w = mNeighbors.at(Directions::WEST)->getDatum();
+            nw = mNeighbors.at(Directions::NORTH_WEST)->getDatum();
+            n = mNeighbors.at(Directions::NORTH)->getDatum();
+            
+            diffX = -(w + nw);
+            diffY = -(nw + n);
+            break;
+        case DirectionIndex::BOTTOM_LEFT:
+            n = mNeighbors.at(Directions::NORTH)->getDatum();
+            ne = mNeighbors.at(Directions::NORTH_EAST)->getDatum();
+            e = mNeighbors.at(Directions::EAST)->getDatum();
+            
+            diffX = ne + e;
+            diffY = -(n + ne);
+            break;
+        case DirectionIndex::TOP_ROW:
+            e = mNeighbors.at(Directions::EAST)->getDatum();
+            se = mNeighbors.at(Directions::SOUTH_EAST)->getDatum();
+            s = mNeighbors.at(Directions::SOUTH)->getDatum();
+            sw = mNeighbors.at(Directions::SOUTH_WEST)->getDatum();
+            w = mNeighbors.at(Directions::WEST)->getDatum();
+            
+            diffX = (s + sw + w) - (e + se + s);
+            diffY = (se + s + sw);
+            break;
+        case DirectionIndex::BOTTOM_ROW:
+            w = mNeighbors.at(Directions::WEST)->getDatum();
+            nw = mNeighbors.at(Directions::NORTH_WEST)->getDatum();
+            n = mNeighbors.at(Directions::NORTH)->getDatum();
+            ne = mNeighbors.at(Directions::NORTH_EAST)->getDatum();
+            e = mNeighbors.at(Directions::EAST)->getDatum();
+            
+            diffX = (n + ne + e) - (w + nw + n);
+            diffY = -(nw + n + ne);
+            break;
+        case DirectionIndex::LEFT_COLUMN:
+            n = mNeighbors.at(Directions::NORTH)->getDatum();
+            ne = mNeighbors.at(Directions::NORTH_EAST)->getDatum();
+            e = mNeighbors.at(Directions::EAST)->getDatum();
+            se = mNeighbors.at(Directions::SOUTH_EAST)->getDatum();
+            s = mNeighbors.at(Directions::SOUTH)->getDatum();
+            
+            diffX = (ne + e + se);
+            diffY = (e + se + s) - (n + ne + e);
+            break;
+        case DirectionIndex::RIGHT_COLUMN:
+            s = mNeighbors.at(Directions::SOUTH)->getDatum();
+            sw = mNeighbors.at(Directions::SOUTH_WEST)->getDatum();
+            w = mNeighbors.at(Directions::WEST)->getDatum();
+            nw = mNeighbors.at(Directions::NORTH_WEST)->getDatum();
+            n = mNeighbors.at(Directions::NORTH)->getDatum();
+            
+            diffX = -(sw + w + nw);
+            diffY = (s + sw + w) - (w + nw + n);
+            break;
+        case DirectionIndex::INNER:
+            // get measurement readings of all neighboring marks
+            nw = mNeighbors.at(Directions::NORTH_WEST)->getDatum();
+            n = mNeighbors.at(Directions::NORTH)->getDatum();
+            ne = mNeighbors.at(Directions::NORTH_EAST)->getDatum();
+            e = mNeighbors.at(Directions::EAST)->getDatum();
+            se = mNeighbors.at(Directions::SOUTH_EAST)->getDatum();
+            s = mNeighbors.at(Directions::SOUTH)->getDatum();
+            sw = mNeighbors.at(Directions::SOUTH_WEST)->getDatum();
+            w = mNeighbors.at(Directions::WEST)->getDatum();
+            
+            // calculate the difference between all neighbors at the top and bottom and to the left and right.
+            diffX = (nw + w + sw) - (ne + e + se);
+            diffY = (nw + n + ne) - (sw + s + se);
+            break;
+    }
     
     // update force vector
     mForce.set((float) diffX, (float) diffY);
     
     // apply max strength to force vector
     mForce.normalize();
-    mForce *= ofMap((float) mDatum, 0.f, 255.f, 0.f, maxStrength);
+    mForce *= ofMap((float) mDatum, 0.f, 255.f, 0.f, maxFieldForce);
+    
+    // apply fixed force
+    if (mForce.lengthSquared() == 0 && isFixed()) {
+        mForce.set(mFixedForce);
+        mForce *= maxEdgeForce;
+    }
 }
 
 
@@ -100,6 +187,11 @@ const ofVec3f& VectorFieldMark::getPosition() const {
 }
 
 
+const ofVec2f& VectorFieldMark::getGridPosition() const {
+    return mGridPosition;
+}
+
+
 const ofVec3f& VectorFieldMark::getForce() const {
     return mForce;
 }
@@ -111,6 +203,11 @@ const int VectorFieldMark::getDatum() {
 
 const int VectorFieldMark::getNeighborCount() {
     return mNeighbors.size();
+}
+
+
+const unsigned int VectorFieldMark::getNeighborIndex() {
+    return mNeighborIndex;
 }
 
 

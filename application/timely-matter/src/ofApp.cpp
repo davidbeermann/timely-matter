@@ -9,7 +9,6 @@ void ofApp::setup() {
     mInputProvider->setup();
     
     mVectorField.setup(mInputProvider->getWidth(), mInputProvider->getHeight(), 32);
-    mFieldMaxStrength = 8.0f;
     
     mParticleSystem.setup(50, ofVec3f(mInputProvider->getWidth(), mInputProvider->getHeight(), 0.f));
     
@@ -32,7 +31,7 @@ void ofApp::update() {
     // update input provider first ...
     mInputProvider->update();
     // ... before retrieving pixel data to update vector field.
-    mVectorField.update(mInputProvider->getPixels(), mFieldMaxStrength);
+    mVectorField.update(mInputProvider->getPixels());
     
     // apply forces of vector field to particl system...
     mParticleSystem.applyVectorField(mVectorField);

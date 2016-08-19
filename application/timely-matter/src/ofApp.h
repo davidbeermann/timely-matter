@@ -15,7 +15,6 @@ class ofApp : public ofBaseApp {
     ofVec2f mCenteredPos;
     bool mShowGui;
     ofxPanel mGui;
-    float mFieldMaxStrength;
     VectorFieldInputType mDefaultType = VectorFieldInputType::NOISE;
     VectorFieldInputFactory mInputFactory;
     VectorFieldInputProvider* mInputProvider;
