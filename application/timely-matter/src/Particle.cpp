@@ -43,15 +43,18 @@ void Particle::update(const ofRectangle& bounds) {
 }
 
 
-void Particle::draw() {
-    ofPushStyle();
-    ofSetColor(255);
+void Particle::draw(const ofVboMesh& mesh) {
+    // regular style drawing
+//    ofPushStyle();
+//    ofSetColor(255);
+//    ofDrawCircle(mPosition.x, mPosition.y, 2.5f);
+//    ofPopStyle();
     
-//    ofPushMatrix();
-    ofDrawCircle(mPosition.x, mPosition.y, 5);
-//    ofPopMatrix();
-    
-    ofPopStyle();
+    // vbo mesh drawing
+    ofPushMatrix();
+    ofTranslate(mPosition.x, mPosition.y);
+    mesh.draw();
+    ofPopMatrix();
 }
 
 

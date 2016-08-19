@@ -15,6 +15,6 @@ public:
     void setup(ofVec3f position);
     void applyForce(const ofVec3f& force);
     void update(const ofRectangle& bounds);
-    void draw();
+    void draw(const ofVboMesh& mesh);
     const ofVec3f& getPosition();
 };

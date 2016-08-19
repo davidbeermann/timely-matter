@@ -7,6 +7,7 @@
 class ParticleSystem {
     ofRectangle mBounds;
     vector<Particle> mParticles;
+    ofVboMesh mParticleMesh;
     ofParameterGroup mGuiParams;
     ofParameter<bool> mGuiShowParticles;
     ofParameter<float> mGuiMaxVelocity;

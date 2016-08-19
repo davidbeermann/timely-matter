@@ -21,6 +21,17 @@ void ParticleSystem::setup(const unsigned int numParticles, const ofVec3f size) 
         p.setup(ofVec3f(ofRandom(size.x), ofRandom(size.y), 0.f));
         mParticles.push_back(p);
     }
+    
+    // create a single mesh for all particles
+    mParticleMesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
+    mParticleMesh.addVertex(ofVec3f(0.f, 0.f, 0.f));
+    int steps = 12;
+    float radius = 3.f;
+    double inc = TWO_PI / (double) steps;
+    for (int i = 0; i <= steps; ++i) {
+        double radian = i * inc;
+        mParticleMesh.addVertex(ofVec3f(cos(radian)*radius, sin(radian)*radius, 0.f));
+    }
 }
 
 
@@ -47,7 +58,7 @@ void ParticleSystem::draw(const VectorField& vectorField) {
     if (mGuiShowParticles) {
         for (PIt p = mParticles.begin(); p != mParticles.end(); ++p) {
             
-            p->draw();
+            p->draw(mParticleMesh);
             
             if(mGuiShowMarkReference) {
                 ofVec3f pos = vectorField.getMeterPointForPosition(p->getPosition());

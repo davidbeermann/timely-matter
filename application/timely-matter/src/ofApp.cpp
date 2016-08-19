@@ -10,7 +10,7 @@ void ofApp::setup() {
     
     mVectorField.setup(mInputProvider->getWidth(), mInputProvider->getHeight(), 32);
     
-    mParticleSystem.setup(50, ofVec3f(mInputProvider->getWidth(), mInputProvider->getHeight(), 0.f));
+    mParticleSystem.setup(100, ofVec3f(mInputProvider->getWidth(), mInputProvider->getHeight(), 0.f));
     
     // setup GUI
     mGui.setDefaultWidth(250);
