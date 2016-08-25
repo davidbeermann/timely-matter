@@ -63,7 +63,7 @@
     var el_header = document.getElementById('page-header');
     var header_minimized = false;
 
-    var scrollHandler = debounce(function setHeaderState() {
+    function setHeaderState() {
       if (window.scrollY > 30) {
         if (!header_minimized) {
           addClass(el_header, 'page-header-small');
@@ -75,9 +75,12 @@
           header_minimized = false;
         }
       }
-    }, 100);
+    };
 
-    window.addEventListener('scroll', scrollHandler);
+    var scrollHandler = debounce(setHeaderState, 100);
+
+    // disabled debouncing for smoother transitions
+    window.addEventListener('scroll', setHeaderState);
   };
 
   document.addEventListener('DOMContentLoaded', function(e) {
