@@ -1,35 +1,65 @@
 @import "../colors"
 @import "../fonts"
 
-$h1-size: 48px
+$h1-size: 44px
+$h1-size-small: 32px
+
+$transition-speed: 0.45s
+
+$header_height_maximized: 170px
+$header_height_minimized: 70px
 
 // was .site-header but needed to be renamed due to bug!!!
 // https://github.com/jekyll/jekyll/issues/4876
 .page-header
-  text-align: center 
+  text-align: center
   a
+    
     background-color: #fff
-    border-bottom: solid 1px $mid-gray
+    border-bottom: solid 1px $light-gray
     display: block
+    height: rem($header_height_maximized)
     margin: 0 auto
-    padding: em(32) 0 em(37)
     max-width: $max-width
+    overflow: hidden
+    position: relative
+    transition: all $transition-speed ease
     &, &:visited, &:active
       color: $dark-gray
       text-decoration: none
+  hgroup
+    left: 50%
+    position: absolute
+    top: 50%
+    transform: translate(-50%, -50%)
   h1
     border-bottom: none
     display: block
     font-family: $norwester
-    font-size: em($h1-size)
+    font-size: rem($h1-size)
     line-height: 1
-    margin: 0 0 em(8, $h1-size) 0
+    margin: 0
     text-transform: lowercase
+    transition: all $transition-speed ease
   h2
     color: $mid-gray
     font-family: $roboto
-    font-size: em(18)
-    font-style: italic
+    font-size: rem(16)
+    // font-style: italic
     font-weight: 400
-    line-height: 1.1667
+    height: auto
+    line-height: 1.35
     margin: 0
+    padding-top: rem(8)
+    opacity: 1
+    transition: all $transition-speed ease
+
+.page-header.page-header-small
+  a
+    height: rem($header_height_minimized)
+  h1
+    font-size: rem($h1-size-small)
+  h2
+    opacity: 0
+    padding-top: 0
+    height: 0
