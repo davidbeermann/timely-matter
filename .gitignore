@@ -4,10 +4,12 @@
 # except for *.md and all files in src and bin
 examples/*/*
 !examples/*/*.md
+!examples/*/addons.make
 !examples/*/bin
 !examples/*/src
 application/*/*
 !application/*/*.md
+!application/*/addons.make
 !application/*/bin
 !application/*/src
 
