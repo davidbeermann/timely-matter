@@ -89,7 +89,7 @@ void ofApp::keyPressed(int key) {
             m_smoothing_enabled = !m_smoothing_enabled;
             break;
         
-        case 357: // arrow up
+        case OF_KEY_UP:
             if (m_num_samples == 0) {
                 m_num_samples = 2;
             } else {
@@ -107,7 +107,7 @@ void ofApp::keyPressed(int key) {
             drawMask();
             break;
             
-        case 359: // arrow down
+        case OF_KEY_DOWN:
             if (m_num_samples == 2) {
                 m_num_samples = 0;
             } else {
