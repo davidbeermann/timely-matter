@@ -1,12 +1,6 @@
 #include "SelectionHandle.hpp"
 
 
-const bool SelectionHandle::isOverHandle(const ofVec3f& position) {
-    const float distance = m_position.distance(position);
-    return (distance <= m_radius);
-}
-
-
 void SelectionHandle::setup(const ofRectangle& bounds, const ofVec2f position, const float radius) {
     m_bounds = bounds;
     m_position = position;
@@ -48,7 +42,7 @@ const ofVec2f& SelectionHandle::getPosition() const {
 
 
 void SelectionHandle::mouseMoved(ofMouseEventArgs& args) {
-    m_is_over = isOverHandle(args);
+    m_is_over = m_isOverHandle(args);
 }
 
 
@@ -72,14 +66,26 @@ void SelectionHandle::mouseDragged(ofMouseEventArgs& args) {
 
 
 void SelectionHandle::mousePressed(ofMouseEventArgs& args) {
-    if (isOverHandle(args)) {
+    if (m_isOverHandle(args)) {
         m_click_offset.set(args - m_position);
         m_is_dragging = true;
+        
+        ofNotifyEvent(onHandleDragStart, this);
     }
 }
 
 
 void SelectionHandle::mouseReleased(ofMouseEventArgs& args) {
+    if (m_is_dragging) {
+        ofNotifyEvent(onHandleDragStop, this);
+    }
+        
     m_is_dragging = false;
+}
+
+
+const bool SelectionHandle::m_isOverHandle(const ofVec3f& position) {
+    const float distance = m_position.distance(position);
+    return (distance <= m_radius);
 }
 

@@ -6,16 +6,18 @@
 
 
 class ImageSelection {
-    void _setup();
-    void _setupMask();
-    void _clearMask();
-    void _drawMask();
+    void m_enableMaskRedraw();
+    void m_disableMaskRedraw();
+    void m_setup();
+    void m_setupMask();
+    void m_clearMask();
+    void m_drawMask();
     ofVec2f m_position;
     ofRectangle m_bounds;
     ofImage m_image;
     ofFbo m_mask;
     RectangularSelection m_selection;
-    bool m_mask_enabled = false;
+    bool m_mask_enabled = false, m_redraw_mask = false;
 public:
     void setup(const ofVec2f& position, const string& image_name);
     void setup(const ofVec2f& position, const unsigned int width, const unsigned int height);

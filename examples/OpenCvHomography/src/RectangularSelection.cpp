@@ -1,4 +1,5 @@
 #include "RectangularSelection.hpp"
+#include "ofEvents.h"
 
 using namespace cv;
 
@@ -13,10 +14,12 @@ void RectangularSelection::setup(const ofRectangle bounds) {
     m_handle_br.setup(bounds, ofVec2f(bounds.x + bounds.width, bounds.y + bounds.height), m_handle_radius);
     m_handle_bl.setup(bounds, ofVec2f(bounds.x, bounds.y + bounds.height), m_handle_radius);
     
-    m_handles.push_back(&m_handle_tl);
-    m_handles.push_back(&m_handle_tr);
-    m_handles.push_back(&m_handle_br);
-    m_handles.push_back(&m_handle_bl);
+    // Creating a vector of type vector<SelectionHandle> leads to weird errors – destruction of instances inside of vector.
+    // Therefore a vector of pointers is used.
+    m_handles.push_back(&m_handle_tl); // 0 = top left
+    m_handles.push_back(&m_handle_tr); // 1 = top right
+    m_handles.push_back(&m_handle_br); // 2 = bottom tight
+    m_handles.push_back(&m_handle_bl); // 3 = bottom left
 }
 
 
@@ -36,6 +39,6 @@ void RectangularSelection::draw() {
 }
 
 
-const vector<SelectionHandle*>& RectangularSelection::getHandles() const {
+vector<SelectionHandle*>& RectangularSelection::getHandles() {
     return m_handles;
 }
