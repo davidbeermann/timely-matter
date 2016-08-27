@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "VectorFieldInputProvider.h"
+#include "AppVars.hpp"
 
 
 class NoiseInputProvider : public VectorFieldInputProvider {
@@ -12,7 +13,7 @@ class NoiseInputProvider : public VectorFieldInputProvider {
     const ofPixels& doGetPixels();
     const unsigned int doGetWidth();
     const unsigned int doGetHeight();
-    const VectorFieldInputType doGetType();
+    const AppMode doGetType();
     const string doGetName();
     // private class attributes
     ofShader mShader;

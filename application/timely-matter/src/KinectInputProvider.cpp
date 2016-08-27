@@ -10,7 +10,7 @@ KinectInputProvider::~KinectInputProvider() {
 void KinectInputProvider::doSetup() {
     // Kinect method signature: init(bool infrared, bool video, bool texture)
     // enable Kinect eith infrared video and texture
-    mKinect.init(false, false, true);
+    mKinect.init(false, true, true);
     
     // uses some cpu - scews the video image?!
     //mKinect.setRegistration(true);
@@ -59,8 +59,8 @@ const unsigned int KinectInputProvider::doGetHeight() {
 }
 
 
-const VectorFieldInputType KinectInputProvider::doGetType() {
-    return VectorFieldInputType::NOISE;
+const AppMode KinectInputProvider::doGetType() {
+    return AppMode::KINECT;
 }
 
 

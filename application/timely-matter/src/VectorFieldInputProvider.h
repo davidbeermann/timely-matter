@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "VectorFieldInputType.h"
+#include "AppVars.hpp"
 
 // Implementation for NVI Non-Virtual Interface derived from here:
 // http://stackoverflow.com/questions/14323595/best-way-to-declare-an-interface-in-c11#answer-14324500
@@ -14,7 +14,7 @@ private:
     virtual const ofPixels& doGetPixels() = 0;
     virtual const unsigned int doGetWidth() = 0;
     virtual const unsigned int doGetHeight() = 0;
-    virtual const VectorFieldInputType doGetType() = 0;
+    virtual const AppMode doGetType() = 0;
     virtual const string doGetName() = 0;
 protected:
     const unsigned int DEFAULT_WIDTH = 640;
@@ -30,6 +30,6 @@ public:
     const ofPixels& getPixels() { return doGetPixels(); };
     const unsigned int getWidth() { return doGetWidth(); };
     const unsigned int getHeight() { return doGetHeight(); };
-    const VectorFieldInputType getType() { return doGetType(); };
+    const AppMode getType() { return doGetType(); };
     const string getName() { return doGetName(); };
 };

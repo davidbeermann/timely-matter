@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxGui.h"
+#include "AppVars.hpp"
 #include "VectorFieldInputFactory.h"
 #include "VectorFieldInputProvider.h"
 #include "VectorField.h"
@@ -9,30 +10,23 @@
 
 
 class ofApp : public ofBaseApp {
-    void updateGuiPosition();
-    void updateGui();
-    void updateInputProvider(const VectorFieldInputType type);
+    VectorFieldInputFactory m_input_factory;
+    VectorFieldInputProvider* m_input_provider;
+    VectorField m_vector_field;
+    ParticleSystem m_particle_system;
+    bool m_update_window_size;
+    
     ofVec2f mCenteredPos;
-    bool mShowGui;
-    ofxPanel mGui;
-    VectorFieldInputType mDefaultType = VectorFieldInputType::NOISE;
-    VectorFieldInputFactory mInputFactory;
-    VectorFieldInputProvider* mInputProvider;
-    VectorField mVectorField;
-    ParticleSystem mParticleSystem;
 public:
     void setup();
     void update();
     void draw();
-    void keyPressed(int key);
-//    void keyReleased(int key);
-//    void mouseMoved(int x, int y );
-//    void mouseDragged(int x, int y, int button);
-//    void mousePressed(int x, int y, int button);
-//    void mouseReleased(int x, int y, int button);
-//    void mouseEntered(int x, int y);
-//    void mouseExited(int x, int y);
     void windowResized(int w, int h);
-//    void dragEvent(ofDragInfo dragInfo);
-//    void gotMessage(ofMessage msg);
+    
+    const bool isInputAvailable();
+    void setInputProvider(const AppMode mode);
+    
+    const ofParameterGroup& getInputParams() { return m_input_provider->getGuiParams(); };
+    const ofParameterGroup& getVectorFieldParams() { return m_vector_field.getGuiParams(); };
+    const ofParameterGroup& getParticleSystemParams() { return m_particle_system.getGuiParams(); };
 };

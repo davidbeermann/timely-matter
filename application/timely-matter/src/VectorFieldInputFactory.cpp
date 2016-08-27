@@ -3,12 +3,12 @@
 #include "KinectInputProvider.h"
 
 
-VectorFieldInputProvider* VectorFieldInputFactory::get(VectorFieldInputType type) {
-    switch (type) {
-        case VectorFieldInputType::NOISE:
+VectorFieldInputProvider* VectorFieldInputFactory::get(const AppMode mode) {
+    switch (mode) {
+        case AppMode::NOISE:
             return new NoiseInputProvider();
             break;
-        case VectorFieldInputType::KINECT:
+        case AppMode::KINECT:
             return new KinectInputProvider();
             break;
         default:

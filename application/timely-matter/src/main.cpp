@@ -4,34 +4,37 @@
 
 
 int main( ){
+    ofGLFWWindowSettings settings;
+    
     // create window for controller application
-    ofGLFWWindowSettings controllerSettings;
-    controllerSettings.title = "Controller";
-    controllerSettings.width = 690;
-    controllerSettings.height = 800;
-    controllerSettings.resizable = false;
-    controllerSettings.setGLVersion(3, 3); // OpenGL 3.3 #version 330
-    shared_ptr<ofAppBaseWindow> controllerWindow = ofCreateWindow(controllerSettings);
+    //    ofGLFWWindowSettings controllerSettings;
+    settings.title = "Controller";
+    settings.width = 690;
+    settings.height = 800;
+    settings.resizable = false;
+    settings.setGLVersion(3, 3); // OpenGL 3.3 #version 330
+    shared_ptr<ofAppBaseWindow> controllerWindow = ofCreateWindow(settings);
     
     // create window for main application
-    ofGLFWWindowSettings appSettings;
-    appSettings.title = "Application";
-    appSettings.width = 1024;
-    appSettings.height = 768;
-    appSettings.resizable = true;
-    appSettings.setGLVersion(3, 3); // OpenGL 3.3 #version 330
+    //    ofGLFWWindowSettings appSettings;
+    settings.title = "Application";
+    settings.width = 1024;
+    settings.height = 768;
+    settings.resizable = true;
+    settings.setGLVersion(3, 3); // OpenGL 3.3 #version 330
     // SHARE CONTEXT!
     // enables rendering of elements instanciated in ofApp in ofController
-    appSettings.shareContextWith = controllerWindow;
-    shared_ptr<ofAppBaseWindow> appWindow = ofCreateWindow(appSettings);
+    // and strangely also the rendering in ofApp... i.e. fbo and shaders
+    settings.shareContextWith = controllerWindow;
+    shared_ptr<ofAppBaseWindow> appWindow = ofCreateWindow(settings);
     
     // CREATE APPLICATIONS
     // use shared pointers in order to pass ofApp instance into ofController instance
-    shared_ptr<ofController> controller(new ofController());
     shared_ptr<ofApp> app(new ofApp());
+    shared_ptr<ofController> controller(new ofController());
     
     // Setup link between windows
-    controller->mainApp = app;
+    controller->app_sptr = app;
     
     // Link apps to windows
     ofRunApp(controllerWindow, controller);

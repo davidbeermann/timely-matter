@@ -70,8 +70,8 @@ const unsigned int NoiseInputProvider::doGetHeight() {
 }
 
 
-const VectorFieldInputType NoiseInputProvider::doGetType() {
-    return VectorFieldInputType::NOISE;
+const AppMode NoiseInputProvider::doGetType() {
+    return AppMode::NOISE;
 }
 
 
