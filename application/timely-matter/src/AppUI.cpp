@@ -1,11 +1,7 @@
-#include "ofController.hpp"
+#include "AppUI.hpp"
 
 
-void ofController::setup() {
-    ofSetFrameRate(60);
-    ofSetBackgroundColor(33);
-    ofSetBackgroundAuto(true);
-    
+void AppUI::setup() {
     // configure gui
     m_gui.setDefaultWidth(250);
     m_gui.setWidthElements(250);
@@ -17,12 +13,12 @@ void ofController::setup() {
 }
 
 
-void ofController::update() {
+void AppUI::update() {
     m_debug_info = "FPS: " + to_string((int) ofGetFrameRate());
 }
 
 
-void ofController::draw() {
+void AppUI::draw() {
     ofDrawBitmapString(m_debug_info, 20, 20);
     
     switch (m_state) {
@@ -43,8 +39,8 @@ void ofController::draw() {
 }
 
 
-void ofController::keyReleased(int key) {
-    switch (key) {
+void AppUI::keyPressed(ofKeyEventArgs& args) {
+    switch (args.key) {
         case 'g':
             // toggle gui display
             m_gui_visible = !m_gui_visible;
@@ -53,7 +49,7 @@ void ofController::keyReleased(int key) {
     
     switch (m_state) {
         case AppState::MODE_SELECTION:
-            m_evalModeSelectionInput(key);
+            m_evalModeSelectionInput(args.key);
             break;
         case AppState::CAMERA_ADJUSTMENT:
             break;
@@ -65,7 +61,22 @@ void ofController::keyReleased(int key) {
 }
 
 
-void ofController::m_drawModeSelectionView() {
+void AppUI::clearParameters() {
+    m_gui.clear();
+}
+
+
+void AppUI::addParameters(const ofParameterGroup& group) {
+    m_gui.add(group);
+}
+
+
+void AppUI::loadSettings() {
+    m_gui.loadFromFile("settings.xml");
+}
+
+
+void AppUI::m_drawModeSelectionView() {
     string info = "SELECT APPLICATION MODE";
     info += "\n- Press '1' for Noise";
     info += "\n- Press '2' for Kinect";
@@ -74,18 +85,16 @@ void ofController::m_drawModeSelectionView() {
 }
 
 
-void ofController::m_evalModeSelectionInput(int selection) {
+void AppUI::m_evalModeSelectionInput(int selection) {
     switch (selection) {
         case '1':
-            m_mode = AppMode::NOISE;
             ofLog() << "Application mode selected: NOISE";
-            m_setupMode();
+            m_setupMode(AppMode::NOISE);
             break;
             
         case '2':
-            m_mode = AppMode::KINECT;
             ofLog() << "Application mode selected: KINECT";
-            m_setupMode();
+            m_setupMode(AppMode::KINECT);
             break;
             
         default:
@@ -95,22 +104,7 @@ void ofController::m_evalModeSelectionInput(int selection) {
 }
 
 
-void ofController::m_setupMode() {
-    // notify app about mode selection
-    app_sptr->setInputProvider(m_mode);
-    // reflect changes in app input in gui
-    m_updateGuiParams();
-}
-
-
-void ofController::m_updateGuiParams() {
-    m_gui.clear();
-    if (app_sptr->isInputAvailable()) {
-        m_gui.add(app_sptr->getInputParams());
-        m_gui.add(app_sptr->getVectorFieldParams());
-        m_gui.add(app_sptr->getParticleSystemParams());
-        m_gui.loadFromFile("settings.xml");
-    } else {
-        ofLog() << "Can not update GUI because no input is available.";
-    }
+void AppUI::m_setupMode(AppMode mode) {
+    m_mode = mode;
+    ofNotifyEvent(eventModeSelected, m_mode, this);
 }

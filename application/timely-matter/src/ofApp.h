@@ -1,7 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxGui.h"
+#include "ofEvents.h"
+#include "AppUI.hpp"
 #include "AppVars.hpp"
 #include "VectorFieldInputFactory.h"
 #include "VectorFieldInputProvider.h"
@@ -10,6 +11,7 @@
 
 
 class ofApp : public ofBaseApp {
+    AppUI m_ui;
     VectorFieldInputFactory m_input_factory;
     VectorFieldInputProvider* m_input_provider;
     VectorField m_vector_field;
@@ -24,9 +26,5 @@ public:
     void windowResized(int w, int h);
     
     const bool isInputAvailable();
-    void setInputProvider(const AppMode mode);
-    
-    const ofParameterGroup& getInputParams() { return m_input_provider->getGuiParams(); };
-    const ofParameterGroup& getVectorFieldParams() { return m_vector_field.getGuiParams(); };
-    const ofParameterGroup& getParticleSystemParams() { return m_particle_system.getGuiParams(); };
+    void setInputProvider(AppMode& mode);
 };

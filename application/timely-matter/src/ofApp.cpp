@@ -2,7 +2,11 @@
 
 
 void ofApp::setup() {
+    ofSetFrameRate(60);
     ofSetBackgroundColor(33);
+    
+    m_ui.setup();
+    ofAddListener(m_ui.eventModeSelected, this, &ofApp::setInputProvider);
     
     m_input_provider = nullptr;
     
@@ -29,6 +33,8 @@ void ofApp::update() {
         // ...and update all particles within the system.
         m_particle_system.update();
     }
+    
+    m_ui.update();
 }
 
 
@@ -58,6 +64,8 @@ void ofApp::draw() {
         // show debug info
         ofDrawBitmapString(debugInfo, 10, 20);
     }
+    
+    m_ui.draw();
 }
 
 
@@ -67,7 +75,7 @@ void ofApp::windowResized(int w, int h) {
 }
 
 
-void ofApp::setInputProvider(const AppMode mode) {
+void ofApp::setInputProvider(AppMode& mode) {
     if (isInputAvailable()) {
         delete m_input_provider;
         m_input_provider = nullptr;
@@ -76,11 +84,20 @@ void ofApp::setInputProvider(const AppMode mode) {
     m_input_provider = m_input_factory.get(mode);
     m_input_provider->setup();
     
+    ofLog() << "input setup complete: " << m_input_provider->getName();
+    
     //TODO fix this for switching between input providers
     // setup can not be done twice
     m_vector_field.setup(m_input_provider->getWidth(), m_input_provider->getHeight(), 32);
     
     m_particle_system.setup(100, ofVec3f(m_input_provider->getWidth(), m_input_provider->getHeight(), 0.f));
+    
+    // update gui
+    m_ui.clearParameters();
+    m_ui.addParameters(m_input_provider->getGuiParams());
+    m_ui.addParameters(m_vector_field.getGuiParams());
+    m_ui.addParameters(m_particle_system.getGuiParams());
+    m_ui.loadSettings();
 
     // set flag to update window positions
     // not possible to do immediately because this method is called by ofController,
