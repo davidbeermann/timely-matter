@@ -15,3 +15,6 @@ application/*/*
 
 # ignore all *.app files inside of bin folders
 *.app
+
+# ignore folder with local tests
+tests
