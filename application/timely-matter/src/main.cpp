@@ -12,7 +12,8 @@ int main( ){
     settings.width = 690;
     settings.height = 800;
     settings.resizable = false;
-    settings.setGLVersion(3, 3); // OpenGL 3.3 #version 330
+    settings.setGLVersion(3, 2); // OpenGL 3.2 - GLSL #version 150
+//    settings.setGLVersion(3, 3); // OpenGL 3.3 - GLSL #version 330
     shared_ptr<ofAppBaseWindow> controllerWindow = ofCreateWindow(settings);
     
     // create window for main application
@@ -21,7 +22,8 @@ int main( ){
     settings.width = 1024;
     settings.height = 768;
     settings.resizable = true;
-    settings.setGLVersion(3, 3); // OpenGL 3.3 #version 330
+    settings.setGLVersion(3, 2); // OpenGL 3.2 - GLSL #version 150
+//    settings.setGLVersion(3, 3); // OpenGL 3.3 - GLSL #version 330
     // SHARE CONTEXT!
     // enables rendering of elements instanciated in ofApp in ofController
     // and strangely also the rendering in ofApp... i.e. fbo and shaders
