@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "AppVars.hpp"
+#include "AppUI.hpp"
 
 // Implementation for NVI Non-Virtual Interface derived from here:
 // http://stackoverflow.com/questions/14323595/best-way-to-declare-an-interface-in-c11#answer-14324500
@@ -17,6 +18,7 @@ private:
     virtual const AppMode doGetType() = 0;
     virtual const string doGetName() = 0;
     virtual const bool doIsReady() = 0;
+    virtual void m_doAddParams(AppUI& ui) = 0;
 protected:
     const unsigned int DEFAULT_WIDTH = 640;
     const unsigned int DEFAULT_HEIGHT = 480;
@@ -34,4 +36,6 @@ public:
     const AppMode getType() { return doGetType(); };
     const string getName() { return doGetName(); };
     const bool isReady() { return doIsReady(); };
+    
+    void addParams(AppUI& ui){ m_doAddParams(ui); };
 };

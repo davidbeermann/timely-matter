@@ -5,7 +5,7 @@
 #include "KinectView.hpp"
 #include "VectorFieldInputProvider.h"
 #include "AppVars.hpp"
-
+#include "AppUI.hpp"
 
 
 class KinectInputProvider : public VectorFieldInputProvider {
@@ -19,6 +19,7 @@ class KinectInputProvider : public VectorFieldInputProvider {
     const AppMode doGetType();
     const string doGetName();
     const bool doIsReady();
+    void m_doAddParams(AppUI& ui);
     // private class attributes
     ofxKinect m_kinect;
     KinectView* m_view;

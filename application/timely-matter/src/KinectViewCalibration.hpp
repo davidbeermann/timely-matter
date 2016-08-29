@@ -13,4 +13,5 @@ protected:
     void m_doSetup();
     void m_doUpdate();
     void m_doDraw();
+    const ofParameterGroup& m_doGetParams();
 };

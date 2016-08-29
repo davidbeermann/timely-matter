@@ -81,3 +81,11 @@ const bool KinectInputProvider::doIsReady() {
     return false;
 }
 
+
+void KinectInputProvider::m_doAddParams(AppUI& ui) {
+    ui.addParameters(mGuiParams);
+    if (m_view != nullptr) {
+        ui.addParameters(m_view->getParams());
+    }
+}
+

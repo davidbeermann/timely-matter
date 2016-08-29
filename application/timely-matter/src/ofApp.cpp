@@ -1,4 +1,5 @@
 #include "ofApp.h"
+#include "ViewEvents.hpp"
 
 
 void ofApp::setup() {
@@ -7,6 +8,8 @@ void ofApp::setup() {
     
     m_ui.setup();
     ofAddListener(m_ui.eventModeSelected, this, &ofApp::setInputProvider);
+    
+    ofAddListener(ViewEvents::get().onParametersChanged, this, &ofApp::updateGuiParameters);
     
     m_input_provider = nullptr;
     m_is_prepared = false;
@@ -69,12 +72,23 @@ void ofApp::windowResized(int w, int h) {
 }
 
 
+void ofApp::updateGuiParameters() {
+    ofLog() << "ofApp::updateGuiParameters()";
+    m_ui.clearParameters();
+    
+    m_input_provider->addParams(m_ui);
+    
+    m_ui.loadSettings();
+}
+
+
 void ofApp::setInputProvider(AppMode& mode) {
     // clear prior input
     if (isInputAvailable()) {
         delete m_input_provider;
         m_input_provider = nullptr;
         //TODO reset vector field and particle system
+        m_ui.clearParameters();
     }
     
     // setup input provider
@@ -86,6 +100,7 @@ void ofApp::setInputProvider(AppMode& mode) {
     // update window positions
     windowResized(ofGetWindowWidth(), ofGetWindowHeight());
 }
+
 
 const bool ofApp::isInputAvailable() {
     return m_input_provider != nullptr;

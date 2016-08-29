@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "VectorFieldInputProvider.h"
 #include "AppVars.hpp"
+#include "AppUI.hpp"
 
 
 class NoiseInputProvider : public VectorFieldInputProvider {
@@ -16,6 +17,7 @@ class NoiseInputProvider : public VectorFieldInputProvider {
     const AppMode doGetType();
     const string doGetName();
     const bool doIsReady();
+    void m_doAddParams(AppUI& ui);
     // private class attributes
     ofShader mShader;
     ofFbo mFbo;

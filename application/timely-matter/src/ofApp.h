@@ -27,6 +27,8 @@ public:
     void draw();
     void windowResized(int w, int h);
     
+    void updateGuiParameters();
+    
     const bool isInputAvailable();
     void setInputProvider(AppMode& mode);
 };

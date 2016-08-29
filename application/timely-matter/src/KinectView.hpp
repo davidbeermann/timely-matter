@@ -10,6 +10,7 @@ protected:
     virtual void m_doSetup() = 0;
     virtual void m_doUpdate() = 0;
     virtual void m_doDraw() = 0;
+    virtual const ofParameterGroup& m_doGetParams() = 0;
     ofxKinect* m_kinect_ptr = nullptr;
 public:
     ~KinectView() {
@@ -26,4 +27,5 @@ public:
     
     void update() { m_doUpdate(); };
     void draw() { m_doDraw(); };
+    const ofParameterGroup& getParams() { return m_doGetParams(); };
 };

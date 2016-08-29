@@ -84,3 +84,9 @@ const bool NoiseInputProvider::doIsReady() {
     return true;
 }
 
+
+void NoiseInputProvider::m_doAddParams(AppUI& ui) {
+    ui.addParameters(mGuiParams);
+}
+
+
