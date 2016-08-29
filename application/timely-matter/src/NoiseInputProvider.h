@@ -15,6 +15,7 @@ class NoiseInputProvider : public VectorFieldInputProvider {
     const unsigned int doGetHeight();
     const AppMode doGetType();
     const string doGetName();
+    const bool doIsReady();
     // private class attributes
     ofShader mShader;
     ofFbo mFbo;

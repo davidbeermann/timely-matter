@@ -1,19 +1,20 @@
 #include "KinectInputProvider.h"
+#include "KinectViewCalibration.hpp"
 
 
 KinectInputProvider::~KinectInputProvider() {
 //    ofLog() << "~KinectInputProvider()";
-    mKinect.close();
+    m_kinect.close();
 }
 
 
 void KinectInputProvider::doSetup() {
     // Kinect method signature: init(bool infrared, bool video, bool texture)
-    // enable Kinect eith infrared video and texture
-    mKinect.init(false, true, true);
+    // enable Kinect with infrared video and texture
+    m_kinect.init(true, true, true);
     
     // uses some cpu - scews the video image?!
-    //mKinect.setRegistration(true);
+    //m_kinect.setRegistration(true);
     
     // setup GUI to control Kinect
     mGuiParams.setName("Kinect");
@@ -22,40 +23,47 @@ void KinectInputProvider::doSetup() {
     mGuiParams.add(mGuiDepthFarPlane.set("depth far plane", 1500, 1000, 2500));
     
     // open connection to Kinect and start grabbing images
-    mKinect.open();
+    m_kinect.open();
+    
+    m_view = new KinectViewCalibration();
+    m_view->setup(&m_kinect);
 }
 
 
 void KinectInputProvider::doUpdate() {
     // set depth clipping
     // the closer the range the better results for the texture gray values between 0-255.
-    mKinect.setDepthClipping(mGuiDepthNearPlane, mGuiDepthFarPlane);
+    m_kinect.setDepthClipping(mGuiDepthNearPlane, mGuiDepthFarPlane);
     
     // update Kinect - grab new camera data
-    mKinect.update();
+    m_kinect.update();
+    
+    m_view->update();
 }
 
 
 void KinectInputProvider::doDraw() {
     // draw texture to stage
     if (mGuiShowDepthImage) {
-        mKinect.drawDepth(0, 0);
+        m_kinect.drawDepth(0, 0);
     }
+    
+    m_view->draw();
 }
 
 
 const ofPixels& KinectInputProvider::doGetPixels() {
-    return mKinect.getDepthPixels();
+    return m_kinect.getDepthPixels();
 }
 
 
 const unsigned int KinectInputProvider::doGetWidth() {
-    return (unsigned int) mKinect.getWidth();
+    return (unsigned int) m_kinect.getWidth();
 }
 
 
 const unsigned int KinectInputProvider::doGetHeight() {
-    return (unsigned int) mKinect.getHeight();
+    return (unsigned int) m_kinect.getHeight();
 }
 
 
@@ -66,5 +74,10 @@ const AppMode KinectInputProvider::doGetType() {
 
 const string KinectInputProvider::doGetName() {
     return "Kinect";
+}
+
+
+const bool KinectInputProvider::doIsReady() {
+    return false;
 }
 

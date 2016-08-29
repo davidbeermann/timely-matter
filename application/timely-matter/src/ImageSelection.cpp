@@ -24,6 +24,12 @@ void ImageSelection::setup(const ofVec2f& position, const unsigned int width, co
 }
 
 
+void ImageSelection::update(const ofVec2f& position) {
+    m_position.x = position.x;
+    m_position.y = position.y;
+}
+
+
 void ImageSelection::draw() {
     if (m_mask_enabled && m_redraw_mask) {
         m_drawMask();

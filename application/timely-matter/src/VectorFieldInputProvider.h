@@ -16,6 +16,7 @@ private:
     virtual const unsigned int doGetHeight() = 0;
     virtual const AppMode doGetType() = 0;
     virtual const string doGetName() = 0;
+    virtual const bool doIsReady() = 0;
 protected:
     const unsigned int DEFAULT_WIDTH = 640;
     const unsigned int DEFAULT_HEIGHT = 480;
@@ -32,4 +33,5 @@ public:
     const unsigned int getHeight() { return doGetHeight(); };
     const AppMode getType() { return doGetType(); };
     const string getName() { return doGetName(); };
+    const bool isReady() { return doIsReady(); };
 };

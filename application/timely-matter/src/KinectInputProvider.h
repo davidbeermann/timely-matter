@@ -1,9 +1,11 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxKinect.h"
+#include "KinectView.hpp"
 #include "VectorFieldInputProvider.h"
 #include "AppVars.hpp"
-#include "ofxKinect.h"
+
 
 
 class KinectInputProvider : public VectorFieldInputProvider {
@@ -16,8 +18,10 @@ class KinectInputProvider : public VectorFieldInputProvider {
     const unsigned int doGetHeight();
     const AppMode doGetType();
     const string doGetName();
+    const bool doIsReady();
     // private class attributes
-    ofxKinect mKinect;
+    ofxKinect m_kinect;
+    KinectView* m_view;
     ofParameter<bool> mGuiShowDepthImage;
     ofParameter<int> mGuiDepthNearPlane;
     ofParameter<int> mGuiDepthFarPlane;

@@ -9,29 +9,31 @@ void ofApp::setup() {
     ofAddListener(m_ui.eventModeSelected, this, &ofApp::setInputProvider);
     
     m_input_provider = nullptr;
-    
-    m_update_window_size = false;
+    m_is_prepared = false;
 }
 
 
 void ofApp::update() {
-    if (m_update_window_size) {
-        windowResized(ofGetWindowWidth(), ofGetWindowHeight());
-        m_update_window_size = false;
-    }
     
     if (isInputAvailable()) {
         // update input provider first ...
         m_input_provider->update();
         
-        // ... before retrieving pixel data to update vector field.
-        m_vector_field.update(m_input_provider->getPixels());
-        
-        // apply forces of vector field to particl system...
-        m_particle_system.applyVectorField(m_vector_field);
-        
-        // ...and update all particles within the system.
-        m_particle_system.update();
+        if (m_input_provider->isReady()) {
+            if (!m_is_prepared) {
+                m_prepare_for_rendering();
+                m_is_prepared = true;
+            }
+            
+            // ... before retrieving pixel data to update vector field.
+            m_vector_field.update(m_input_provider->getPixels());
+            
+            // apply forces of vector field to particl system...
+            m_particle_system.applyVectorField(m_vector_field);
+            
+            // ...and update all particles within the system.
+            m_particle_system.update();
+        }
     }
     
     m_ui.update();
@@ -41,7 +43,7 @@ void ofApp::update() {
 void ofApp::draw() {
     if (isInputAvailable()) {
         ofPushMatrix();
-        ofTranslate(mCenteredPos);
+//        ofTranslate(mCenteredPos);
         
         ofPushStyle();
         ofSetColor(0);
@@ -49,20 +51,13 @@ void ofApp::draw() {
         ofPopStyle();
         
         m_input_provider->draw();
-        m_vector_field.draw();
-        m_particle_system.draw(m_vector_field);
+        
+        if (m_is_prepared) {
+            m_vector_field.draw();
+            m_particle_system.draw(m_vector_field);
+        }
         
         ofPopMatrix();
-        
-        // define debug info string
-        string debugInfo = "FPS " + to_string((int) ofGetFrameRate());
-        debugInfo += "\nActive Input Provider: " + m_input_provider->getName();
-        debugInfo += "\n\nPress 'g' to toggle GUI";
-        debugInfo += "\nPress '1' to switch to noise input";
-        debugInfo += "\nPress '2' to switch to Kinect input";
-        
-        // show debug info
-        ofDrawBitmapString(debugInfo, 10, 20);
     }
     
     m_ui.draw();
@@ -70,26 +65,39 @@ void ofApp::draw() {
 
 
 void ofApp::windowResized(int w, int h) {
-    ofLog() << "ofApp::windowResized() --> " << w << "x" << h;
     mCenteredPos.set((w - m_input_provider->getWidth()) * 0.5f, (h - m_input_provider->getHeight()) * 0.5f);
 }
 
 
 void ofApp::setInputProvider(AppMode& mode) {
+    // clear prior input
     if (isInputAvailable()) {
         delete m_input_provider;
         m_input_provider = nullptr;
+        //TODO reset vector field and particle system
     }
     
+    // setup input provider
     m_input_provider = m_input_factory.get(mode);
     m_input_provider->setup();
     
     ofLog() << "input setup complete: " << m_input_provider->getName();
     
-    //TODO fix this for switching between input providers
-    // setup can not be done twice
-    m_vector_field.setup(m_input_provider->getWidth(), m_input_provider->getHeight(), 32);
+    // update window positions
+    windowResized(ofGetWindowWidth(), ofGetWindowHeight());
+}
+
+const bool ofApp::isInputAvailable() {
+    return m_input_provider != nullptr;
+}
+
+
+void ofApp::m_prepare_for_rendering() {
+    ofLog() << "Prepare for Rendering";
     
+    // setup vector field
+    m_vector_field.setup(m_input_provider->getWidth(), m_input_provider->getHeight(), 32);
+    // setup particle system
     m_particle_system.setup(100, ofVec3f(m_input_provider->getWidth(), m_input_provider->getHeight(), 0.f));
     
     // update gui
@@ -98,15 +106,6 @@ void ofApp::setInputProvider(AppMode& mode) {
     m_ui.addParameters(m_vector_field.getGuiParams());
     m_ui.addParameters(m_particle_system.getGuiParams());
     m_ui.loadSettings();
-
-    // set flag to update window positions
-    // not possible to do immediately because this method is called by ofController,
-    // which apparently sets the window scope – window sizes are wrong when method is called.
-    m_update_window_size = true;
-}
-
-const bool ofApp::isInputAvailable() {
-    return m_input_provider != nullptr;
 }
 
 

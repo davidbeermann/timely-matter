@@ -79,3 +79,8 @@ const string NoiseInputProvider::doGetName() {
     return "Perlin Noise";
 }
 
+
+const bool NoiseInputProvider::doIsReady() {
+    return true;
+}
+

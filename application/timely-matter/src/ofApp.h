@@ -11,12 +11,14 @@
 
 
 class ofApp : public ofBaseApp {
+    void m_prepare_for_rendering();
+    
     AppUI m_ui;
     VectorFieldInputFactory m_input_factory;
     VectorFieldInputProvider* m_input_provider;
     VectorField m_vector_field;
     ParticleSystem m_particle_system;
-    bool m_update_window_size;
+    bool m_is_prepared;
     
     ofVec2f mCenteredPos;
 public:
