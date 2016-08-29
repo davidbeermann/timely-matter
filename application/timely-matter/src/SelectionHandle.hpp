@@ -12,7 +12,7 @@ class SelectionHandle {
     ofColor m_color;
     float m_radius, m_radius_double;
     bool m_is_over, m_is_dragging;
-    unsigned int m_alpha_min, m_alpha_max;
+    unsigned int m_alpha;
 public:
     SelectionHandle() {
         // add mouse event listeners

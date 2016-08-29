@@ -7,8 +7,7 @@ void SelectionHandle::setup(const ofRectangle& bounds, const ofVec2f position, c
     m_radius = radius;
     m_radius_double = radius * 2.f;
     m_color.set(255, 0, 0);
-    m_alpha_min = 51;
-    m_alpha_max = 230;
+    m_alpha = 51;
     
     m_is_dragging = false;
 }
@@ -16,19 +15,13 @@ void SelectionHandle::setup(const ofRectangle& bounds, const ofVec2f position, c
 
 void SelectionHandle::draw() {
     ofPushStyle();
-    ofSetColor(m_color, m_is_dragging ? m_alpha_min : m_alpha_max);
+    ofSetColor(m_color, m_alpha);
     
     ofPushMatrix();
     ofTranslate(m_position);
     
-    ofDrawCircle(0, 0, m_is_over || m_is_dragging ? m_radius_double : m_radius);
-    
-    if (m_is_dragging) {
-        ofSetColor(m_color, 255);
-        ofSetLineWidth(0.25f);
-        ofNoFill();
-        ofDrawLine(-m_radius, 0, m_radius, 0);
-        ofDrawLine(0, -m_radius, 0, m_radius);
+    if (m_is_over && !m_is_dragging) {
+        ofDrawCircle(0, 0, m_radius);
     }
     
     ofPopMatrix();

@@ -7,7 +7,7 @@ using namespace cv;
 void RectangularSelection::setup(const ofRectangle bounds) {
     m_bounds = bounds;
     m_handle_radius = 6.f;
-    m_line_color.setHsb(0, 255, 33, 85);
+    m_line_color.setHsb(0, 255, 255, 85);
     
     m_handle_tl.setup(bounds, ofVec2f(bounds.x, bounds.y), m_handle_radius);
     m_handle_tr.setup(bounds, ofVec2f(bounds.x + bounds.width, bounds.y), m_handle_radius);
