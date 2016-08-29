@@ -21,5 +21,6 @@ public:
     void operator=(ViewEvents const&) = delete;
     
     ofEvent<void> onParametersChanged;
+    ofEvent<void> onHomographySelected;
 };
 

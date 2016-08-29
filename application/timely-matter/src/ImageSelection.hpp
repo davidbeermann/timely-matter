@@ -23,7 +23,7 @@ public:
     void setup(const ofVec2f& position, const unsigned int width, const unsigned int height);
     void update(const ofVec2f& position);
     void draw();
-    const vector<cv::Point2f> getPoints();
+    vector<cv::Point2f> getPoints();
     void enableMask(const bool value);
     
     const ofVec2f& getPosition() {

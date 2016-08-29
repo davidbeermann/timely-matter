@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ofEvents.h"
 #include "ofxOpenCv.h"
 #include "KinectView.hpp"
 #include "ImageSelection.hpp"
@@ -19,4 +20,15 @@ protected:
     void m_doUpdate();
     void m_doDraw();
     const ofParameterGroup& m_doGetParams();
+public:
+    KinectViewCalibration() {
+        ofRegisterKeyEvents(this);
+    };
+    ~KinectViewCalibration() {
+        ofUnregisterKeyEvents(this);
+    };
+    vector<cv::Point2f> getHomographyPoints();
+    // key events
+    void keyPressed(ofKeyEventArgs& args);
+    void keyReleased(ofKeyEventArgs& args){};
 };

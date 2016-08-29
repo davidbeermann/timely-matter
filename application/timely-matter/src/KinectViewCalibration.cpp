@@ -1,6 +1,17 @@
 #include "KinectViewCalibration.hpp"
-#include "ofEvents.h"
 #include "ViewEvents.hpp"
+
+
+vector<cv::Point2f> KinectViewCalibration::getHomographyPoints() {
+    return m_selection.getPoints();
+}
+
+
+void KinectViewCalibration::keyPressed(ofKeyEventArgs& args) {
+    if (args.key == OF_KEY_RETURN) {
+        ofNotifyEvent(ViewEvents::get().onHomographySelected, this);
+    }
+}
 
 
 void KinectViewCalibration::m_onWindowResized(const int width, const int height) {

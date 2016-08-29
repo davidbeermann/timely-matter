@@ -50,7 +50,7 @@ void ImageSelection::draw() {
 }
 
 
-const vector<Point2f> ImageSelection::getPoints() {
+vector<Point2f> ImageSelection::getPoints() {
     vector<Point2f> points;
     
     vector<SelectionHandle*> handles = m_selection.getHandles();

@@ -1,10 +1,20 @@
 #include "KinectInputProvider.h"
 #include "KinectViewCalibration.hpp"
+#include "ViewEvents.hpp"
 
 
 KinectInputProvider::~KinectInputProvider() {
 //    ofLog() << "~KinectInputProvider()";
     m_kinect.close();
+}
+
+
+void KinectInputProvider::storeHomographyPoints() {
+    ofLog() << "KinectInputProvider::storeHomographyPoints()";
+    
+    KinectViewCalibration* concreteView = static_cast<KinectViewCalibration*>(m_view);
+    vector<cv::Point2f> points = concreteView->getHomographyPoints();
+    ofLog() << "number of points: " << points.size();
 }
 
 
@@ -27,6 +37,8 @@ void KinectInputProvider::doSetup() {
     
     m_view = new KinectViewCalibration();
     m_view->setup(&m_kinect);
+    
+    ofAddListener(ViewEvents::get().onHomographySelected, this, &KinectInputProvider::storeHomographyPoints);
 }
 
 

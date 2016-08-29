@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxKinect.h"
+#include "ofxOpenCv.h"
 #include "KinectView.hpp"
 #include "VectorFieldInputProvider.h"
 #include "AppVars.hpp"
@@ -28,4 +29,5 @@ class KinectInputProvider : public VectorFieldInputProvider {
     ofParameter<int> mGuiDepthFarPlane;
 public:
     ~KinectInputProvider();
+    void storeHomographyPoints();
 };
