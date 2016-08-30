@@ -1,5 +1,5 @@
 #include "KinectInputProvider.h"
-#include "KinectHomographyCalibration.hpp"
+#include "KinectCalibrationView.hpp"
 #include "KinectDepthCalibration.hpp"
 #include "ViewEvents.hpp"
 #include "ofxCv.h"
@@ -17,10 +17,10 @@ KinectInputProvider::~KinectInputProvider() {
 }
 
 
-void KinectInputProvider::storeHomographyPoints() {
-    ofLog() << "KinectInputProvider::storeHomographyPoints()";
+void KinectInputProvider::storeCalibration() {
+    ofLog() << "KinectInputProvider::storeCalibration()";
     
-    KinectHomographyCalibration* concreteView = static_cast<KinectHomographyCalibration*>(m_view);
+    KinectCalibrationView* concreteView = static_cast<KinectCalibrationView*>(m_view);
     vector<cv::Point2f> input_points = concreteView->getHomographyPoints();
     ofLog() << "number of points: " << input_points.size();
     
@@ -34,7 +34,7 @@ void KinectInputProvider::storeHomographyPoints() {
     m_homographic_matrix = findHomography(Mat(input_points), Mat(output_points));
     
     // remove listener
-    ofRemoveListener(ViewEvents::get().onHomographySelected, this, &KinectInputProvider::storeHomographyPoints);
+    ofRemoveListener(ViewEvents::get().onKinectCalibrated, this, &KinectInputProvider::storeCalibration);
     
     // clear view
     clearView();
@@ -45,9 +45,6 @@ void KinectInputProvider::storeHomographyPoints() {
     
     m_view = depth_calibration;
     m_view->setup(&m_kinect);
-    
-    // add new listener to new view events
-    //TODO
 }
 
 
@@ -68,10 +65,10 @@ void KinectInputProvider::doSetup() {
     // open connection to Kinect and start grabbing images
     m_kinect.open();
     
-    m_view = new KinectHomographyCalibration();
+    m_view = new KinectCalibrationView();
     m_view->setup(&m_kinect);
     
-    ofAddListener(ViewEvents::get().onHomographySelected, this, &KinectInputProvider::storeHomographyPoints);
+    ofAddListener(ViewEvents::get().onKinectCalibrated, this, &KinectInputProvider::storeCalibration);
 }
 
 

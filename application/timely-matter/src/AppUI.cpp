@@ -28,9 +28,7 @@ void AppUI::draw() {
             case AppState::MODE_SELECTION:
                 m_drawModeSelectionView();
                 break;
-            case AppState::CAMERA_ADJUSTMENT:
-                break;
-            case AppState::DEPTH_ADJUSTMENT:
+            case AppState::CALIBRATION:
                 break;
             case AppState::RUNNING:
                 break;
@@ -87,9 +85,7 @@ void AppUI::keyPressed(ofKeyEventArgs& args) {
         case AppState::MODE_SELECTION:
             m_evalModeSelectionInput(args.key);
             break;
-        case AppState::CAMERA_ADJUSTMENT:
-            break;
-        case AppState::DEPTH_ADJUSTMENT:
+        case AppState::CALIBRATION:
             break;
         case AppState::RUNNING:
             break;

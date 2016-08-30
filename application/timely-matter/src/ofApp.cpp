@@ -48,10 +48,10 @@ void ofApp::draw() {
         ofPushMatrix();
 //        ofTranslate(mCenteredPos);
         
-        ofPushStyle();
-        ofSetColor(0);
-        ofDrawRectangle(0, 0, m_input_provider->getWidth(), m_input_provider->getHeight());
-        ofPopStyle();
+//        ofPushStyle();
+//        ofSetColor(0);
+//        ofDrawRectangle(0, 0, m_input_provider->getWidth(), m_input_provider->getHeight());
+//        ofPopStyle();
         
         m_input_provider->draw();
         

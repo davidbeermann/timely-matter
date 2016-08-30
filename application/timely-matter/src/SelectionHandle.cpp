@@ -29,8 +29,24 @@ void SelectionHandle::draw() {
 }
 
 
-const ofVec2f& SelectionHandle::getPosition() const {
-    return m_position;
+void SelectionHandle::updateBounds(const ofRectangle& bounds) {
+    m_bounds = bounds;
+    
+    if (m_position.x < bounds.x) {
+        m_position.set(bounds.x, m_position.y);
+    }
+    
+    if (m_position.x > bounds.x + bounds.width) {
+        m_position.set(bounds.x + bounds.width, m_position.y);
+    }
+    
+    if (m_position.y < bounds.y) {
+        m_position.set(m_position.x, bounds.y);
+    }
+    
+    if (m_position.y > bounds.y + bounds.height) {
+        m_position.set(m_position.x, bounds.y + bounds.height);
+    }
 }
 
 

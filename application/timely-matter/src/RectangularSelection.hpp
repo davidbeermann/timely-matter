@@ -20,7 +20,8 @@ class RectangularSelection {
     ofColor m_line_color;
     
 public:
-    void setup(const ofRectangle bounds);
+    void setup(const ofRectangle& bounds);
     void draw();
+    void updateBounds(const ofRectangle& bounds);
     vector<SelectionHandle*>& getHandles();
 };

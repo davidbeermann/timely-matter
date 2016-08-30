@@ -35,5 +35,5 @@ class KinectInputProvider : public VectorFieldInputProvider {
     
 public:
     ~KinectInputProvider();
-    void storeHomographyPoints();
+    void storeCalibration();
 };

@@ -25,7 +25,10 @@ public:
     
     void setup(const ofRectangle& bounds, const ofVec2f position, const float radius);
     void draw();
-    const ofVec2f& getPosition() const;
+    
+    void updateBounds(const ofRectangle& bounds);
+//    ofVec2f& getPosition() { return m_position; };
+    const ofVec2f& getPosition() const { return m_position; };
     
     // mouse event listener methods ÐÊmandatory when registering listeners!
     void mouseMoved(ofMouseEventArgs& args);

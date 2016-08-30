@@ -18,7 +18,10 @@ enum class AppMode : uint8_t {
 
 enum class AppState : uint8_t {
     MODE_SELECTION = 1,
-    CAMERA_ADJUSTMENT = 2,
-    DEPTH_ADJUSTMENT = 3,
-    RUNNING = 4
+    CALIBRATION = 2,
+    RUNNING = 3
 };
+
+
+#define PROJECT_WIDTH 1024
+#define PROJECT_HEIGHT 768

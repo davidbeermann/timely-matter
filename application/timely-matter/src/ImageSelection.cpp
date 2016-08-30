@@ -5,28 +5,18 @@
 using namespace cv;
 
 
-void ImageSelection::setup(const ofVec2f& position, const string& image_name) {
-    m_position = position;
-    
+void ImageSelection::setup(const string& image_name) {
     m_image.load(image_name);
     
     m_setup();
 }
 
 
-void ImageSelection::setup(const ofVec2f& position, const unsigned int width, const unsigned int height) {
-    m_position = position;
-    
+void ImageSelection::setup(const unsigned int width, const unsigned int height) {
     m_image.allocate(width, height, OF_IMAGE_COLOR);
     m_image.setColor(ofColor(0, 0, 0));
     
     m_setup();
-}
-
-
-void ImageSelection::update(const ofVec2f& position) {
-    m_position.x = position.x;
-    m_position.y = position.y;
 }
 
 
@@ -50,15 +40,11 @@ void ImageSelection::draw() {
 }
 
 
-vector<Point2f> ImageSelection::getPoints() {
-    vector<Point2f> points;
+void ImageSelection::updatePosition(const ofVec2f& position) {
+    m_position.set(position.x, position.y);
+    m_bounds.set(position.x, position.y, m_image.getWidth(), m_image.getHeight());
     
-    vector<SelectionHandle*> handles = m_selection.getHandles();
-    for (int i = 0; i < handles.size(); ++i) {
-        points.push_back(Point2f(handles[i]->getPosition().x - m_position.x, handles[i]->getPosition().y - m_position.y));
-    }
-    
-    return points;
+    m_selection.updateBounds(m_bounds);
 }
 
 
@@ -70,6 +56,18 @@ void ImageSelection::enableMask(const bool value) {
     }
     
     m_mask_enabled = value;
+}
+
+
+vector<Point2f> ImageSelection::getPoints() {
+    vector<Point2f> points;
+    
+    vector<SelectionHandle*> handles = m_selection.getHandles();
+    for (int i = 0; i < handles.size(); ++i) {
+        points.push_back(Point2f(handles[i]->getPosition().x - m_position.x, handles[i]->getPosition().y - m_position.y));
+    }
+    
+    return points;
 }
 
 
@@ -86,7 +84,9 @@ void ImageSelection::m_disableMaskRedraw() {
 
 
 void ImageSelection::m_setup() {
-    m_bounds.set(m_position.x, m_position.y, m_image.getWidth(), m_image.getHeight());
+    m_position.set(0, 0);
+    m_bounds.set(0, 0, m_image.getWidth(), m_image.getHeight());
+    
     m_selection.setup(m_bounds);
     
     vector<SelectionHandle*> handle;

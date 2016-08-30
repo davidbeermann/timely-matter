@@ -22,9 +22,9 @@ public:
     void setup(ofxKinect* kinect_sptr) {
         m_kinect_ptr = kinect_sptr;
         
-        m_onWindowResized(ofGetWindowWidth(), ofGetWindowHeight());
-        
         m_doSetup();
+        
+        m_onWindowResized(ofGetWindowWidth(), ofGetWindowHeight());
     };
     
     void update() { m_doUpdate(); };

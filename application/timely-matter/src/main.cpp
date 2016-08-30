@@ -6,8 +6,8 @@ int main( ){
     // create window for application
     ofGLFWWindowSettings settings;
     settings.title = "Timely Matter";
-    settings.width = 1024;
-    settings.height = 768;
+    settings.width = 1320;
+    settings.height = 1000;
     settings.resizable = true;
 //    settings.setGLVersion(3, 2); // OpenGL 3.2 - GLSL #version 150
     settings.setGLVersion(3, 3); // OpenGL 3.3 - GLSL #version 330

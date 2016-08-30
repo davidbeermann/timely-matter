@@ -4,7 +4,7 @@
 using namespace cv;
 
 
-void RectangularSelection::setup(const ofRectangle bounds) {
+void RectangularSelection::setup(const ofRectangle& bounds) {
     m_bounds = bounds;
     m_handle_radius = 6.f;
     m_line_color.setHsb(0, 255, 255, 85);
@@ -36,6 +36,16 @@ void RectangularSelection::draw() {
     m_handle_tr.draw();
     m_handle_br.draw();
     m_handle_bl.draw();
+}
+
+
+void RectangularSelection::updateBounds(const ofRectangle& bounds) {
+    m_bounds = bounds;
+    
+    for (int i = 0; i < m_handles.size(); ++i) {
+        SelectionHandle* handle = m_handles.at(i);
+        handle->updateBounds(bounds);
+    }
 }
 
 
