@@ -1,6 +1,5 @@
 #include "KinectInputProvider.h"
 #include "KinectCalibrationView.hpp"
-#include "KinectDepthCalibration.hpp"
 #include "ViewEvents.hpp"
 #include "ofxCv.h"
 
@@ -11,7 +10,7 @@ using namespace cv;
 KinectInputProvider::~KinectInputProvider() {
 //    ofLog() << "~KinectInputProvider()";
     
-    clearView();
+    m_clearView();
 
     m_kinect.close();
 }
@@ -20,31 +19,15 @@ KinectInputProvider::~KinectInputProvider() {
 void KinectInputProvider::storeCalibration() {
     ofLog() << "KinectInputProvider::storeCalibration()";
     
-    KinectCalibrationView* concreteView = static_cast<KinectCalibrationView*>(m_view);
-    vector<cv::Point2f> input_points = concreteView->getHomographyPoints();
-    ofLog() << "number of points: " << input_points.size();
-    
-    // fixed output frame a quarter size of the final rendering
-    vector<cv::Point2f> output_points;
-    output_points.push_back(Point2f(0.f, 0.f));
-    output_points.push_back(Point2f(KinectDepthCalibration::WIDTH, 0.f));
-    output_points.push_back(Point2f(KinectDepthCalibration::WIDTH, KinectDepthCalibration::HEIGHT));
-    output_points.push_back(Point2f(0.f, KinectDepthCalibration::HEIGHT));
-    
-    m_homographic_matrix = findHomography(Mat(input_points), Mat(output_points));
-    
     // remove listener
     ofRemoveListener(ViewEvents::get().onKinectCalibrated, this, &KinectInputProvider::storeCalibration);
     
+    //TODO store calibration setting
+    
     // clear view
-    clearView();
+    m_clearView();
     
-    // create new view
-    KinectDepthCalibration* depth_calibration = new KinectDepthCalibration();
-    depth_calibration->setHomography(m_homographic_matrix);
-    
-    m_view = depth_calibration;
-    m_view->setup(&m_kinect);
+    //TODO add vector field calibration
 }
 
 
@@ -56,41 +39,34 @@ void KinectInputProvider::doSetup() {
     // uses some cpu - scews the video image?!
     //m_kinect.setRegistration(true);
     
-//    // setup GUI to control Kinect
-//    mGuiParams.setName("Kinect");
-//    mGuiParams.add(mGuiShowDepthImage.set("show depth image", true));
-//    mGuiParams.add(mGuiDepthNearPlane.set("depth near plane", 500, 500, 1000));
-//    mGuiParams.add(mGuiDepthFarPlane.set("depth far plane", 1500, 1000, 2500));
-    
     // open connection to Kinect and start grabbing images
     m_kinect.open();
     
+    // create initial view
     m_view = new KinectCalibrationView();
     m_view->setup(&m_kinect);
     
+    // add initial view listeners
     ofAddListener(ViewEvents::get().onKinectCalibrated, this, &KinectInputProvider::storeCalibration);
 }
 
 
 void KinectInputProvider::doUpdate() {
-//    // set depth clipping
-//    // the closer the range the better results for the texture gray values between 0-255.
-//    m_kinect.setDepthClipping(mGuiDepthNearPlane, mGuiDepthFarPlane);
-    
     // update Kinect - grab new camera data
     m_kinect.update();
     
-    m_view->update();
+    // update view
+    if (m_view != nullptr) {
+        m_view->update();
+    }
 }
 
 
 void KinectInputProvider::doDraw() {
-    // draw texture to stage
-    if (mGuiShowDepthImage) {
-        m_kinect.drawDepth(0, 0);
+    // update view
+    if (m_view != nullptr) {
+        m_view->draw();
     }
-    
-    m_view->draw();
 }
 
 
@@ -125,14 +101,13 @@ const bool KinectInputProvider::doIsReady() {
 
 
 void KinectInputProvider::m_doAddParams(AppUI& ui) {
-//    ui.addParameters(mGuiParams);
     if (m_view != nullptr) {
         ui.addParameters(m_view->getParams());
     }
 }
 
 
-void KinectInputProvider::clearView() {
+void KinectInputProvider::m_clearView() {
     if (m_view != nullptr) {
         delete m_view;
         m_view = nullptr;

@@ -23,15 +23,12 @@ class KinectInputProvider : public VectorFieldInputProvider {
     void m_doAddParams(AppUI& ui);
     
     // private class methods
-    void clearView();
+    void m_clearView();
     
     // private class attributes
     ofxKinect m_kinect;
     KinectView* m_view;
     cv::Mat m_homographic_matrix;
-    ofParameter<bool> mGuiShowDepthImage;
-    ofParameter<int> mGuiDepthNearPlane;
-    ofParameter<int> mGuiDepthFarPlane;
     
 public:
     ~KinectInputProvider();

@@ -22,4 +22,15 @@
 		<show_mark_ref>0</show_mark_ref>
 		<show_particles>1</show_particles>
 	</Particle_System>
+<Timely_Matter/>
+	<Kinect_Calibration>
+		<Infrared_Normalization>
+			<Min>54.2711</Min>
+			<Max>255</Max>
+		</Infrared_Normalization>
+		<Depth_Field_of_View>
+			<Near_plane>1300</Near_plane>
+			<Far_plane>1900</Far_plane>
+		</Depth_Field_of_View>
+	</Kinect_Calibration>
 </Timely_Matter>
