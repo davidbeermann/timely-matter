@@ -1,26 +1,26 @@
-#include "KinectViewCalibration.hpp"
+#include "KinectHomographyCalibration.hpp"
 #include "ViewEvents.hpp"
 
 
-vector<cv::Point2f> KinectViewCalibration::getHomographyPoints() {
+vector<cv::Point2f> KinectHomographyCalibration::getHomographyPoints() {
     return m_selection.getPoints();
 }
 
 
-void KinectViewCalibration::keyPressed(ofKeyEventArgs& args) {
+void KinectHomographyCalibration::keyPressed(ofKeyEventArgs& args) {
     if (args.key == OF_KEY_RETURN) {
         ofNotifyEvent(ViewEvents::get().onHomographySelected, this);
     }
 }
 
 
-void KinectViewCalibration::m_onWindowResized(const int width, const int height) {
-    ofLog() << "KinectViewCalibration::m_onWindowResized()";
+void KinectHomographyCalibration::m_onWindowResized(const int width, const int height) {
+    ofLog() << "KinectHomographyCalibration::m_onWindowResized()";
     m_center_position.set((width - m_kinect_ptr->width) * 0.5f, (height - m_kinect_ptr->height) * 0.5f);
 }
 
 
-void KinectViewCalibration::m_doSetup() {
+void KinectHomographyCalibration::m_doSetup() {
     m_onWindowResized(ofGetWindowWidth(), ofGetWindowHeight());
     
     m_selection.setup(m_center_position, m_kinect_ptr->width, m_kinect_ptr->height);
@@ -37,7 +37,7 @@ void KinectViewCalibration::m_doSetup() {
 }
 
 
-void KinectViewCalibration::m_doUpdate() {
+void KinectHomographyCalibration::m_doUpdate() {
     m_selection.update(m_center_position);
     
     m_kinect_buffer.setFromPixels(m_kinect_ptr->getPixels());
@@ -53,12 +53,12 @@ void KinectViewCalibration::m_doUpdate() {
 }
 
 
-void KinectViewCalibration::m_doDraw() {
+void KinectHomographyCalibration::m_doDraw() {
     m_selection.draw();
 }
 
 
-const ofParameterGroup& KinectViewCalibration::m_doGetParams() {
+const ofParameterGroup& KinectHomographyCalibration::m_doGetParams() {
     return m_params;
 }
 

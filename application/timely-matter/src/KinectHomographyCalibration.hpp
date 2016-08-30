@@ -6,7 +6,7 @@
 #include "ImageSelection.hpp"
 
 
-class KinectViewCalibration : public KinectView {
+class KinectHomographyCalibration : public KinectView {
     ImageSelection m_selection;
     ofImage m_kinect_buffer;
     ofxCvGrayscaleImage m_grayscale;
@@ -21,10 +21,10 @@ protected:
     void m_doDraw();
     const ofParameterGroup& m_doGetParams();
 public:
-    KinectViewCalibration() {
+    KinectHomographyCalibration() {
         ofRegisterKeyEvents(this);
     };
-    ~KinectViewCalibration() {
+    ~KinectHomographyCalibration() {
         ofUnregisterKeyEvents(this);
     };
     vector<cv::Point2f> getHomographyPoints();
