@@ -21,7 +21,7 @@ void KinectHomographyCalibration::m_onWindowResized(const int width, const int h
 
 
 void KinectHomographyCalibration::m_doSetup() {
-    m_onWindowResized(ofGetWindowWidth(), ofGetWindowHeight());
+//    m_onWindowResized(ofGetWindowWidth(), ofGetWindowHeight());
     
     m_selection.setup(m_center_position, m_kinect_ptr->width, m_kinect_ptr->height);
     m_selection.enableMask(false);

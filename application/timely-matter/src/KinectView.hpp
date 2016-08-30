@@ -12,16 +12,18 @@ protected:
     virtual void m_doDraw() = 0;
     virtual const ofParameterGroup& m_doGetParams() = 0;
     ofxKinect* m_kinect_ptr = nullptr;
+    
 public:
-    ~KinectView() {
-        if (m_kinect_ptr != nullptr) {
-            delete m_kinect_ptr;
-            m_kinect_ptr = nullptr;
-        }
+    virtual ~KinectView(){
+        // do not delete pointer, since it is managed by KinectInputProvider
+        m_kinect_ptr = nullptr;
     };
     
-    void setup(ofxKinect* kinect_ptr) {
-        m_kinect_ptr = kinect_ptr;
+    void setup(ofxKinect* kinect_sptr) {
+        m_kinect_ptr = kinect_sptr;
+        
+        m_onWindowResized(ofGetWindowWidth(), ofGetWindowHeight());
+        
         m_doSetup();
     };
     
