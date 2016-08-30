@@ -12,6 +12,7 @@ class AppUI {
     void m_evalModeSelectionInput(int selection);
     void m_setupMode(AppMode mode);
     
+    bool m_visible;
     AppState m_state;
     AppMode m_mode;
     ofxPanel m_gui;
@@ -29,6 +30,9 @@ public:
     void setup();
     void update();
     void draw();
+    
+    void show();
+    void hide();
     void clearParameters();
     void addParameters(const ofParameterGroup& group);
     void loadSettings();

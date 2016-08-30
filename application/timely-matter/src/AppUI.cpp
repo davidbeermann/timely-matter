@@ -2,6 +2,8 @@
 
 
 void AppUI::setup() {
+    m_visible = true;
+    
     // configure gui
     m_gui.setDefaultWidth(250);
     m_gui.setWidthElements(250);
@@ -19,45 +21,35 @@ void AppUI::update() {
 
 
 void AppUI::draw() {
-    ofDrawBitmapString(m_debug_info, 20, 20);
-    
-    switch (m_state) {
-        case AppState::MODE_SELECTION:
-            m_drawModeSelectionView();
-            break;
-        case AppState::CAMERA_ADJUSTMENT:
-            break;
-        case AppState::DEPTH_ADJUSTMENT:
-            break;
-        case AppState::RUNNING:
-            break;
-    }
-    
-    if (m_gui_visible) {
-        m_gui.draw();
+    if (m_visible) {
+        ofDrawBitmapString(m_debug_info, 20, 20);
+        
+        switch (m_state) {
+            case AppState::MODE_SELECTION:
+                m_drawModeSelectionView();
+                break;
+            case AppState::CAMERA_ADJUSTMENT:
+                break;
+            case AppState::DEPTH_ADJUSTMENT:
+                break;
+            case AppState::RUNNING:
+                break;
+        }
+        
+        if (m_gui_visible) {
+            m_gui.draw();
+        }
     }
 }
 
 
-void AppUI::keyPressed(ofKeyEventArgs& args) {
-    switch (args.key) {
-        case 'g':
-            // toggle gui display
-            m_gui_visible = !m_gui_visible;
-            break;
-    }
-    
-    switch (m_state) {
-        case AppState::MODE_SELECTION:
-            m_evalModeSelectionInput(args.key);
-            break;
-        case AppState::CAMERA_ADJUSTMENT:
-            break;
-        case AppState::DEPTH_ADJUSTMENT:
-            break;
-        case AppState::RUNNING:
-            break;
-    }
+void AppUI::show() {
+    m_visible = true;
+}
+
+
+void AppUI::hide() {
+    m_visible = false;
 }
 
 
@@ -73,6 +65,35 @@ void AppUI::addParameters(const ofParameterGroup& group) {
 
 void AppUI::loadSettings() {
     m_gui.loadFromFile("settings.xml");
+}
+
+
+void AppUI::keyPressed(ofKeyEventArgs& args) {
+    
+    switch (args.key) {
+        case ' ':
+            m_visible = !m_visible;
+            break;
+        case 'g':
+            // toggle gui display
+            m_gui_visible = !m_gui_visible;
+            break;
+    }
+    
+    // ignore state key events if invisble
+    if (!m_visible) return;
+    
+    switch (m_state) {
+        case AppState::MODE_SELECTION:
+            m_evalModeSelectionInput(args.key);
+            break;
+        case AppState::CAMERA_ADJUSTMENT:
+            break;
+        case AppState::DEPTH_ADJUSTMENT:
+            break;
+        case AppState::RUNNING:
+            break;
+    }
 }
 
 
