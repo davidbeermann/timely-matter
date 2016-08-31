@@ -22,6 +22,3 @@ enum class AppState : uint8_t {
     RUNNING = 3
 };
 
-
-#define PROJECT_WIDTH 1024
-#define PROJECT_HEIGHT 768

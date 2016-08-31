@@ -1,10 +1,10 @@
 #include "KinectCalibrationView.hpp"
+#include "AppVars.hpp"
+#include "AppModel.hpp"
 #include "ViewEvents.hpp"
 #include "ofxCv.h"
 
 #define PADDING 18
-#define PROJECTOR_WIDTH 1024
-#define PROJECTOR_HEIGHT 768
 
 using namespace ofxCv;
 using namespace cv;
@@ -38,7 +38,8 @@ void KinectCalibrationView::m_doSetup() {
     m_infrared_buffer.allocate(m_kinect_ptr->width, m_kinect_ptr->height, OF_IMAGE_COLOR);
     m_grayscale.allocate(m_kinect_ptr->width, m_kinect_ptr->height);
     m_depth_buffer.allocate(m_kinect_ptr->width, m_kinect_ptr->height, OF_IMAGE_GRAYSCALE);
-    m_crop_buffer.allocate(PROJECTOR_WIDTH/2, PROJECTOR_HEIGHT/2, OF_IMAGE_GRAYSCALE);
+    m_crop_buffer.allocate(AppModel::get().getDepthBufferWidth(), AppModel::get().getDepthBufferHeight(), OF_IMAGE_GRAYSCALE);
+    
     
     // define GUI parameters
     m_params.setName("Kinect Calibration");
