@@ -1,6 +1,8 @@
 #include "KinectInputProvider.h"
 #include "KinectCalibrationView.hpp"
+#include "VectorFieldCalibrationView.hpp"
 #include "ViewEvents.hpp"
+#include "AppModel.hpp"
 #include "ofxCv.h"
 
 using namespace ofxCv;
@@ -17,17 +19,24 @@ KinectInputProvider::~KinectInputProvider() {
 
 
 void KinectInputProvider::storeCalibration() {
-    ofLog() << "KinectInputProvider::storeCalibration()";
+//    ofLog() << "KinectInputProvider::storeCalibration()";
     
     // remove listener
     ofRemoveListener(ViewEvents::get().onKinectCalibrated, this, &KinectInputProvider::storeCalibration);
     
-    //TODO store calibration setting
+    // static cast to concrete view pointer
+    KinectCalibrationView* concrete_view = static_cast<KinectCalibrationView*>(m_view);
+    AppModel::get().setSelectionPoints(concrete_view->getSelectionPoints());
+    AppModel::get().setHomographyMatrix(concrete_view->getHomographyMatrix());
     
     // clear view
     m_clearView();
     
-    //TODO add vector field calibration
+    // create new view
+    m_view = new VectorFieldCalibrationView();
+    m_view->setup(&m_kinect);
+    
+    //TODO add listener to view event
 }
 
 
@@ -44,6 +53,7 @@ void KinectInputProvider::doSetup() {
     
     // create initial view
     m_view = new KinectCalibrationView();
+//    m_view = new VectorFieldCalibrationView();
     m_view->setup(&m_kinect);
     
     // add initial view listeners

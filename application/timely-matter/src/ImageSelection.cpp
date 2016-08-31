@@ -59,11 +59,25 @@ void ImageSelection::enableMask(const bool value) {
 }
 
 
-vector<Point2f> ImageSelection::getPoints() {
+vector<ofVec2f> ImageSelection::getPoints() {
+    vector<ofVec2f> points;
+    
+    vector<SelectionHandle*> handles = m_selection.getHandles();
+    for (int i = 0; i < handles.size(); ++i) {
+        // convert absolute coordinates to relative coordinates
+        points.push_back(ofVec2f(handles[i]->getPosition().x - m_position.x, handles[i]->getPosition().y - m_position.y));
+    }
+    
+    return points;
+}
+
+
+vector<Point2f> ImageSelection::getPointsForCv() {
     vector<Point2f> points;
     
     vector<SelectionHandle*> handles = m_selection.getHandles();
     for (int i = 0; i < handles.size(); ++i) {
+        // convert absolute coordinates to relative coordinates
         points.push_back(Point2f(handles[i]->getPosition().x - m_position.x, handles[i]->getPosition().y - m_position.y));
     }
     

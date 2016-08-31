@@ -17,6 +17,16 @@ void KinectCalibrationView::keyPressed(ofKeyEventArgs& args) {
 }
 
 
+vector<ofVec2f> KinectCalibrationView::getSelectionPoints() {
+    return m_selection.getPoints();
+}
+
+
+const cv::Mat& KinectCalibrationView::getHomographyMatrix() const {
+    return m_homographic_matrix;
+}
+
+
 void KinectCalibrationView::m_onWindowResized(const int width, const int height) {
     m_selection_position.set(PADDING, PADDING);
     m_selection.updatePosition(m_selection_position);
@@ -85,7 +95,7 @@ void KinectCalibrationView::m_doUpdate() {
     m_depth_buffer.setFromPixels(m_kinect_ptr->getDepthPixels());
     
     // get input points fon selection
-    vector<Point2f> input_points = m_selection.getPoints();
+    vector<Point2f> input_points = m_selection.getPointsForCv();
     
     // fixed output frame a quarter size of the final rendering
     vector<Point2f> output_points;

@@ -37,4 +37,7 @@ public:
     // key events
     void keyPressed(ofKeyEventArgs& args);
     void keyReleased(ofKeyEventArgs& args){};
+    // getter
+    vector<ofVec2f> getSelectionPoints();
+    const cv::Mat& getHomographyMatrix() const;
 };

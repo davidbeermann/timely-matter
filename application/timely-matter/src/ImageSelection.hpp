@@ -24,7 +24,8 @@ public:
     void draw();
     void updatePosition(const ofVec2f& position);
     void enableMask(const bool value);
-    vector<cv::Point2f> getPoints();
+    vector<ofVec2f> getPoints();
+    vector<cv::Point2f> getPointsForCv();
     
     
     const ofVec2f& getPosition() {
