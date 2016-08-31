@@ -36,7 +36,7 @@ private:
         m_output_points_cv[2].y = height;
         
         m_output_points_cv[3].x = 0;
-        m_output_points_cv[4].y = height;
+        m_output_points_cv[3].y = height;
     }
     // camera properties - Kinect 360 resolution
     unsigned int m_camera_width = 640;
@@ -68,8 +68,8 @@ public:
         
         m_updateDepthBufferSize(width / 2, height / 2);
     };
-    const ofVec2f getProjectorSize() {
-        return ofVec2f(m_projector_width, m_projector_height);
+    const ofRectangle getProjectorSize() {
+        return ofRectangle(0, 0, m_projector_width, m_projector_height);
     };
     const unsigned int getCameraWidth() {
         return m_camera_width;
