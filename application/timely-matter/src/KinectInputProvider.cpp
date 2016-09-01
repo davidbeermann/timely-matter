@@ -1,6 +1,7 @@
 #include "KinectInputProvider.h"
 #include "KinectCalibrationView.hpp"
 #include "VectorFieldCalibrationView.hpp"
+#include "KinectRenderView.hpp"
 #include "ofxCv.h"
 
 using namespace ofxCv;
@@ -47,6 +48,10 @@ void KinectInputProvider::storeVectorFieldCalibration() {
     m_model.setFieldForces(concrete_view->getForceFieldParam(), concrete_view->getForceEdgeParam());
     
     m_clearView();
+    
+    // create new view
+    m_view = new KinectRenderView();
+    m_view->setup(&m_kinect);
 }
 
 
