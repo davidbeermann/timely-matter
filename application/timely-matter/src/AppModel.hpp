@@ -52,6 +52,12 @@ private:
     vector<Point2f> m_selection_points_cv;
     vector<Point2f> m_output_points_cv;
     Mat m_homographic_matrix;
+    // kinect depth properties
+    unsigned int m_kinect_near;
+    unsigned int m_kinect_far;
+    // vector field properties
+    float m_vector_field_force;
+    float m_vector_edge_force;
 public:
     static AppModel& get() {
         static AppModel instance;
@@ -114,6 +120,14 @@ public:
     };
     const Mat& setHomographyMatrix() const {
         return m_homographic_matrix;
+    };
+    void setDepthFieldOfView(const unsigned int near, const unsigned int far) {
+        m_kinect_near = near;
+        m_kinect_far = far;
+    };
+    void setFieldForces(const float field_force, const float edge_force) {
+        m_vector_field_force = field_force;
+        m_vector_edge_force = edge_force;
     };
 };
 

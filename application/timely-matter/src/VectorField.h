@@ -14,14 +14,15 @@ class VectorField {
     unsigned int m_subdivision_x, m_subdivision_y;
     float m_field_inc_x, m_field_inc_y;
     float m_input_inc_x, m_input_inc_y;
-    unsigned int mMarksPerRow, mMarksPerColumn;
-    vector<VectorFieldMark> mMarks;
+    unsigned int m_marks_per_row, m_marks_per_column;
+    unsigned int m_average_datum;
+    vector<VectorFieldMark> m_marks;
     ofParameterGroup mGuiParams;
-    ofParameter<float> mMaxEdgeForce;
-    ofParameter<float> mMaxFieldForce;
-    ofParameter<bool> mGuiDebugMeterPoints;
-    ofParameter<bool> mGuiDebugMeterValues;
-    ofParameter<bool> mGuiDebugVector;
+    ofParameter<float> m_max_edge_force;
+    ofParameter<float> m_max_field_force;
+    ofParameter<bool> m_show_marks;
+    ofParameter<bool> m_show_mark_values;
+    ofParameter<bool> m_show_vectors;
 public:
     void setup(const unsigned int width, const unsigned int height, const unsigned int subdivision);
     void setup(const unsigned int width, const unsigned int height, const unsigned int subdivisionX, const unsigned int subdivisionY);
@@ -31,5 +32,9 @@ public:
     void draw();
     const ofVec3f& getForceForPosition(const ofVec3f& position) const;
     const ofVec3f getMeterPointForPosition(const ofVec3f& position) const;
-    const ofParameterGroup& getGuiParams();
+    const ofParameterGroup& getGuiParams() const { return mGuiParams; };
+    ofParameterGroup& getGuiParams() { return mGuiParams; };
+    const unsigned int getAverageDatum() const { return m_average_datum; };
+    const float getMaxEdgeForce() const { return m_max_edge_force; };
+    const float getMaxFieldForce() const { return m_max_field_force; };
 };

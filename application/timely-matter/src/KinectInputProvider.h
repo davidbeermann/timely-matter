@@ -7,6 +7,8 @@
 #include "VectorFieldInputProvider.h"
 #include "AppVars.hpp"
 #include "AppUI.hpp"
+#include "ViewEvents.hpp"
+#include "AppModel.hpp"
 
 
 class KinectInputProvider : public VectorFieldInputProvider {
@@ -26,11 +28,15 @@ class KinectInputProvider : public VectorFieldInputProvider {
     void m_clearView();
     
     // private class attributes
+    AppModel& m_model;
+    ViewEvents& m_events;
     ofxKinect m_kinect;
     KinectView* m_view;
     cv::Mat m_homographic_matrix;
     
 public:
+    KinectInputProvider() : m_model(AppModel::get()), m_events(ViewEvents::get()) {};
     ~KinectInputProvider();
-    void storeCalibration();
+    void storeKinectCalibration();
+    void storeVectorFieldCalibration();
 };

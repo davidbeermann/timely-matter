@@ -22,5 +22,6 @@ public:
     
     ofEvent<void> onParametersChanged;
     ofEvent<void> onKinectCalibrated;
+    ofEvent<void> onVectorFieldCalibrated;
 };
 

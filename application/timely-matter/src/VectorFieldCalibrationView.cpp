@@ -1,11 +1,12 @@
 #include "VectorFieldCalibrationView.hpp"
-
+#include "Utils.hpp"
 #include "ofEvents.h"
 #include "ofxOpenCv.h"
 #include "ofxCv.h"
 
 using namespace cv;
 using namespace ofxCv;
+using namespace timelymatter;
 
 
 void VectorFieldCalibrationView::m_onWindowResized(const int width, const int height) {
@@ -44,12 +45,27 @@ void VectorFieldCalibrationView::m_doSetup() {
     // setup vector field
     m_vector_field.setup(m_model.getProjectorWidth(), m_model.getProjectorHeight(), m_model.getDepthBufferWidth(), m_model.getDepthBufferHeight(), 32);
     
+    // setup gui parameters
+    m_params.setName("Vector Field Calibration");
+    // kinect depth params
+    ofParameterGroup depth_params;
+    depth_params.setName("Kinect Depth FoV");
+    depth_params.add(m_param_depth_near.set("Near plane", 1000, 500, 2500));
+    depth_params.add(m_param_depth_far.set("Far plane", 2500, 500, 4000));
+    m_params.add(depth_params);
+    // vector field params
+    m_params.add(m_vector_field.getGuiParams());
+    
     // notify gui about update
     ofNotifyEvent(m_events.onParametersChanged, this);
 }
 
 
 void VectorFieldCalibrationView::m_doUpdate() {
+    // set depth clipping
+    // the closer the range the better results for the texture gray values between 0-255.
+    m_kinect_ptr->setDepthClipping(m_param_depth_near, m_param_depth_far);
+    
     if (m_kinect_ptr->isFrameNew()) {
         // update output fbo
         m_output_fbo.begin();
@@ -74,8 +90,12 @@ void VectorFieldCalibrationView::m_doUpdate() {
 
 void VectorFieldCalibrationView::m_doDraw() {
     ofPushMatrix();
-    
     ofTranslate(m_center_position);
+    
+    string avg = "Mark Datum - Current Average: " + to_string(m_vector_field.getAverageDatum()) + " - Ideal Average: 127";
+    ofRectangle bounds = getBitmapStringBoundingBox(avg);
+    ofDrawBitmapString(avg, (m_model.getProjectorWidth() - bounds.getWidth()) * 0.5f, -5.f);
+    
     ofPushStyle();
     ofSetColor(0);
     ofDrawRectangle(0, 0, m_model.getProjectorWidth(), m_model.getProjectorHeight());
@@ -94,6 +114,6 @@ void VectorFieldCalibrationView::m_doDraw() {
 
 
 const ofParameterGroup& VectorFieldCalibrationView::m_doGetParams() {
-    return m_vector_field.getGuiParams();
+    return m_params;
 }
 

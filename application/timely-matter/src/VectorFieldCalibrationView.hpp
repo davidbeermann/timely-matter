@@ -17,6 +17,9 @@ class VectorFieldCalibrationView : public KinectView {
     ofImage m_kinect_image;
     ofImage m_depth_image;
     VectorField m_vector_field;
+    ofParameterGroup m_params;
+    ofParameter<unsigned int> m_param_depth_near;
+    ofParameter<unsigned int> m_param_depth_far;
 protected:
     // concrete implementations for AppView
     void m_onWindowResized(const int width, const int height);
@@ -27,5 +30,22 @@ protected:
     const ofParameterGroup& m_doGetParams();
     
 public:
-    VectorFieldCalibrationView() : m_model(AppModel::get()), m_events(ViewEvents::get()) {}
+    VectorFieldCalibrationView() : m_model(AppModel::get()), m_events(ViewEvents::get()) {
+        ofRegisterKeyEvents(this);
+    };
+    ~VectorFieldCalibrationView() {
+        ofUnregisterKeyEvents(this);
+    };
+    // key events
+    void keyPressed(ofKeyEventArgs& args) {
+        if (args.key == OF_KEY_RETURN) {
+            ofNotifyEvent(m_events.onVectorFieldCalibrated, this);
+        }
+    };
+    void keyReleased(ofKeyEventArgs& args){};
+    // getter/setter
+    const unsigned int getDepthNearParam() const { return m_param_depth_near; };
+    const unsigned int getDepthFarParam() const { return m_param_depth_far; };
+    const float getForceFieldParam() const { return m_vector_field.getMaxFieldForce(); };
+    const float getForceEdgeParam() const { return m_vector_field.getMaxEdgeForce(); };
 };

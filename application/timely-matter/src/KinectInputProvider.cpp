@@ -1,8 +1,6 @@
 #include "KinectInputProvider.h"
 #include "KinectCalibrationView.hpp"
 #include "VectorFieldCalibrationView.hpp"
-#include "ViewEvents.hpp"
-#include "AppModel.hpp"
 #include "ofxCv.h"
 
 using namespace ofxCv;
@@ -18,16 +16,16 @@ KinectInputProvider::~KinectInputProvider() {
 }
 
 
-void KinectInputProvider::storeCalibration() {
-//    ofLog() << "KinectInputProvider::storeCalibration()";
+void KinectInputProvider::storeKinectCalibration() {
+//    ofLog() << "KinectInputProvider::storeKinectCalibration()";
     
     // remove listener
-    ofRemoveListener(ViewEvents::get().onKinectCalibrated, this, &KinectInputProvider::storeCalibration);
+    ofRemoveListener(m_events.onKinectCalibrated, this, &KinectInputProvider::storeKinectCalibration);
     
     // static cast to concrete view pointer
     KinectCalibrationView* concrete_view = static_cast<KinectCalibrationView*>(m_view);
-    AppModel::get().setSelectionPoints(concrete_view->getSelectionPoints());
-    AppModel::get().setHomographyMatrix(concrete_view->getHomographyMatrix());
+    m_model.setSelectionPoints(concrete_view->getSelectionPoints());
+    m_model.setHomographyMatrix(concrete_view->getHomographyMatrix());
     
     // clear view
     m_clearView();
@@ -36,7 +34,19 @@ void KinectInputProvider::storeCalibration() {
     m_view = new VectorFieldCalibrationView();
     m_view->setup(&m_kinect);
     
-    //TODO add listener to view event
+    ofAddListener(m_events.onVectorFieldCalibrated, this, &KinectInputProvider::storeVectorFieldCalibration);
+}
+
+
+void KinectInputProvider::storeVectorFieldCalibration() {
+    ofRemoveListener(m_events.onVectorFieldCalibrated, this, &KinectInputProvider::storeVectorFieldCalibration);
+    
+    // static cast to concrete view pointer
+    VectorFieldCalibrationView* concrete_view = static_cast<VectorFieldCalibrationView*>(m_view);
+    m_model.setDepthFieldOfView(concrete_view->getDepthNearParam(), concrete_view->getDepthFarParam());
+    m_model.setFieldForces(concrete_view->getForceFieldParam(), concrete_view->getForceEdgeParam());
+    
+    m_clearView();
 }
 
 
@@ -57,7 +67,7 @@ void KinectInputProvider::doSetup() {
     m_view->setup(&m_kinect);
     
     // add initial view listeners
-    ofAddListener(ViewEvents::get().onKinectCalibrated, this, &KinectInputProvider::storeCalibration);
+    ofAddListener(m_events.onKinectCalibrated, this, &KinectInputProvider::storeKinectCalibration);
 }
 
 

@@ -19,8 +19,6 @@ class KinectCalibrationView : public KinectView {
     ofParameterGroup m_params;
     ofParameter<float> m_param_norm_min;
     ofParameter<float> m_param_norm_max;
-    ofParameter<int> m_param_depth_near;
-    ofParameter<int> m_param_depth_far;
 protected:
     void m_onWindowResized(const int width, const int height);
     void m_doSetup();

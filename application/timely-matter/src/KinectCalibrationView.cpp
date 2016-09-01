@@ -52,19 +52,13 @@ void KinectCalibrationView::m_doSetup() {
     
     
     // define GUI parameters
-    m_params.setName("Kinect Calibration");
+    m_params.setName("Depth Crop Configuration");
     // infrared params
     ofParameterGroup infrared_params;
     infrared_params.setName("Infrared Normalization");
     infrared_params.add(m_param_norm_min.set("Min", 33.f, 0.f, 255.f));
     infrared_params.add(m_param_norm_max.set("Max", 255.f, 0.f, 255.f));
     m_params.add(infrared_params);
-    // depth params
-    ofParameterGroup depth_params;
-    depth_params.setName("Depth Field of View");
-    depth_params.add(m_param_depth_near.set("Near plane", 1000, 500, 2500));
-    depth_params.add(m_param_depth_far.set("Far plane", 2500, 500, 4000));
-    m_params.add(depth_params);
     
     // send event to update GUI
     ofNotifyEvent(ViewEvents::get().onParametersChanged, this);
@@ -86,10 +80,6 @@ void KinectCalibrationView::m_doUpdate() {
     
     // update image within selection container
     m_selection.getImage().setFromPixels(m_grayscale.getPixels());
-    
-    // set depth clipping
-    // the closer the range the better results for the texture gray values between 0-255.
-    m_kinect_ptr->setDepthClipping(m_param_depth_near, m_param_depth_far);
     
     // update depth pixels
     m_depth_buffer.setFromPixels(m_kinect_ptr->getDepthPixels());
