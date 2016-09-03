@@ -3,7 +3,9 @@
 #include "ofMain.h"
 #include "AppModel.hpp"
 #include "AppEvent.hpp"
+#include "ViewEvent.hpp"
 #include "UpdateStateCommand.hpp"
+#include "UpdateModeCommand.hpp"
 #include "ViewManager.hpp"
 //#include "ofEvents.h"
 //#include "AppUI.hpp"
@@ -18,11 +20,13 @@ using namespace timelymatter;
 
 class ofApp : public ofBaseApp {
     // model references
-    timelymatter::AppModel& m_app_model;
-    // event refernece
+    AppModel& m_app_model;
+    // event references
     AppEvent& m_app_event;
+    ViewEvent& m_view_event;
     // commands
     UpdateStateCommand m_update_state_cmd;
+    UpdateModeCommand m_update_mode_cmd;
     // views
     ViewManager m_view_manager;
 public:

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ofMain.h"
-#include "AppState.hpp"
 #include "AppMode.hpp"
 
 
@@ -10,23 +9,23 @@ namespace timelymatter {
     // Singleton class
     // Proposed implementation adapted from here:
     // http://stackoverflow.com/questions/1008019/c-singleton-design-pattern#1008289
-    class AppEvent {
+    class ViewEvent {
         // private constructor
-        AppEvent() {};
+        ViewEvent() {};
         
     public:
         // static method to retrieve singleton instance
-        static AppEvent& get() {
-            static AppEvent event;
+        static ViewEvent& get() {
+            static ViewEvent event;
             return event;
         };
         
         // remove copy constructor and and copy assingnment operator - C++ 11 style
-        AppEvent(AppEvent const&) = delete;
-        void operator=(AppEvent const&) = delete;
+        ViewEvent(ViewEvent const&) = delete;
+        void operator=(ViewEvent const&) = delete;
         
         // events
-        ofEvent<AppState> update_state;
+        ofEvent<AppMode> mode_selected;
     };
     
 }

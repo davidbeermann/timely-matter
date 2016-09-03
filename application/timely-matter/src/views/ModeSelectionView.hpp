@@ -23,7 +23,5 @@ namespace timelymatter
         // key event listener methods
         void keyPressed(ofKeyEventArgs& args);
         void keyReleased(ofKeyEventArgs& args) {};
-        // view events
-        ofEvent<AppMode> mode_selected;
     };
 }

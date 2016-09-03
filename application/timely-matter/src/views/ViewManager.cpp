@@ -37,7 +37,7 @@ void ViewManager::draw() {
 void ViewManager::onStateUpdated(AppState& state) {
     switch (state) {
         case AppState::SELECT_MODE:
-            m_setup_mode_selection_view();
+            m_setup_view(new ModeSelectionView());
             break;
         default:
             ofLog() << "No case implemented for state " << (int) state;
@@ -54,12 +54,11 @@ void ViewManager::m_clearView() {
 }
 
 
-void ViewManager::m_setup_mode_selection_view() {
+void ViewManager::m_setup_view(BaseView* view) {
+    // clear old view
     m_clearView();
     
-    m_view = new ModeSelectionView();
+    // setup new view
+    m_view = view;
     m_view->setup();
-    
-    ModeSelectionView* view = static_cast<ModeSelectionView*>(m_view);
-    ofAddListener(view->mode_selected, &m_update_mode_cmd, &UpdateModeCommand::execute);
 }

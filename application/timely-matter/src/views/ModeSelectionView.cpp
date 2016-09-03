@@ -20,11 +20,11 @@ void ModeSelectionView::keyPressed(ofKeyEventArgs& args) {
     switch (args.key) {
         case '1':
             mode = AppMode::NOISE;
-            ofNotifyEvent(mode_selected, mode, this);
+            ofNotifyEvent(m_view_event.mode_selected, mode, this);
             break;
         case '2':
             mode = AppMode::KINECT;
-            ofNotifyEvent(mode_selected, mode, this);
+            ofNotifyEvent(m_view_event.mode_selected, mode, this);
             break;
         default:
             break;

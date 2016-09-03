@@ -5,7 +5,10 @@
 //using namespace timelymatter;
 
 
-ofApp::ofApp() : m_app_model(timelymatter::AppModel::get()), m_app_event(AppEvent::get()) {
+ofApp::ofApp() :
+m_app_model(timelymatter::AppModel::get()),
+m_app_event(AppEvent::get()),
+m_view_event(ViewEvent::get()) {
 }
 
 
@@ -14,14 +17,18 @@ void ofApp::setup() {
     ofSetBackgroundColor(33);
     
     // setup command mapping
-    ofAddListener(m_app_event.updateState, &m_update_state_cmd, &UpdateStateCommand::execute);
+    // app events
+    ofAddListener(m_app_event.update_state, &m_update_state_cmd, &UpdateStateCommand::execute);
+    // view events
+    ofAddListener(m_view_event.mode_selected, &m_update_mode_cmd, &UpdateModeCommand::execute);
+    
     
     // setup view manager
     m_view_manager.setup();
     
     // set initial state
     AppState state = AppState::SELECT_MODE;
-    ofNotifyEvent(m_app_event.updateState, state, this);
+    ofNotifyEvent(m_app_event.update_state, state, this);
 }
 
 
