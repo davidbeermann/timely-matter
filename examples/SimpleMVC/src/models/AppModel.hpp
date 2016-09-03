@@ -22,7 +22,7 @@ class AppModel {
 public:
     static AppModel& get();
     
-    // remove copy constructor and and copy assingment operator - C++ 11 style
+    // remove copy constructor and and copy assingnment operator - C++ 11 style
     AppModel(AppModel const&) = delete;
     void operator=(AppModel const&) = delete;
     

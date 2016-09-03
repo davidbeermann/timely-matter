@@ -1,15 +1,8 @@
 #include "ofMain.h"
 #include "ofApp.h"
-#include "AppModel.hpp"
-
-#define PROJECTOR_WIDTH 1024
-#define PROJECTOR_HEIGHT 768
 
 
 int main( ){
-    // setup model
-    AppModel::get().setProjectorSize(PROJECTOR_WIDTH, PROJECTOR_HEIGHT);
-    
     // create window for application
     ofGLFWWindowSettings settings;
     settings.title = "Timely Matter";
