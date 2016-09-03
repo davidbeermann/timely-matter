@@ -7,6 +7,7 @@
 #include "UpdateStateCommand.hpp"
 #include "UpdateModeCommand.hpp"
 #include "ViewManager.hpp"
+#include "GuiView.hpp"
 //#include "ofEvents.h"
 //#include "AppUI.hpp"
 //#include "AppVars.hpp"
@@ -29,6 +30,7 @@ class ofApp : public ofBaseApp {
     UpdateModeCommand m_update_mode_cmd;
     // views
     ViewManager m_view_manager;
+    GuiView m_gui_view;
 public:
     ofApp();
     void setup();

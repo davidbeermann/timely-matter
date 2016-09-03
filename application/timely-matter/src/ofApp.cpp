@@ -22,9 +22,9 @@ void ofApp::setup() {
     // view events
     ofAddListener(m_view_event.mode_selected, &m_update_mode_cmd, &UpdateModeCommand::execute);
     
-    
-    // setup view manager
+    // setup views
     m_view_manager.setup();
+    m_gui_view.setup();
     
     // set initial state
     AppState state = AppState::SELECT_MODE;
@@ -34,11 +34,13 @@ void ofApp::setup() {
 
 void ofApp::update() {
     m_view_manager.update();
+    m_gui_view.update();
 }
 
 
 void ofApp::draw() {
     m_view_manager.draw();
+    m_gui_view.draw();
 }
 
 

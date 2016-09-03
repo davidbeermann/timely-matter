@@ -5,7 +5,10 @@ namespace timelymatter
     // function found here:
     // https://forum.openframeworks.cc/t/how-to-get-size-of-ofdrawbitmapstring/22578/6
     // thx @roymacdonald
-    ofRectangle getBitmapStringBoundingBox(string text){
+    // define function as inline to be compiled only once!
+    // info found here:
+    // http://stackoverflow.com/questions/27436981/xcode-c-duplicate-symbols-for-architecture-x86-64#27437117
+    inline ofRectangle getBitmapStringBoundingBox(string text){
         vector<string> lines = ofSplitString(text, "\n");
         int maxLineLength = 0;
         for(int i = 0; i < (int)lines.size(); i++) {
