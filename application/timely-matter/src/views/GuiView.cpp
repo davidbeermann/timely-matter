@@ -22,6 +22,9 @@ void GuiView::m_onSetup() {
     
     m_info_rect.setX(8.f);
     m_info_rect.setY(8.f);
+    
+    // add listener for updates
+    ofAddListener(m_view_event.update_gui, this, &GuiView::onGuiUpdate);
 }
 
 
@@ -56,7 +59,7 @@ void GuiView::m_onDraw() {
 }
 
 
-GuiView::GuiView() {
+GuiView::GuiView() : m_view_event(ViewEvent::get()) {
     ofRegisterKeyEvents(this);
 }
 
@@ -70,5 +73,10 @@ void GuiView::keyPressed(ofKeyEventArgs& args) {
     if (args.key == 'g') {
         m_visible = !m_visible;
     }
+}
+
+void GuiView::onGuiUpdate(ofParameterGroup& params) {
+    m_panel.clear();
+    m_panel.add(params);
 }
 

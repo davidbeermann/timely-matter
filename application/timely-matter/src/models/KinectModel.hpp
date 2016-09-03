@@ -12,7 +12,7 @@ namespace timelymatter {
         // private constructor
         KinectModel();
         
-        ofxKinect m_kinect;
+        shared_ptr<ofxKinect> m_kinect_sptr;
         float m_depth_clip_near;
         float m_depth_clip_far;
         
@@ -25,7 +25,9 @@ namespace timelymatter {
         void operator=(KinectModel const&) = delete;
         
         // public interface methods
-        ofxKinect& getKinect();
+        shared_ptr<ofxKinect> getKinect();
+        const unsigned int getDepthBufferWidth() const;
+        const unsigned int getDepthBufferHeight() const;
     };
 
 }

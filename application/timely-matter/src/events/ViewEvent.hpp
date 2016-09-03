@@ -26,6 +26,7 @@ namespace timelymatter {
         
         // events
         ofEvent<AppMode> mode_selected;
+        ofEvent<ofParameterGroup> update_gui;
     };
     
 }

@@ -1,13 +1,16 @@
 #pragma once
 
+#include "BaseView.hpp"
+#include "ViewEvent.hpp"
 #include "ofMain.h"
 #include "ofxGui.h"
-#include "BaseView.hpp"
+
 
 
 namespace timelymatter {
 
     class GuiView : public BaseView {
+        ViewEvent& m_view_event;
         bool m_visible;
         ofxPanel m_panel;
         string m_info;
@@ -25,6 +28,8 @@ namespace timelymatter {
         // key event listener methods
         void keyPressed(ofKeyEventArgs& args);
         void keyReleased(ofKeyEventArgs& args) {};
+        // custom event listeners
+        void onGuiUpdate(ofParameterGroup& params);
     };
     
 }

@@ -1,5 +1,6 @@
 #include "ViewManager.hpp"
 #include "ModeSelectionView.hpp"
+#include "CalibrateProjectionView.hpp"
 
 
 using namespace timelymatter;
@@ -38,6 +39,9 @@ void ViewManager::onStateUpdated(AppState& state) {
     switch (state) {
         case AppState::SELECT_MODE:
             m_setup_view(new ModeSelectionView());
+            break;
+        case AppState::CALIBRATE_PROJECTION:
+            m_setup_view(new CalibrateProjectionView());
             break;
         default:
             ofLog() << "No case implemented for state " << (int) state;
