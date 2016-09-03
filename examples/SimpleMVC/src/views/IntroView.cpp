@@ -2,16 +2,17 @@
 #include "AppEvents.hpp"
 
 
-
 void IntroView::m_doSetup() {
     ofAddListener(m_model.value_updated, this, &IntroView::onValueUpdated);
 }
 
 
 void IntroView::m_doUpdate() {
-    if (ofGetFrameNum() % 2) {
-        int value = (int) ofRandom(10000);
-        ofNotifyEvent(update_value, value, this);
+    if (ofGetFrameNum() % 15) {
+        IntroViewArgs args;
+        args.value = (int) ofRandom(10000);
+
+        ofNotifyEvent(update_value, args, this);
     }
 }
 

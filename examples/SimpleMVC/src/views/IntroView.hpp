@@ -4,6 +4,12 @@
 #include "AppView.hpp"
 
 
+struct IntroViewArgs {
+    string foo = "bar";
+    int value;
+};
+
+
 class IntroView : public AppView {
     int m_value = -1;
 protected:
@@ -14,7 +20,7 @@ public:
     IntroView();
     ~IntroView();
     // view events
-    ofEvent<int> update_value;
+    ofEvent<IntroViewArgs> update_value;
     // key event handler
     void keyPressed(ofKeyEventArgs& args);
     void keyReleased(ofKeyEventArgs& args) {};
