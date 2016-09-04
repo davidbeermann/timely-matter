@@ -1,4 +1,5 @@
 #include "CalibrateProjectionView.hpp"
+#include "ParameterUtils.hpp"
 #include "ofxCv.h"
 
 #define PADDING 18
@@ -34,10 +35,10 @@ void CalibrateProjectionView::m_onSetup() {
     m_params.setName("Configure Projection");
     // infrared params
     ofParameterGroup infrared_params;
-    infrared_params.setName("Infrared Normalization");
-    infrared_params.add(m_param_norm_min.set("Min", 33.f, 0.f, 255.f));
-    infrared_params.add(m_param_norm_max.set("Max", 255.f, 0.f, 255.f));
-    m_params.add(infrared_params);
+    m_params.add(setupInfraredParameters(infrared_params, m_param_norm_min, m_param_norm_max));
+    // depth clipping params
+    ofParameterGroup clip_params;
+    m_params.add(setupDepthClippingParameters(clip_params, m_param_clip_near, m_param_clip_far));
     
     // send event to update GUI
     ofNotifyEvent(m_view_event.update_gui, m_params, this);
@@ -45,6 +46,8 @@ void CalibrateProjectionView::m_onSetup() {
 
 
 void CalibrateProjectionView::m_onUpdate() {
+    m_kinect_sptr->setDepthClipping(m_param_clip_near, m_param_clip_far);
+    
     m_kinect_sptr->update();
     
     if (m_kinect_sptr->isFrameNew()) {
@@ -110,6 +113,8 @@ void CalibrateProjectionView::keyPressed(ofKeyEventArgs& args) {
     if (args.key == OF_KEY_RETURN) {
         CalibrateProjectionArgs args;
         args.selection_points = m_selection.getPoints();
+        args.depth_clip_near = m_param_clip_near;
+        args.depth_clip_far = m_param_clip_far;
         
         ofNotifyEvent(m_view_event.projection_calibrated, args, this);
     }

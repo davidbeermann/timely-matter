@@ -25,6 +25,8 @@ namespace timelymatter
         ofParameterGroup m_params;
         ofParameter<float> m_param_norm_min;
         ofParameter<float> m_param_norm_max;
+        ofParameter<unsigned int> m_param_clip_near;
+        ofParameter<unsigned int> m_param_clip_far;
     protected:
         void m_onWindowResized(const int width, const int height);
         void m_onSetup();

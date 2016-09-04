@@ -35,4 +35,20 @@ namespace timelymatter
         // return group
         return group;
     }
+    
+    
+    inline ofParameterGroup& setupInfraredParameters
+    (
+        ofParameterGroup& group,
+        ofParameter<float>& min,
+        ofParameter<float>& max
+    ) {
+        // setup parameters for loading settings
+        group.setName("Infrared Normalization");
+        group.add(min.set("Min", 33.f, 0.f, 255.f));
+        group.add(max.set("Max", 255.f, 0.f, 255.f));
+        
+        // return group
+        return group;
+    }
 }

@@ -8,6 +8,8 @@ namespace timelymatter {
     
     struct CalibrateProjectionArgs {
         vector<ofVec2f> selection_points;
+        float depth_clip_near = -1.f;
+        float depth_clip_far = -1.f;
     };
     
     struct CalibrateDepthArgs {
