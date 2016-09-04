@@ -21,14 +21,18 @@ namespace timelymatter
         ofImage m_depth_image;
         VectorField m_vector_field;
         ofParameterGroup m_params;
-        ofParameter<unsigned int> m_param_depth_near;
-        ofParameter<unsigned int> m_param_depth_far;
+        ofParameter<unsigned int> m_param_clip_near;
+        ofParameter<unsigned int> m_param_clip_far;
     protected:
         void m_onWindowResized(const int width, const int height);
         void m_onSetup();
         void m_onUpdate();
         void m_onDraw();
     public:
-        CalibrateDepthView() : m_kinect_sptr(m_kinect_model.getKinect()) {};
+        CalibrateDepthView();
+        ~CalibrateDepthView();
+        // key event listener methods
+        void keyPressed(ofKeyEventArgs& args);
+        void keyReleased(ofKeyEventArgs& args) {};
     };
 }

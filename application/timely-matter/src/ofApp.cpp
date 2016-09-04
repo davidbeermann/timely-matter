@@ -6,10 +6,10 @@
 
 
 ofApp::ofApp() :
-m_app_model(timelymatter::AppModel::get()),
-m_app_event(AppEvent::get()),
-m_view_event(ViewEvent::get()) {
-}
+    m_app_model(timelymatter::AppModel::get()),
+    m_app_event(AppEvent::get()),
+    m_view_event(ViewEvent::get())
+{}
 
 
 void ofApp::setup() {
@@ -22,6 +22,7 @@ void ofApp::setup() {
     // view events
     ofAddListener(m_view_event.mode_selected, &m_update_mode_cmd, &UpdateModeCommand::execute);
     ofAddListener(m_view_event.projection_calibrated, &m_update_projector_calibration_cmd, &UpdateProjectorCalibrationCommand::execute);
+    ofAddListener(m_view_event.depth_calibrated, &m_update_depth_calibration_cmd, &UpdateDepthCalibrationCommand::execute);
     
     // setup views
     m_view_manager.setup();

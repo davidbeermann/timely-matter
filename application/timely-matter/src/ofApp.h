@@ -7,6 +7,7 @@
 #include "UpdateStateCommand.hpp"
 #include "UpdateModeCommand.hpp"
 #include "UpdateProjectorCalibrationCommand.hpp"
+#include "UpdateDepthCalibrationCommand.hpp"
 #include "ViewManager.hpp"
 #include "GuiView.hpp"
 //#include "ofEvents.h"
@@ -30,6 +31,7 @@ class ofApp : public ofBaseApp {
     UpdateStateCommand m_update_state_cmd;
     UpdateModeCommand m_update_mode_cmd;
     UpdateProjectorCalibrationCommand m_update_projector_calibration_cmd;
+    UpdateDepthCalibrationCommand m_update_depth_calibration_cmd;
     // views
     ViewManager m_view_manager;
     GuiView m_gui_view;

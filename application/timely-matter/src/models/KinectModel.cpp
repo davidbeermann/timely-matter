@@ -8,8 +8,12 @@ KinectModel::KinectModel() {
     m_kinect_sptr = shared_ptr<ofxKinect>(new ofxKinect());
     
     // set  default values
-    m_depth_clip_near = 1200.f;
-    m_depth_clip_far = 1900.f;
+    m_depth_clip_near = 1200;
+    m_depth_clip_near_min = 500;
+    m_depth_clip_near_max = 2500;
+    m_depth_clip_far = 1900;
+    m_depth_clip_far_min = 1000;
+    m_depth_clip_far_max = 3000;
     
     m_selection_points.push_back(ofVec2f(0.f, 0.f));
     m_selection_points.push_back(ofVec2f(0.f, 0.f));
@@ -54,6 +58,24 @@ shared_ptr<ofxKinect> KinectModel::getKinect() {
     m_kinect_sptr->setDepthClipping(m_depth_clip_near, m_depth_clip_far);
     
     return m_kinect_sptr;
+}
+
+
+void KinectModel::setDepthClipNear(const unsigned int& value) {
+    if (value >= m_depth_clip_near_min && value <= m_depth_clip_near_max) {
+        m_depth_clip_near = value;
+    } else {
+        ofLog() << "Out of range value for depth clipping near. Must be within [" << m_depth_clip_near_min << "," << m_depth_clip_near_max << "]";
+    }
+}
+
+
+void KinectModel::setDepthClipFar(const unsigned int& value) {
+    if (value >= m_depth_clip_far_min && value <= m_depth_clip_far_max) {
+        m_depth_clip_far = value;
+    } else {
+        ofLog() << "Out of range value for depth clipping far. Must be within [" << m_depth_clip_far_min << "," << m_depth_clip_far_max << "]";
+    }
 }
 
 

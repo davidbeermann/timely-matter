@@ -1,5 +1,7 @@
 #include "CalibrateDepthView.hpp"
 #include "BitmapStringUtils.hpp"
+#include "ParameterUtils.hpp"
+#include "ViewEvent.hpp"
 #include "ofxCv.h"
 
 using namespace timelymatter;
@@ -46,10 +48,7 @@ void CalibrateDepthView::m_onSetup() {
     m_params.setName("Calibrate Depth");
     // kinect depth params
     ofParameterGroup depth_params;
-    depth_params.setName("Depth Clipping");
-    depth_params.add(m_param_depth_near.set("Near plane", 1000, 500, 2500));
-    depth_params.add(m_param_depth_far.set("Far plane", 2500, 500, 4000));
-    m_params.add(depth_params);
+    m_params.add(setupDepthClippingParameters(depth_params, m_param_clip_near, m_param_clip_far));
     // vector field params
     m_params.add(m_vector_field.getGuiParams());
     
@@ -61,7 +60,7 @@ void CalibrateDepthView::m_onSetup() {
 void CalibrateDepthView::m_onUpdate() {
     // set depth clipping
     // the closer the range the better results for the texture gray values between 0-255.
-    m_kinect_sptr->setDepthClipping(m_param_depth_near, m_param_depth_far);
+    m_kinect_sptr->setDepthClipping(m_param_clip_near, m_param_clip_far);
     
     m_kinect_sptr->update();
     
@@ -109,5 +108,28 @@ void CalibrateDepthView::m_onDraw() {
     m_depth_image.draw(m_fbo_output_size);
     
     ofPopMatrix();
+}
+
+
+CalibrateDepthView::CalibrateDepthView() : m_kinect_sptr(m_kinect_model.getKinect()) {
+    ofRegisterKeyEvents(this);
+}
+
+
+CalibrateDepthView::~CalibrateDepthView() {
+    ofUnregisterKeyEvents(this);
+}
+
+
+void CalibrateDepthView::keyPressed(ofKeyEventArgs& args) {
+    if (args.key == OF_KEY_RETURN) {
+        CalibrateDepthArgs args;
+        args.depth_clip_near = m_param_clip_near;
+        args.depth_clip_far = m_param_clip_far;
+        args.vector_force_field = m_vector_field.getMaxFieldForce();
+        args.vector_force_edge = m_vector_field.getMaxEdgeForce();
+        
+        ofNotifyEvent(m_view_event.depth_calibrated, args, this);
+    }
 }
 
