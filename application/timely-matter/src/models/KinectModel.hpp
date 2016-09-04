@@ -35,6 +35,7 @@ namespace timelymatter {
         const unsigned int getDepthBufferWidth() const;
         const unsigned int getDepthBufferHeight() const;
         const vector<ofVec2f>& getSelectionPoints() const;
+        void setSelectionPoints(const vector<ofVec2f>& points);
         const vector<Point2f>& getCvSelectionPoints() const;
         const vector<Point2f>& getCvOutputPoints() const;
     };

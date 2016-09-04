@@ -1,6 +1,7 @@
 #include "ViewManager.hpp"
 #include "ModeSelectionView.hpp"
 #include "CalibrateProjectionView.hpp"
+#include "CalibrateDepthView.hpp"
 
 
 using namespace timelymatter;
@@ -42,6 +43,9 @@ void ViewManager::onStateUpdated(AppState& state) {
             break;
         case AppState::CALIBRATE_PROJECTION:
             m_setup_view(new CalibrateProjectionView());
+            break;
+        case AppState::CALIBRATE_DEPTH:
+            m_setup_view(new CalibrateDepthView());
             break;
         default:
             ofLog() << "No case implemented for state " << (int) state;

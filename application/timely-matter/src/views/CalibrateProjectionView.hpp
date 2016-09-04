@@ -31,6 +31,10 @@ namespace timelymatter
         void m_onUpdate();
         void m_onDraw();
     public:
-        CalibrateProjectionView() : m_kinect_sptr(m_kinect_model.getKinect()) {};
-    };    
+        CalibrateProjectionView();
+        ~CalibrateProjectionView();
+        // key event listener methods
+        void keyPressed(ofKeyEventArgs& args);
+        void keyReleased(ofKeyEventArgs& args) {};
+    };
 }

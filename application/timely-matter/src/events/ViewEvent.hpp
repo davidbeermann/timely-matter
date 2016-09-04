@@ -6,6 +6,10 @@
 
 namespace timelymatter {
     
+    struct CalibrateProjectionArgs {
+        vector<ofVec2f> selection_points;
+    };
+    
     // Singleton class
     // Proposed implementation adapted from here:
     // http://stackoverflow.com/questions/1008019/c-singleton-design-pattern#1008289
@@ -27,6 +31,7 @@ namespace timelymatter {
         // events
         ofEvent<AppMode> mode_selected;
         ofEvent<ofParameterGroup> update_gui;
+        ofEvent<CalibrateProjectionArgs> projection_calibrated;
     };
     
 }

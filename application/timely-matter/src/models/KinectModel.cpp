@@ -6,9 +6,25 @@ using namespace timelymatter;
 KinectModel::KinectModel() {
     // create shared pointer of kinect instance
     m_kinect_sptr = shared_ptr<ofxKinect>(new ofxKinect());
+    
     // set  default values
     m_depth_clip_near = 1200.f;
     m_depth_clip_far = 1900.f;
+    
+    m_selection_points.push_back(ofVec2f(0.f, 0.f));
+    m_selection_points.push_back(ofVec2f(0.f, 0.f));
+    m_selection_points.push_back(ofVec2f(0.f, 0.f));
+    m_selection_points.push_back(ofVec2f(0.f, 0.f));
+    
+    m_cv_selection_points.push_back(Point2f(0.f, 0.f));
+    m_cv_selection_points.push_back(Point2f(0.f, 0.f));
+    m_cv_selection_points.push_back(Point2f(0.f, 0.f));
+    m_cv_selection_points.push_back(Point2f(0.f, 0.f));
+    
+    m_cv_output_points.push_back(Point2f(0.f, 0.f));
+    m_cv_output_points.push_back(Point2f(getDepthBufferWidth(), 0.f));
+    m_cv_output_points.push_back(Point2f(getDepthBufferWidth(), getDepthBufferHeight()));
+    m_cv_output_points.push_back(Point2f(0.f, getDepthBufferHeight()));
 }
 
 
@@ -53,6 +69,16 @@ const unsigned int KinectModel::getDepthBufferHeight() const {
 
 const vector<ofVec2f>& KinectModel::getSelectionPoints() const {
     return m_selection_points;
+}
+
+
+void KinectModel::setSelectionPoints(const vector<ofVec2f>& points) {
+    for (int i = 0; i < m_selection_points.size(); ++i) {
+        m_selection_points[i].set(points[i]);
+        
+        m_cv_selection_points[i].x = points[i].x;
+        m_cv_selection_points[i].y = points[i].y;
+    }
 }
 
 

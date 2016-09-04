@@ -95,3 +95,23 @@ void CalibrateProjectionView::m_onDraw() {
     m_crop_buffer.draw(m_crop_position);
 }
 
+
+CalibrateProjectionView::CalibrateProjectionView() : m_kinect_sptr(m_kinect_model.getKinect()) {
+    ofRegisterKeyEvents(this);
+}
+
+
+CalibrateProjectionView::~CalibrateProjectionView() {
+    ofUnregisterKeyEvents(this);
+}
+
+
+void CalibrateProjectionView::keyPressed(ofKeyEventArgs& args) {
+    if (args.key == OF_KEY_RETURN) {
+        CalibrateProjectionArgs args;
+        args.selection_points = m_selection.getPoints();
+        
+        ofNotifyEvent(m_view_event.projection_calibrated, args, this);
+    }
+}
+
