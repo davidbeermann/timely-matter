@@ -1,5 +1,4 @@
 #include "CalibrateProjectionView.hpp"
-#include "BitmapStringUtils.hpp"
 #include "ofxCv.h"
 
 #define PADDING 18

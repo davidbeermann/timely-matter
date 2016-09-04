@@ -4,6 +4,7 @@
 #include "ofEvents.h"
 #include "AppModel.hpp"
 #include "KinectModel.hpp"
+#include "ProjectorModel.hpp"
 #include "ViewEvent.hpp"
 
 
@@ -17,6 +18,7 @@ class BaseView {
 protected:
     AppModel& m_app_model;
     KinectModel& m_kinect_model;
+    ProjectorModel& m_projector_model;
     ViewEvent& m_view_event;
     
     // Methods to be implemented by concrete view.
@@ -30,6 +32,7 @@ public:
     BaseView() :
     m_app_model(AppModel::get()),
     m_kinect_model(KinectModel::get()),
+    m_projector_model(ProjectorModel::get()),
     m_view_event(ViewEvent::get()) {
         ofAddListener(ofEvents().windowResized, this, &BaseView::onWindowResized);
     };

@@ -1,6 +1,9 @@
 #pragma once
 
 #include "ofxKinect.h"
+#include "ofxOpenCv.h"
+
+using namespace cv;
 
 
 namespace timelymatter {
@@ -15,6 +18,9 @@ namespace timelymatter {
         shared_ptr<ofxKinect> m_kinect_sptr;
         float m_depth_clip_near;
         float m_depth_clip_far;
+        vector<ofVec2f> m_selection_points;
+        vector<Point2f> m_cv_selection_points;
+        vector<Point2f> m_cv_output_points;
         
     public:
         // static method to retrieve singleton instance
@@ -28,6 +34,9 @@ namespace timelymatter {
         shared_ptr<ofxKinect> getKinect();
         const unsigned int getDepthBufferWidth() const;
         const unsigned int getDepthBufferHeight() const;
+        const vector<ofVec2f>& getSelectionPoints() const;
+        const vector<Point2f>& getCvSelectionPoints() const;
+        const vector<Point2f>& getCvOutputPoints() const;
     };
 
 }

@@ -6,7 +6,7 @@ using namespace timelymatter;
 KinectModel::KinectModel() {
     // create shared pointer of kinect instance
     m_kinect_sptr = shared_ptr<ofxKinect>(new ofxKinect());
-    // setting default values
+    // set  default values
     m_depth_clip_near = 1200.f;
     m_depth_clip_far = 1900.f;
 }
@@ -48,5 +48,20 @@ const unsigned int KinectModel::getDepthBufferWidth() const {
 
 const unsigned int KinectModel::getDepthBufferHeight() const {
     return m_kinect_sptr->height * 0.75;
+}
+
+
+const vector<ofVec2f>& KinectModel::getSelectionPoints() const {
+    return m_selection_points;
+}
+
+
+const vector<Point2f>& KinectModel::getCvSelectionPoints() const {
+    return m_cv_selection_points;
+}
+
+
+const vector<Point2f>& KinectModel::getCvOutputPoints() const {
+    return m_cv_output_points;
 }
 

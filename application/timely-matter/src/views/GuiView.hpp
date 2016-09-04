@@ -6,7 +6,6 @@
 #include "ofxGui.h"
 
 
-
 namespace timelymatter {
 
     class GuiView : public BaseView {
