@@ -23,7 +23,9 @@ namespace timelymatter {
         void applyVectorField(const VectorField& vectorField);
         void update();
         void draw(const VectorField& vectorField);
-        const ofParameterGroup& getGuiParams();
+        
+        const ofParameterGroup& getParams() const { return m_params; }
+        ofParameterGroup& getParams() { return m_params; }
     };
 
 }

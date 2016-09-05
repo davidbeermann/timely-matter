@@ -33,12 +33,12 @@ void VectorField::setup(const unsigned int fieldWidth, const unsigned int fieldH
     
     // setup gui parameters
     // do this now, in order to set the max edge force for fixed marks
-    mGuiParams.setName("Vector Field");
-    mGuiParams.add(m_max_edge_force.set("max edge force", 8.f, 1.f, 12.f));
-    mGuiParams.add(m_max_field_force.set("max field force", 8.f, 1.f, 12.f));
-    mGuiParams.add(m_show_marks.set("meter points", false));
-    mGuiParams.add(m_show_mark_values.set("meter values", false));
-    mGuiParams.add(m_show_vectors.set("vectors", false));
+    m_params.setName("Vector Field");
+    m_params.add(m_max_edge_force.set("max edge force", 8.f, 1.f, 12.f));
+    m_params.add(m_max_field_force.set("max field force", 8.f, 1.f, 12.f));
+    m_params.add(m_show_marks.set("meter points", false));
+    m_params.add(m_show_mark_values.set("meter values", false));
+    m_params.add(m_show_vectors.set("vectors", false));
     
     // setup listeners for changes in field strength
     //    m_max_edge_force.addListener(this, &VectorField::onMaxEdgeForceChanged);

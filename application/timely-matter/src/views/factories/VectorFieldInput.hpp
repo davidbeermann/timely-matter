@@ -14,6 +14,7 @@ namespace timelymatter {
         
     protected:
         // Methods to be implemented by concrete view.
+        virtual ofParameterGroup& m_onGetParams() = 0;
         virtual const ofPixels& m_onGetPixels() = 0;
         virtual const unsigned int m_onGetWidth() = 0;
         virtual const unsigned int m_onGetHeight() = 0;
@@ -27,6 +28,7 @@ namespace timelymatter {
         virtual ~VectorFieldInput() = default;
         
         // Non-Virtual Interface methods
+        ofParameterGroup& getParams() { return m_onGetParams(); };
         const ofPixels& getPixels() { return m_onGetPixels(); };
         const unsigned int getWidth() { return m_onGetWidth(); };
         const unsigned int getHeight() { return m_onGetHeight(); };

@@ -21,7 +21,7 @@ namespace timelymatter
         unsigned int m_marks_per_row, m_marks_per_column;
         unsigned int m_average_datum;
         vector<VectorFieldMark> m_marks;
-        ofParameterGroup mGuiParams;
+        ofParameterGroup m_params;
         ofParameter<float> m_max_edge_force;
         ofParameter<float> m_max_field_force;
         ofParameter<bool> m_show_marks;
@@ -36,8 +36,8 @@ namespace timelymatter
         void draw();
         const ofVec3f& getForceForPosition(const ofVec3f& position) const;
         const ofVec3f getMeterPointForPosition(const ofVec3f& position) const;
-        const ofParameterGroup& getGuiParams() const { return mGuiParams; };
-        ofParameterGroup& getGuiParams() { return mGuiParams; };
+        const ofParameterGroup& getParams() const { return m_params; };
+        ofParameterGroup& getParams() { return m_params; };
         const unsigned int getAverageDatum() const { return m_average_datum; };
         const float getMaxEdgeForce() const { return m_max_edge_force; };
         const float getMaxFieldForce() const { return m_max_field_force; };

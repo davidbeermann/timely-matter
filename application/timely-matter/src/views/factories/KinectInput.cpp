@@ -42,13 +42,3 @@ const unsigned int KinectInput::m_onGetHeight() {
     return (unsigned int) m_kinect_sptr->getHeight();
 }
 
-
-const AppMode KinectInput::m_onGetType() {
-    return AppMode::KINECT;
-}
-
-
-const string KinectInput::m_onGetName() {
-    return "Kinect";
-}
-

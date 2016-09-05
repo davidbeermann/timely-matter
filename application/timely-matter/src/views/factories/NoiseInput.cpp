@@ -19,12 +19,12 @@ void NoiseInput::m_onSetup() {
     m_image.allocate(m_fbo.getWidth(), m_fbo.getHeight(), OF_IMAGE_COLOR_ALPHA);
     
     // setup GUI settings
-//    mGuiParams.setName("Perlin Noise");
-//    mGuiParams.add(m_offset_x.set("offset x", 5.43, 0.0, 15.0));
-//    mGuiParams.add(m_offset_y.set("offset y", 2.34, 0.0, 15.0));
-//    mGuiParams.add(m_scale.set("scale", 0.0055, 0.001, 0.01));
-//    mGuiParams.add(m_speed.set("speed", 0.5, 0.05, 0.95));
-//    mGuiParams.add(m_draw_output.set("draw FBO", true));
+    m_params.setName("Perlin Noise");
+    m_params.add(m_offset_x.set("offset x", 5.43, 0.0, 15.0));
+    m_params.add(m_offset_y.set("offset y", 2.34, 0.0, 15.0));
+    m_params.add(m_scale.set("scale", 0.0055, 0.001, 0.01));
+    m_params.add(m_speed.set("speed", 0.5, 0.05, 0.95));
+    m_params.add(m_draw_output.set("draw FBO", true));
 }
 
 
@@ -69,16 +69,6 @@ const unsigned int NoiseInput::m_onGetWidth() {
 
 const unsigned int NoiseInput::m_onGetHeight() {
     return m_fbo.getHeight();
-}
-
-
-const AppMode NoiseInput::m_onGetType() {
-    return AppMode::NOISE;
-}
-
-
-const string NoiseInput::m_onGetName() {
-    return "Perlin Noise";
 }
 
 

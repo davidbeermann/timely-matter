@@ -72,8 +72,3 @@ void ParticleSystem::draw(const VectorField& vectorField) {
         }
     }
 }
-
-
-const ofParameterGroup& ParticleSystem::getGuiParams() {
-    return m_params;
-}
