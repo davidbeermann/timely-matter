@@ -27,13 +27,12 @@ void RenderView::m_onSetup() {
     m_image.allocate(m_input.getWidth(), m_input.getHeight(), OF_IMAGE_COLOR);
     
     // compile gui params
-    ofParameterGroup group;
-    group.setName("Render View");
-    group.add(m_input.getParams());
-    group.add(m_vector_field.getParams());
-    group.add(m_particle_system.getParams());
+    GuiUpdateArgs args;
+    args.params.push_back(m_input.getParams());
+    args.params.push_back(m_vector_field.getParams());
+    args.params.push_back(m_particle_system.getParams());
     
-    ofNotifyEvent(m_view_event.update_gui, group, this);
+    ofNotifyEvent(m_view_event.update_gui, args, this);
 }
 
 

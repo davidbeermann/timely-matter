@@ -28,7 +28,7 @@ namespace timelymatter {
         void keyPressed(ofKeyEventArgs& args);
         void keyReleased(ofKeyEventArgs& args) {};
         // custom event listeners
-        void onGuiUpdate(ofParameterGroup& params);
+        void onGuiUpdate(GuiUpdateArgs& args);
     };
     
 }

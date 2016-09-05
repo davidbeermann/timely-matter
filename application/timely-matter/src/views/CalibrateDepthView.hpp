@@ -20,7 +20,6 @@ namespace timelymatter
         ofImage m_kinect_image;
         ofImage m_depth_image;
         VectorField m_vector_field;
-        ofParameterGroup m_params;
         ofParameter<unsigned int> m_param_clip_near;
         ofParameter<unsigned int> m_param_clip_far;
     protected:

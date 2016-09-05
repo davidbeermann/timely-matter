@@ -32,16 +32,18 @@ void CalibrateProjectionView::m_onSetup() {
     m_crop_buffer.allocate(m_kinect_model.getDepthBufferWidth(), m_kinect_model.getDepthBufferHeight(), OF_IMAGE_GRAYSCALE);
     
     // define GUI parameters
-    m_params.setName("Configure Projection");
+    GuiUpdateArgs args;
     // infrared params
     ofParameterGroup infrared_params;
-    m_params.add(setupInfraredParameters(infrared_params, m_param_norm_min, m_param_norm_max));
+    setupInfraredParameters(infrared_params, m_param_norm_min, m_param_norm_max);
+    args.params.push_back(infrared_params);
     // depth clipping params
     ofParameterGroup clip_params;
-    m_params.add(setupDepthClippingParameters(clip_params, m_param_clip_near, m_param_clip_far));
+    setupDepthClippingParameters(clip_params, m_param_clip_near, m_param_clip_far);
+    args.params.push_back(clip_params);
     
     // send event to update GUI
-    ofNotifyEvent(m_view_event.update_gui, m_params, this);
+    ofNotifyEvent(m_view_event.update_gui, args, this);
 }
 
 

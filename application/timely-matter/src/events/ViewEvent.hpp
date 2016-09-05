@@ -19,6 +19,10 @@ namespace timelymatter {
         float vector_force_edge = -1.f;
     };
     
+    struct GuiUpdateArgs {
+        vector<ofParameterGroup> params;
+    };
+    
     // Singleton class
     // Proposed implementation adapted from here:
     // http://stackoverflow.com/questions/1008019/c-singleton-design-pattern#1008289
@@ -39,7 +43,7 @@ namespace timelymatter {
         
         // events
         ofEvent<AppMode> mode_selected;
-        ofEvent<ofParameterGroup> update_gui;
+        ofEvent<GuiUpdateArgs> update_gui;
         ofEvent<CalibrateProjectionArgs> projection_calibrated;
         ofEvent<CalibrateDepthArgs> depth_calibrated;
     };

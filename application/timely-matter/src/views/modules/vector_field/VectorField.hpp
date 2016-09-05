@@ -37,7 +37,6 @@ namespace timelymatter
         void draw();
         const ofVec3f& getForceForPosition(const ofVec3f& position) const;
         const ofVec3f getMeterPointForPosition(const ofVec3f& position) const;
-        const ofParameterGroup& getParams() const { return m_params; };
         ofParameterGroup& getParams() { return m_params; };
         const unsigned int getAverageDatum() const { return m_average_datum; };
         const float getMaxEdgeForce() const { return m_edge_force; };

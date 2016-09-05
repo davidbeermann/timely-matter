@@ -22,7 +22,6 @@ namespace timelymatter
         ofImage m_crop_buffer;
         ofxCvGrayscaleImage m_grayscale;
         Mat m_homographic_matrix;
-        ofParameterGroup m_params;
         ofParameter<float> m_param_norm_min;
         ofParameter<float> m_param_norm_max;
         ofParameter<unsigned int> m_param_clip_near;

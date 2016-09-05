@@ -75,8 +75,13 @@ void GuiView::keyPressed(ofKeyEventArgs& args) {
     }
 }
 
-void GuiView::onGuiUpdate(ofParameterGroup& params) {
+void GuiView::onGuiUpdate(GuiUpdateArgs& args) {
     m_panel.clear();
-    m_panel.add(params);
+    
+    if (args.params.size() > 0) {
+        for (int i = 0; i < args.params.size(); ++i) {
+            m_panel.add(args.params[i]);
+        }
+    }
 }
 

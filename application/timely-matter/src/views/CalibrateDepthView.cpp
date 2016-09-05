@@ -45,15 +45,15 @@ void CalibrateDepthView::m_onSetup() {
     m_vector_field.setup(m_projector_model.getWidth(), m_projector_model.getHeight(), m_kinect_model.getDepthBufferWidth(), m_kinect_model.getDepthBufferHeight(), 32);
     
     // setup gui parameters
-    m_params.setName("Calibrate Depth");
+    GuiUpdateArgs args;
     // kinect depth params
     ofParameterGroup depth_params;
-    m_params.add(setupDepthClippingParameters(depth_params, m_param_clip_near, m_param_clip_far));
+    args.params.push_back(setupDepthClippingParameters(depth_params, m_param_clip_near, m_param_clip_far));
     // vector field params
-    m_params.add(m_vector_field.getParams());
+    args.params.push_back(m_vector_field.getParams());
     
     // send event to update GUI
-    ofNotifyEvent(m_view_event.update_gui, m_params, this);
+    ofNotifyEvent(m_view_event.update_gui, args, this);
 }
 
 
