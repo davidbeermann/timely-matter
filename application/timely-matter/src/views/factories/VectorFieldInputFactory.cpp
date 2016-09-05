@@ -5,18 +5,22 @@
 using namespace timelymatter;
 
 
-VectorFieldInput VectorFieldInputFactory::get(const AppMode mode) {
+VectorFieldInput& VectorFieldInputFactory::get(const AppMode mode) {
+    VectorFieldInput* input;
+    
     switch (mode) {
         case AppMode::NOISE:
-            return NoiseInput();
+            input = new NoiseInput();
             break;
         case AppMode::KINECT:
-            return KinectInput();
+            input = new KinectInput();
             break;
         default:
             ofLog() << "Invalid mode. Creating default input.";
-            return NoiseInput();
+            input = new NoiseInput();
             break;
     }
+    
+    return *input;
 }
 
