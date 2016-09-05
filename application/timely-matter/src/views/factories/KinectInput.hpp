@@ -13,8 +13,9 @@ namespace timelymatter {
         
         // private class attributes
         shared_ptr<ofxKinect> m_kinect_sptr;
-        cv::Mat m_homographic_matrix;
-        
+        ofImage m_depth_source_image;
+        ofImage m_depth_output_image;
+        cv::Mat m_homography_matrix;
         ofParameterGroup m_params;
         
     protected:
