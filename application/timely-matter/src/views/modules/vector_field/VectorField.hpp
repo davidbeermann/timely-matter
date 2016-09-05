@@ -22,10 +22,11 @@ namespace timelymatter
         unsigned int m_average_datum;
         vector<VectorFieldMark> m_marks;
         ofParameterGroup m_params;
-        ofParameter<float> m_max_edge_force;
-        ofParameter<float> m_max_field_force;
+        ofParameter<float> m_edge_force;
+        ofParameter<float> m_field_force;
+        ofParameter<float> m_attract_threshold;
         ofParameter<bool> m_show_marks;
-        ofParameter<bool> m_show_mark_values;
+        ofParameter<bool> m_show_values;
         ofParameter<bool> m_show_vectors;
     public:
         void setup(const unsigned int width, const unsigned int height, const unsigned int subdivision);
@@ -39,8 +40,8 @@ namespace timelymatter
         const ofParameterGroup& getParams() const { return m_params; };
         ofParameterGroup& getParams() { return m_params; };
         const unsigned int getAverageDatum() const { return m_average_datum; };
-        const float getMaxEdgeForce() const { return m_max_edge_force; };
-        const float getMaxFieldForce() const { return m_max_field_force; };
+        const float getMaxEdgeForce() const { return m_edge_force; };
+        const float getMaxFieldForce() const { return m_field_force; };
     };
 
 }

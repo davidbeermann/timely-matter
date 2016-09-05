@@ -11,6 +11,7 @@ VectorFieldModel::VectorFieldModel() {
     m_edge_force = 8.f;
     m_edge_force_min = 0.f;
     m_edge_force_max = 12.f;
+    m_attract_threshold = 127.f;
 }
 
 
@@ -20,7 +21,7 @@ VectorFieldModel& VectorFieldModel::get() {
 }
 
 
-void VectorFieldModel::setFieldForce(const unsigned int& value) {
+void VectorFieldModel::setFieldForce(const float& value) {
     if (value >= m_field_force_min && value <= m_field_force_max) {
         m_field_force = value;
     } else {
@@ -29,7 +30,7 @@ void VectorFieldModel::setFieldForce(const unsigned int& value) {
 }
 
 
-void VectorFieldModel::setEdgeForce(const unsigned int& value) {
+void VectorFieldModel::setEdgeForce(const float& value) {
     if (value >= m_edge_force_min && value <= m_edge_force_max) {
         m_edge_force = value;
     } else {

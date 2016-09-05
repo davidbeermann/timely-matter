@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "KinectModel.hpp"
+#include "VectorFieldModel.hpp"
 
 
 namespace timelymatter
@@ -49,6 +50,58 @@ namespace timelymatter
         group.add(max.set("Max", 255.f, 0.f, 255.f));
         
         // return group
+        return group;
+    }
+    
+    
+    inline ofParameterGroup& setupVectorFieldParameters
+    (
+        ofParameterGroup& group,
+        ofParameter<float>& edge_force,
+        ofParameter<float>& field_force,
+        ofParameter<float>& attract_threshold,
+        ofParameter<bool>& show_marks,
+        ofParameter<bool>& show_values,
+        ofParameter<bool>& show_vectors
+    ) {
+        // get model reference
+        VectorFieldModel& model = VectorFieldModel::get();
+        
+        // set name
+        group.setName("Vector Field");
+        edge_force.setName("edge force");
+        field_force.setName("field force");
+        attract_threshold.setName("attract threshold");
+        show_marks.setName("show marks");
+        show_values.setName("show values");
+        show_vectors.setName("show vectors");
+        
+        // set values
+        edge_force.set(model.getEdgeForce());
+        edge_force.setMin(model.getEdgeForceMin());
+        edge_force.setMax(model.getEdgeForceMax());
+        
+        field_force.set(model.getFieldForce());
+        field_force.setMin(model.getFieldForceMin());
+        field_force.setMax(model.getFieldForceMax());
+        
+        attract_threshold.set(model.getAttractThreshold());
+        attract_threshold.setMin(0.f);
+        attract_threshold.setMax(255.f);
+        
+        show_marks.set(false);
+        show_values.set(false);
+        show_vectors.set(false);
+        
+        // add parameters to group
+        group.add(edge_force);
+        group.add(field_force);
+        group.add(attract_threshold);
+        group.add(show_marks);
+        group.add(show_values);
+        group.add(show_vectors);
+        
+        // return
         return group;
     }
 }

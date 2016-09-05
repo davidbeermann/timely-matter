@@ -1,5 +1,6 @@
 #include "VectorField.hpp"
 #include "VectorFieldDirections.hpp"
+#include "ParameterUtils.hpp"
 
 using namespace timelymatter;
 
@@ -33,16 +34,7 @@ void VectorField::setup(const unsigned int fieldWidth, const unsigned int fieldH
     
     // setup gui parameters
     // do this now, in order to set the max edge force for fixed marks
-    m_params.setName("Vector Field");
-    m_params.add(m_max_edge_force.set("max edge force", 8.f, 1.f, 12.f));
-    m_params.add(m_max_field_force.set("max field force", 8.f, 1.f, 12.f));
-    m_params.add(m_show_marks.set("meter points", false));
-    m_params.add(m_show_mark_values.set("meter values", false));
-    m_params.add(m_show_vectors.set("vectors", false));
-    
-    // setup listeners for changes in field strength
-    //    m_max_edge_force.addListener(this, &VectorField::onMaxEdgeForceChanged);
-    //    m_max_field_force.addListener(this, &VectorField::onMaxFieldForceChanged);
+    setupVectorFieldParameters(m_params, m_edge_force, m_field_force, m_attract_threshold, m_show_marks, m_show_values, m_show_vectors);
     
     // calculate field increments
     m_field_inc_x = (float) fieldWidth / (float) subdivisionX;
@@ -92,13 +84,13 @@ void VectorField::update(const ofPixels &pixels) {
     
     //TODO refactor to one loop!
     for (it = m_marks.begin(); it != m_marks.end(); ++it) {
-        it->update(m_max_field_force, m_max_edge_force);
+        it->update(m_field_force, m_edge_force, m_attract_threshold);
     }
 }
 
 
 void VectorField::draw() {
-    if (m_show_marks || m_show_mark_values || m_show_vectors) {
+    if (m_show_marks || m_show_values || m_show_vectors) {
         ofPushStyle();
         ofSetLineWidth(0.5f);
         ofNoFill();
@@ -114,7 +106,7 @@ void VectorField::draw() {
                 ofDrawCircle(0, 0, 2);
             }
             
-            if (m_show_mark_values) {
+            if (m_show_values) {
                 ofSetColor(0, 0, 127);
                 ofDrawBitmapString(to_string(mark->getDatum()   ), 0, m_field_inc_y);
             }
@@ -235,15 +227,5 @@ void VectorField::m_setupMarks() {
         
         //        ofLog() << "mark " << mark->getID() << " has " << mark->getNeighborCount() << " neighbor(s) with neighbor index: " << mark->getNeighborIndex();
     }
-}
-
-
-void VectorField::onMaxEdgeForceChanged(float& value) {
-    ofLog() << value;
-}
-
-
-void VectorField::onMaxFieldForceChanged(float& value) {
-    ofLog() << value;
 }
 

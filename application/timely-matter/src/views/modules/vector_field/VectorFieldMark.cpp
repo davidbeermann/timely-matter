@@ -37,7 +37,7 @@ void VectorFieldMark::setDatum(int value) {
     mDatum = value;
 }
 
-void VectorFieldMark::update(const float maxFieldForce, const float maxEdgeForce) {
+void VectorFieldMark::update(const float& maxFieldForce, const float& maxEdgeForce, const float& attractThreshold) {
     int diffX = 0;
     int diffY = 0;
     int nw, n, ne, e, se, s, sw, w;
@@ -137,7 +137,23 @@ void VectorFieldMark::update(const float maxFieldForce, const float maxEdgeForce
     
     // apply max strength to force vector
     mForce.normalize();
-    mForce *= ofMap((float) mDatum, 0.f, 255.f, 0.f, maxFieldForce);
+    
+    // decide whether to attract or repell
+    if (attractThreshold == 0.f) {
+        // all gray-to-white areas repell, only black areas do nothing
+        mForce *= ofMap((float) mDatum, 0.f, 255.f, 0.f, maxFieldForce);
+    } else if (attractThreshold == 255.f) {
+        // all gray-to-black areas attract, only white areas do nothing
+        mForce *= ofMap((float) mDatum, 0.f, 255.f, -maxFieldForce, 0.f);
+    } else {
+        if ((float) mDatum <= attractThreshold) {
+            // attract range
+            mForce *= ofMap((float) mDatum, 0.f, attractThreshold, -maxFieldForce, 0.f);
+        } else {
+            // repell range
+            mForce *= ofMap((float) mDatum, attractThreshold, 255.f, 0.f, maxFieldForce);
+        }
+    }
     
     // apply fixed force
     if (mForce.lengthSquared() == 0 && isFixed()) {

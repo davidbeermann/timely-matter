@@ -39,7 +39,7 @@ namespace timelymatter
         void addNeighbor(Directions direction, VectorFieldMark* mark);
         void setDatum(int value);
         void reset();
-        void update(const float maxFieldForce, const float maxEdgeForce);
+        void update(const float& maxFieldForce, const float& maxEdgeForce, const float& attractThreshold);
         void drawDebug();
         const unsigned int& getID();
         const ofVec3f& getPosition() const;

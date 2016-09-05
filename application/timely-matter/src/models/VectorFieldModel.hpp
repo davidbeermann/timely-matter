@@ -18,6 +18,7 @@ namespace timelymatter {
         float m_edge_force;
         float m_edge_force_min;
         float m_edge_force_max;
+        float m_attract_threshold;
         
     public:
         // static method to retrieve singleton instance
@@ -28,26 +29,30 @@ namespace timelymatter {
         void operator=(VectorFieldModel const&) = delete;
         
         // public interface methods
-        void setFieldForce(const unsigned int& value);
-        const unsigned int getFieldForce() const {
+        void setFieldForce(const float& value);
+        const float getFieldForce() const {
             return m_field_force;
         }
-        const unsigned int getFieldForceMin() const {
+        const float getFieldForceMin() const {
             return m_field_force_min;
         }
-        const unsigned int getFieldForceMax() const {
+        const float getFieldForceMax() const {
             return m_field_force_max;
         }
         
-        void setEdgeForce(const unsigned int& value);
-        const unsigned int getEdgeForce() const {
+        void setEdgeForce(const float& value);
+        const float getEdgeForce() const {
             return m_edge_force;
         }
-        const unsigned int getEdgeForceMin() const {
+        const float getEdgeForceMin() const {
             return m_edge_force_min;
         }
-        const unsigned int getEdgeForceMax() const {
+        const float getEdgeForceMax() const {
             return m_edge_force_max;
+        }
+        
+        const float getAttractThreshold() const {
+            return m_attract_threshold;
         }
     };
     
