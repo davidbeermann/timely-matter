@@ -30,10 +30,11 @@ protected:
 public:
     // Setup model references for all views derived from this class.
     BaseView() :
-    m_app_model(AppModel::get()),
-    m_kinect_model(KinectModel::get()),
-    m_projector_model(ProjectorModel::get()),
-    m_view_event(ViewEvent::get()) {
+        m_app_model(AppModel::get()),
+        m_kinect_model(KinectModel::get()),
+        m_projector_model(ProjectorModel::get()),
+        m_view_event(ViewEvent::get())
+    {
         ofAddListener(ofEvents().windowResized, this, &BaseView::onWindowResized);
     };
     
