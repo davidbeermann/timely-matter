@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 #include "AppModel.hpp"
+#include "ProjectorModel.hpp"
+#include "KinectModel.hpp"
 #include "AppEvent.hpp"
 #include "ViewEvent.hpp"
 #include "UpdateStateCommand.hpp"
@@ -24,6 +26,8 @@ using namespace timelymatter;
 class ofApp : public ofBaseApp {
     // model references
     AppModel& m_app_model;
+    ProjectorModel& m_projector_model;
+    KinectModel& m_kinect_model;
     // event references
     AppEvent& m_app_event;
     ViewEvent& m_view_event;

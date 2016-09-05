@@ -26,6 +26,7 @@ namespace timelymatter {
         const unsigned int getWidth() const;
         const unsigned int getHeight() const;
         const ofRectangle getSize() const;
+        void setSize(const unsigned int& width, const unsigned int& height);
     };
     
 }

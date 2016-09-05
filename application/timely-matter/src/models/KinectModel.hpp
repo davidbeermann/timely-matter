@@ -23,6 +23,8 @@ namespace timelymatter {
         unsigned int m_depth_clip_far;
         unsigned int m_depth_clip_far_min;
         unsigned int m_depth_clip_far_max;
+        unsigned int m_depth_buffer_width;
+        unsigned int m_depth_buffer_height;
         vector<ofVec2f> m_selection_points;
         vector<Point2f> m_cv_selection_points;
         vector<Point2f> m_cv_output_points;
@@ -60,6 +62,7 @@ namespace timelymatter {
             return m_depth_clip_far_max;
         }
         
+        void setDepthBufferSize(const unsigned int& width, const unsigned int& height);
         const unsigned int getDepthBufferWidth() const;
         const unsigned int getDepthBufferHeight() const;
         

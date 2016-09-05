@@ -32,3 +32,8 @@ const ofRectangle ProjectorModel::getSize() const {
     return m_size;
 }
 
+
+void ProjectorModel::setSize(const unsigned int& width, const unsigned int& height) {
+    m_size.set(0, 0, width, height);
+}
+

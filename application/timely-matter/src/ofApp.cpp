@@ -3,10 +3,14 @@
 //#include "ViewEvents.hpp"
 
 //using namespace timelymatter;
+#define PROJECTOR_WIDTH 1024
+#define PROJECTOR_HEIGHT 768
 
 
 ofApp::ofApp() :
-    m_app_model(timelymatter::AppModel::get()),
+    m_app_model(AppModel::get()),
+    m_projector_model(ProjectorModel::get()),
+    m_kinect_model(KinectModel::get()),
     m_app_event(AppEvent::get()),
     m_view_event(ViewEvent::get())
 {}
@@ -15,6 +19,10 @@ ofApp::ofApp() :
 void ofApp::setup() {
     ofSetFrameRate(60);
     ofSetBackgroundColor(33);
+    
+    // configure models
+    m_projector_model.setSize(PROJECTOR_WIDTH, PROJECTOR_HEIGHT);
+    m_kinect_model.setDepthBufferSize(PROJECTOR_WIDTH * 0.5f, PROJECTOR_HEIGHT * 0.5f);
     
     // setup command mapping
     // app events
