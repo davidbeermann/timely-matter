@@ -19,7 +19,7 @@ void NoiseInput::m_onSetup() {
     m_image.allocate(m_fbo.getWidth(), m_fbo.getHeight(), OF_IMAGE_COLOR_ALPHA);
     
     // setup GUI settings
-    m_params.setName("Perlin Noise");
+    m_params.setName("Noise Input");
     m_params.add(m_offset_x.set("offset x", 5.43, 0.0, 15.0));
     m_params.add(m_offset_y.set("offset y", 2.34, 0.0, 15.0));
     m_params.add(m_scale.set("scale", 0.0055, 0.001, 0.01));
@@ -49,8 +49,15 @@ void NoiseInput::m_onUpdate() {
 
 void NoiseInput::m_onDraw() {
     if(m_draw_output) {
+        m_onDraw(ofRectangle(0, 0, m_fbo.getWidth(), m_fbo.getHeight()));
+    }
+}
+
+
+void NoiseInput::m_onDraw(const ofRectangle& size) {
+    if(m_draw_output) {
         // draw FBO to stage
-        m_fbo.draw(0, 0);
+        m_fbo.draw(size.getX(), size.getY(), size.getWidth(), size.getHeight());
     }
 }
 

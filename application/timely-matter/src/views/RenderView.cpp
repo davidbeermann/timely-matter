@@ -24,8 +24,6 @@ void RenderView::m_onSetup() {
     // setup particle system
     m_particle_system.setup(100, ofVec3f(m_projector_model.getWidth(), m_projector_model.getHeight(), 0.f));
     
-    m_image.allocate(m_input.getWidth(), m_input.getHeight(), OF_IMAGE_COLOR);
-    
     // compile gui params
     GuiUpdateArgs args;
     args.params.push_back(m_input.getParams());
@@ -48,9 +46,6 @@ void RenderView::m_onUpdate() {
 
     // ...and update all particles within the system.
     m_particle_system.update();
-    
-    m_image.setFromPixels(m_input.getPixels());
-    m_image.update();
 }
 
 
@@ -63,9 +58,7 @@ void RenderView::m_onDraw() {
     ofDrawRectangle(m_projector_model.getSize());
     ofPopStyle();
     
-    m_image.draw(m_projector_model.getSize());
-    
-//    m_input.draw();
+    m_input.draw(m_projector_model.getSize());
     m_vector_field.draw();
     m_particle_system.draw(m_vector_field);
     

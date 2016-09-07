@@ -23,6 +23,9 @@ void KinectInput::m_onSetup() {
     m_depth_output_image.allocate(m_kinect_model.getDepthBufferWidth(), m_kinect_model.getDepthBufferHeight(), OF_IMAGE_GRAYSCALE);
     
     m_homography_matrix = findHomography(Mat(m_kinect_model.getCvSelectionPoints()), Mat(m_kinect_model.getCvOutputPoints()));
+    
+    m_params.setName("Kinect Input");
+    m_params.add(m_show_output.set("show output", false));
 }
 
 
@@ -43,7 +46,17 @@ void KinectInput::m_onUpdate() {
 
 
 void KinectInput::m_onDraw() {
-    
+    if(m_show_output) {
+        m_onDraw(ofRectangle(0, 0, m_depth_output_image.getWidth(), m_depth_output_image.getHeight()));
+    }
+}
+
+
+void KinectInput::m_onDraw(const ofRectangle& size) {
+    if(m_show_output) {
+        // draw image to stage
+        m_depth_output_image.draw(size);
+    }
 }
 
 

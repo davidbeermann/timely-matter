@@ -16,7 +16,6 @@ namespace timelymatter
         VectorField m_vector_field;
         ParticleSystem m_particle_system;
         ofVec2f m_center_position;
-        ofImage m_image;
     protected:
         void m_onWindowResized(const int width, const int height);
         void m_onSetup();

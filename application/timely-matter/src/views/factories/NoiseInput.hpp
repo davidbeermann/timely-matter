@@ -27,6 +27,7 @@ namespace timelymatter {
         void m_onUpdate();
         void m_onDraw();
         
+        void m_onDraw(const ofRectangle& size);
         const ofPixels& m_onGetPixels();
         const unsigned int m_onGetWidth();
         const unsigned int m_onGetHeight();
