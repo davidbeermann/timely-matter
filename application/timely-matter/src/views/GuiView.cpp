@@ -1,5 +1,6 @@
 #include "GuiView.hpp"
 #include "BitmapStringUtils.hpp"
+#include "AppEvent.hpp"
 
 using namespace timelymatter;
 
@@ -70,8 +71,14 @@ GuiView::~GuiView() {
 
 
 void GuiView::keyPressed(ofKeyEventArgs& args) {
-    if (args.key == 'g') {
-        m_visible = !m_visible;
+    switch (args.key) {
+        case 'g':
+            m_visible = !m_visible;
+            break;
+        case 'r':
+            AppState state = AppState::SELECT_MODE;
+            ofNotifyEvent(AppEvent::get().update_state, state, this);
+            break;
     }
 }
 
