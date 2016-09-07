@@ -72,11 +72,18 @@ void VectorField::update(const ofPixels &pixels) {
             y -= 1;
         }
         // read the value of the red channel - since it is a gray scale image, all channels should have the same value.
-        int pixelValue = (int) pixels[(y * m_input_width + x) * pixels.getNumChannels()];
-        // update datum
-        it->setDatum(pixelValue);
-        
-        m_average_datum += pixelValue;
+//        ofLog() << "x:" << x << " - y:" << y << " - input_width:" << m_input_width << " - num_channels:" << pixels.getNumChannels() << " - index: " << ((y * m_input_width + x) * pixels.getNumChannels());
+        int index = (y * m_input_width + x) * pixels.getNumChannels();
+        if (index < pixels.size()) {
+            int pixelValue = (int) pixels[index];
+            // update datum
+            it->setDatum(pixelValue);
+            
+            m_average_datum += pixelValue;
+        } else {
+            //TODO fix invalid index access
+            ofLog() << "no value for index: " << index << " - pixels size: " << pixels.size();
+        }
     }
     
     // calculate avreage
