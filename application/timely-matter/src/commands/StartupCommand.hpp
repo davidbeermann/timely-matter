@@ -13,7 +13,7 @@ namespace timelymatter {
             ofLogNotice("StartupCommand") << "execute";
             
             // load model settings
-            m_kinect_model.loadSettings();
+            ofNotifyEvent(AppEvent::get().load_settings, this);
             
             // set initial state
             AppState state = AppState::SELECT_MODE;

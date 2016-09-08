@@ -9,6 +9,7 @@
 #include "StartupCommand.hpp"
 #include "ResetCommand.hpp"
 #include "SaveSettingsCommand.hpp"
+#include "LoadSettingsCommand.hpp"
 #include "UpdateStateCommand.hpp"
 #include "UpdateModeCommand.hpp"
 #include "UpdateProjectorCalibrationCommand.hpp"
@@ -32,6 +33,7 @@ class ofApp : public ofBaseApp {
     ResetCommand m_reset_cmd;
     UpdateStateCommand m_update_state_cmd;
     SaveSettingsCommand m_save_settings_cmd;
+    LoadSettingsCommand m_load_settings_cmd;
     UpdateModeCommand m_update_mode_cmd;
     UpdateProjectorCalibrationCommand m_update_projector_calibration_cmd;
     UpdateDepthCalibrationCommand m_update_depth_calibration_cmd;

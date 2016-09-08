@@ -28,6 +28,7 @@ void ofApp::setup() {
     ofAddListener(m_app_event.reset, &m_reset_cmd, &ResetCommand::execute);
     ofAddListener(m_app_event.update_state, &m_update_state_cmd, &UpdateStateCommand::execute);
     ofAddListener(m_app_event.save_settings, &m_save_settings_cmd, &SaveSettingsCommand::execute);
+    ofAddListener(m_app_event.load_settings, &m_load_settings_cmd, &LoadSettingsCommand::execute);
     // view events
     ofAddListener(m_view_event.mode_selected, &m_update_mode_cmd, &UpdateModeCommand::execute);
     ofAddListener(m_view_event.projection_calibrated, &m_update_projector_calibration_cmd, &UpdateProjectorCalibrationCommand::execute);

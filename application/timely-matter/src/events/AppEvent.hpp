@@ -30,6 +30,7 @@ namespace timelymatter {
         ofEvent<void> reset;
         ofEvent<AppState> update_state;
         ofEvent<void> save_settings;
+        ofEvent<void> load_settings;
     };
     
 }

@@ -86,6 +86,10 @@ void GuiView::keyPressed(ofKeyEventArgs& args) {
             ofNotifyEvent(AppEvent::get().save_settings, this);
             break;
         }
+        case 'l': {
+            ofNotifyEvent(AppEvent::get().load_settings, this);
+            break;
+        }
     }
 }
 
