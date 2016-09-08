@@ -20,7 +20,7 @@ namespace timelymatter {
         
     public:
         void setup(const unsigned int num_particles, const ofVec3f size);
-        void applyVectorField(const VectorField& vectorField);
+        void applyVectorField(VectorField& vectorField);
         void update();
         void draw(const VectorField& vectorField);
         

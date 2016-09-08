@@ -43,78 +43,78 @@ void VectorFieldMark::update(const float& maxFieldForce, const float& maxEdgeFor
     int nw, n, ne, e, se, s, sw, w;
     
     switch (mNeighborIndex) {
-        case DirectionIndex::TOP_LEFT:
-            e = mNeighbors.at(Directions::EAST)->getDatum();
-            se = mNeighbors.at(Directions::SOUTH_EAST)->getDatum();
-            s = mNeighbors.at(Directions::SOUTH)->getDatum();
-            
-            diffX = e + se;
-            diffY = se + s;
-            break;
-        case DirectionIndex::TOP_RIGHT:
-            s = mNeighbors.at(Directions::SOUTH)->getDatum();
-            sw = mNeighbors.at(Directions::SOUTH_WEST)->getDatum();
-            w = mNeighbors.at(Directions::WEST)->getDatum();
-            
-            diffX = -(sw + w);
-            diffY = s + sw;
-            break;
-        case DirectionIndex::BOTTOM_RIGHT:
-            w = mNeighbors.at(Directions::WEST)->getDatum();
-            nw = mNeighbors.at(Directions::NORTH_WEST)->getDatum();
-            n = mNeighbors.at(Directions::NORTH)->getDatum();
-            
-            diffX = -(w + nw);
-            diffY = -(nw + n);
-            break;
-        case DirectionIndex::BOTTOM_LEFT:
-            n = mNeighbors.at(Directions::NORTH)->getDatum();
-            ne = mNeighbors.at(Directions::NORTH_EAST)->getDatum();
-            e = mNeighbors.at(Directions::EAST)->getDatum();
-            
-            diffX = ne + e;
-            diffY = -(n + ne);
-            break;
-        case DirectionIndex::TOP_ROW:
-            e = mNeighbors.at(Directions::EAST)->getDatum();
-            se = mNeighbors.at(Directions::SOUTH_EAST)->getDatum();
-            s = mNeighbors.at(Directions::SOUTH)->getDatum();
-            sw = mNeighbors.at(Directions::SOUTH_WEST)->getDatum();
-            w = mNeighbors.at(Directions::WEST)->getDatum();
-            
-            diffX = (s + sw + w) - (e + se + s);
-            diffY = (se + s + sw);
-            break;
-        case DirectionIndex::BOTTOM_ROW:
-            w = mNeighbors.at(Directions::WEST)->getDatum();
-            nw = mNeighbors.at(Directions::NORTH_WEST)->getDatum();
-            n = mNeighbors.at(Directions::NORTH)->getDatum();
-            ne = mNeighbors.at(Directions::NORTH_EAST)->getDatum();
-            e = mNeighbors.at(Directions::EAST)->getDatum();
-            
-            diffX = (n + ne + e) - (w + nw + n);
-            diffY = -(nw + n + ne);
-            break;
-        case DirectionIndex::LEFT_COLUMN:
-            n = mNeighbors.at(Directions::NORTH)->getDatum();
-            ne = mNeighbors.at(Directions::NORTH_EAST)->getDatum();
-            e = mNeighbors.at(Directions::EAST)->getDatum();
-            se = mNeighbors.at(Directions::SOUTH_EAST)->getDatum();
-            s = mNeighbors.at(Directions::SOUTH)->getDatum();
-            
-            diffX = (ne + e + se);
-            diffY = (e + se + s) - (n + ne + e);
-            break;
-        case DirectionIndex::RIGHT_COLUMN:
-            s = mNeighbors.at(Directions::SOUTH)->getDatum();
-            sw = mNeighbors.at(Directions::SOUTH_WEST)->getDatum();
-            w = mNeighbors.at(Directions::WEST)->getDatum();
-            nw = mNeighbors.at(Directions::NORTH_WEST)->getDatum();
-            n = mNeighbors.at(Directions::NORTH)->getDatum();
-            
-            diffX = -(sw + w + nw);
-            diffY = (s + sw + w) - (w + nw + n);
-            break;
+//        case DirectionIndex::TOP_LEFT:
+//            e = mNeighbors.at(Directions::EAST)->getDatum();
+//            se = mNeighbors.at(Directions::SOUTH_EAST)->getDatum();
+//            s = mNeighbors.at(Directions::SOUTH)->getDatum();
+//            
+//            diffX = e + se;
+//            diffY = se + s;
+//            break;
+//        case DirectionIndex::TOP_RIGHT:
+//            s = mNeighbors.at(Directions::SOUTH)->getDatum();
+//            sw = mNeighbors.at(Directions::SOUTH_WEST)->getDatum();
+//            w = mNeighbors.at(Directions::WEST)->getDatum();
+//            
+//            diffX = -(sw + w);
+//            diffY = s + sw;
+//            break;
+//        case DirectionIndex::BOTTOM_RIGHT:
+//            w = mNeighbors.at(Directions::WEST)->getDatum();
+//            nw = mNeighbors.at(Directions::NORTH_WEST)->getDatum();
+//            n = mNeighbors.at(Directions::NORTH)->getDatum();
+//            
+//            diffX = -(w + nw);
+//            diffY = -(nw + n);
+//            break;
+//        case DirectionIndex::BOTTOM_LEFT:
+//            n = mNeighbors.at(Directions::NORTH)->getDatum();
+//            ne = mNeighbors.at(Directions::NORTH_EAST)->getDatum();
+//            e = mNeighbors.at(Directions::EAST)->getDatum();
+//            
+//            diffX = ne + e;
+//            diffY = -(n + ne);
+//            break;
+//        case DirectionIndex::TOP_ROW:
+//            e = mNeighbors.at(Directions::EAST)->getDatum();
+//            se = mNeighbors.at(Directions::SOUTH_EAST)->getDatum();
+//            s = mNeighbors.at(Directions::SOUTH)->getDatum();
+//            sw = mNeighbors.at(Directions::SOUTH_WEST)->getDatum();
+//            w = mNeighbors.at(Directions::WEST)->getDatum();
+//            
+//            diffX = (s + sw + w) - (e + se + s);
+//            diffY = (se + s + sw);
+//            break;
+//        case DirectionIndex::BOTTOM_ROW:
+//            w = mNeighbors.at(Directions::WEST)->getDatum();
+//            nw = mNeighbors.at(Directions::NORTH_WEST)->getDatum();
+//            n = mNeighbors.at(Directions::NORTH)->getDatum();
+//            ne = mNeighbors.at(Directions::NORTH_EAST)->getDatum();
+//            e = mNeighbors.at(Directions::EAST)->getDatum();
+//            
+//            diffX = (n + ne + e) - (w + nw + n);
+//            diffY = -(nw + n + ne);
+//            break;
+//        case DirectionIndex::LEFT_COLUMN:
+//            n = mNeighbors.at(Directions::NORTH)->getDatum();
+//            ne = mNeighbors.at(Directions::NORTH_EAST)->getDatum();
+//            e = mNeighbors.at(Directions::EAST)->getDatum();
+//            se = mNeighbors.at(Directions::SOUTH_EAST)->getDatum();
+//            s = mNeighbors.at(Directions::SOUTH)->getDatum();
+//            
+//            diffX = (ne + e + se);
+//            diffY = (e + se + s) - (n + ne + e);
+//            break;
+//        case DirectionIndex::RIGHT_COLUMN:
+//            s = mNeighbors.at(Directions::SOUTH)->getDatum();
+//            sw = mNeighbors.at(Directions::SOUTH_WEST)->getDatum();
+//            w = mNeighbors.at(Directions::WEST)->getDatum();
+//            nw = mNeighbors.at(Directions::NORTH_WEST)->getDatum();
+//            n = mNeighbors.at(Directions::NORTH)->getDatum();
+//            
+//            diffX = -(sw + w + nw);
+//            diffY = (s + sw + w) - (w + nw + n);
+//            break;
         case DirectionIndex::INNER:
             // get measurement readings of all neighboring marks
             nw = mNeighbors.at(Directions::NORTH_WEST)->getDatum();

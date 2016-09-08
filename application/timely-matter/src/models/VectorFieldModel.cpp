@@ -8,9 +8,9 @@ VectorFieldModel::VectorFieldModel() {
     m_field_force = 8.f;
     m_field_force_min = 0.f;
     m_field_force_max = 12.f;
-    m_edge_force = 8.f;
+    m_edge_force = 1.5f;
     m_edge_force_min = 0.f;
-    m_edge_force_max = 12.f;
+    m_edge_force_max = 4.f;
     m_attract_threshold = 127.f;
 }
 

@@ -58,8 +58,3 @@ void Particle::draw(const ofVboMesh& mesh) {
     mesh.draw();
     ofPopMatrix();
 }
-
-
-const ofVec3f& Particle::getPosition() {
-    return m_position;
-}

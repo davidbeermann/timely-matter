@@ -37,7 +37,7 @@ void ParticleSystem::setup(const unsigned int num_particles, const ofVec3f size)
 }
 
 
-void ParticleSystem::applyVectorField(const VectorField& vectorField) {
+void ParticleSystem::applyVectorField(VectorField& vectorField) {
     if (m_show_particles) {
         for (PIt p = m_particles.begin(); p != m_particles.end(); ++p) {
             ofVec3f force = vectorField.getForceForPosition(p->getPosition());

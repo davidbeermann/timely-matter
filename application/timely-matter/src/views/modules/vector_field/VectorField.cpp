@@ -43,6 +43,11 @@ void VectorField::setup(const unsigned int fieldWidth, const unsigned int fieldH
     m_input_inc_x = (float) inputWidth / (float) subdivisionX;
     m_input_inc_y = (float) inputHeight / (float) subdivisionY;
     
+    // calculate maximum field distance for edge force intensity
+    float half_inc_x = m_field_inc_x / 2;
+    float half_inc_y = m_field_inc_y / 2;
+    m_max_field_distance = sqrt(half_inc_x * half_inc_x + half_inc_y * half_inc_y);
+    
     // add one to each subdivision dimension to include marks at the right and bottom border.
     m_marks_per_row = subdivisionX + 1;
     m_marks_per_column = subdivisionY + 1;
@@ -82,7 +87,7 @@ void VectorField::update(const ofPixels &pixels) {
             m_average_datum += pixelValue;
         } else {
             //TODO fix invalid index access
-            ofLog() << "no value for index: " << index << " - pixels size: " << pixels.size();
+//            ofLog() << "no value for index: " << index << " - pixels size: " << pixels.size();
         }
     }
     
@@ -132,11 +137,30 @@ void VectorField::draw() {
 }
 
 
-const ofVec3f& VectorField::getForceForPosition(const ofVec3f& position) const {
+const ofVec3f& VectorField::getForceForPosition(const ofVec3f& position) {
     float relX = round(position.x / m_field_inc_x);
     float relY = round(position.y / m_field_inc_y);
     
-    return m_marks[relY * m_marks_per_row + relX].getForce();
+    unsigned int index = relY * m_marks_per_row + relX;
+    VectorFieldMark mark = m_marks[index];
+    
+    if (mark.isFixed()) {
+        // calculate distance between mark and particle position
+        float dist = abs(position.distance(mark.getPosition()));
+        // map the distance to the edge force intensity – the closer the particle, the stronger the force
+        // this leads to a more organic looking behavior atthe bounds of the vector field
+        float scale = ofMap(dist, 0.f, m_max_field_distance, m_edge_force, 0.f);
+        
+        // update edge vector
+        m_edge_vector.set(mark.getForce());
+        m_edge_vector.normalize();
+        m_edge_vector *= scale;
+        
+        // return reference to updated edge vector
+        return m_edge_vector;
+    } else {
+        return mark.getForce();
+    }
 }
 
 
@@ -178,50 +202,51 @@ void VectorField::m_setupMarks() {
         const unsigned int x = mark->getGridPosition().x;
         const unsigned int y = mark->getGridPosition().y;
         
-        if (mark->isFixed()) {
-            if (x == 0 && y == 0) { // top left corner
-                mark->addNeighbor(Directions::EAST, &m_marks[(y) * m_marks_per_row + (x+1)]);
-                mark->addNeighbor(Directions::SOUTH_EAST, &m_marks[(y+1) * m_marks_per_row + (x+1)]);
-                mark->addNeighbor(Directions::SOUTH, &m_marks[(y+1) * m_marks_per_row + (x)]);
-            } else if (x == m_subdivision_x && y == 0) { // top right corner
-                mark->addNeighbor(Directions::SOUTH, &m_marks[(y+1) * m_marks_per_row + (x)]);
-                mark->addNeighbor(Directions::SOUTH_WEST, &m_marks[(y+1) * m_marks_per_row + (x-1)]);
-                mark->addNeighbor(Directions::WEST, &m_marks[(y) * m_marks_per_row + (x-1)]);
-            } else if (x == m_subdivision_x && y == m_subdivision_y) { // bottom right corner
-                mark->addNeighbor(Directions::WEST, &m_marks[(y) * m_marks_per_row + (x-1)]);
-                mark->addNeighbor(Directions::NORTH_WEST, &m_marks[(y-1) * m_marks_per_row + (x-1)]);
-                mark->addNeighbor(Directions::NORTH, &m_marks[(y-1) * m_marks_per_row + (x)]);
-            } else if (x == 0 && y == m_subdivision_y) { // bottom left corner
-                mark->addNeighbor(Directions::NORTH, &m_marks[(y-1) * m_marks_per_row + (x)]);
-                mark->addNeighbor(Directions::NORTH_EAST, &m_marks[(y-1) * m_marks_per_row + (x+1)]);
-                mark->addNeighbor(Directions::EAST, &m_marks[(y) * m_marks_per_row + (x+1)]);
-            } else if (x == 0) { // outer left marks
-                mark->addNeighbor(Directions::NORTH, &m_marks[(y-1) * m_marks_per_row + (x)]);
-                mark->addNeighbor(Directions::NORTH_EAST, &m_marks[(y-1) * m_marks_per_row + (x+1)]);
-                mark->addNeighbor(Directions::EAST, &m_marks[(y) * m_marks_per_row + (x+1)]);
-                mark->addNeighbor(Directions::SOUTH_EAST, &m_marks[(y+1) * m_marks_per_row + (x+1)]);
-                mark->addNeighbor(Directions::SOUTH, &m_marks[(y+1) * m_marks_per_row + (x)]);
-            } else if (x == m_subdivision_x) { // outer right marks
-                mark->addNeighbor(Directions::SOUTH, &m_marks[(y+1) * m_marks_per_row + (x)]);
-                mark->addNeighbor(Directions::SOUTH_WEST, &m_marks[(y+1) * m_marks_per_row + (x-1)]);
-                mark->addNeighbor(Directions::WEST, &m_marks[(y) * m_marks_per_row + (x-1)]);
-                mark->addNeighbor(Directions::NORTH_WEST, &m_marks[(y-1) * m_marks_per_row + (x-1)]);
-                mark->addNeighbor(Directions::NORTH, &m_marks[(y-1) * m_marks_per_row + (x)]);
-            } else if (y == 0) { // outer top marks
-                mark->addNeighbor(Directions::EAST, &m_marks[(y) * m_marks_per_row + (x+1)]);
-                mark->addNeighbor(Directions::SOUTH_EAST, &m_marks[(y+1) * m_marks_per_row + (x+1)]);
-                mark->addNeighbor(Directions::SOUTH, &m_marks[(y+1) * m_marks_per_row + (x)]);
-                mark->addNeighbor(Directions::SOUTH_WEST, &m_marks[(y+1) * m_marks_per_row + (x-1)]);
-                mark->addNeighbor(Directions::WEST, &m_marks[(y) * m_marks_per_row + (x-1)]);
-            } else if (y == m_subdivision_y) {  // outer bottom marks
-                mark->addNeighbor(Directions::WEST, &m_marks[(y) * m_marks_per_row + (x-1)]);
-                mark->addNeighbor(Directions::NORTH_WEST, &m_marks[(y-1) * m_marks_per_row + (x-1)]);
-                mark->addNeighbor(Directions::NORTH, &m_marks[(y-1) * m_marks_per_row + (x)]);
-                mark->addNeighbor(Directions::NORTH_EAST, &m_marks[(y-1) * m_marks_per_row + (x+1)]);
-                mark->addNeighbor(Directions::EAST, &m_marks[(y) * m_marks_per_row + (x+1)]);
-            } else { // no more case left
-            }
-        } else {
+//        if (mark->isFixed()) {
+//            if (x == 0 && y == 0) { // top left corner
+//                mark->addNeighbor(Directions::EAST, &m_marks[(y) * m_marks_per_row + (x+1)]);
+//                mark->addNeighbor(Directions::SOUTH_EAST, &m_marks[(y+1) * m_marks_per_row + (x+1)]);
+//                mark->addNeighbor(Directions::SOUTH, &m_marks[(y+1) * m_marks_per_row + (x)]);
+//            } else if (x == m_subdivision_x && y == 0) { // top right corner
+//                mark->addNeighbor(Directions::SOUTH, &m_marks[(y+1) * m_marks_per_row + (x)]);
+//                mark->addNeighbor(Directions::SOUTH_WEST, &m_marks[(y+1) * m_marks_per_row + (x-1)]);
+//                mark->addNeighbor(Directions::WEST, &m_marks[(y) * m_marks_per_row + (x-1)]);
+//            } else if (x == m_subdivision_x && y == m_subdivision_y) { // bottom right corner
+//                mark->addNeighbor(Directions::WEST, &m_marks[(y) * m_marks_per_row + (x-1)]);
+//                mark->addNeighbor(Directions::NORTH_WEST, &m_marks[(y-1) * m_marks_per_row + (x-1)]);
+//                mark->addNeighbor(Directions::NORTH, &m_marks[(y-1) * m_marks_per_row + (x)]);
+//            } else if (x == 0 && y == m_subdivision_y) { // bottom left corner
+//                mark->addNeighbor(Directions::NORTH, &m_marks[(y-1) * m_marks_per_row + (x)]);
+//                mark->addNeighbor(Directions::NORTH_EAST, &m_marks[(y-1) * m_marks_per_row + (x+1)]);
+//                mark->addNeighbor(Directions::EAST, &m_marks[(y) * m_marks_per_row + (x+1)]);
+//            } else if (x == 0) { // outer left marks
+//                mark->addNeighbor(Directions::NORTH, &m_marks[(y-1) * m_marks_per_row + (x)]);
+//                mark->addNeighbor(Directions::NORTH_EAST, &m_marks[(y-1) * m_marks_per_row + (x+1)]);
+//                mark->addNeighbor(Directions::EAST, &m_marks[(y) * m_marks_per_row + (x+1)]);
+//                mark->addNeighbor(Directions::SOUTH_EAST, &m_marks[(y+1) * m_marks_per_row + (x+1)]);
+//                mark->addNeighbor(Directions::SOUTH, &m_marks[(y+1) * m_marks_per_row + (x)]);
+//            } else if (x == m_subdivision_x) { // outer right marks
+//                mark->addNeighbor(Directions::SOUTH, &m_marks[(y+1) * m_marks_per_row + (x)]);
+//                mark->addNeighbor(Directions::SOUTH_WEST, &m_marks[(y+1) * m_marks_per_row + (x-1)]);
+//                mark->addNeighbor(Directions::WEST, &m_marks[(y) * m_marks_per_row + (x-1)]);
+//                mark->addNeighbor(Directions::NORTH_WEST, &m_marks[(y-1) * m_marks_per_row + (x-1)]);
+//                mark->addNeighbor(Directions::NORTH, &m_marks[(y-1) * m_marks_per_row + (x)]);
+//            } else if (y == 0) { // outer top marks
+//                mark->addNeighbor(Directions::EAST, &m_marks[(y) * m_marks_per_row + (x+1)]);
+//                mark->addNeighbor(Directions::SOUTH_EAST, &m_marks[(y+1) * m_marks_per_row + (x+1)]);
+//                mark->addNeighbor(Directions::SOUTH, &m_marks[(y+1) * m_marks_per_row + (x)]);
+//                mark->addNeighbor(Directions::SOUTH_WEST, &m_marks[(y+1) * m_marks_per_row + (x-1)]);
+//                mark->addNeighbor(Directions::WEST, &m_marks[(y) * m_marks_per_row + (x-1)]);
+//            } else if (y == m_subdivision_y) {  // outer bottom marks
+//                mark->addNeighbor(Directions::WEST, &m_marks[(y) * m_marks_per_row + (x-1)]);
+//                mark->addNeighbor(Directions::NORTH_WEST, &m_marks[(y-1) * m_marks_per_row + (x-1)]);
+//                mark->addNeighbor(Directions::NORTH, &m_marks[(y-1) * m_marks_per_row + (x)]);
+//                mark->addNeighbor(Directions::NORTH_EAST, &m_marks[(y-1) * m_marks_per_row + (x+1)]);
+//                mark->addNeighbor(Directions::EAST, &m_marks[(y) * m_marks_per_row + (x+1)]);
+//            } else { // no more case left
+//            }
+//        } else {
+        if (!mark->isFixed()) {
             mark->addNeighbor(Directions::NORTH_WEST, &m_marks[(y-1) * m_marks_per_row + (x-1)]);
             mark->addNeighbor(Directions::NORTH, &m_marks[(y-1) * m_marks_per_row + (x)]);
             mark->addNeighbor(Directions::NORTH_EAST, &m_marks[(y-1) * m_marks_per_row + (x+1)]);

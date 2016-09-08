@@ -18,9 +18,11 @@ namespace timelymatter
         unsigned int m_subdivision_x, m_subdivision_y;
         float m_field_inc_x, m_field_inc_y;
         float m_input_inc_x, m_input_inc_y;
+        float m_max_field_distance;
         unsigned int m_marks_per_row, m_marks_per_column;
         unsigned int m_average_datum;
         vector<VectorFieldMark> m_marks;
+        ofVec3f m_edge_vector;
         ofParameterGroup m_params;
         ofParameter<float> m_edge_force;
         ofParameter<float> m_field_force;
@@ -35,7 +37,7 @@ namespace timelymatter
         void setup(const unsigned int fieldWidth, const unsigned int fieldHeight, const unsigned int inputWidth, const unsigned int inputHeight, const unsigned int subdivisionX, const unsigned int subdivisionY);
         void update(const ofPixels &pixels);
         void draw();
-        const ofVec3f& getForceForPosition(const ofVec3f& position) const;
+        const ofVec3f& getForceForPosition(const ofVec3f& position);
         const ofVec3f getMeterPointForPosition(const ofVec3f& position) const;
         ofParameterGroup& getParams() { return m_params; };
         const unsigned int getAverageDatum() const { return m_average_datum; };
