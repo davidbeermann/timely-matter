@@ -24,6 +24,7 @@ void ofApp::setup() {
     
     // setup command mapping
     // app events
+    ofAddListener(m_app_event.startup, &m_startup_cmd, &StartupCommand::execute);
     ofAddListener(m_app_event.update_state, &m_update_state_cmd, &UpdateStateCommand::execute);
     // view events
     ofAddListener(m_view_event.mode_selected, &m_update_mode_cmd, &UpdateModeCommand::execute);
@@ -34,9 +35,8 @@ void ofApp::setup() {
     m_view_manager.setup();
     m_gui_view.setup();
     
-    // set initial state
-    AppState state = AppState::SELECT_MODE;
-    ofNotifyEvent(m_app_event.update_state, state, this);
+    // startup application
+    ofNotifyEvent(m_app_event.startup, this);
 }
 
 

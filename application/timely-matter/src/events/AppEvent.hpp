@@ -26,6 +26,7 @@ namespace timelymatter {
         void operator=(AppEvent const&) = delete;
         
         // events
+        ofEvent<void> startup;
         ofEvent<AppState> update_state;
     };
     

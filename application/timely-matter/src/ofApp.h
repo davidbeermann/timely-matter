@@ -6,6 +6,7 @@
 #include "KinectModel.hpp"
 #include "AppEvent.hpp"
 #include "ViewEvent.hpp"
+#include "StartupCommand.hpp"
 #include "UpdateStateCommand.hpp"
 #include "UpdateModeCommand.hpp"
 #include "UpdateProjectorCalibrationCommand.hpp"
@@ -25,6 +26,7 @@ class ofApp : public ofBaseApp {
     AppEvent& m_app_event;
     ViewEvent& m_view_event;
     // commands
+    StartupCommand m_startup_cmd;
     UpdateStateCommand m_update_state_cmd;
     UpdateModeCommand m_update_mode_cmd;
     UpdateProjectorCalibrationCommand m_update_projector_calibration_cmd;
