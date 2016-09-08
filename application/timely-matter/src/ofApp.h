@@ -7,6 +7,7 @@
 #include "AppEvent.hpp"
 #include "ViewEvent.hpp"
 #include "StartupCommand.hpp"
+#include "SaveSettingsCommand.hpp"
 #include "UpdateStateCommand.hpp"
 #include "UpdateModeCommand.hpp"
 #include "UpdateProjectorCalibrationCommand.hpp"
@@ -28,6 +29,7 @@ class ofApp : public ofBaseApp {
     // commands
     StartupCommand m_startup_cmd;
     UpdateStateCommand m_update_state_cmd;
+    SaveSettingsCommand m_save_settings_cmd;
     UpdateModeCommand m_update_mode_cmd;
     UpdateProjectorCalibrationCommand m_update_projector_calibration_cmd;
     UpdateDepthCalibrationCommand m_update_depth_calibration_cmd;
