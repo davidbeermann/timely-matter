@@ -31,6 +31,9 @@ namespace timelymatter {
         void updateBounds(const ofRectangle& bounds);
         //    ofVec2f& getPosition() { return m_position; };
         const ofVec2f& getPosition() const { return m_position; };
+        void setPosition(const ofVec2f& position) {
+            m_position.set(position);
+        }
         
         // mouse event listener methods ÐÊmandatory when registering listeners!
         void mouseMoved(ofMouseEventArgs& args);

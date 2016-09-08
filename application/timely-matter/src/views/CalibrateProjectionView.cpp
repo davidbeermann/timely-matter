@@ -25,6 +25,10 @@ void CalibrateProjectionView::m_onSetup() {
     m_selection.setup(m_kinect_sptr->width, m_kinect_sptr->height);
     m_selection.enableMask(false);
     
+    if (m_kinect_model.settingsLoaded()) {
+        m_selection.setHandlePositions(m_kinect_model.getSelectionPoints());
+    }
+    
     // allocate image buffers
     m_infrared_buffer.allocate(m_kinect_sptr->width, m_kinect_sptr->height, OF_IMAGE_COLOR);
     m_grayscale.allocate(m_kinect_sptr->width, m_kinect_sptr->height);

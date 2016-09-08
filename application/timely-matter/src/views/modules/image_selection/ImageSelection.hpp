@@ -26,6 +26,7 @@ namespace timelymatter {
         void draw();
         void updatePosition(const ofVec2f& position);
         void enableMask(const bool value);
+        void setHandlePositions(const vector<ofVec2f>& positions);
         vector<ofVec2f> getPoints();
         vector<cv::Point2f> getPointsForCv();
         

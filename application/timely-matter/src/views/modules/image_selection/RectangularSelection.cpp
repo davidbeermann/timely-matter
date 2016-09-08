@@ -50,6 +50,14 @@ void RectangularSelection::updateBounds(const ofRectangle& bounds) {
 }
 
 
+void RectangularSelection::updatePositions(const vector<ofVec2f>& positions) {
+    m_handle_tl.setPosition(positions[0]);
+    m_handle_tr.setPosition(positions[1]);
+    m_handle_br.setPosition(positions[2]);
+    m_handle_bl.setPosition(positions[3]);
+}
+
+
 vector<SelectionHandle*>& RectangularSelection::getHandles() {
     return m_handles;
 }

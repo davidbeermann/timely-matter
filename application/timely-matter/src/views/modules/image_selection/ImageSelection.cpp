@@ -60,6 +60,20 @@ void ImageSelection::enableMask(const bool value) {
 }
 
 
+void ImageSelection::setHandlePositions(const vector<ofVec2f>& positions) {
+    ofLog() << "ImageSelection::setHandlePositions() " << positions.size();
+    
+    // convert relative to absolute coordinates
+    vector<ofVec2f> abs_positions;
+    for (int i = 0; i < positions.size(); ++i) {
+        abs_positions.push_back(m_position + positions[i]);
+    }
+    
+    // update positions
+    m_selection.updatePositions(abs_positions);
+}
+
+
 vector<ofVec2f> ImageSelection::getPoints() {
     vector<ofVec2f> points;
     

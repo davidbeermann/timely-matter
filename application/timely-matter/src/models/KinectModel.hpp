@@ -85,7 +85,7 @@ namespace timelymatter {
             return m_cv_output_points;
         }
         
-        const bool hasLoadedSettings() const {
+        const bool settingsLoaded() const {
             return m_settings_loaded;
         }
         void loadSettings();

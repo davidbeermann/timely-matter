@@ -18,6 +18,7 @@ namespace timelymatter {
         void setup(const ofRectangle& bounds);
         void draw();
         void updateBounds(const ofRectangle& bounds);
+        void updatePositions(const vector<ofVec2f>& positions);
         vector<SelectionHandle*>& getHandles();
     };
 
