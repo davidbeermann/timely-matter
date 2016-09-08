@@ -71,20 +71,21 @@ GuiView::~GuiView() {
 
 
 void GuiView::keyPressed(ofKeyEventArgs& args) {
+    // solution for scope issues in case statements.
+    // foud here: http://stackoverflow.com/questions/92396/why-cant-variables-be-declared-in-a-switch-statement
     switch (args.key) {
-        case 'g':
+        case 'g': {
             m_visible = !m_visible;
             break;
-        // solution for scope issues in case statements.
-        // foud here: http://stackoverflow.com/questions/92396/why-cant-variables-be-declared-in-a-switch-statement
+        }
         case 'r': {
-            AppState state = AppState::SELECT_MODE;
-            ofNotifyEvent(AppEvent::get().update_state, state, this);
+            ofNotifyEvent(AppEvent::get().reset, this);
             break;
         }
-        case 's':
+        case 's': {
             ofNotifyEvent(AppEvent::get().save_settings, this);
             break;
+        }
     }
 }
 

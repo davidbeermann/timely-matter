@@ -7,6 +7,7 @@
 #include "AppEvent.hpp"
 #include "ViewEvent.hpp"
 #include "StartupCommand.hpp"
+#include "ResetCommand.hpp"
 #include "SaveSettingsCommand.hpp"
 #include "UpdateStateCommand.hpp"
 #include "UpdateModeCommand.hpp"
@@ -28,6 +29,7 @@ class ofApp : public ofBaseApp {
     ViewEvent& m_view_event;
     // commands
     StartupCommand m_startup_cmd;
+    ResetCommand m_reset_cmd;
     UpdateStateCommand m_update_state_cmd;
     SaveSettingsCommand m_save_settings_cmd;
     UpdateModeCommand m_update_mode_cmd;

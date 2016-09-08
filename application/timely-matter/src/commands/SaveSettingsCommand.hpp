@@ -1,8 +1,6 @@
 #pragma once
 
 #include "Command.hpp"
-#include "AppState.hpp"
-#include "AppEvent.hpp"
 
 
 namespace timelymatter {

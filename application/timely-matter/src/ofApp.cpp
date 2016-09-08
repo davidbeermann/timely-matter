@@ -25,6 +25,7 @@ void ofApp::setup() {
     // setup command mapping
     // app events
     ofAddListener(m_app_event.startup, &m_startup_cmd, &StartupCommand::execute);
+    ofAddListener(m_app_event.reset, &m_reset_cmd, &ResetCommand::execute);
     ofAddListener(m_app_event.update_state, &m_update_state_cmd, &UpdateStateCommand::execute);
     ofAddListener(m_app_event.save_settings, &m_save_settings_cmd, &SaveSettingsCommand::execute);
     // view events

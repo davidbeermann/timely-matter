@@ -27,6 +27,7 @@ namespace timelymatter {
         
         // events
         ofEvent<void> startup;
+        ofEvent<void> reset;
         ofEvent<AppState> update_state;
         ofEvent<void> save_settings;
     };
