@@ -1,0 +1,20 @@
+<KinectModel>
+    <selection_points>
+        <point>
+            <x>128.000000000</x>
+            <y>76.000000000</y>
+        </point>
+        <point>
+            <x>514.000000000</x>
+            <y>54.000000000</y>
+        </point>
+        <point>
+            <x>515.000000000</x>
+            <y>354.000000000</y>
+        </point>
+        <point>
+            <x>118.000000000</x>
+            <y>364.000000000</y>
+        </point>
+    </selection_points>
+</KinectModel>

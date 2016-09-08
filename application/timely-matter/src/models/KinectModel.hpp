@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxKinect.h"
 #include "ofxOpenCv.h"
+#include "ofxXmlSettings.h"
 
 using namespace cv;
 
@@ -28,6 +29,9 @@ namespace timelymatter {
         vector<ofVec2f> m_selection_points;
         vector<Point2f> m_cv_selection_points;
         vector<Point2f> m_cv_output_points;
+        
+        ofxXmlSettings m_settings;
+        bool m_settings_loaded = false;
         
     public:
         // static method to retrieve singleton instance
@@ -63,13 +67,29 @@ namespace timelymatter {
         }
         
         void setDepthBufferSize(const unsigned int& width, const unsigned int& height);
-        const unsigned int getDepthBufferWidth() const;
-        const unsigned int getDepthBufferHeight() const;
+        const unsigned int getDepthBufferWidth() const {
+            return m_depth_buffer_width;
+        }
+        const unsigned int getDepthBufferHeight() const {
+            return m_depth_buffer_height;
+        }
         
-        const vector<ofVec2f>& getSelectionPoints() const;
         void setSelectionPoints(const vector<ofVec2f>& points);
-        const vector<Point2f>& getCvSelectionPoints() const;
-        const vector<Point2f>& getCvOutputPoints() const;
+        const vector<ofVec2f>& getSelectionPoints() const{
+            return m_selection_points;
+        }
+        const vector<Point2f>& getCvSelectionPoints() const {
+            return m_cv_selection_points;
+        }
+        const vector<Point2f>& getCvOutputPoints() const {
+            return m_cv_output_points;
+        }
+        
+        const bool hasLoadedSettings() const {
+            return m_settings_loaded;
+        }
+        void loadSettings();
+        void saveSettings();
     };
 
 }

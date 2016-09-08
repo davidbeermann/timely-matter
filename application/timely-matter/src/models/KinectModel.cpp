@@ -1,5 +1,7 @@
 #include "KinectModel.hpp"
 
+#define SETTINGS_FILE "KinectModelSettings.xml"
+
 using namespace timelymatter;
 
 
@@ -42,7 +44,7 @@ KinectModel& KinectModel::get() {
 
 shared_ptr<ofxKinect> KinectModel::getKinect() {
     if (!m_kinect_sptr->isConnected()) {
-        ofLog() << "Connect Kinect";
+        ofLogNotice("KinectModel") << "Kinect is connected";
         
         // Method attributes: init(bool infrared, bool video, bool texture)
         m_kinect_sptr->init(true, true, true);
@@ -67,7 +69,7 @@ void KinectModel::setDepthClipNear(const unsigned int& value) {
     if (value >= m_depth_clip_near_min && value <= m_depth_clip_near_max) {
         m_depth_clip_near = value;
     } else {
-        ofLog() << "Out of range value for depth clipping near. Must be within [" << m_depth_clip_near_min << "," << m_depth_clip_near_max << "]";
+        ofLogError("KinectModel") << "Out of range value for depth clipping near. Must be within [" << m_depth_clip_near_min << "," << m_depth_clip_near_max << "]";
     }
 }
 
@@ -76,7 +78,7 @@ void KinectModel::setDepthClipFar(const unsigned int& value) {
     if (value >= m_depth_clip_far_min && value <= m_depth_clip_far_max) {
         m_depth_clip_far = value;
     } else {
-        ofLog() << "Out of range value for depth clipping far. Must be within [" << m_depth_clip_far_min << "," << m_depth_clip_far_max << "]";
+        ofLogError("KinectModel") << "Out of range value for depth clipping far. Must be within [" << m_depth_clip_far_min << "," << m_depth_clip_far_max << "]";
     }
 }
 
@@ -84,21 +86,6 @@ void KinectModel::setDepthClipFar(const unsigned int& value) {
 void KinectModel::setDepthBufferSize(const unsigned int& width, const unsigned int& height) {
     m_depth_buffer_width = width;
     m_depth_buffer_height = height;
-}
-
-
-const unsigned int KinectModel::getDepthBufferWidth() const {
-    return m_depth_buffer_width;
-}
-
-
-const unsigned int KinectModel::getDepthBufferHeight() const {
-    return m_depth_buffer_height;
-}
-
-
-const vector<ofVec2f>& KinectModel::getSelectionPoints() const {
-    return m_selection_points;
 }
 
 
@@ -112,12 +99,52 @@ void KinectModel::setSelectionPoints(const vector<ofVec2f>& points) {
 }
 
 
-const vector<Point2f>& KinectModel::getCvSelectionPoints() const {
-    return m_cv_selection_points;
+void KinectModel::loadSettings() {
+    m_settings_loaded = m_settings.loadFile(SETTINGS_FILE);
+    if (m_settings_loaded) {
+        ofLogNotice("KinectModel") << "settings from file " << SETTINGS_FILE << " loaded";
+        
+        m_settings.pushTag("KinectModel");
+        m_settings.pushTag("selection_points");
+        
+        int num_tags = m_settings.getNumTags("point");
+        if (num_tags != m_selection_points.size()) {
+            ofLogWarning("KinectModel") << "Invalid point data detected!";
+        } else {
+            for (int i = 0; i < num_tags; ++i) {
+                m_selection_points[i].x = m_settings.getValue("point:x", 0.f, i);
+                m_selection_points[i].y = m_settings.getValue("point:y", 0.f, i);
+            }
+        }
+        
+        m_settings.popTag();
+        m_settings.popTag();
+    }
 }
 
 
-const vector<Point2f>& KinectModel::getCvOutputPoints() const {
-    return m_cv_output_points;
+void KinectModel::saveSettings() {
+    // remove all nodes in xml settings
+    m_settings.clear();
+    
+    m_settings.addTag("KinectModel");
+    m_settings.pushTag("KinectModel");
+    m_settings.addTag("selection_points");
+    m_settings.pushTag("selection_points");
+    for (int i = 0; i < m_selection_points.size(); ++i) {
+        int tag = m_settings.addTag("point");
+        m_settings.setValue("point:x", m_selection_points[i].x, tag);
+        m_settings.setValue("point:y", m_selection_points[i].y, tag);
+    }
+    m_settings.popTag();
+    m_settings.popTag();
+    
+    // save settings to file
+    bool success = m_settings.saveFile(SETTINGS_FILE);
+    if (success) {
+        ofLogNotice("KinectModel") << "settings successfully written to " << SETTINGS_FILE;
+    } else {
+        ofLogError("KinectModel") << "settings was unable to write settings to " << SETTINGS_FILE;
+    }
 }
 
