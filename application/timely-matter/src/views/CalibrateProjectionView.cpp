@@ -17,6 +17,13 @@ void CalibrateProjectionView::m_onWindowResized(const int width, const int heigh
     float crop_x = width - PADDING - m_kinect_sptr->width + (m_kinect_sptr->width - m_crop_buffer.getWidth()) * 0.5f;
     float crop_y = PADDING + (m_kinect_sptr->height - m_crop_buffer.getHeight()) * 0.5f;
     m_crop_position.set(crop_x, crop_y);
+    
+    // apply loaded settings at first window resize,
+    // due to internal absolute positioning of ImageSelection
+    //TODO refactor ImageSelection to handle position changes internally
+    if (m_kinect_model.settingsLoaded()) {
+        m_selection.setHandlePositions(m_kinect_model.getSelectionPoints());
+    }
 }
 
 
@@ -24,10 +31,6 @@ void CalibrateProjectionView::m_onSetup() {
     // setup selection
     m_selection.setup(m_kinect_sptr->width, m_kinect_sptr->height);
     m_selection.enableMask(false);
-    
-    if (m_kinect_model.settingsLoaded()) {
-        m_selection.setHandlePositions(m_kinect_model.getSelectionPoints());
-    }
     
     // allocate image buffers
     m_infrared_buffer.allocate(m_kinect_sptr->width, m_kinect_sptr->height, OF_IMAGE_COLOR);

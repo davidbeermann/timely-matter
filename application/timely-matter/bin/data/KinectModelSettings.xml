@@ -1,20 +1,20 @@
 <KinectModel>
     <selection_points>
         <point>
-            <x>124.000000000</x>
-            <y>78.000000000</y>
-        </point>
-        <point>
-            <x>516.000000000</x>
-            <y>56.000000000</y>
-        </point>
-        <point>
-            <x>515.000000000</x>
-            <y>354.000000000</y>
-        </point>
-        <point>
             <x>115.000000000</x>
-            <y>360.000000000</y>
+            <y>64.000000000</y>
+        </point>
+        <point>
+            <x>527.000000000</x>
+            <y>44.000000000</y>
+        </point>
+        <point>
+            <x>528.000000000</x>
+            <y>369.000000000</y>
+        </point>
+        <point>
+            <x>105.000000000</x>
+            <y>377.000000000</y>
         </point>
     </selection_points>
 </KinectModel>
