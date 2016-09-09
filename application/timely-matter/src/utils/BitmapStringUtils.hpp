@@ -1,5 +1,7 @@
 #pragma once
 
+#define BITMAP_TEXT_LINE_HEIGHT 11
+
 namespace timelymatter
 {
     // function found here:
