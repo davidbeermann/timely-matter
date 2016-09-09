@@ -11,7 +11,7 @@ VectorFieldModel::VectorFieldModel() {
     m_edge_force = 1.5f;
     m_edge_force_min = 0.f;
     m_edge_force_max = 4.f;
-    m_attract_threshold = 127.f;
+    m_attract_threshold = 0.f;
 }
 
 
