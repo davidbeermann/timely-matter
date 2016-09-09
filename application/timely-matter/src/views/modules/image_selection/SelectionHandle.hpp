@@ -45,8 +45,8 @@ namespace timelymatter {
         void mouseExited(ofMouseEventArgs& args) {};
         
         // custom events
-        ofEvent<void> onHandleDragStart;
-        ofEvent<void> onHandleDragStop;
+        ofEvent<void> dragStart;
+        ofEvent<void> dragStop;
     };
     
 }

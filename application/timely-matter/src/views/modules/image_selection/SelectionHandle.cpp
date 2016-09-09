@@ -81,14 +81,14 @@ void SelectionHandle::mousePressed(ofMouseEventArgs& args) {
         m_click_offset.set(args - m_position);
         m_is_dragging = true;
         
-        ofNotifyEvent(onHandleDragStart, this);
+        ofNotifyEvent(dragStart, this);
     }
 }
 
 
 void SelectionHandle::mouseReleased(ofMouseEventArgs& args) {
     if (m_is_dragging) {
-        ofNotifyEvent(onHandleDragStop, this);
+        ofNotifyEvent(dragStop, this);
     }
         
     m_is_dragging = false;

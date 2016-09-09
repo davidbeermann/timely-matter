@@ -98,15 +98,17 @@ vector<Point2f> ImageSelection::getPointsForCv() {
 }
 
 
-void ImageSelection::m_enableMaskRedraw() {
-//    ofLog() << "ImageSelection::_enableMaskRedraw()";
+void ImageSelection::m_onHandleDragStart() {
+//    ofLog() << "ImageSelection::m_onHandleDragStart()";
     m_redraw_mask = true;
 }
 
 
-void ImageSelection::m_disableMaskRedraw() {
-//    ofLog() << "ImageSelection::m_disableMaskRedraw()";
+void ImageSelection::m_onHandleDragStop() {
+//    ofLog() << "ImageSelection::m_onHandleDragStop()";
     m_redraw_mask = false;
+    
+    ofNotifyEvent(updated, this);
 }
 
 
@@ -119,8 +121,8 @@ void ImageSelection::m_setup() {
     vector<SelectionHandle*> handle;
     for (unsigned int i = 0; i < m_selection.getHandles().size(); ++i) {
         SelectionHandle* handle = m_selection.getHandles().at(i);
-        ofAddListener(handle->onHandleDragStart, this, &ImageSelection::m_enableMaskRedraw);
-        ofAddListener(handle->onHandleDragStop, this, &ImageSelection::m_disableMaskRedraw);
+        ofAddListener(handle->dragStart, this, &ImageSelection::m_onHandleDragStart);
+        ofAddListener(handle->dragStop, this, &ImageSelection::m_onHandleDragStop);
     }
 }
 

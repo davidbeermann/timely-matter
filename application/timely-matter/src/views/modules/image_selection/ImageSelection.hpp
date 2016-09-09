@@ -8,8 +8,8 @@
 namespace timelymatter {
 
     class ImageSelection {
-        void m_enableMaskRedraw();
-        void m_disableMaskRedraw();
+        void m_onHandleDragStart();
+        void m_onHandleDragStop();
         void m_setup();
         void m_setupMask();
         void m_clearMask();
@@ -46,6 +46,8 @@ namespace timelymatter {
         const unsigned int getHeight() {
             return m_image.getHeight();
         };
+        
+        ofEvent<void> updated;
     };
 
 }
