@@ -1,8 +1,10 @@
 #include "KinectModel.hpp"
+#include "ofxCv.h"
 
 #define SETTINGS_FILE "KinectModelSettings.xml"
 
 using namespace timelymatter;
+using namespace ofxCv;
 
 
 KinectModel::KinectModel() {
@@ -96,6 +98,18 @@ void KinectModel::setSelectionPoints(const vector<ofVec2f>& points) {
         m_cv_selection_points[i].x = points[i].x;
         m_cv_selection_points[i].y = points[i].y;
     }
+}
+
+
+Mat& KinectModel::getHomographyMatrix() {
+    m_homography_matrix = findHomography(Mat(m_cv_selection_points), Mat(m_cv_output_points));
+    return m_homography_matrix;
+}
+
+
+Mat& KinectModel::getHomographyMatrix(const vector<Point2f>& source_points) {
+    m_homography_matrix = findHomography(Mat(source_points), Mat(m_cv_output_points));
+    return m_homography_matrix;
 }
 
 

@@ -3,10 +3,7 @@
 #include "BaseView.hpp"
 #include "ofMain.h"
 #include "ofxKinect.h"
-#include "ofxOpenCv.h"
 #include "ImageSelection.hpp"
-
-using namespace cv;
 
 
 namespace timelymatter
@@ -21,7 +18,6 @@ namespace timelymatter
         ofImage m_depth_buffer;
         ofImage m_crop_buffer;
         ofxCvGrayscaleImage m_grayscale;
-        Mat m_homographic_matrix;
         ofParameter<float> m_param_norm_min;
         ofParameter<float> m_param_norm_max;
         ofParameter<unsigned int> m_param_clip_near;

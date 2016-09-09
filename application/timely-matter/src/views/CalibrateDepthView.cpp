@@ -75,9 +75,8 @@ void CalibrateDepthView::m_onUpdate() {
         
         // read depth date into buffer
         m_kinect_image.setFromPixels(m_kinect_sptr->getDepthPixels());
-        // extract relevant depth date vis homographic transformation
-        Mat matrix = findHomography(Mat(m_kinect_model.getCvSelectionPoints()), Mat(m_kinect_model.getCvOutputPoints()));
-        warpPerspective(m_kinect_image, m_depth_image, matrix, CV_INTER_LINEAR);
+        // extract relevant depth area via homography transformation
+        warpPerspective(m_kinect_image, m_depth_image, m_kinect_model.getHomographyMatrix(), CV_INTER_LINEAR);
         // update depth image for drawing
         m_depth_image.update();
         

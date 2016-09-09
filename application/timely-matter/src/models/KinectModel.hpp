@@ -29,6 +29,7 @@ namespace timelymatter {
         vector<ofVec2f> m_selection_points;
         vector<Point2f> m_cv_selection_points;
         vector<Point2f> m_cv_output_points;
+        Mat m_homography_matrix;
         
         ofxXmlSettings m_settings;
         bool m_settings_loaded = false;
@@ -84,6 +85,9 @@ namespace timelymatter {
         const vector<Point2f>& getCvOutputPoints() const {
             return m_cv_output_points;
         }
+        
+        Mat& getHomographyMatrix();
+        Mat& getHomographyMatrix(const vector<Point2f>& source_points);
         
         const bool settingsLoaded() const {
             return m_settings_loaded;

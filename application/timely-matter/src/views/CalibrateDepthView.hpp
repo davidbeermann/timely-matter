@@ -3,7 +3,6 @@
 #include "BaseView.hpp"
 #include "ofMain.h"
 #include "ofxKinect.h"
-#include "ofxOpenCv.h"
 #include "VectorField.hpp"
 
 using namespace cv;

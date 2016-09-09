@@ -1,11 +1,13 @@
 #include "CalibrateProjectionView.hpp"
 #include "ParameterUtils.hpp"
+#include "ofxOpenCv.h"
 #include "ofxCv.h"
 
 #define PADDING 18
 
 using namespace timelymatter;
 using namespace ofxCv;
+using namespace cv;
 
 
 void CalibrateProjectionView::m_onWindowResized(const int width, const int height) {
@@ -79,20 +81,11 @@ void CalibrateProjectionView::m_onUpdate() {
         // update depth pixels
         m_depth_buffer.setFromPixels(m_kinect_sptr->getDepthPixels());
         
-        // get input points fon selection
+        // get input points from selection
         vector<Point2f> input_points = m_selection.getPointsForCv();
         
-        // fixed output frame a quarter size of the final rendering
-        vector<Point2f> output_points;
-        output_points.push_back(Point2f(0.f, 0.f));
-        output_points.push_back(Point2f(m_crop_buffer.getWidth(), 0.f));
-        output_points.push_back(Point2f(m_crop_buffer.getWidth(), m_crop_buffer.getHeight()));
-        output_points.push_back(Point2f(0.f, m_crop_buffer.getHeight()));
-        
-        m_homographic_matrix = findHomography(Mat(input_points), Mat(output_points));
-        
-        // apply homographic transformation
-        warpPerspective(m_depth_buffer, m_crop_buffer, m_homographic_matrix, CV_INTER_LINEAR);
+        // apply homography transformation
+        warpPerspective(m_depth_buffer, m_crop_buffer, m_kinect_model.getHomographyMatrix(input_points), CV_INTER_LINEAR);
         
         // update buffers for diplay
         m_depth_buffer.update();
