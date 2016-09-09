@@ -4,12 +4,15 @@
 #include "ViewEvent.hpp"
 #include "ofxCv.h"
 
+#define BOX_MARGIN 4
+
 using namespace timelymatter;
 using namespace ofxCv;
 
 
 void CalibrateDepthView::m_onWindowResized(const int width, const int height) {
-    float x = (ofGetWindowWidth() - m_projector_model.getWidth()) * 0.5f;
+    float combined_width = m_fbo_output_size.getWidth() + BOX_MARGIN + m_projector_model.getWidth();
+    float x = (ofGetWindowWidth() - combined_width) * 0.5f + m_fbo_output_size.getWidth() + BOX_MARGIN;
     float y = (ofGetWindowHeight() - m_projector_model.getHeight()) * 0.5f;
     m_center_position.set(x, y);
 }
@@ -46,6 +49,11 @@ void CalibrateDepthView::m_onSetup() {
     
     // setup gui parameters
     GuiUpdateArgs args;
+    // view params
+    ofParameterGroup view_params;
+    view_params.setName("Calibrate Depth View");
+    view_params.add(m_param_show_depth.set("show depth output", false));
+    args.params.push_back(view_params);
     // kinect depth params
     ofParameterGroup depth_params;
     args.params.push_back(setupDepthClippingParameters(depth_params, m_param_clip_near, m_param_clip_far));
@@ -89,21 +97,29 @@ void CalibrateDepthView::m_onDraw() {
     ofPushMatrix();
     ofTranslate(m_center_position);
     
-    string avg = "Mark Datum - Current Average: " + to_string(m_vector_field.getAverageDatum()) + " - Ideal Average: 127";
-    ofRectangle bounds = getBitmapStringBoundingBox(avg);
-    ofDrawBitmapString(avg, (m_projector_model.getWidth() - bounds.getWidth()) * 0.5f, -5.f);
+    string avg = "Average Datum: " + to_string(m_vector_field.getAverageDatum());
+    ofRectangle bounds_avg = getBitmapStringBoundingBox(avg);
+    ofDrawBitmapString(avg, (m_projector_model.getWidth() - bounds_avg.getWidth()) * 0.5f, -BOX_MARGIN);
+    
+    ofRectangle bounds_confirm = getBitmapStringBoundingBox(m_confirm_msg);
+    ofDrawBitmapString(m_confirm_msg, (m_projector_model.getWidth() - bounds_confirm.getWidth()) * 0.5f,  m_projector_model.getHeight() + BITMAP_TEXT_LINE_HEIGHT + BOX_MARGIN);
     
     ofPushStyle();
     ofSetColor(0);
     ofDrawRectangle(0, 0, m_projector_model.getWidth(), m_projector_model.getHeight());
     ofPopStyle();
-    m_depth_image.draw(m_projector_model.getSize());
+    if (m_param_show_depth) {
+        m_depth_image.draw(m_projector_model.getSize());
+    }
     m_vector_field.draw();
     
-    ofTranslate(-(m_fbo_output_size.width + 2), 0);
+    ofTranslate(-(m_fbo_output_size.getWidth() + BOX_MARGIN), 0);
+    ofDrawBitmapString(m_selection_title, 0, -BOX_MARGIN);
     m_output_fbo.draw(m_fbo_output_size);
     
-    ofTranslate(0, m_fbo_output_size.height + 2);
+    ofTranslate(0, m_fbo_output_size.getHeight() + BOX_MARGIN);
+    ofDrawBitmapString(m_depth_title, 0, BITMAP_TEXT_LINE_HEIGHT);
+    ofTranslate(0, BITMAP_TEXT_LINE_HEIGHT + BOX_MARGIN);
     m_depth_image.draw(m_fbo_output_size);
     
     ofPopMatrix();
