@@ -17,8 +17,8 @@ namespace timelymatter
         
         // set names for loading settings
         group.setName("Depth Clipping");
-        near.setName("Near");
-        far.setName("Far");
+        near.setName("near");
+        far.setName("far");
         
         // apply values stored in model
         near.set(kinect_model.getDepthClipNear());
@@ -46,8 +46,8 @@ namespace timelymatter
     ) {
         // setup parameters for loading settings
         group.setName("Infrared Normalization");
-        group.add(min.set("Min", 33.f, 0.f, 255.f));
-        group.add(max.set("Max", 255.f, 0.f, 255.f));
+        group.add(min.set("min", 33.f, 0.f, 255.f));
+        group.add(max.set("max", 255.f, 0.f, 255.f));
         
         // return group
         return group;

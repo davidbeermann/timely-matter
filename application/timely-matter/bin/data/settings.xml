@@ -1,36 +1,37 @@
 <Timely_Matter>
-	<Perlin_Noise>
-		<offset_x>7.42347</offset_x>
-		<offset_y>4.97449</offset_y>
-		<scale>0.00401224</scale>
-		<speed>0.443061</speed>
-		<draw_FBO>0</draw_FBO>
-	</Perlin_Noise>
-	<Kinect>
-		<show_depth_image>1</show_depth_image>
-		<depth_near_plane>813</depth_near_plane>
-		<depth_far_plane>1619</depth_far_plane>
-	</Kinect>
+  <Infrared_Normalization>
+    <min>40.5918</min>
+    <max>255</max>
+  </Infrared_Normalization>
+  <Depth_Clipping>
+    <near>1487</near>
+    <far>1767</far>
+  </Depth_Clipping>
+  <Calibrate_Depth_View>
+    <show_depth_output>0</show_depth_output>
+  </Calibrate_Depth_View>
+  <Kinect_Input>
+    <show_output>0</show_output>
+  </Kinect_Input>
+  <Noise_Input>
+    <offset_x>5.43</offset_x>
+    <offset_y>2.34</offset_y>
+    <scale>0.0055</scale>
+    <speed>0.5</speed>
+    <draw_FBO>1</draw_FBO>
+  </Noise_Input>
 	<Vector_Field>
-		<meter_points>0</meter_points>
-		<meter_values>0</meter_values>
-		<vectors>0</vectors>
+    <edge_force>1.5</edge_force>
+		<field_force>8</field_force>
+		<attract_threshold>0</attract_threshold>
+		<show_marks>0</show_marks>
+		<show_values>0</show_values>
+		<show_vectors>0</show_vectors>
 	</Vector_Field>
 	<Particle_System>
-		<max_velocity>4.74694</max_velocity>
-		<velocity_decay>0.985665</velocity_decay>
+		<max_velocity>5</max_velocity>
+		<velocity_decay>0.99</velocity_decay>
 		<show_mark_ref>0</show_mark_ref>
 		<show_particles>1</show_particles>
 	</Particle_System>
-<Timely_Matter/>
-	<Kinect_Calibration>
-		<Infrared_Normalization>
-			<Min>54.2711</Min>
-			<Max>255</Max>
-		</Infrared_Normalization>
-		<Depth_Field_of_View>
-			<Near_plane>1300</Near_plane>
-			<Far_plane>1900</Far_plane>
-		</Depth_Field_of_View>
-	</Kinect_Calibration>
 </Timely_Matter>

@@ -5,6 +5,18 @@
 using namespace timelymatter;
 
 
+void GuiView::m_updateInfo() {
+    m_info = "FPS: " + to_string((int) ofGetFrameRate());
+    m_info += "\nCurrent App Mode: " + to_string((int) m_app_model.getMode());
+    m_info += "\nCurrent App State: " + to_string((int) m_app_model.getState());
+    
+    ofRectangle bounds = getBitmapStringBoundingBox(m_info);
+    // update dimensions
+    m_info_rect.setWidth(bounds.getWidth() + 2 * m_info_padding);
+    m_info_rect.setHeight(bounds.getHeight() + 2 * m_info_padding);
+}
+
+
 void GuiView::m_onWindowResized(const int width, const int height) {
 }
 
@@ -24,6 +36,10 @@ void GuiView::m_onSetup() {
     m_info_rect.setX(8.f);
     m_info_rect.setY(8.f);
     
+    // set initial gui position
+    m_updateInfo();
+    m_panel.setPosition(m_info_rect.getX() + m_info_rect.getWidth() + 8.f, m_info_rect.getY());
+    
     // add listener for updates
     ofAddListener(m_view_event.update_gui, this, &GuiView::onGuiUpdate);
 }
@@ -31,14 +47,7 @@ void GuiView::m_onSetup() {
 
 void GuiView::m_onUpdate() {
     if (m_visible) {
-        m_info = "FPS: " + to_string((int) ofGetFrameRate());
-        m_info += "\nCurrent App Mode: " + to_string((int) m_app_model.getMode());
-        m_info += "\nCurrent App State: " + to_string((int) m_app_model.getState());
-        
-        ofRectangle bounds = getBitmapStringBoundingBox(m_info);
-        // update dimensions
-        m_info_rect.setWidth(bounds.getWidth() + 2 * m_info_padding);
-        m_info_rect.setHeight(bounds.getHeight() + 2 * m_info_padding);
+        m_updateInfo();
     }
 }
 
@@ -80,6 +89,7 @@ void GuiView::keyPressed(ofKeyEventArgs& args) {
         }
         case 'r': {
             ofNotifyEvent(AppEvent::get().reset, this);
+            m_panel.clear();
             break;
         }
         case 's': {
@@ -94,12 +104,17 @@ void GuiView::keyPressed(ofKeyEventArgs& args) {
 }
 
 void GuiView::onGuiUpdate(GuiUpdateArgs& args) {
+    // clear out all previous paramters
     m_panel.clear();
     
+    // add parameters send via event
     if (args.params.size() > 0) {
         for (int i = 0; i < args.params.size(); ++i) {
             m_panel.add(args.params[i]);
         }
     }
+    
+    // load settings
+    m_panel.loadFromFile("settings.xml");
 }
 

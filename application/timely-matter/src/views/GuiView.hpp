@@ -9,6 +9,8 @@
 namespace timelymatter {
 
     class GuiView : public BaseView {
+        void m_updateInfo();
+        
         ViewEvent& m_view_event;
         bool m_visible;
         ofxPanel m_panel;
