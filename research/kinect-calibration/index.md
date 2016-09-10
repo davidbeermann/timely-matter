@@ -41,7 +41,10 @@ position: 2
 ### Drivers and libraries for Kinect
 
 * [OpenKinect](https://openkinect.org/wiki/Main_Page)
-	* [libfreenect](https://github.com/OpenKinect/libfreenect)
+	* [libfreenect](https://github.com/OpenKinect/libfreenect)  
+	Drivers and libraries for the Xbox Kinect device on Windows, Linux, and OS X
+	* [libfreenect2](https://github.com/OpenKinect/libfreenect2)  
+	Open source drivers for the Kinect for Windows v2 device
 
 * [OpenNI](https://en.wikipedia.org/wiki/OpenNI)  
 The OpenNI framework is an open source SDK used for the development of 3D sensing middleware libraries and applications.
@@ -68,3 +71,6 @@ RGBDemo is an opensource software that aims at providing a simple toolkit to sta
 	* [ofxRulr Hackpad](https://rulr.hackpad.com/)
 	* [Workshops.ofxRulr.Advanced](https://github.com/elliotwoods/Workshops.ofxRulr.Advanced)
 * [ofxProjectorKinectV2Calibration](https://github.com/Kj1/ofxKinect2ProjectorCalibration)
+* [ofxKinectV2](https://github.com/ofTheo/ofxKinectV2)
+* [ofxMultiKinectV2](https://github.com/hanasaan/ofxMultiKinectV2)
+* [Xbox One Kinect Teardown](https://www.ifixit.com/Teardown/Xbox+One+Kinect+Teardown/19725)
