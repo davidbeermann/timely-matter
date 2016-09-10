@@ -6,6 +6,9 @@
     Page sorting solution found here:
     http://stackoverflow.com/questions/9053066/sorted-navigation-menu-with-jekyll-and-liquid
     {% endcomment %}
+    <li {% if page.url == '/' %}class="active"{% endif %}>
+      <a href="{{'/' | prepend: site.baseurl}}">Home</a>
+    </li>
     {% for node in pages %}
       {% assign depth = node.dir | split:"/" | size %}
       {% if node.layout == "mainpage" and node.title != null and depth <= 2 %}
