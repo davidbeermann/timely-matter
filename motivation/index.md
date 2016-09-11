@@ -8,9 +8,11 @@ position: 0
 
 The topic of this project was motivated by several encounters. Firstly it was inspired by my personal endeavour managing time by the means of computers. Secondly it was motivated by my increasing interest in how modern technology is affecting us personally and sociologically. And lastly it was influenced by my interest in the nature of time from a scientific perspective. These three strands culminated in the theme *Experiments on the entanglements of technology, time and the present moment*.
 
+Although my topic is rooted in theoretical observations I set myself the goal to produce *experiments*. By that I mean the practical exploration and application within a theoretical context. The goal of these experiments was not so much a tangible visualization of a theoretical ideas, but rather to create a relevant experience inspired by these ideas. The choice for the very broad context of *technology* and *time* was also a conscious decision. The constantly evolving technological landscape creates new applications in multiple forms. Focusing simply on computers or smartphones would have being an artificial limitation. In a similiar fashion this argument is also true for time itself. Which leaves us the only particular notion within the topic, the *present moment*. As I'll try to show with my work, I believe the present moment is crucial in understanding and approaching current and new conceptions of time in general. Namely Henri Bergson's notion of duration was elemental for me in developing a different stance on time and in turn directing my further research and the development of my thesis project.
+
 ## Core themes
 
-In the following paragraphs I'd like to introduce some themes that I defined as crucial for my project.
+While converging my initial instinct within the broad field I defined for myself into a concrete topic I identified several themes, which I believe are relevant in the context of my thesis topic. Even if not all aspects mentioned below found their way into the final concept of my work, they were at the back of my mind while working on it. In the following paragraphs I'd like to introduce these crucial themes.
 
 ### Efficiency
 
