@@ -50,18 +50,26 @@ The way we experience time is two-fold. On the one hand there is external time, 
 
 Appropriation of technological functionalities as human paradigms i.e. multi-tasking ...
 
-### Encoding
+### Asynchronicity
+
+Early technologies often operated in sync with human beings. ...
+
+### Encoding 
+
 
 ... I think, when thoughts, ideas and philosophies are encoded into software their sociological exposure and long-term effects should be closely monitored and carefully analyzed. ...
 
-## Cognitive Dissonance
+### Cognitive Dissonance
 
 https://en.wikipedia.org/wiki/Cognitive_dissonance
 
 > It sounds like such a weirdly scientific term, but it’s broad reaching. I guess, for me, I was thinking about a place—because of the Internet—where there’s a lot of information out there, and we’re constantly bombarded by it, and it’s telling us many different things. Some of them are true, some of them are not. Some of them are true temporarily, and then change as science progresses. It’s just a mess of information. I think inherently, most people want to be good people, and being bombarded by all this is pushing them and pulling them in a bunch of different directions. You start to kind of lose touch with yourself by gaining all of this information. I think that’s where some of the dissonance comes from—wanting to do the right thing, but losing track of what that is for you as a human being.  
 https://daily.bandcamp.com/2016/09/06/eluvium-matthew-cooper-interview/
 
-https://timeline.com/hobby-career-b5d199b0df18#.bn9vv6k88## Resources
+https://timeline.com/hobby-career-b5d199b0df18#.bn9vv6k88
+
+## Projected outcome
+
 ## Resources
 
 * [Siri, why am I so busy?: An interview with Judy Wajcman](http://www.publicbooks.org/interviews/siri-why-am-i-so-busy-an-interview-with-judy-wajcman) (Verified at 16/09/12)
