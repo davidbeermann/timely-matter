@@ -67,14 +67,15 @@ Early technologies often operated in sync with human beings. ...
 
 ... I think, when thoughts, ideas and philosophies are encoded into software their sociological exposure and long-term effects should be closely monitored and carefully analyzed. ...
 
-### Cognitive Dissonance
+### Inherence
 
-https://en.wikipedia.org/wiki/Cognitive_dissonance
+In his TED talk about his book [What Technology Wants](http://kk.org/books/what-technology-wants/) WIRED magazine co-founder Kevin Kelly explains his view on the evolution of technology. The title seems to suggest a humanization of technology but Kelly is rather refering to the inherent qualities of technology. He goes on to point out that according to his observations technology evolves by the same standards nature does: ubiquity, diversity, specialization, complexity and socialization. According to Kelly there's proof for each of these trends in technology. Therefore he considers technology as the 7th [kingdom of nature](https://en.wikipedia.org/wiki/Kingdom_(biology)).
 
-> It sounds like such a weirdly scientific term, but it’s broad reaching. I guess, for me, I was thinking about a place—because of the Internet—where there’s a lot of information out there, and we’re constantly bombarded by it, and it’s telling us many different things. Some of them are true, some of them are not. Some of them are true temporarily, and then change as science progresses. It’s just a mess of information. I think inherently, most people want to be good people, and being bombarded by all this is pushing them and pulling them in a bunch of different directions. You start to kind of lose touch with yourself by gaining all of this information. I think that’s where some of the dissonance comes from—wanting to do the right thing, but losing track of what that is for you as a human being.  
-https://daily.bandcamp.com/2016/09/06/eluvium-matthew-cooper-interview/
+Another important concept in Kelly's analysis is what he refers to as the *infinite game*. He posits that culture is an accumulation of ideas. This implies that each idea is build upon the previous generation – as in cellular biology and genetics. In other words current technology is the plateau from which new technology is derived. But technology has also the advantage of skipping the current plateau and derive inspiration from all previous ideas. Therefore technology has an advantage over natural evolution where inappropriate adaptations to the environment simply cease to exist if they can not adapt to new circumstances.
 
-https://timeline.com/hobby-career-b5d199b0df18#.bn9vv6k88
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ap-ZC21bk18" frameborder="0" allowfullscreen></iframe>
+
+From the standpoint that technology is modeled after natural observations and evolves by the same standards the hypothesis of the [technological singularity](https://en.wikipedia.org/wiki/Technological_singularity) becomes feasable. The singularity encapsulates the idea that technology will be able to reproduce and improve itself which eventually will result in a powerful superintelligence that far surpasses human intelligence. The author, scientist and self-proclaimed futurist Ray Kurzweil is a proponent of this theory. He argues that we are already working on the technology and predicts that the singularity will become reality by 2045.
 
 ## Projected outcome
 
