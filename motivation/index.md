@@ -44,7 +44,8 @@ Following Wacjman the reason is the intensification of work enabled by technolog
 
 So in essence technology is not innately responsible for our lack of time. It is rather our cultural inclinination to perform and feel busy. And the compression of time due to performance induced by technology fuels the acceleration narrative. Nevertheless, Wajcman says about herself that she does not fall prey to cultural pessimism or technological determinism which she is critizing Paul Virilio and Manuel Castels for. She's optimistic that after using new technologies excessively and obsessively in the beginning over time we integrate the new tools into our lives.
 
-**{TODO check for brief references to Hartmut Rosa and Douglas Rushkoff}**
+**{TODO check for brief references to Hartmut Rosa and/or Douglas Rushkoff}**  
+**{TODO add brief part on asynchronisity of human and computers}**
 
 ### Relativity
 
@@ -84,3 +85,5 @@ From the standpoint that technology is modeled after natural observations and ev
 * [Siri, why am I so busy?: An interview with Judy Wajcman](http://www.publicbooks.org/interviews/siri-why-am-i-so-busy-an-interview-with-judy-wajcman) (Verified at 16/09/12)
 * [Lisa Randall — Dark Matter and the Astounding Interconnectedness of Everything](http://www.onbeing.org/program/lisa-randall-dark-matter-and-the-astounding-interconnectedness-of-everything/8100), On Being with Krista Tippett, November 12, 2015 (Verified at 16/09/13)
 * [The Autumn of the Multitaskers](http://www.theatlantic.com/magazine/archive/2007/11/the-autumn-of-the-multitaskers/306342/), Walter Kirn, The Atlantic, November 2007 Issue (Verified at 16/09/13)
+* [A World Without Work](http://www.theatlantic.com/magazine/archive/2015/07/world-without-work/395294/), Derek Thompson, The Atlantic, July/August 2015 Issue (Verified at 16/09/13)
+* [Our parents discovered leisure. We killed it.](https://timeline.com/hobby-career-b5d199b0df18#.ck2fbab8o), Stephanie Buck (Verified at 16/09/13)
