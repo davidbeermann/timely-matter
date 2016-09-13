@@ -63,8 +63,17 @@ Another less hazardous appropriation is the act browsing. When we browse we are 
 
 ### Encoding 
 
+Nowadays the ease of software development allows for rapid implementations of new ideas and concepts. A highly acclaimed circumstance which nevertheless has its pitfalls. Once an idea is implemented and reaches a certain threshold of distribution it becomes hard if not impossible to alter or adapt. Computer philosophy writer and computer scientist Jaron Lanier names this phenomenon **lock-in** in his 2010 manifesto [*You Are Not a Gadget*](http://www.penguinrandomhouse.com/books/97779/you-are-not-a-gadget-by-jaron-lanier/). He argues that "the process of lock-in is like a wave gradually washing over the rulebook of life, culling the ambiguities of flexible thoughts as more and more thought structures are solidified into effectively permanent reality". (p.9)
 
-... I think, when thoughts, ideas and philosophies are encoded into software their sociological exposure and long-term effects should be closely monitored and carefully analyzed. ...
+His predominant example he refers to is the MIDI standard for notes in digital music and how it affects the ideation of new software and therefore also compositions. MIDI was developed by Dave Smith in the early 1980s. He conceived the standard when being faced with the problem of connecting a keyboard to a synthesizer. Dispite the fact the MIDI is a quite literal translation of the keys being pressed and released, MIDI became a standard format for musical notes in software. Whereas MIDI works well to encode the behavior of a keyboard, it fails to do so with other instruments, for example a saxophone. Nevertheless, since MIDI became an unquestioned standard for notes it also used to represent a saxophone in music software.
+
+> "It takes only a tiny group of engineers to create technology that can shape the entire future of human experience with incredible speed. Therefore, crucial arguments about the human relationship with technology should take place between developers and users before such direct manipulations are designed." — Jaron Lanier (p.5f)
+
+As he points out, Lanier is worried that the same mistake in terms of what a note is, is repeated nowadays in terms of what person is online. According to Lanier working with information technology automatically involves being engaged in social engeneering.
+
+A concern in a similiar vein is shared by Eli Pariser in his 2011 book [*The Filter Bubble: What the Internet Is Hiding from You*](http://www.penguin.com/book/the-filter-bubble-by-eli-pariser/9780143121237). Pariser is credited with coining the term **filter bubble** in order to describe the effects algorithms have on our consumption of online media. Pariser critizises the intransparent nature by which for example Google generates search results or Facebook generates its news stream.
+
+In summary, I believe it is worth questioning ideas and philosophies that are encoded into technology. What is true for musical notes is even more so true for our concept of time and how it is represented in technology.
 
 ### Inherence
 
