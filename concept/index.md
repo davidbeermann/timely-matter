@@ -1,9 +1,9 @@
 ---
 layout: mainpage
-title: Implementation
+title: Concept
 position: 3
 ---
 
-# Implementation
+# Concept
 
 ...
