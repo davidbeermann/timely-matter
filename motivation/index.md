@@ -12,6 +12,8 @@ Although my topic is rooted in theoretical observations I set myself the goal to
 
 ## Core themes
 
+> "Nobody understands time." — Lisa Randall, Theoretical Physicist
+
 While converging my initial instinct within the broad field I defined for myself into a concrete topic I identified several themes, which I believe are relevant in the context of my thesis topic. Even if not all aspects mentioned below found their way into the final concept of my work, they were at the back of my mind while working on it. In the following paragraphs I'd like to introduce these crucial themes.
 
 ### Efficiency
@@ -21,6 +23,8 @@ During the financial crisis which started in 2007 and which is recognized as the
 <iframe width="560" height="315" src="https://www.youtube.com/embed/1npzZu83AfU" frameborder="0" allowfullscreen></iframe>
 
 Technology which enables higher efficency does so in order to save time. The notion of 'saving time' alludes to notion of a sustainable work-life balance. The goal is to minimize the amount of 'work time' in order to gain 'life time'. In this scenario work and life are two competing forces, where work has a negative connotation, whereas life has positive connotations. From this perspective being effective at work is eligible, if not necessary in order to have time for life. Generally, technology that acts as a enhancement of or replacement for human labor is ingrained with the drive for efficiency. It is the promise to tip the scale towards the life part of the equation. Computers especially try to fulfill the promise of less, more efficient work. Once computers where connected by a world-wide network and services became available detached from space and time, the dream of 'efficiency at the click of a mouse' seemed attainable even more so.
+
+> "We all remember the promises. The slogans. They were all about freedom, liberation. Supposedly we were in handcuffs and wanted out of them. The key that dangled in front of us was a microchip." — Walter Kirn
 
 Nowadays modern computer technology provides a multiplicity of options providing help to organize ones time. In its simplest form it appers as calendars, notifications and timers. Build upon these are a number of strategies, for example: [GTD (Getting Things Done)](http://gettingthingsdone.com/), [Pomodoro Technique](http://pomodorotechnique.com/) or the [Eisenhower Matrix](http://www.eisenhower.me/). The techniques a then translated into software which makes them broadly available. All these techniques aim to accomplish higher efficiency in order to 'save time'.
 
@@ -36,7 +40,7 @@ Although the story that technology is causing the acceleration seems plausible, 
 
 Following Wacjman the reason is the intensification of work enabled by technology. The idea of the intensification of work is derived from Karl Marx, who argued that there are only two ways to extract more work from laborers: work longer hours or increase the productivity in the same period of time. According to Wajcman's empirical research work hours have remained constant since the 1960s. But her research also shows that a feeling of contant pressure and lack of time has evolved. Why did this gap emerge? Wajcman's answer is two-fold. On the one hand there are people who work more by choice and others who work less unintendedly. The distribution of work is very unequal across our societies. Wajcman also argues that the gap is caused by the strain of a new **performance regime**. Our work is measured in ways it was never before.
 
-> We now attribute value to “busyness” and multitasking; we feel busy because we want to squeeze as much as possible into as little time as possible. In order to change these feelings we first need to redefine our cultural values. — Judy Wacjman
+> "We now attribute value to “busyness” and multitasking; we feel busy because we want to squeeze as much as possible into as little time as possible. In order to change these feelings we first need to redefine our cultural values." — Judy Wacjman
 
 So in essence technology is not innately responsible for our lack of time. It is rather our cultural inclinination to perform and feel busy. And the compression of time due to performance induced by technology fuels the acceleration narrative. Nevertheless, Wajcman says about herself that she does not fall prey to cultural pessimism or technological determinism which she is critizing Paul Virilio and Manuel Castels for. She's optimistic that after using new technologies excessively and obsessively in the beginning over time we integrate the new tools into our lives.
 
@@ -70,6 +74,8 @@ https://timeline.com/hobby-career-b5d199b0df18#.bn9vv6k88
 
 ## Projected outcome
 
-## Resources
+## Reference List
 
 * [Siri, why am I so busy?: An interview with Judy Wajcman](http://www.publicbooks.org/interviews/siri-why-am-i-so-busy-an-interview-with-judy-wajcman) (Verified at 16/09/12)
+* [Lisa Randall — Dark Matter and the Astounding Interconnectedness of Everything](http://www.onbeing.org/program/lisa-randall-dark-matter-and-the-astounding-interconnectedness-of-everything/8100), On Being with Krista Tippett, November 12, 2015 (Verified at 16/09/13)
+* [The Autumn of the Multitaskers](http://www.theatlantic.com/magazine/archive/2007/11/the-autumn-of-the-multitaskers/306342/), Walter Kirn, The Atlantic, November 2007 Issue (Verified at 16/09/13)
