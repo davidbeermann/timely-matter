@@ -91,6 +91,10 @@ From the standpoint that technology is modeled after natural observations and ev
 
 ## Projected outcome
 
+Some of the themes I described above, at least the ones which relate to work and technology, might seem like I'm an opponent of technological progress. But although I share a general scepticism towards to overly optimistic trajectories of technology, I also believe that technology already is an integral part of our life and the many positive effects by far outweigh the negative ones. Nevertheless, I also think that a critically observation, analysis and assessment of technological and sociological should take place in democratic and public context.
+
+With my project my project I want to specifically address our undersanding of time and propose an alternative point of view which enables the creative development of future in every moment of time.
+
 ## Reference List
 
 * [Siri, why am I so busy?: An interview with Judy Wajcman](http://www.publicbooks.org/interviews/siri-why-am-i-so-busy-an-interview-with-judy-wajcman) (Verified at 16/09/12)
