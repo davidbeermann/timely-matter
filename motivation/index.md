@@ -102,3 +102,4 @@ With my project my project I want to specifically address our undersanding of ti
 * [The Autumn of the Multitaskers](http://www.theatlantic.com/magazine/archive/2007/11/the-autumn-of-the-multitaskers/306342/), Walter Kirn, The Atlantic, November 2007 Issue (Verified at 16/09/13)
 * [A World Without Work](http://www.theatlantic.com/magazine/archive/2015/07/world-without-work/395294/), Derek Thompson, The Atlantic, July/August 2015 Issue (Verified at 16/09/13)
 * [Our parents discovered leisure. We killed it.](https://timeline.com/hobby-career-b5d199b0df18#.ck2fbab8o), Stephanie Buck (Verified at 16/09/13)
+* [The End of Work](http://radioopensource.org/the-end-of-work/), Radio Open Source: arts, ideas and politics with Christopher Lydon, July 31, 2014 (Verified at 16/09/14)
