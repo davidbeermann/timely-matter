@@ -51,9 +51,25 @@ So in essence technology is not innately responsible for our lack of time. It is
 **{TODO check for brief references to Hartmut Rosa and/or Douglas Rushkoff}**  
 **{TODO add brief part on asynchronisity of human and computers}**
 
-### Relativity
+### Experience
 
-The way we experience time is two-fold. On the one hand there is external time, or clock time, which structures our interaction with our environment. The contrast to that is internal time, which describes how we actually experience the flow of time. Whereas external time is linear, internal time is non-linear. We expereice this fact when in certain moments time seems to stand still, whereas in other moments time seems faster than usual. The experience of time is coupled to our psyche ...
+The way we experience time can be distinguished by two common sense types of time: external and internal. External time is best described as the time of the clock. Its steady flow structures our daily life and is the accepted organizational paradigm. On the contrary internal time describes how we experience time personally. Our personal experience of time is in flux – it's seemingly faster at times and seemingly slower at other times – and governed by our psyche. The contradiction between the linearity of external time and the non-linear flow of internal time governing our experience of time in general.
+
+This cursory overview of our experience of time of course does not do justice to inherent complexities. As Maria Popova points out in her article [*The Science of Internal Time, Social Jet Lag, and Why You’re So Tired*](https://www.brainpickings.org/2012/05/11/internal-time-till-roenneber/), reviewing German chronobiologist Till Roenneberg's book [*Internal Time: Chronotypes, Social Jet Lag, and Why You’re So Tired*](http://www.hup.harvard.edu/catalog.php?isbn=9780674065857), we all have our personal **chronotype**. Our chronotype is characterized by how much sleep we need as an individual and when we go to bed or get up. Also, our chronotype changes constantly over our lifetime. Roenneberg's research underlines the fact that the requirements by social time (external time) conflict with our biological time (internal time) which creates what he calls **social jetlag**. He found evidence that ingrained conceptions about time, which for example are depicted by proverbs like "The early bird catches the worm", are not justified in modern societies and can have negative effects on your health. But also other factors affect our chronotype, predominently the rhythm of day and night time. Therefore artificial changes to the external clock, like daylight savings time (DST), are detrimental for some chronotypes.
+
+Author and professor of sociology Helga Nowotny takes on yet another stance of how we experience time. In her 1993 book [*Eigenzeit*](http://www.suhrkamp.de/buecher/eigenzeit-helga_nowotny_28652.html) - english title [*Time: The Modern and Postmodern Experience*](http://www.polity.co.uk/book.asp?ref=9780745618371) – she concerns herself with our perception of time and how it has changed, especially due to communication technology. **{TODO finish section and translate quotes}**
+
+> Ich wurde allmählich überzeugt vom unaufhaltsamen Verschwinden der Kategorie Zukunft und ihrer Ersetzung durch etwas, das ich die erstreckte Gegenwart nenne. Und immer und überall stieß ich auf jene Technologien, die am unmittelbarsten und sichtbarsten die menschliche Zeitwahrnehmung verändern - die modernen Kommunikationstechnologien. — Helga Nowotny
+
+> Die Durchlässigkeit der Zeitgrenze zwischen Gegenwart und Zukunft wird durch Technologien gefördert, die zeitliche Entkoppelung und Dezentralisierung ermöglichen und die andersartige, auf die Gegenwart bezoge- ne Zeitmuster erzeugen, die sich von der Linearität weitge- hend abgelöst haben.
+
+> Das Thema der Eigenzeit geht durch mehrere Kapitel hindurch. Die Geschichte der Zeitgeber, allen voran der Uhr, spiegelt das Verhältnis der Menschen in ihrer zeitlichen Bedingtheit zwischen ihrer sozialen Umwelt und ihrer "eigenen", sich erst allmählich heruasbildenen individualisierten Zeit wider. Uhren als Zeitgeber verkörpern auch die Werte einer Gesellschaft. Die ersten Uhren hatten wenig gemeinsam mit den funktionalen Zeitgebern, die heute Werte anzeigen, die längst internationalisiert wurden. Mit der Entstehung der bürgerlichen Gesellschaft, in der die Subjektivität allmählich zu einem neuen Bezugspunkt wurde, entstand auch die partielle Herauslösung aus einer gemeinsamen, sozialen Zeit.
+
+> Mit den eigenen Zeitreserven angesichts einer begrenzten Lebenszeit besser umgehen zu lernen, dem Zeitdruck zu widerstehen, setzt ein verständnisvolles Öffnen gegenüber dem strategisch-spielerischen Aspekt in der Zeit voraus.
+
+> Die bisherige Geschichte der westlich-linearen Zeitordnung ist eng verknüpft mit der Industrialisierung und der brutalen Anpassung der menschlichen Arbeitskraft und Lebenszeit an die Maschine.
+
+> So entsteht die Sehnsucht nach dem Augenblick. Strategisch gedacht, soll es der »richtige« Augenblick sein: Spielerisch-kreativ gedacht ist es der Augenblick, der - für kurze Zeit - alles ermöglicht und aus dem Geschichte fließt.
 
 ### Appropriation
 
