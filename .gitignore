@@ -7,11 +7,13 @@ examples/*/*
 !examples/*/addons.make
 !examples/*/bin
 !examples/*/src
+!examples/*/images
 application/*/*
 !application/*/*.md
 !application/*/addons.make
 !application/*/bin
 !application/*/src
+!application/*/images
 
 # ignore all *.app files inside of bin folders
 *.app
