@@ -1,6 +1,19 @@
 @import "../colors"
 
 .page-content
+  a
+    position: relative
+    &, &:active, &:visited
+      border-bottom-color: $light-gray
+      border-bottom-style: solid
+      border-bottom-width: 3px
+      color: $mid-gray
+      text-decoration: none
+    &:hover
+      border-bottom-width: 1px
+      color: $light-mid-gray
+      @include animation(content_link_anim 0.4s ease)
+
   blockquote
     @include outer-container
     line-height: 1.4
@@ -17,3 +30,12 @@
       font-size: rem(20)
       font-style: italic
       font-weight: 300
+
+
+@include keyframes(content_link_anim)
+  from
+    border-bottom-width: 3px
+    color: $mid-gray
+  to
+    border-bottom-width: 1px
+    color: $light-mid-gray
