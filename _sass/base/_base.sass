@@ -27,7 +27,7 @@ p
 .page-content
   h1
     display: inline-block
-    // position: relative
+    margin-top: 0
     &::after
       background-color: $dark-gray
       content: ""
@@ -36,3 +36,5 @@ p
       position: relative
       width: auto
       top: em(-3)
+  &>h1
+    margin-top: em(-6)
