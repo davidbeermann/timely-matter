@@ -3,6 +3,10 @@
 $footer-margin: 3em
 $footer-padding: 1.5em
 
+$link-color: #a0a0a0
+$hover-color: #606060
+$line-color: #ededed
+
 .page-footer
   border-top: solid 1px $light-gray
   margin-top: $footer-margin
@@ -16,3 +20,36 @@ $footer-padding: 1.5em
   line-height: 1.42857
   p
     margin: 0
+  a
+    position: relative
+    &, &:active, &:visited
+      color: $link-color
+      text-decoration: none
+    &::after
+      background-color: $line-color
+      bottom: -1px
+      content: ''
+      height: 2px
+      left: 0
+      position: absolute
+      width: 100%
+    &:hover
+      color: $hover-color
+      @include animation(link_anim 0.35s ease)
+    &:hover::after
+      height: 0
+      @include animation(line_anim 0.25s ease)
+
+@include keyframes(link_anim)
+  from
+    color: $link-color
+  to
+    color: $hover-color
+
+@include keyframes(line_anim)
+  from
+    bottom: -1px
+    height: 2px
+  to
+    bottom: 1px
+    height: 0
