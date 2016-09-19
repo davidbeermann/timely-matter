@@ -1,0 +1,19 @@
+@import "../colors"
+
+.page-content
+  blockquote
+    @include outer-container
+    line-height: 1.4
+    text-align: center
+    p
+      @include span-columns(10)
+      @include shift(1)
+      color: $light-mid-gray
+      font-size: rem(14)
+      margin-top: 0.5em
+      margin-bottom: 0
+    &>p:first-child
+      color: $mid-gray
+      font-size: rem(20)
+      font-style: italic
+      font-weight: 300
