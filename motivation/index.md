@@ -12,7 +12,9 @@ Although my topic is rooted in theoretical observations I set myself the goal to
 
 ## Core themes
 
-> "Nobody understands time." — Lisa Randall, Theoretical Physicist
+> Nobody understands time.
+>
+> Lisa Randall, Theoretical Physicist
 
 While converging my initial instinct within the broad field I defined for myself into a concrete topic I identified several themes, which I believe are relevant in the context of my thesis topic. Even if not all aspects mentioned below found their way into the final concept of my work, they were at the back of my mind while working on it. In the following paragraphs I'd like to introduce these crucial themes.
 
@@ -46,7 +48,9 @@ The idea of "The End of Work" is nothing new, even at Keynes' times. It is float
 
 Although the ideal of the end of work sounds tempting, McAfee goes on to explain why in his opinion we should critically observe the transition period. The classic economist view of the world is that technology creates more jobs and companies than it destroys. But through his research he became sceptical of this assumption. Because he observed how technology is the driving factor of hollowing out the middle class. That is because technology creates new jobs at the upper and lower steps of the skill ladder. 
 
-> "We all remember the promises. The slogans. They were all about freedom, liberation. Supposedly we were in handcuffs and wanted out of them. The key that dangled in front of us was a microchip." — Walter Kirn
+> We all remember the promises. The slogans. They were all about freedom, liberation. Supposedly we were in handcuffs and wanted out of them. The key that dangled in front of us was a microchip.
+> 
+> Walter Kirn
 
 Generally technology which enables higher efficency does so in order to save time – doing the same amount of work in less time. The notion of 'saving time' also alludes to notion of a sustainable work-life balance. The goal is to minimize the amount of 'work time' in order to gain 'life time'. In this scenario work and life are two competing forces, where work has a negative connotation, whereas life has positive connotations. From this perspective being effective at work is eligible, if not necessary in order to have 'time to live'. Generally, technology that acts as a enhancement of or replacement for human labor is ingrained with the drive for efficiency. It is the promise to tip the scale towards the life part of the equation. Computers especially try to fulfill the promise of less, more efficient work. Once computers where connected by a world-wide network and services became available detached from space and time, the dream of 'efficiency at the click of a mouse' seemed attainable even more so.
 
@@ -64,7 +68,9 @@ Although the story that technology is causing the acceleration seems plausible, 
 
 Following Wacjman the reason is the intensification of work enabled by technology. The idea of the intensification of work is derived from Karl Marx, who argued that there are only two ways to extract more work from laborers: work longer hours or increase the productivity in the same period of time. According to Wajcman's empirical research work hours have remained constant since the 1960s. But her research also shows that a feeling of contant pressure and lack of time has evolved. Why did this gap emerge? Wajcman's answer is two-fold. On the one hand there are people who work more by choice and others who work less unintendedly. The distribution of work is very unequal across our societies. Wajcman also argues that the gap is caused by the strain of a new **performance regime**. Our work is measured in ways it was never before.
 
-> "We now attribute value to “busyness” and multitasking; we feel busy because we want to squeeze as much as possible into as little time as possible. In order to change these feelings we first need to redefine our cultural values." — Judy Wacjman
+> We now attribute value to “busyness” and multitasking; we feel busy because we want to squeeze as much as possible into as little time as possible. In order to change these feelings we first need to redefine our cultural values.
+> 
+> Judy Wacjman
 
 So in essence technology is not innately responsible for our lack of time. It is rather our cultural inclinination to perform and feel busy. And the compression of time due to performance induced by technology fuels the acceleration narrative. Nevertheless, Wajcman says about herself that she does not fall prey to cultural pessimism or technological determinism which she is critizing Paul Virilio and Manuel Castels for. She's optimistic that after using new technologies excessively and obsessively in the beginning over time we integrate the new tools into our lives.
 
@@ -77,7 +83,9 @@ Nowadays the ease of software development allows for rapid implementations of ne
 
 His predominant example he refers to is the MIDI standard for notes in digital music and how it affects the ideation of new software and therefore also compositions. MIDI was developed by Dave Smith in the early 1980s. He conceived the standard when being faced with the problem of connecting a keyboard to a synthesizer. Dispite the fact the MIDI is a quite literal translation of the keys being pressed and released, MIDI became a standard format for musical notes in software. Whereas MIDI works well to encode the behavior of a keyboard, it fails to do so with other instruments, for example a saxophone. Nevertheless, since MIDI became an unquestioned standard for notes it also used to represent a saxophone in music software.
 
-> "It takes only a tiny group of engineers to create technology that can shape the entire future of human experience with incredible speed. Therefore, crucial arguments about the human relationship with technology should take place between developers and users before such direct manipulations are designed." — Jaron Lanier (p.5f)
+> It takes only a tiny group of engineers to create technology that can shape the entire future of human experience with incredible speed. Therefore, crucial arguments about the human relationship with technology should take place between developers and users before such direct manipulations are designed.
+>
+> Jaron Lanier (p.5f)
 
 As he points out, Lanier is worried that the same mistake in terms of what a note is, is repeated nowadays in terms of what person is online. According to Lanier working with information technology automatically involves being engaged in social engeneering.
 
