@@ -1,4 +1,4 @@
-const JEKYLL_SERVER_ADDRESS = 'http://127.0.0.1:4000/timely-matter/';
+const JEKYLL_SERVER_ADDRESS = 'http://127.0.0.1:4000/';
 
 const browser_sync = require('browser-sync').create();
 const gulp = require('gulp');
@@ -17,7 +17,6 @@ gulp.task('scripts', function () {
 
 
 gulp.task('images', function () {
-    console.log('optimizing images');
     gulp.src('./_images/**/*')
         .pipe(imagemin({
             interlaced: true,
