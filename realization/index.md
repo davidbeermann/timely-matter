@@ -8,6 +8,9 @@ position: 4
 
 In the following sections I'll chronologically present excerpts of the in-between steps that let me to the final implementation.
 
+![Notes during programming]({{ "/static/images/realization-1.gif" | prepend: site.baseurl }})
+*Notes during programming*
+
 ## Cinder – Flocking Tutorial
 
 After following Cinder's basic [Getting Started](https://libcinder.org/docs/guides/opengl/index.html) guide I took upon myself to implement the unfortunately out-dated Flocking Tutorial by [Robert Hodgin](http://www.roberthodgin.com/) with the latest version of Cinder. You'll find the tutorial under [Guides](https://libcinder.org/docs/guides/index.html). It is a two-part tutorial. [Part 1](https://libcinder.org/docs/guides/tour/hello_cinder.html) explains some Cinder basics and builds a basic particle simulation. Whereas [part 2](https://libcinder.org/docs/guides/flocking/chapter1.html) goes into the details of extending the particle simulation and also the implementation of steering behaviors.
