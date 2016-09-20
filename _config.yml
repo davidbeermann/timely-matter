@@ -11,8 +11,10 @@ subtitle: >
 email: mail@davidbeermann.com
 description: > # this means to ignore newlines until "baseurl:"
   ...
-baseurl: "/timely-matter" # the subpath of your site, e.g. /blog
-url: "https://davidbeermann.github.io" # the base hostname & protocol for your site
+#baseurl: "/timely-matter" # the subpath of your site, e.g. /blog
+#url: "https://davidbeermann.github.io" # the base hostname & protocol for your site
+baseurl: "/"
+url: "http://timely-matter.davidbeermann.com"
 
 #google_fonts: https://fonts.googleapis.com/css?family=Roboto+Mono:400,700|Roboto:400,400i,700,700i
 google_fonts: https://fonts.googleapis.com/css?family=Roboto+Mono:300,700|Roboto:300,300i,700,700i
