@@ -12,11 +12,11 @@ Although my topic is rooted in theoretical observations I set myself the goal to
 
 ## Core themes
 
+While converging my initial instinct within the broad field I defined for myself into a concrete topic I identified several themes, which I believe are relevant in the context of my thesis topic. Even if not all aspects mentioned below found their way into the final concept of my work, they were at the back of my mind while working on it. In the following paragraphs I'd like to introduce these crucial themes.
+
 > Nobody understands time.
 >
 > Lisa Randall, Theoretical Physicist
-
-While converging my initial instinct within the broad field I defined for myself into a concrete topic I identified several themes, which I believe are relevant in the context of my thesis topic. Even if not all aspects mentioned below found their way into the final concept of my work, they were at the back of my mind while working on it. In the following paragraphs I'd like to introduce these crucial themes.
 
 ### Experience
 
@@ -24,19 +24,22 @@ The way we experience time can be distinguished by two common sense types of tim
 
 This cursory overview of our experience of time of course does not do justice to inherent complexities. As Maria Popova points out in her article [*The Science of Internal Time, Social Jet Lag, and Why You’re So Tired*](https://www.brainpickings.org/2012/05/11/internal-time-till-roenneber/), reviewing German chronobiologist Till Roenneberg's book [*Internal Time: Chronotypes, Social Jet Lag, and Why You’re So Tired*](http://www.hup.harvard.edu/catalog.php?isbn=9780674065857), we all have our personal **chronotype**. Our chronotype is characterized by how much sleep we need as an individual and when we go to bed or get up. Also, our chronotype changes constantly over our lifetime. Roenneberg's research underlines the fact that the requirements by social time (external time) conflict with our biological time (internal time) which creates what he calls **social jetlag**. He found evidence that ingrained conceptions about time, which for example are depicted by proverbs like "The early bird catches the worm", are not justified in modern societies and can have negative effects on your health. But also other factors affect our chronotype, predominently the rhythm of day and night time. Therefore artificial changes to the external clock, like daylight savings time (DST), are detrimental for some chronotypes.
 
-Author and professor of sociology Helga Nowotny takes on yet another stance of how we experience time. In her 1993 book [*Eigenzeit*](http://www.suhrkamp.de/buecher/eigenzeit-helga_nowotny_28652.html) - english title [*Time: The Modern and Postmodern Experience*](http://www.polity.co.uk/book.asp?ref=9780745618371) – she concerns herself with our perception of time and how it has changed, especially due to communication technology. **{TODO finish section and translate quotes}**
+Whereas Roenneberg concerns himself with the biological effects of the requirements of social time, author and professor of sociology Helga Nowotny looks at the effects of changing temporalities in western society. In her 1993 book [*Eigenzeit*](http://www.suhrkamp.de/buecher/eigenzeit-helga_nowotny_28652.html) - the english translation from 1996 is titled [*Time: The Modern and Postmodern Experience*](http://www.polity.co.uk/book.asp?ref=9780745618371) – she concerns herself with the perception of time and how it has changed. She argues that in the phase of the industrialization due to the capitalistic idea time was valued against money. This equation is suitably depicted by Benjamin Franklin's idiom *'Time Is Money'*. Then time was a scarce commodity within the industrial production cycle. Innovation and the belief in progress were linear and therefore the boundaries between present and future intact.
 
-> Ich wurde allmählich überzeugt vom unaufhaltsamen Verschwinden der Kategorie Zukunft und ihrer Ersetzung durch etwas, das ich die erstreckte Gegenwart nenne. Und immer und überall stieß ich auf jene Technologien, die am unmittelbarsten und sichtbarsten die menschliche Zeitwahrnehmung verändern - die modernen Kommunikationstechnologien. — Helga Nowotny
+> I gradually became convinced of the inexor­ able disappearance of the category of the future and its replacement by something I call the extended present. And always and everywhere I encountered those technol­ ogies which are changing the human perception of time most immediately and most visibly - the modem tech­ nologies of communication.
+>
+> Helga Nowotny (p.8)
 
-> Die Durchlässigkeit der Zeitgrenze zwischen Gegenwart und Zukunft wird durch Technologien gefördert, die zeitliche Entkoppelung und Dezentralisierung ermöglichen und die andersartige, auf die Gegenwart bezoge- ne Zeitmuster erzeugen, die sich von der Linearität weitge- hend abgelöst haben.
+All of this changed with end of the age of industrialization and the introduction of modern communication technologies, according to Nowotny. She perceives that time is speeded up by becoming accelerated innovation itself. To her the time-boundary between present and future has become permeable and the present has been detached from the temporal linearity. *'A present geared to accelerated innovation is beginning to devour the future.' (p.11)* This state she calls extended present. This state is characterized by approximate simultaneities installed by technological infrarstructure. Networking technologies bridge the gap between temporal and spatial distances. But as this technology is connecting us on the one hand it also separates us in economic terms. Nowotny observes that the technological and economic advantage of industrialized nations increases the separation to developing nations while at the same time our interaction is almost immediate. Another aspect of our accelerated temporality she identifies is that responsibility dwindles. The reason is that short-term interactions negate time and therefore do not create the foundation for durable relationships and trust.
 
-> Das Thema der Eigenzeit geht durch mehrere Kapitel hindurch. Die Geschichte der Zeitgeber, allen voran der Uhr, spiegelt das Verhältnis der Menschen in ihrer zeitlichen Bedingtheit zwischen ihrer sozialen Umwelt und ihrer "eigenen", sich erst allmählich heruasbildenen individualisierten Zeit wider. Uhren als Zeitgeber verkörpern auch die Werte einer Gesellschaft. Die ersten Uhren hatten wenig gemeinsam mit den funktionalen Zeitgebern, die heute Werte anzeigen, die längst internationalisiert wurden. Mit der Entstehung der bürgerlichen Gesellschaft, in der die Subjektivität allmählich zu einem neuen Bezugspunkt wurde, entstand auch die partielle Herauslösung aus einer gemeinsamen, sozialen Zeit.
+> Only against the background of speed can slowness be determined and learnt. Only against the back­ ground of temporal limitation can the latter be surpassed.
+>
+> Helga Nowotny (p.14f)
 
-> Mit den eigenen Zeitreserven angesichts einer begrenzten Lebenszeit besser umgehen zu lernen, dem Zeitdruck zu widerstehen, setzt ein verständnisvolles Öffnen gegenüber dem strategisch-spielerischen Aspekt in der Zeit voraus.
+> There thus arises the longing for the moment. In stra­tegic terms, it has to be the 'right' moment. In playful creative terms, it is the moment which - for a short time - makes everything possible, and from which history flows. Seeking the moment and finding it ultimately means acknowledging one's own temporality.
+>
+> Helga Nowotny (p.15)
 
-> Die bisherige Geschichte der westlich-linearen Zeitordnung ist eng verknüpft mit der Industrialisierung und der brutalen Anpassung der menschlichen Arbeitskraft und Lebenszeit an die Maschine.
-
-> So entsteht die Sehnsucht nach dem Augenblick. Strategisch gedacht, soll es der »richtige« Augenblick sein: Spielerisch-kreativ gedacht ist es der Augenblick, der - für kurze Zeit - alles ermöglicht und aus dem Geschichte fließt.
 
 ### Efficiency
 
@@ -74,9 +77,6 @@ Following Wacjman the reason is the intensification of work enabled by technolog
 
 So in essence technology is not innately responsible for our lack of time. It is rather our cultural inclinination to perform and feel busy. And the compression of time due to performance induced by technology fuels the acceleration narrative. Nevertheless, Wajcman says about herself that she does not fall prey to cultural pessimism or technological determinism which she is critizing Paul Virilio and Manuel Castels for. She's optimistic that after using new technologies excessively and obsessively in the beginning over time we integrate the new tools into our lives.
 
-**{TODO check for brief references to Hartmut Rosa and/or Douglas Rushkoff}**  
-**{TODO add brief part on asynchronisity of human and computers}**
-
 ### Encoding 
 
 Nowadays the ease of software development allows for rapid implementations of new ideas and concepts. A highly acclaimed circumstance which nevertheless has its pitfalls. Once an idea is implemented and reaches a certain threshold of distribution it becomes hard if not impossible to alter or adapt. Computer philosophy writer and computer scientist Jaron Lanier names this phenomenon **lock-in** in his 2010 manifesto [*You Are Not a Gadget*](http://www.penguinrandomhouse.com/books/97779/you-are-not-a-gadget-by-jaron-lanier/). He argues that "the process of lock-in is like a wave gradually washing over the rulebook of life, culling the ambiguities of flexible thoughts as more and more thought structures are solidified into effectively permanent reality". (p.9)
@@ -100,8 +100,6 @@ Derived from the ideal of efficency we developed strategies which appropriate te
 As pointed out by Walter Kirn in his 2007 article [*The Autumn of the Multitaskers*](http://www.theatlantic.com/magazine/archive/2007/11/the-autumn-of-the-multitaskers/306342/) scientists found evidence contrasting the assumed benefits of multi-tasking. First of all it requires a constant switching between brain regions – imagine reading an article (visual process) and brushing your teeth (physical coordination). This switching actually prevents the activation of higher areas of brain activity which are related to memory and learning. "We concentrate on the act of concentration at the expense of whatever it is that we’re supposed to be concentrating *on*". Further there is evidence that multi-tasking triggers biochemical processes which release stress related hormones. Although the effect of these hormones in the short term are controversial – some even argue for them to be healthy – science univocally agrees on the long term effects of stress in general and related hormones. Effects are fatigue, inability to focus and limited analytical abilities. "This is the great irony of multitasking—that its overall goal, getting more done in less time, turns out to be chimerical. In reality, multitasking slows our thinking".
 
 Another less hazardous appropriation is the act browsing. When we browse we are not really immersing ourselves into a task or topic, but we are rather enacting it with a mental idleness without attention to details or retention of knowledge. Ideally, instead of remembering what we read, we remember where we read it. It is kind of a *mental bookmark*. Whether this a necessary appropriation at times of information overload stands to question. Unquestionably this behavior is enabled by technology and possibly reinforced – I'm thinking of endless scrolling website, which automatically load new content on demand. The last example is life hacking. In a technological context hacking is the act of exposing (possibly exploiting) an engineering oversight or creating a short-cut to achieve the same result with less effort. Life hacking is the same principle. It is the pursuit od short cuts for better personal efficiency.
-
-**{TODO add reference to [Cognitive Dissonance](https://en.wikipedia.org/wiki/Cognitive_dissonance)}**
 
 ### Inherence
 
