@@ -25,6 +25,10 @@ how nature works and the way people think.
 > Gregory Bateson  
 > An Ecology of Mind
 
+> Nobody understands time.
+>
+> Lisa Randall, Theoretical Physicist
+
 ## Introduction
 
 ...
@@ -67,7 +71,31 @@ The ideas by Bergson and Deleuze have many revolutionary implications – politi
 
 ## Emergence
 
-...
+Bergson's interpretation of an understanding of time based on duration has inherent emergent characteristics. His notion of internal growth and constant creation of novelty aligns with the concepts encapsulated in **emergence**. Emergence is a much debated topic with little consensus about its definition. Nevertheless it is a worthwhile endevour to inspect the characteristics of emergence in regards to time.
+
+As the 2008 edition of the [Chicago Humanities Festival](http://chicagohumanities.org/) addressed it – [*Emergence: Where Science Meets Philosophy*](http://chicagohumanities.org/events/2008/thinking-big/emergence-philosophy-meets-science) – the field lies at a vibrant intersection. Science and philosophy identify similiar but also different properties that characterize emergence...
+
+In his essay *'The mangle in practice'* Andrew Pickering suggests an alternative perception of scientific practice/s... He proposes a performative notion which acknowledges the **temporally emergent relationship between human and nonhuman agency**. Thereby his idea extends the default conception of science-as-knowledge to represent nature and produce insights. The concept of science-as-culture includes material, social and temporal dimensions.
+
+By acknowledging the symmetric nature of human and nonhuman agency, Pickering ties himself to the **actor-network theory** proposed by Bruno Latour among others. Whereas he agrees with the feature of material agency in order to escape the representational nature of science in favor of a performative nature, Pickering opposes Latour's appeal to semiotics in order to justify his theory to critics. According to Pickering semiotics bears the risk of underrating human agency and therefore all knowledge produced by science. This is why he proposes the temporally emergent property of human and nonhuman agency. Another effect of performing science in real time is that it resolves the issue of retrospective justification. Instead retrospection itself becomes subject to analysis.
+
+Pickering's deviation from the actor-network theory is founded in human **intentionality**. Intentionality captures goals of nonexistent future states that humans seek out to achieve. By acknowledging the itention of human agency he objects to a purely symmetric relationship with nonhuman agency. In this regard Pickering agrees with Latour's critics who resolves this issue simply by the means of semiotics. But according to Pickering this clearly disregards the extended temporality of human intentionality. Therefore he proposes the process of **modelling**. This open-ended process has neither a determinate destination nor a finite number of instrumental variants. The goals of scientific practice emerge in real time.
+
+> Existing culture, to appropriate Michel Foucault's phrase (1972), is literally the surface of emergence for the intentional structure of human agency.
+> 
+> Pickering, p.20
+
+Further Pickering remarks that based on the assumption that goals of scientific practice emerge from existing machines, material agency and human itentions must be intertwined. This dependency he describes as the process of **tuning**. Tuning is a process in which humans intentionally make adjustments to machines in anticipation of a specific result which is a capture of material agency. 'The world of intentionality is, then, constitutively engaged with the world of material agency, even if the one cannot be substituted for the other.' (p.20) Not only is the relationship between human and material agency required but also the scientific goals liable for revision. In the process of tuning human intention is reconfigured and becomes itself subject to temporal emergence. Therefore human intentionality and nonhuman agency are deeply intertwined by reciprocal dependence. Nevertheless human intent is still acknowledged as distinct.
+
+> Tuning in goal-oriented practice takes the form, I think, of a dance of agency.
+> 
+> Pickering, p.21
+
+The dance of agency alludes to performative idiom Pickering tries to establish in quite literal way. The previously described process of tuning can be generalized as a form of a **dialectic of resistance and accommodation**. In this case resistence is a metaphor for failing to achieve an intended capture of material agency. On the other hand accomodation is an active human strategy as a result of resistance. This interplay of material and social agency blurs their contours. It is this emergent transformation and delineation which Pickering appropriates as 'the mangle in practice'. By corroding the distinctions between human and nonhuman agency the mangle adverts to actor-network theory. But the performative idiom that Pickering developed moves past binary distinctions between humanism and antihumanism. Instead it opens the space for **posthumanism**. In it human actors are still present but also inextricably entangled with the nonhuman. Humans simply lost their claim of being at the center of reality.
+
+> The world makes us in one and the same process as we make the world.
+> 
+> Pickering, p.26
 
 ## Matter
 
@@ -75,9 +103,21 @@ The ideas by Bergson and Deleuze have many revolutionary implications – politi
 
 ## Conclusion
 
-...
+How unstable out image of reality actually is was recently exposed with the Higgs Boson Particle by the LHC. The proof that this particle exists was attributed by measurements of its weight. This result does not align with two dominant theoretical physic views of our universe. The multiverse and {...}. The calculations of the former we made under the assumtion that the Higgs Boson particle weighs {...}. The latter theory assumed that the same particle weighs {...}. The actual result turned out to be {...}.
+
+Neri Oxman depicts in her inaugural essay [*'Age of Entanglement'*](http://jods.mitpress.mit.edu/pub/AgeOfEntanglement) for the [Journal of Design and Science (JoDS)](http://jods.mitpress.mit.edu/) the fields of science and art adjacent to one another. They meet each other in philosophy, where according to Oxman cuture and nature are debated in order to derive new information.
+
+![Krebs Cycle of Creativity]({{ "/static/images/krebs-cycle-of-creativity.png" | prepend: site.baseurl }})
+
+> The things [art & science] that are least important for our survival are the very things that make us human.
+> 
+> Savas Dimopoulos, *Particle Fever* (2014)
 
 ## References
 
-* Bergson, H. (1948). The Creative Mind. New York. NY: The Philosophical Library, Inc.
-* Parr, A. (2010). The Deleuze Dictionary. Revised Edition. Edinburgh. UK: Edinburgh University Press Ltd.
+* Bergson, H. (1948). *The Creative Mind*. New York. NY: The Philosophical Library, Inc.
+* McCormack, J, & Dorin, A. (2001). *Art, Emergence and the Computational Sublime*. Second Iteration [Proceedings of the Second International Conference on Generative Systems in the Electronic Arts, Victoria, Australia, 5-7 December 2001], Centre for Electronic Media Art, VIC, Australia, pp 67-81.
+* Greenblatt, S. (2011). *The swerve – how the world became modern*. New York/London, US/UK: W. W. Norton & Company, Inc.
+* Parr, A. (2010). *The Deleuze Dictionary – Revised Edition*. Edinburgh. UK: Edinburgh University Press Ltd.
+* Pickering, A. (1995). *The mangle of practice: time, agency, and science*. Chicago/London. US/UK: The University of Chicago Press.
+ 
