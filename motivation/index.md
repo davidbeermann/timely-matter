@@ -95,13 +95,13 @@ Another less hazardous appropriation is the act browsing. When we browse we are 
 
 ### Inherence
 
-In his TED talk about his book [What Technology Wants](http://kk.org/books/what-technology-wants/) WIRED magazine co-founder Kevin Kelly explains his view on the evolution of technology. The title seems to suggest a humanization of technology but Kelly is rather refering to the inherent qualities of technology. He goes on to point out that according to his observations technology evolves by the same standards nature does: ubiquity, diversity, specialization, complexity and socialization. According to Kelly there's proof for each of these trends in technology. Therefore he considers technology as the 7th [kingdom of nature](https://en.wikipedia.org/wiki/Kingdom_(biology)).
+In his [TED talk](https://www.youtube.com/watch?v=ap-ZC21bk18) about his book [What Technology Wants](http://kk.org/books/what-technology-wants/) WIRED magazine co-founder Kevin Kelly explains his view on the evolution of technology. The title seems to suggest a humanization of technology but Kelly is rather refering to the inherent qualities of technology. He goes on to point out that according to his observations technology evolves by the same standards nature does: ubiquity, diversity, specialization, complexity and socialization. According to Kelly there's proof for each of these trends in technology. Therefore he considers technology as the 7th [kingdom of nature](https://en.wikipedia.org/wiki/Kingdom_(biology)).
 
 Another important concept in Kelly's analysis is what he refers to as the **infinite game**. He posits that culture is an accumulation of ideas. This implies that each idea is build upon the previous generation – as in cellular biology and genetics. In other words current technology is the plateau from which new technology is derived. But technology has also the advantage of skipping the current plateau and derive inspiration from all previous ideas. Therefore technology has an advantage over natural evolution where inappropriate adaptations to the environment simply cease to exist if they can not adapt to new circumstances.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ap-ZC21bk18" frameborder="0" allowfullscreen></iframe>
-
 From the standpoint that technology is modeled after natural observations and evolves by the same standards the hypothesis of the [technological singularity](https://en.wikipedia.org/wiki/Technological_singularity) becomes feasable. The **singularity** encapsulates the idea that technology will be able to reproduce and improve itself which eventually will result in a powerful superintelligence that far surpasses human intelligence. The author, scientist and futurist Ray Kurzweil is a proponent of this theory. He argues that we are already working on the technology and predicts that the singularity will become reality in the forseeable future. He also perceives the human body already in transition which he captures in the term **transhuman**. This encapsulates the idea that we as humans are overcoming  our physical and biological limitation by means of technology.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/khjY5LWF3tg" frameborder="0" allowfullscreen></iframe>
 
 ## Projected outcome
 
