@@ -6,6 +6,8 @@ position: 2
 
 # Concept
 
+The following arguments are derived from several fields of study which in their complexities by far exceed any single conclusive work – probably even in the field itself. In that regard I clearly neglected Ralph Ammer's advice ['Don’t think big!'](https://blog.prototypr.io/dont-think-big-5ca8e7dd8b3d#.opdknri2c). His core argument is: *'Big topics often lead to small results, small topics foster great results.'* And from a perspective of the contribution to a distinct field I'm incline to agree. With this work however my goal was to tie together thoughts and concepts from big, divergent fields in order to craft new connections. Therefore I see my contribution rather in these connection than in measurable contribution to a single field.
+
 ## Preface 
 
 > As all historians know, the past is a great darkness, and filled with echoes.
