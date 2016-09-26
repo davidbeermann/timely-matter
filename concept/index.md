@@ -6,11 +6,18 @@ position: 2
 
 # Concept
 
+## Preface 
+
 > As all historians know, the past is a great darkness, and filled with echoes.
 Voices may reach us from it; but what they say to us is imbued with the obscurity of the matrix out of which they come; and, try as we may, we cannot decipher them precisely in the clearer light of our own day.
 >
 > Margaret Atwood  
 > (1985, p.311)
+
+> Nature even on the most local scales made a mockery of information technology. Even augmented by tech, the human brain was paltry, infinitesimal, in comparision to the universe. [...] Matter was information, information matter, and only in the brain did matter organize itself sufficiently to be aware of itself; only in the brain could the information of which the world consisted manipulate itself. The human brain was a very special case.  
+> 
+> Jonathan Franzen  
+> (2015, p.504)
 
 > When the shadow of the sash appeared on the curtains it was between seven and
 eight o’clock and then I was in time again, hearing the watch. It was Grandfather’s and when Father gave it to me he said, Quentin, I give you the mausoleum of all hope and desire; it’s rather excruciatingly apt that you will use it to gain the reducto absurdum of all human experience which fit your individual needs no better than it fitted his or his father’s. I give it to you not that you may remember time, but that you might forget it now and then for a moment and not spend all your breath trying to conquer it. Because no battle is ever won he said. They are not even fought. The field only reveals to man his own folly and despair,
@@ -18,16 +25,6 @@ and victory is an illusion of philosophers and fools.
 >
 > William Faulkner  
 > (1995, p.63)
-
-> The major problems in the world are the result of the difference between
-how nature works and the way people think.
->
-> Gregory Bateson  
-> An Ecology of Mind
-
-> Nobody understands time.
->
-> Lisa Randall, Theoretical Physicist
 
 ## Introduction
 
@@ -109,9 +106,23 @@ Neri Oxman depicts in her inaugural essay [*'Age of Entanglement'*](http://jods.
 
 ![Krebs Cycle of Creativity]({{ "/static/images/krebs-cycle-of-creativity.png" | prepend: site.baseurl }})
 
+## Postface
+
+> Nobody understands time.
+>
+> Lisa Randall, Theoretical Physicist  
+> OnBeing Podcast
+
+> The major problems in the world are the result of the difference between
+how nature works and the way people think.
+>
+> Gregory Bateson  
+> An Ecology of Mind
+
 > The things [art & science] that are least important for our survival are the very things that make us human.
 > 
-> Savas Dimopoulos, *Particle Fever* (2014)
+> Savas Dimopoulos  
+> *Particle Fever* (2014)
 
 ## References
 
