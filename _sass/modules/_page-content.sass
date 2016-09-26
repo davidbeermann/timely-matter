@@ -16,11 +16,14 @@
 
   img
     width: 100%
-  img + em, a + em
+  img + em, img + a
     color: $light-mid-gray
     display: block
     font-size: rem(14)
     text-align: center
+  img + a
+    &, &:active, &:visited
+      border-bottom: 0
 
   blockquote
     @include outer-container

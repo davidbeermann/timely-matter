@@ -19,8 +19,8 @@ Unfortunately with release v0.9.0 of Cinder the sample code of the tutorial was 
 
 While adopting the tutorial for the latest version of Cinder I tried to apply as many concepts I learned from the introductory guide. Also I sometimes ventured into building my own variantions. The results of this exploration can be found in my GitHub repository [Yet to be uploaded]().
 
-[![Screenshot of Cinder flocking application]({{ "/static/images/cinder-flocking-tutorial.png" | prepend: site.baseurl }})]({{ "/static/images/cinder-flocking-tutorial.png" | prepend: site.baseurl }})
-*Final rendition of the Cinder flocking application*
+![Screenshot of Cinder flocking application]({{ "/static/images/cinder-flocking-tutorial.png" | prepend: site.baseurl }})
+[*Final rendition of the Cinder flocking application*]({{ "/static/images/cinder-flocking-tutorial.png" | prepend: site.baseurl }})
 
 Although the tutorial taught me a lot about Cinder in general and C++ and OpenGL specifically I had to find out that the [Cinder's extension for Kinect](https://github.com/cinder/Cinder-Kinect) does currently not work the latest version. One of the reasons was that Cinder switched from their on math library to [GLM](http://glm.g-truc.net/). While errors resulting from this change would be easily fixed, I also ran into other issues I was unable to resolve. Since I knew from the start that my project would rely on the Kinect camera I went on to work with openFrameworks.
 
