@@ -70,17 +70,29 @@ The ideas by Bergson and Deleuze have many revolutionary implications – politi
 
 ## Emergence
 
-Bergson's interpretation of an understanding of time based on duration has inherent emergent characteristics. His notion of internal growth and constant creation of novelty aligns with the concepts encapsulated in **emergence**. Emergence is a much debated topic with little consensus about its definition. Nevertheless it is a worthwhile endevour to inspect the characteristics of emergence in regards to time.
+Intepreting Bergson's extension of our understanding of time based on duration I recognized  its inherent emergent characteristics. His notion of reality as creative evolution where due to an internal and intertwined growth novelty and possibility is perpetually created alludes to **emergence**. The term is not homogeneous though. Its varied notions are much debated and as of now it seems to be impossible to generate a unique definition for it.
 
-As the 2008 edition of the [Chicago Humanities Festival](http://chicagohumanities.org/) addressed it – [*Emergence: Where Science Meets Philosophy*](http://chicagohumanities.org/events/2008/thinking-big/emergence-philosophy-meets-science) – the field lies at a vibrant intersection. Science and philosophy identify similiar but also different properties that characterize emergence...
+> The term emergence refers to the ways that a multiplicity of seemingly discrete, relatively simple interactions can give rise to astonishing complexity and pattern without any apparent direction or plan.
+> 
+> Richard J. Franke  
+> Chicago Humanities Festival
 
-In his essay *'The mangle in practice'* Andrew Pickering suggests an alternative perception of scientific practice/s... He proposes a performative notion which acknowledges the **temporally emergent relationship between human and nonhuman agency**. Thereby his idea extends the default conception of science-as-knowledge to represent nature and produce insights. The concept of science-as-culture includes material, social and temporal dimensions.
+This off-hand description suggested by Richard Franke of what emergence is hints at the intricacies of assiciations this term is endowed with across philosophy and science. During the 2008 edition of the [Chicago Humanities Festival](http://chicagohumanities.org/) themed [*Emergence: Where Science Meets Philosophy*](http://chicagohumanities.org/events/2008/thinking-big/emergence-philosophy-meets-science) professor Paul Humphreys pointed out the following four characteristics of emergent behavior: 
+
+* emerge from something else – not being fundamental
+* have some kind of autonomy over above the things from which they emerge
+* possess a certain kind of novelty
+* have a holistic aspect - being larger than its parts
+
+According to Humphreys if any combination of three of these characteristics can be identified it's a pretty good indicator for emergent behavior. Applying these characteristics to previously described notion of time – Bergson's concept of duration and Deleuze's concept of becoming – then the emergent properties of the joined conception of time quickly becomes apparent. Bergson's notion of movement and change clearly relate to one moment in time ermerging out of another. According to his argument against retrospection each moment also has its immanent autonomy. And finally Bergson's notion of creative evolution, where each phase is intertwined with others, in order to continuously create novel moments fulfills the third criteria. According to Humphreys' proposed characteristics Bergson's conception of time clearly exhibits emergent behavior. Thus I will take a closer look at our relationship with technology probing it for similiar emergent properties.
+
+In his essay *'The mangle in practice'* Andrew Pickering suggests an alternative perception of scientific practice, which has far reaching consequences on how we derive knowledge and interact with our reality. He proposes a performative notion which acknowledges the **temporally emergent relationship between human and nonhuman agency**. Thereby his idea extends the default conception of science-as-knowledge to represent nature and produce insights. The concept of science-as-culture includes material, social and temporal dimensions.
 
 By acknowledging the symmetric nature of human and nonhuman agency, Pickering ties himself to the **actor-network theory** proposed by Bruno Latour among others. Whereas he agrees with the feature of material agency in order to escape the representational nature of science in favor of a performative nature, Pickering opposes Latour's appeal to semiotics in order to justify his theory to critics. According to Pickering semiotics bears the risk of underrating human agency and therefore all knowledge produced by science. This is why he proposes the temporally emergent property of human and nonhuman agency. Another effect of performing science in real time is that it resolves the issue of retrospective justification. Instead retrospection itself becomes subject to analysis.
 
 Pickering's deviation from the actor-network theory is founded in human **intentionality**. Intentionality captures goals of nonexistent future states that humans seek out to achieve. By acknowledging the itention of human agency he objects to a purely symmetric relationship with nonhuman agency. In this regard Pickering agrees with Latour's critics who resolves this issue simply by the means of semiotics. But according to Pickering this clearly disregards the extended temporality of human intentionality. Therefore he proposes the process of **modelling**. This open-ended process has neither a determinate destination nor a finite number of instrumental variants. The goals of scientific practice emerge in real time.
 
-> Existing culture, to appropriate Michel Foucault's phrase (1972), is literally the surface of emergence for the intentional structure of human agency.
+> Existing culture, to appropriate Michel Foucault's phrase, is literally the surface of emergence for the intentional structure of human agency.
 > 
 > Pickering, p.20
 
