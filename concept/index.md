@@ -30,9 +30,41 @@ and victory is an illusion of philosophers and fools.
 
 ## Introduction
 
-...
+Unbeknownst to Poggio Bracciolini, he was about to irrevesibly change the course of history for centuries to come when in the winter of 1417 he discovered a long lost poem in a remote monastry. The poem was *De rerum nature* – *On the Nature of Things* – by **Lucretius**. Before Bracciolini's discovery fragments of the poem or references to it were sought-after relics by intellectuals. But what Bracciolini discovered was the poem in its entirety. Written in the first century BC it was forbidden under christian influenced roman rule. Therefore its recovery centuries after its disappearance is already miraculous. It had to transcribed in regular intervals and properly stored in order to keep it accessible. This fact is even more astonishing considering its content, implications and therefore the consequences for the prospective scribe and reader.
+
+> In one of the great cultural transformations in the history of the West, the pursuit of pain triumphed over the pursuit of pleasure.
+> 
+> Greenblatt (p.103)
+
+The history of the poem and its discovery is captured in the Pulitzer Price winning book [*The swerve: how the world became modern*](http://books.wwnorton.com/books/detail.aspx?ID=22329) by Stephen Greenblatt. The poem is inspired by Epicurus school of philosophy called **Epicureanism** which is based on the idea of **atomism**. The notion of atomism encompasses that everything that has ever existed is made from indestructible, small building blocks. The Greeks called these blocks atoms. According to Epicurus these atoms are non-hierarchical and exist in a bleak void. Everything that ever existed emerged from combinations of atoms moving freely in the void without devine intevention. From this conception Epicurus derived his critique on superstition and religious belief. Once liberated from these beliefs and its accompanied worldly detriments Epicurus advocated that the purpose of life is the pursuit of pleasure.
+
+Lucretius poem is heralded for its didactic qualities but also unifying the many strands of Epicureanism in a single text. In chapter 8 Greenblatt elaborates in great detail about the revolutionary implications of Lucretius' work. The work's core arguments challenged many beliefs at that time which nowadays constitute the foundations of modern life. Among the many arguments Greenblatt points out the following I find noteworthy in the context of my following elaboration.
+
+> The elementary particles of matter—"the seeds of the things"—are eternal.
+> 
+> Greenblatt (p.186)
+
+Since atoms are indestructible any new configuration is derived from atoms that already existed. Any form that we observe is therefore transitory. Once disolved the atoms of any form will be redistributed in the creation of novelty. This notion also implies that the number of elementary particles is limited. In Lucretius words: "And so the destructive motions cannot hold sway eternally and bury existence forever; nor again can the motions that cause life and growth preserve created things eternally." (p.186)
+
+> Nature ceaselessly experiments.
+> 
+> Greenblatt (p.189)
+
+Any arrangement of particles is the result of a perpetual process of trial and error. Though Lucretius acknowledges that "what has been created gives rise to its own function." (p.190) This implies that some forms succeed over others by being more successfully adapted to their environment. In other words, Lucretius anticipated the famous phrase ["survival of the fittest"](https://en.wikipedia.org/wiki/Survival_of_the_fittest) almost 2.000 years before Darwin adopted it.
+
+> All speculation—all science, all morality, all attemps to fashion a life worth living—must start and end with the comprehension of the invisible seeds of things: atoms and the void and nothing else.
+> 
+> Greenblatt (p.199)
+
+If there is only "atoms and the void and nothing else" then there is no place for any providential creator choreographing the dance of atoms into conceived forms. Further, there is also no mystic beginning, no devine interventions and also no afterlife. For Lucretius accepting this fact was a crucial step toward the possibility of happiness. Although it might seem at first as reason for despair, Lucretius argues that the knowledge about how things are awakens the deepest wonder. He thereby reverses the ancient order of philosophical endevours where wonder led to the pursuit of knowledge. In the reversal of assumptions Alan Watts is likely to agree. In his 1951 book *Wisdom of Insecurity* Watts posits:
+
+> By the same law of reversed effort, we discover the "infinite" and the "absolute", not by straining to escape from the finite and relative world, but by the most complete acceptance of its limitations.
+> 
+> Watts
 
 ## Duration
+
+The philosophical ideas by Lucretius necessarily evoke questions about the nature of time. If there is no beginning and no end to any forms in our universe what is it that supports the actuality of time? If time exits, is it eternal alongside atoms? Or is time created in the moment? If it is created in the moment how can we relate to it as an absolute given? These questions were my starting point when venturing into the murky waters in the pursuit of the nature of time.
 
 Clocks provide one distinct measurement of time and a common convention by which one can interact with reality. But it also imposes a contradiction upon us: between external time and our individual internal perception of time. As I pointed out before this asynchronicity between external and internal time is problematic because it skews the reality of time as we experience it. And it also hints towards the idea that clock time has very little to do with the actual nature of time.
 
