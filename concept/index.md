@@ -56,7 +56,7 @@ Any arrangement of particles is the result of a perpetual process of trial and e
 > 
 > Greenblatt (p.199)
 
-If there is only "atoms and the void and nothing else" then there is no place for any providential creator choreographing the dance of atoms into conceived forms. Further, there is also no mystic beginning, no devine interventions and also no afterlife. For Lucretius accepting this fact was a crucial step toward the possibility of happiness. Although it might seem at first as reason for despair, Lucretius argues that the knowledge about how things are awakens the deepest wonder. He thereby reverses the ancient order of philosophical endevours where wonder led to the pursuit of knowledge. In the reversal of assumptions Alan Watts is likely to agree. In his 1951 book *Wisdom of Insecurity* Watts posits:
+If there is only "atoms and the void and nothing else" then there is no place for any providential creator choreographing the "dance of atoms" into conceived forms. Further, there is also no mystic beginning, no devine interventions and also no afterlife. For Lucretius accepting this fact was a crucial step toward the possibility of happiness. Although it might seem at first as reason for despair, Lucretius argues that the knowledge about how things are awakens the deepest wonder. He thereby reverses the ancient order of philosophical endevours where wonder led to the pursuit of knowledge. In the reversal of assumptions Alan Watts is likely to agree. In his 1951 book *Wisdom of Insecurity* Watts posits:
 
 > By the same law of reversed effort, we discover the "infinite" and the "absolute", not by straining to escape from the finite and relative world, but by the most complete acceptance of its limitations.
 > 
@@ -142,15 +142,31 @@ The dance of agency alludes to performative idiom Pickering tries to establish i
 
 ## Matter
 
-...
+By acknowledging Pickering's account of posthumanism a new epistemology and ontology of our reality has been established. Our inextricable entanglement with nonhuman agency weakens the human claim over the control of reality's creation, but Pickering neglects any notion of antihumanism. Through the process of tuning which itself emerges through the 'dance of agencies' human's claim over intentionality is maintained. While Picking's vision of reality dissolves the the clear distinction between human and material agency it does not address the question of the nature of time directly. Therefore we need to return to the small building blocks that constitute our reality – the 'dance of atoms' as Lucretius remarks.
+
+In order to approach the nature of time from a perspective of matter Karen Barad's notion of **agential realism** provides the necessary 'tool kit' to gain novel insights. In her essay *Ma(r)king Time: Material Entanglements and Re-memberings: Cutting Together-Apart* she delves into the inner workings of quantum mechanics in pursuit to unravel the mystery of time's ontology.
+
+> Matter is discrete. Time is continuous. Place knows its place. Time too has its place. Nature and culture are split by this continuity, and objectivity is secured as externality. We know this story well, it is written into our bones, in many ways we inhabit it and it inhabits us.
+> 
+> Barad (p.25)
+
+Barad's concept of agential realism is based on the idea of **intra-acting agencies** which are **ontologically inseperable**. The neologism intra-action introduced by Barad implies that objects have no fixed state prior to their interaction. Objects rather emerge through interaction. In othe words, there are no distinct agencies, but rather agencies that are distinct by emerging from/through intra-action. This provokes a drastic reworking of the common notion of causality. The concept of intra-action is a transformation of the actor-network theory in the sense that phenomena are not assemblages of humans and nonhumans. Instead it describes the possible condition of humans and nonhumans in their materiality. Thereby her concept peals off the last layer of cognitive assurance about our reality and appeals to the flux of matter.
+
+> Matter doesn't move in time. Matter doesn't evolve in time. Matter does time. Matter materializes and enfolds different temporalities.
+> 
+> Barad (p.17)
+
+In her essay Barad refers to a crucial experiment that supports her suggestions. The original double-slit experiment was conceived by Thomas Young in 1801. It can be used as a litmus test whether an entity is a wave or a particle. On the other hand, **Niels Bohr** pointed out that this thought experiment might not proof the nature of reality itself, but just an entities behavior in a specific setup. On page 26 Barad describes the outcome of the which-slit detector experiment. Without the detector present in the experiment the atom behaves like a wave. But once the detector is introduced to the experiment the atom changes to a particle behavior. Since the experiment involves a laser the result is visualized in the pattern of light it produces. It is crucial to note that the change in behavior is not a result of a disturbance in the setup but the behavioral change is induced by design. The experiment beautifully demonstrates Bohr's **Principle of Complementarity** and his performative understanding of identity. It is the empirical evidence to support his claim of an entanglement of the 'object' and the 'agencies of observation'. According to Bohr's principle an entity's behavior – whether it behaves either like a wave or like a particle – depends on how it is measured. This raises serious ontological questions about the nature of the entity. If it entity existed before it would have to retroactively change its behavior – as if the entity would go back in time. Otherwise the entity did not exist and was conjured into existence through the measurement. Both options contradict our conventional linear understanding of time and the very nature of reality.
+
+> Neither space nor time exist as determinate givens, as universals, outside of matter. Matter does not reside in space and move through time. Space and time are matter's agential performances.
+> 
+> Barad (p.28)
+
+Based on the results of this experiments Barad posits that reality is defined by intra-actions of non-determinate entities. If an entity's identity id not fixed but 'performed' due to different experimental circumstances then ...
 
 ## Conclusion
 
-How unstable out image of reality actually is was recently exposed with the Higgs Boson Particle by the LHC. The proof that this particle exists was attributed by measurements of its weight. This result does not align with two dominant theoretical physic views of our universe. The multiverse and {...}. The calculations of the former we made under the assumtion that the Higgs Boson particle weighs {...}. The latter theory assumed that the same particle weighs {...}. The actual result turned out to be {...}.
-
-Neri Oxman depicts in her inaugural essay [*'Age of Entanglement'*](http://jods.mitpress.mit.edu/pub/AgeOfEntanglement) for the [Journal of Design and Science (JoDS)](http://jods.mitpress.mit.edu/) the fields of science and art adjacent to one another. They meet each other in philosophy, where according to Oxman cuture and nature are debated in order to derive new information.
-
-![Krebs Cycle of Creativity]({{ "/static/images/krebs-cycle-of-creativity.png" | prepend: site.baseurl }})
+...
 
 ## Postface
 
