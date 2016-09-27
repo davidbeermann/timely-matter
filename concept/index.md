@@ -188,9 +188,10 @@ how nature works and the way people think.
 
 ## References
 
-* Bergson, H. (1948). *The Creative Mind*. New York. NY: The Philosophical Library, Inc.
-* McCormack, J, & Dorin, A. (2001). *Art, Emergence and the Computational Sublime*. Second Iteration [Proceedings of the Second International Conference on Generative Systems in the Electronic Arts, Victoria, Australia, 5-7 December 2001], Centre for Electronic Media Art, VIC, Australia, pp 67-81.
+* Barad, K. (2013). *Ma(r)king Time: Material Entanglements and Re-memberings: Cutting Together-Apart*. In P. R. Carlile, D. Nicolini, A. Langley & H. Tsoukas (Eds.), *How Matter Matters: Objects, Artifacts, and Materiality in Organization Studies* (pp. 16-31). Oxford, UK: Oxford University Press.
+* Bergson, H. (1948). *The Creative Mind*. New York, NY: The Philosophical Library, Inc.
 * Greenblatt, S. (2011). *The swerve – how the world became modern*. New York/London, US/UK: W. W. Norton & Company, Inc.
+* McCormack, J. & Dorin, A. (2001). *Art, Emergence and the Computational Sublime*. In *Second Iteration [Proceedings of the Second International Conference on Generative Systems in the Electronic Arts, Victoria, Australia, 5-7 December 2001]* pp 67-81. Victoria, Australia: Centre for Electronic Media Art.
 * Parr, A. (2010). *The Deleuze Dictionary – Revised Edition*. Edinburgh. UK: Edinburgh University Press Ltd.
 * Pickering, A. (1995). *The mangle of practice: time, agency, and science*. Chicago/London. US/UK: The University of Chicago Press.
- 
+* Watts, A. (1951). *The Wisdom of Insecurity: a message for an age of axiety*. New York, NY: Vintage Books, a division of Random House, Inc. eBook version.
