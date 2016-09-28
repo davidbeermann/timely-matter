@@ -162,7 +162,7 @@ In her essay Barad refers to a crucial experiment that supports her suggestions.
 > 
 > Barad (p.28)
 
-Based on the results of this experiments Barad posits that reality is defined by intra-actions of non-determinate entities. If an entity's identity id not fixed but 'performed' due to different experimental circumstances then ...
+On the backdrop of Barad's agential realist interpretation of quantum physics and based on the results of this experiment she concludes that reality is defined by intra-actions of non-determinate entities. If an entity's identity is not fixed but 'performed' due to different circumstances then the classic ontology of a given space and a linear sequences of moments called time needs to discarded. It is been replaced by a rather spooky scenario. The past never really existed and the future does not simply unfold. Instead the past and the future are iteratively reworked. The which-slit experiment suggests that foregone and anticipated moments in time are all one phenomenon which emerge through the **iterative practices of spacetimemattering**. Neither are single particles separated in space. Nor are moments in time. Both are intra-actively created in the continuous materialization of phenomena. 'Space and time are phenomenal.' (p.28)
 
 ## Conclusion
 
