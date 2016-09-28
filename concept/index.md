@@ -166,7 +166,18 @@ On the backdrop of Barad's agential realist interpretation of quantum physics an
 
 ## Conclusion
 
-...
+In our technologically accelerated time the image of reality turns increasingly unstable. Nevertheless we constantly create new images of reality to craft the hooks to hold onto while the stream of changes hollows out our preconceptions. The movie [Particle Fever](http://particlefever.com/) is about the discovery of the new elemental particle named Higgs Boson. The movie goes on to show that in theoretical physics scientists developed two competing theories of our universe: the multiverse theory and the supersymmetry theory. Both theories relied on an assumed mass of the yet undiscovered particle. The multiverse theory assumed that the mass was approximately 140 giga-electronvolts. The supersymmetry theory estimated its mass at 115. Both theories entail complex calculations and its pivotal point is the mass of the Higgs Boson particle. After decades of experiments the Large Hadron Collider (LHC) at Cern in Switzerland finally found proof for the existance of the Higgs Boson particle in 2012. The measured indicator was its mass. The result turned out to be approximately 125, supporting neither of the theories.
+
+> Clocks are the simulacra of the human claim over the control of time.
+
+In the previous sections I outlined some arguments against our preconceived notion of time. Henri Bergson's emergent notion of time based on duration. Andrew Pickering's posthuman vision 
+of the temporally emergent relationship between human and nonhuman agency. Lastly, Karen Barad's concept of agential realism and the intra-active modeling of space and time. tbc...
+
+> The only way to make sense out of change is to plunge into it, move with it, and join the dance.
+> 
+> Watts
+
+Where I see all three concepts converge is in the creative potential to shape time (and space). The anti-deterministic notion of time liberates us from the boundaries of sequential linearity and enables us to envision the iterative modeling and tuning of our reality with and through technology. Modern technology has become an integral part of our reality and therefore sways the process of reconfiguring reality. tbc...
 
 ## Postface
 
