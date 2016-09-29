@@ -2,6 +2,8 @@
 
 
 void ofApp::setup() {
+    ofSetWindowTitle("Perlin Noise Shader");
+    
     // load vertex and fragment shaders
     // the vertex shader doesn't really do anything.
     // all the magic is happening in the fragment shader.
@@ -28,8 +30,6 @@ void ofApp::setup() {
 
 
 void ofApp::update() {
-    // write frame rate to window title to see how blazing fast rendering is
-    ofSetWindowTitle("FPS " + to_string((int) ofGetFrameRate()));
     
     // update fbo with result of shader
     // uniform variable are passed to the shader in oder to control the rednering via the gui.
@@ -46,6 +46,9 @@ void ofApp::update() {
 
 
 void ofApp::draw() {
+    // write frame rate to stage to see how fast the rendering is
+    ofDrawBitmapString("FPS " + to_string((int) ofGetFrameRate()), 10, 10);
+    
     // draw fbo contents to stage
     mFbo.draw( mFboPos );
     
