@@ -3,9 +3,10 @@
 
 void ofApp::setup() {
     ofSetFrameRate(30);
+    ofSetWindowTitle("Understanding Noise");
     
     // setup rectangle areas to draw the perlin noise graphs into
-    int padding = 20;
+    int padding = 25;
     int height = 200;
     rectStatic = ofRectangle(padding, padding, ofGetWidth() - 2 * padding, height);
     rectAnimated = ofRectangle(padding, height + padding * 2, ofGetWidth() - 2 * padding, height);
@@ -21,7 +22,14 @@ void ofApp::update() {
 
 
 void ofApp::draw() {
-    // draw rectangles to stage
+    // draw bitmap texts
+    ofSetColor(33);
+    int text_offset = 4;
+    ofDrawBitmapString("Static Perlin Noise Graph", rectStatic.x, rectStatic.y - text_offset);
+    ofDrawBitmapString("Continuously Animated Perlin Noise Graph", rectAnimated.x, rectAnimated.y - text_offset);
+    ofDrawBitmapString("Perlin Noise Graph based on elapsed time", rectTime.x, rectTime.y - text_offset);
+    
+    // draw graph backgrounds
     ofSetColor(255);
     ofDrawRectangle(rectStatic);
     ofDrawRectangle(rectAnimated);
