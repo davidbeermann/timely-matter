@@ -6,7 +6,7 @@ position: 2
 
 # Concept
 
-The following arguments are derived from several fields of study which in their complexities by far exceed any single conclusive work – probably even in the field itself. In that regard I clearly neglected Ralph Ammer's advice ['Don’t think big!'](https://blog.prototypr.io/dont-think-big-5ca8e7dd8b3d#.opdknri2c). His core argument is: *'Big topics often lead to small results, small topics foster great results.'* And from a perspective of the contribution to a distinct field I'm incline to agree. With this work however my goal was to tie together thoughts and concepts from big, divergent fields in order to craft new connections. Therefore I see my contribution rather in these connection than in measurable contribution to a single field.
+The following arguments are derived from several fields of study which in their complexities by far exceed any single conclusive work – probably even in the field itself. In that regard I clearly neglected [Ralph Ammer](http://ralphammer.de/)'s advice ['Don’t think big!'](https://blog.prototypr.io/dont-think-big-5ca8e7dd8b3d#.opdknri2c). His core argument is: *"Big topics often lead to small results, small topics foster great results."* And from a perspective of the contribution to a distinct field I'm inclined to agree. With this work however, my goal was to tie together thoughts and concepts from divergent fields in order to craft new connections. Therefore, I see my contribution rather in these connections than in measurable contribution to a single field.
 
 ## Preface 
 
@@ -14,95 +14,99 @@ The following arguments are derived from several fields of study which in their 
 Voices may reach us from it; but what they say to us is imbued with the obscurity of the matrix out of which they come; and, try as we may, we cannot decipher them precisely in the clearer light of our own day.
 >
 > Margaret Atwood  
-> (1985, p.311)
+> (p.311)
 
 > Nature even on the most local scales made a mockery of information technology. Even augmented by tech, the human brain was paltry, infinitesimal, in comparision to the universe. [...] Matter was information, information matter, and only in the brain did matter organize itself sufficiently to be aware of itself; only in the brain could the information of which the world consisted manipulate itself. The human brain was a very special case.  
 > 
 > Jonathan Franzen  
-> (2015, p.504)
+> (p.504)
 
 > When the shadow of the sash appeared on the curtains it was between seven and
 eight o’clock and then I was in time again, hearing the watch. It was Grandfather’s and when Father gave it to me he said, Quentin, I give you the mausoleum of all hope and desire; it’s rather excruciatingly apt that you will use it to gain the reducto absurdum of all human experience which fit your individual needs no better than it fitted his or his father’s. I give it to you not that you may remember time, but that you might forget it now and then for a moment and not spend all your breath trying to conquer it. Because no battle is ever won he said. They are not even fought. The field only reveals to man his own folly and despair,
 and victory is an illusion of philosophers and fools.
 >
 > William Faulkner  
-> (1995, p.63)
+> (p.63)
 
 ## Introduction
 
-Unbeknownst to Poggio Bracciolini, he was about to irrevesibly change the course of history for centuries to come when in the winter of 1417 he discovered a long lost poem in a remote monastry. The poem was *De rerum nature* – *On the Nature of Things* – by **Lucretius**. Before Bracciolini's discovery fragments of the poem or references to it were sought-after relics by intellectuals. But what Bracciolini discovered was the poem in its entirety. Written in the first century BC it was forbidden under christian influenced roman rule. Therefore its recovery centuries after its disappearance is already miraculous. It had to transcribed in regular intervals and properly stored in order to keep it accessible. This fact is even more astonishing considering its content, implications and therefore the consequences for the prospective scribe and reader.
+Unbeknownst to Poggio Bracciolini, he was about to irrevesibly change the course of history for centuries to come when in the winter of 1417 he discovered a long lost poem in a remote monastry. The poem was *De rerum nature* – *On the Nature of Things* – by **Lucretius**. Before Bracciolini's discovery fragments of the poem or references to it were sought-after relics by intellectuals. But what Bracciolini discovered was the poem in its entirety. Written in the first century BC it was forbidden under Christian influenced Roman rule. Therefore, its recovery centuries after its disappearance was miraculous. It had been transcribed in regular intervals and properly stored in order to keep it accessible. This fact is even more astonishing considering its content, implications and thus the consequences for the prospective scribe and reader.
 
 > In one of the great cultural transformations in the history of the West, the pursuit of pain triumphed over the pursuit of pleasure.
 > 
-> Greenblatt (p.103)
+> Stephen Greenblatt  
+> (p.103)
 
-The history of the poem and its discovery is captured in the Pulitzer Price winning book [*The swerve: how the world became modern*](http://books.wwnorton.com/books/detail.aspx?ID=22329) by Stephen Greenblatt. The poem is inspired by Epicurus school of philosophy called **Epicureanism** which is based on the idea of **atomism**. The notion of atomism encompasses that everything that has ever existed is made from indestructible, small building blocks. The Greeks called these blocks atoms. According to Epicurus these atoms are non-hierarchical and exist in a bleak void. Everything that ever existed emerged from combinations of atoms moving freely in the void without devine intevention. From this conception Epicurus derived his critique on superstition and religious belief. Once liberated from these beliefs and its accompanied worldly detriments Epicurus advocated that the purpose of life is the pursuit of pleasure.
+The history of the poem and its discovery is captured in the Pulitzer Prize winning book [*The swerve: how the world became modern*](http://books.wwnorton.com/books/detail.aspx?ID=22329) by Stephen Greenblatt. The poem is inspired by Epicurus school of philosophy called **Epicureanism** which is based on the idea of **atomism**. The notion of atomism says that everything that has ever existed is made from indestructible, small building blocks. The Greeks called these blocks atoms. According to Epicurus these atoms are non-hierarchical and exist in a bleak void. Everything that ever existed emerged from combinations of atoms moving freely in the void without devine intevention. From this conception Epicurus derived his critique on superstition and religious belief. Once liberated from these beliefs and its accompanied worldly detriments, Epicurus advocated that the purpose of life is the pursuit of pleasure.
 
-Lucretius poem is heralded for its didactic qualities but also unifying the many strands of Epicureanism in a single text. In chapter 8 Greenblatt elaborates in great detail about the revolutionary implications of Lucretius' work. The work's core arguments challenged many beliefs at that time which nowadays constitute the foundations of modern life. Among the many arguments Greenblatt points out the following I find noteworthy in the context of my following elaboration.
+Lucretius poem is heralded for its didactic qualities, but also for unifying the many strands of Epicureanism in a single text. In chapter 8, Greenblatt elaborates in great detail on the revolutionary implications of Lucretius' work. The work's core arguments challenged many beliefs at that time, which nowadays constitute the foundations of modern life. Among the many arguments, Greenblatt points out the following which I find noteworthy in the context of my following elaboration:
 
 > The elementary particles of matter—"the seeds of the things"—are eternal.
 > 
-> Greenblatt (p.186)
+> Stephen Greenblatt  
+> (p.186)
 
-Since atoms are indestructible any new configuration is derived from atoms that already existed. Any form that we observe is therefore transitory. Once disolved the atoms of any form will be redistributed in the creation of novelty. This notion also implies that the number of elementary particles is limited. In Lucretius words: "And so the destructive motions cannot hold sway eternally and bury existence forever; nor again can the motions that cause life and growth preserve created things eternally." (p.186)
+Since atoms are indestructible any new configuration is derived from atoms that already existed. Any form that we observe is therefore transitory. Once dissolved the atoms of any form will be redistributed in the creation of novelty. This notion also implies that the number of elementary particles is limited. In Lucretius words: "And so the destructive motions cannot hold sway eternally and bury existence forever; nor again can the motions that cause life and growth preserve created things eternally." (p.186)
 
 > Nature ceaselessly experiments.
 > 
-> Greenblatt (p.189)
+> Stephen Greenblatt
+> (p.189)
 
-Any arrangement of particles is the result of a perpetual process of trial and error. Though Lucretius acknowledges that "what has been created gives rise to its own function." (p.190) This implies that some forms succeed over others by being more successfully adapted to their environment. In other words, Lucretius anticipated the famous phrase ["survival of the fittest"](https://en.wikipedia.org/wiki/Survival_of_the_fittest) almost 2.000 years before Darwin adopted it.
+Any arrangement of particles is the result of a perpetual process of trial and error. Though Lucretius acknowledges that "what has been created gives rise to its own function." (p.190) This implies that some forms succeed over others by being more successfully adapted to their environment. In other words, Lucretius anticipated the famous statement [*survival of the fittest*](https://en.wikipedia.org/wiki/Survival_of_the_fittest) almost 2.000 years before Darwin adopted it.
 
 > All speculation—all science, all morality, all attemps to fashion a life worth living—must start and end with the comprehension of the invisible seeds of things: atoms and the void and nothing else.
 > 
-> Greenblatt (p.199)
+> Stephen Greenblatt
+> (p.199)
 
-If there is only "atoms and the void and nothing else" then there is no place for any providential creator choreographing the "dance of atoms" into conceived forms. Further, there is also no mystic beginning, no devine interventions and also no afterlife. For Lucretius accepting this fact was a crucial step toward the possibility of happiness. Although it might seem at first as reason for despair, Lucretius argues that the knowledge about how things are awakens the deepest wonder. He thereby reverses the ancient order of philosophical endevours where wonder led to the pursuit of knowledge. In the reversal of assumptions Alan Watts is likely to agree. In his 1951 book *Wisdom of Insecurity* Watts posits:
+If there are only "atoms and the void and nothing else" then there is no place for any providential creator choreographing the "dance of atoms" into conceived forms. Further, there is also no mystic beginning, no divine interventions and also no afterlife. For Lucretius accepting this fact was a crucial step toward the possibility of happiness. Although it might seem at first as reason for despair, Lucretius argues that the knowledge about how things are awakens the deepest wonder. He thereby reverses the ancient order of philosophical endeavours where an impulse of wonder led to the pursuit of knowledge. In the reversal of assumptions Alan Watts is likely to agree. In his 1951 book *The Wisdom of Insecurity* Watts posits:
 
 > By the same law of reversed effort, we discover the "infinite" and the "absolute", not by straining to escape from the finite and relative world, but by the most complete acceptance of its limitations.
 > 
-> Watts
+> Alan Watts
 
 ## Duration
 
-The philosophical ideas by Lucretius necessarily evoke questions about the nature of time. If there is no beginning and no end to any forms in our universe what is it that supports the actuality of time? If time exits, is it eternal alongside atoms? Or is time created in the moment? If it is created in the moment how can we relate to it as an absolute given? These questions were my starting point when venturing into the murky waters in the pursuit of the nature of time.
+The philosophical ideas by Lucretius necessarily evoke questions about the nature of time. If there is no beginning and no end to any forms in our universe, what is it that supports the actuality of time? If time exits, is it eternal alongside atoms? Or is time created in the moment? If it is created in the moment, how can we relate to it as an absolute given? These questions were my starting point when venturing into the murky waters of the nature of time.
 
-Clocks provide one distinct measurement of time and a common convention by which one can interact with reality. But it also imposes a contradiction upon us: between external time and our individual internal perception of time. As I pointed out before this asynchronicity between external and internal time is problematic because it skews the reality of time as we experience it. And it also hints towards the idea that clock time has very little to do with the actual nature of time.
+Clocks provide one distinct measurement of time and a common convention by which one can interact with reality. But they also imposes a contradiction: between external time and our individual internal perception of time. As I pointed out before–see [Motivation]({{ "/motivation/" | prepend: site.baseurl }}), this asynchronicity between external and internal time is problematic because it skews the reality of time as we experience it. And it also hints towards the idea that clock time has very little to do with the actual nature of time.
 
-Coming from a theoretical point of view **Henri Bergson** describes our reality of time as fixed moments juxtaposed to another. It is this concept of incremental progression of time which Henri Bergson approaches in his 1934 essay *‘La pensee et le mouvant’* – english translation *‘The Creative Mind’* in 1946. He describes these moments in time as virtual points of rest. According to Bergson this notion of time is scientific and excises only repetition and predictability from our material reality. It puts space and time on the same plane, so we deduce our knowledge about time from our observations about the nature and functions of space. And although he admits that this common sense notion of time is a requirement for our communal life he also perceives it as the reason for our relative awareness about time.
+Coming from a theoretical point of view **Henri Bergson** describes our reality of time as fixed moments juxtaposed to another. It is this concept of incremental progression of time which Henri Bergson approaches in his 1934 essay *La pensee et le mouvant* – english translation *The Creative Mind* by Mabelle L. Andison in 1946. He describes these moments in time as virtual points of rest. According to Bergson this notion of time is scientific and excises only repetition and predictability from our material reality. It puts space and time on the same plane, so we deduce our knowledge about time from our observations about the nature and functions of space. And although he admits that this common sense notion of time is a requirement for our communal life, he also perceives it as the reason for our relative awareness about time.
 
 > Spatiality therefore, and in this quite special sense, sociability, are in this case the real causes of the relativity of our knowledge. Brushing aside this veil, we get back to the immediate and reach an absolute.
 >
-> Bergson, p.28
+> Henri Bergson  
+> (p.28)
 
-Bergson’s quest to reach an ‘immediate’ and ‘absolute’ notion of time is by gaining an understanding of its **duration**. To him duration is not a slice of time but rather an ongoing, never-ending process. He explains his concept of duration by the means of the two measures that shape it: **movement** and **change**. According to Bergson our notion of movement is based on fixed points, moments extracted from time, which describe motions in space. We perceive moment A where something is happening now, and by defining moment B where it was, we are enabled to extrapolate into the future where moment C will be. The juxtaposition of these moments then resemble movement. But to Bergson this juxtaposition is an artificial recomposition of movement swayed by the exigencies of language and computation. The same is true for change. For him change is not the snapshots of states along the course of its happening; “on the contrary, it is flux, the continuity of transition, it is change itself that is real.” (Bergson, p.15) Therefore, if the two components – movement and duration – are indivisible, even substantial, than the same must be true for duration.
+Bergson’s quest to reach an 'immediate' and 'absolute' notion of time is by gaining an understanding of its **duration**. To him duration is not a slice of time but rather an ongoing, never-ending process. He explains his concept of duration by the means of the two measures that shape it: **movement** and **change**. According to Bergson our notion of movement is based on fixed points, moments extracted from time, which describe motions in space. We perceive moment A where something is happening now, and by defining moment B where it was, we are enabled to extrapolate into the future where moment C will be. The juxtaposition of these moments then resemble movement. But to Bergson this juxtaposition is an artificial recomposition of movement swayed by the exigencies of language and computation. The same is true for change. For him change is not the snapshots of states along the course of its happening; “on the contrary, it is flux, the continuity of transition, it is change itself that is real.” (Bergson, p.15) Therefore, if the two components – movement and duration – are indivisible and substantial, then the same must be true for duration.
 
 > Nevertheless the conviction still persists that even if it has not been conceived before being produced, it could have been, and in this sense from all eternity it has existed as possible, in some real or virtual intelligence. The examining of this illusion should tell us that it results from the very essence of our understanding.
 >
-> Bergson, p.21
+> Henri Bergson  
+> (p.21)
 
-Therefore Bergson argues that our common illusion about the nature of the time leads to a logic of **retrospection**. This logic neglects the immediacy and autonomy of the moment. Instead the present moment casts a shadow into the past where the reality of now already existed as a possibility. But not only does our unwillingness to accept that our reality emerges in the moment reduce the present to the mere possible preexistent in the past. By anchoring the present to the past we claim to anticipate the future—as if reality sits on a predefined line protruding from the past into the future. This logic completely negates that time is efficacious. Time is not a linear vector but rather an ongoing force in an indefinite system.
+Therefore, Bergson argues that our common illusion about the nature of the time leads to a logic of **retrospection**. This logic neglects the immediacy and autonomy of the moment. Instead the present moment casts a shadow into the past where the reality of now already existed as a possibility. Also, by anchoring the present in the past we claim to anticipate the future. This stance suggests that our current reality sits on a predefined line protruding from the past into the future. If we deny the concept that the present emerges momentarily, then we limit our understanding of the potential of the present moment. Time is not a linear vector but rather an ongoing force in an indefinite system. Time is efficacious.
 
-As Cliff Stagoll points out in his essays on Becoming and Duration in Adrian Parr’s The Deleuze Dictionary (2010) Gilles Deleuze bases his notion of difference and becoming on Bergson’s notion of duration in addition to Bergson’s method of philosophical intuition. According to Deleuze intuition reveals the essential temporal qualities of our consciousness. An ongoing mental activity that constitutes “a time internal to one’s self.” (Parr, p.81) As this might be simply interpreted as a reference of the common conception of internal time, Deleuze further argues that difference and becoming are key elements of life and essential to one’s lived experience.
+In Adrian Parr’s *The Deleuze Dictionary* (2010) Cliff Stagoll supports with his essays on *Becoming* and *Duration* this inference. According to Stagoll, **Gilles Deleuze** bases his notion of difference and becoming on Bergson’s understanding of duration and Bergson’s method of philosophical intuition. Deleuze posits that intuition reveals the essential temporal qualities of our consciousness. Being conscious is an ongoing mental activity that constitutes “a time internal to one’s self.” (Parr, p.81) As this might be simply interpreted as a reference to the common conception of internal time, Deleuze further argues that difference and becoming are key elements of life and essential to one’s lived experience.
 
-According to Deleuze every moment is a productive assemblage of forces of **‘becoming different’**. The present moment has no ties to the past or the future in that every event occurs in a continuous flow with neither a known start-point nor a specific end-point. Thereby Deleuze acknowledges the efficacious qualities of time. In other words, nature’s continual flow of changes is the immanent production of every unique event. Therefore “becoming might be conceived as the eternal, productive return of difference.” (p.26) This process is the anchor point for Deleuze to argue that changes occur and unfold in their own time – the pure time or empty time.
-
-Further Deleuze agrees with Bergson on the simultaneous awareness of the flow of changes and the particular differences and relationships. So within the steady flow of changes we are able to pinpoint distinct states. But by perceiving them in union Deleuze posits the creative potential that lies in the disconnection between these events.
+According to Deleuze, every moment is a productive assemblage of forces of **becoming different**. The present moment has no ties to the past or the future in that every event occurs in a continuous flow with neither a known start-point nor a specific end-point. Thereby Deleuze acknowledges the efficacious qualities of time. In other words, nature’s inherent continual flow of changes brings about every unique event. This process is the anchor point for Deleuze to argue that changes occur and unfold in their own time – the pure time or empty time. Further Deleuze agrees with Bergson on the simultaneous awareness of the flow of changes  and particular differences. Within the steady flow of changes we are able to identify distinct states and their relationships. Deleuze posits the creative potential that lies in the disconnection between these events.
 
 > Even in the continuity of one’s consciousness, there is a disconnection between events that allows creativity and renewal.
 >
 > Parr, p.82
 
-Henri Bergson describes our reality as a creative evolution, where novelty is constantly springing forth and where “continuous phases penetrate one another by a kind of internal growth.” (Bergson, p.19) This notion of duration, and thereby time itself, enables a reality that is radically different from our common perception. Ultimately Bergson is not appealing to give up on our logical approach towards time. But even if pure intuition is not replacement to our common notion of time, an extended understanding of duration enables creative solutions to ‘big problems’. Bergson posits that the struggle with problems is caused by the detached skin of time which we falsely  perceived as its equivalent. By restoring the awareness of the fluidity of duration and the change and difference inherent to the flow of time we grasp the chance for creative and novel evolution.
+Henri Bergson describes our reality as a creative evolution, where novelty is constantly springing forth. Novelty is created out of itself. This internal growth is characterized by continuous phases that penetrate one another. This notion of duration, and thereby time itself, enables a reality that is radically different from our common perception. Yet, Bergson is not appealing to give up on our logical approach towards time. Pure intuition is not a replacement for our common notion of time. Nevertheless, an extended understanding of time through the notion of duration enables creative solutions. Bergson posits that we falsely perceive the detached skin of time as its equivalent which causes our struggle with time. By restoring the awareness of the fluidity of duration and the change and difference inherent to the flow of time we grasp the chance for creative and novel evolution.
 
 > Let us say then, that in duration, considered as a creative evolution, there is perpetual creation of possibility and not only of reality.
 >
 > Bergson, p.20
 
-The ideas by Bergson and Deleuze have many revolutionary implications – politically, socially, and personally. If we try to perceive time in the proposed manner oneself has to raise questions of being and identity. If things and states are viewed in the field of forces of time, as products of becoming, then the human subject seems utterly lost and without impact.
+Bergson's and Deleuze's ideas are politically, socially, and personally challenging. Once we perceive time in the proposed manner we are confronted with questions about our being and identity. If time is not within our control how can we effect and shape our reality? Is our agency questioned by the flow of time? In what way can we apply this momentary creative potential in our favor?
 
 ## Emergence
 
-Intepreting Bergson's extension of our understanding of time based on duration I recognized  its inherent emergent characteristics. His notion of reality as creative evolution where due to an internal and intertwined growth novelty and possibility is perpetually created alludes to **emergence**. The term is not homogeneous though. Its varied notions are much debated and as of now it seems to be impossible to generate a unique definition for it.
+Intepreting Bergson's understanding of time based on duration, I recognized its inherent emergent characteristics. Reality is described as a process of creative evolution. Novelty and possibility are perpetually created due to an internal growth. This notion alludes to **emergence**. But the various notions of emergence are highly debated and currently it seems impossible to generate one definition.
 
 > The term emergence refers to the ways that a multiplicity of seemingly discrete, relatively simple interactions can give rise to astonishing complexity and pattern without any apparent direction or plan.
 > 
@@ -199,8 +203,11 @@ how nature works and the way people think.
 
 ## References
 
+* Atwood, M. (1985). *The Handmaid's Tale*. New York, NY:Fawcett Columbine.
 * Barad, K. (2013). *Ma(r)king Time: Material Entanglements and Re-memberings: Cutting Together-Apart*. In P. R. Carlile, D. Nicolini, A. Langley & H. Tsoukas (Eds.), *How Matter Matters: Objects, Artifacts, and Materiality in Organization Studies* (pp. 16-31). Oxford, UK: Oxford University Press.
 * Bergson, H. (1948). *The Creative Mind*. New York, NY: The Philosophical Library, Inc.
+* Faulkner, W. (1995). *The sound and the fury*. London, UK: Vintage Random House.
+* Franzen, J. (2015). *Purity*. New York, NY: Farrar, Straus and Giroux.
 * Greenblatt, S. (2011). *The swerve – how the world became modern*. New York/London, US/UK: W. W. Norton & Company, Inc.
 * McCormack, J. & Dorin, A. (2001). *Art, Emergence and the Computational Sublime*. In *Second Iteration [Proceedings of the Second International Conference on Generative Systems in the Electronic Arts, Victoria, Australia, 5-7 December 2001]* pp 67-81. Victoria, Australia: Centre for Electronic Media Art.
 * Parr, A. (2010). *The Deleuze Dictionary – Revised Edition*. Edinburgh. UK: Edinburgh University Press Ltd.
