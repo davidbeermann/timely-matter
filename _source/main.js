@@ -57,6 +57,17 @@
     }
   }
 
+  //
+
+  function getElementOffset(el) {
+    var rect = el.getBoundingClientRect();
+
+    return {
+      top: rect.top + document.body.scrollTop,
+      left: rect.left + document.body.scrollLeft
+    };
+  }
+
   function setupCollapsingHeader() {
     // console.log('setupCollapsingHeader');
 
@@ -83,7 +94,32 @@
     window.addEventListener('scroll', setHeaderState);
   };
 
+  // inspired by code from:
+  // https://css-tricks.com/scrollfollow-sidebar/
+  function setupNavigationRepositioning() {
+    var el = document.getElementById('page-navigation');
+    var offset = getElementOffset(el);
+    // console.log(offset);
+
+    function setNavigationPositon(){
+      // console.log(window.scrollY);
+      if (window.scrollY > 100) {
+        var mt = (window.scrollY - 70) + "px"
+        // console.log(mt);
+        el.style.marginTop = mt;
+      } else {
+        el.style.marginTop = "2em";
+      }
+    };
+
+    var debounce_interval = 17; // 1000/60=16,666666667
+    var handler = debounce(setNavigationPositon, debounce_interval);
+    
+    window.addEventListener('scroll', handler);
+  };
+
   document.addEventListener('DOMContentLoaded', function(e) {
     setupCollapsingHeader();
+    setupNavigationRepositioning();
   });
 })();
