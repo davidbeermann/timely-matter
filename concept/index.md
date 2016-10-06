@@ -203,17 +203,21 @@ how nature works and the way people think.
 > The things [art & science] that are least important for our survival are the very things that make us human.
 > 
 > Savas Dimopoulos  
-> *Particle Fever* (2014)
+> Particle Fever
 
 ## References
 
 * Atwood, M. (1985). *The Handmaid's Tale*. New York, NY:Fawcett Columbine.
 * Barad, K. (2013). *Ma(r)king Time: Material Entanglements and Re-memberings: Cutting Together-Apart*. In P. R. Carlile, D. Nicolini, A. Langley & H. Tsoukas (Eds.), *How Matter Matters: Objects, Artifacts, and Materiality in Organization Studies* (pp. 16-31). Oxford, UK: Oxford University Press.
+* Bateson, N. (2010). *An Ecology of Mind* [Video file]. Retrieved from http://anecologyofmind.com
 * Bergson, H. (1948). *The Creative Mind*. New York, NY: The Philosophical Library, Inc.
 * Faulkner, W. (1995). *The sound and the fury*. London, UK: Vintage Random House.
 * Franzen, J. (2015). *Purity*. New York, NY: Farrar, Straus and Giroux.
 * Greenblatt, S. (2011). *The swerve – how the world became modern*. New York/London, US/UK: W. W. Norton & Company, Inc.
+* Levinson, M. (2013). *Particle Fever* [Video file]. Retrieved from http://particlefever.com
 * McCormack, J. & Dorin, A. (2001). *Art, Emergence and the Computational Sublime*. In *Second Iteration [Proceedings of the Second International Conference on Generative Systems in the Electronic Arts, Victoria, Australia, 5-7 December 2001]* pp 67-81. Victoria, Australia: Centre for Electronic Media Art.
 * Parr, A. (2010). *The Deleuze Dictionary – Revised Edition*. Edinburgh. UK: Edinburgh University Press Ltd.
 * Pickering, A. (1995). *The mangle of practice: time, agency, and science*. Chicago/London. US/UK: The University of Chicago Press.
+* Tippett, K. (Host/Executive Producer). (2015, November 12). *Lisa Randall —
+Dark Matter and the Astounding Interconnectedness of Everything* [Audio podcast]. Retrieved from http://www.onbeing.org/program/lisa-randall-dark-matter-and-the-astounding-interconnectedness-of-everything/8100
 * Watts, A. (1951). *The Wisdom of Insecurity: a message for an age of axiety*. New York, NY: Vintage Books, a division of Random House, Inc. eBook version.
