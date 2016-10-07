@@ -28,3 +28,5 @@ second advisor
 Website created with [Jekyll](http://jekyllrb.com/). Hosted at [GitHub Pages](https://pages.github.com/).
 
 Jekyll theme based on [HTML5 Boilerplate](http://html5boilerplate.com/). CSS compiled with [Sass](http://sass-lang.com/) and with support from [Bourbon](http://bourbon.io/). CSS layouts created with [Neat](http://neat.bourbon.io/). Workflow automation via [Gulp](http://gulpjs.com/). Package management with [npm](https://www.npmjs.com/).
+
+The website was programmed in [Sublime Text](https://www.sublimetext.com/). All Markdown documents were written in [MacDown](http://macdown.uranusjr.com/). Animated GIFs were made with [gifsicle](http://www.lcdf.org/gifsicle/) and [Adapter](https://www.macroplant.com/adapter/). Any Terminal command way executed in [iTerm](http://iterm2.com/). All applications are managed and installed via [Homebrew](http://brew.sh/) and [Homebrew Cask](https://caskroom.github.io/).
