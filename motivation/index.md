@@ -28,7 +28,7 @@ Whereas Roenneberg concerns himself with the biological effects of the requireme
 >
 > Helga Nowotny (p.8)
 
-All of this changed with the introduction of modern communication technologies, according to Nowotny. She perceives that time is speeded up by becoming accelerated innovation itself. To her the time-boundary between present and future has become permeable and the present has been detached from the temporal linearity. *'A present geared to accelerated innovation is beginning to devour the future.' (p.11)* This state she calls **extended present**. It is characterized by approximate simultaneities installed by technological infrarstructure. Networking technologies bridge the gap between temporal and spatial distances. But as this technology is connecting us it also separates us in economic terms. Nowotny observes that the technological and economic advantage of industrialized nations increases the separation to developing nations while at the same time our interaction is almost immediate. Another aspect of our accelerated temporality is dwindling responsibility. The reason that she identifies are short-term interactions which negate time and therefore do not create the foundation for durable relationships and trust.
+All of this changed with the introduction of modern communication technologies, according to Nowotny. She perceives that time is speeded up by becoming accelerated innovation itself. To her the time-boundary between present and future has become permeable and the present has been detached from the temporal linearity. *"A present geared to accelerated innovation is beginning to devour the future."* (p.11) This state she calls **extended present**. It is characterized by approximate simultaneities installed by technological infrarstructure. Networking technologies bridge the gap between temporal and spatial distances. But as this technology is connecting us it also separates us in economic terms. Nowotny observes that the technological and economic advantage of industrialized nations increases the separation to developing nations while at the same time our interaction is almost immediate. Another aspect of our accelerated temporality is dwindling responsibility. The reason that she identifies are short-term interactions which negate time and therefore do not create the foundation for durable relationships and trust.
 
 > Only against the background of speed can slowness be determined and learnt. Only against the back­ ground of temporal limitation can the latter be surpassed.
 >
@@ -115,12 +115,14 @@ With my project my project I want to specifically address our undersanding of ti
 
 ## Reference List
 
-* [Siri, why am I so busy?: An interview with Judy Wajcman](http://www.publicbooks.org/interviews/siri-why-am-i-so-busy-an-interview-with-judy-wajcman) (Verified at 16/09/12)
-* [Lisa Randall — Dark Matter and the Astounding Interconnectedness of Everything](http://www.onbeing.org/program/lisa-randall-dark-matter-and-the-astounding-interconnectedness-of-everything/8100), On Being with Krista Tippett, November 12, 2015 (Verified at 16/09/13)
-* [The Autumn of the Multitaskers](http://www.theatlantic.com/magazine/archive/2007/11/the-autumn-of-the-multitaskers/306342/), Walter Kirn, The Atlantic, November 2007 Issue (Verified at 16/09/13)
-* [The End of Work](http://radioopensource.org/the-end-of-work/), Radio Open Source: arts, ideas and politics with Christopher Lydon, July 31, 2014 (Verified at 16/09/14)
+* Alexander, N. (2016, February 1). *Siri, why am I so busy?: An interview with Judy Wajcman*. Retrieved from http://www.publicbooks.org/interviews/siri-why-am-i-so-busy-an-interview-with-judy-wajcman at 16/10/07 14:09
+* Kirn, W. (2007, November). *The Autumn of the Multitaskers*. Retrieved from http://www.theatlantic.com/magazine/archive/2007/11/the-autumn-of-the-multitaskers/306342/ at 16/10/07 14:08
+* Lanier, J. (2010). *You are not a Gadget: A Manifesto*. New York, NY: Alfred A. Knopf.
+* Lydon, C. (Host). (2014, July 31). *The End of Work* [Audio podcast]. Retrieved from http://radioopensource.org/the-end-of-work/ at 16/10/07 14:02
+* Nowotny, H. (1996). *Time: The Modern and Postmodern Experience*. Cambridge, UK: Polity Press.
+* Popova, M. (2012, November 5). *The Science of Internal Time, Social Jet Lag, and Why You’re So Tired* [Blog post]. Retrieved from https://www.brainpickings.org/2012/05/11/internal-time-till-roenneber/ at 16/10/07 13:54
+* TED. (2007, January 12). *Kevin Kelly: How technology evolves* [Video file]. Retrieved from https://www.youtube.com/watch?v=ap-ZC21bk18 at 16/10/07 14:11
 
 ### Further Reading
 
-* [A World Without Work](http://www.theatlantic.com/magazine/archive/2015/07/world-without-work/395294/), Derek Thompson, The Atlantic, July/August 2015 Issue (Verified at 16/09/13)
-* [Our parents discovered leisure. We killed it.](https://timeline.com/hobby-career-b5d199b0df18#.ck2fbab8o), Stephanie Buck (Verified at 16/09/13)
+* Thompson, D. (2015, July/August). *A World Without Work*. Retrieved from http://www.theatlantic.com/magazine/archive/2015/07/world-without-work/395294/ at 16/10/07 14:21
