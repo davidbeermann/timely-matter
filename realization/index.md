@@ -42,7 +42,7 @@ After doing some research and tutorials I finally managed to get it up and runni
 
 In order to analyze the input from the Kinect camera and calculate the vectors pointing away from lighter (closer) areas, I resorted to the [marching squares algorithm](https://en.wikipedia.org/wiki/Marching_squares). The algorithm is used to find the contour lines in a two-dimensional scalar field. So the idea was to place a grid of measuring points on top of the Kinect pixel data and find all contour lines based on a certain threshold. From the contour lines I then calculated the perpendicular lines. These perpendicular lines I then used as vectors pointing away from white areas.
 
-{image_of_example}
+![Screenshot of 'Marching Squares' example application]({{ "/static/images/realization-marching_squares_example.png" | prepend: site.baseurl }})
 
 So far this solution worked out fine. But then I neeed another algorithm which would assign vector forces to all inner quadrants in my segmented input data. For this purpose I first looked into the [flood fill algorithm](https://en.wikipedia.org/wiki/Flood_fill). The problem with this algorithm was that it started from a random location inside the contour line and then iteratively looked at its surrounding segments. Since I only had forces assigned to contour segments and all of the inner segments should be derived from the closest contour vectors, this algorithm did not work out by default.
 
