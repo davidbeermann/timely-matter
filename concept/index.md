@@ -179,7 +179,7 @@ This impression is vested in the topics I outlined under [Motivation]({{ "/motiv
 
 > The future is not now real and there can be no definite facts of the matter about the future. [What is real is] the process by which future events are generated out of present events.
 > 
-> Lee Smolin, Physicist
+> Lee Smolin, Physicist  
 > quoted by Dan Falk
 
 I'm not trying to paint an apocalytic picture of the future. But I'm also far from being idealistic of the past. Given the inherent qualities and tendencies of technology, I want to suggest a thorough discussion of technological development and its encodings. With a special focus on our notion of time and the present moment.
@@ -190,7 +190,7 @@ In this context our perception of time is crucial. The present moment is fleetin
 
 > It is now easier for us to imagine the end of the world than an alternative to capitalism.
 > 
-> Fredric Jameson
+> Fredric Jameson  
 > quoted by Dunne & Raby (p.12)
 
 The implications of this alternate notion of time reveal a shortcoming of our modernistic society. Ever since the industrialization of the early 20th century the clock has been established as the undulating force that propels time forward. The modernist society clocked in and out of time, distributing time between work and life. Capitalism unleashed increased productivity and wealth with little consideration of its future resources and equal distribution. The industrious energy released by the mechanic support quickly introduced the post-isms to our life. We left industrialzation behind and entered post-industrialization. The depletion of natural resources and the changes to our climate instilled a discussion of what might come after capitalism. But post-capitalism is not yet in sight. When transitioning into the 21st century we begang to think of ourselves as postmodernistic. But some paradigms introduced in the past decades remain a ghostly existence nowadays.
