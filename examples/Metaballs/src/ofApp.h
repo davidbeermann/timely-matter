@@ -57,27 +57,324 @@ struct Cell {
         state += tl->value >= 1.f ? 8 : 0;
     }
     void appendLineVertices(ofMesh& mesh, bool interpolated = false, bool infill = false) {
+        vector<ofVec3f> vertices;
         if (interpolated) {
-            addInterpolatedVertices(mesh, infill);
+            addInterpolatedVertices(vertices);
         } else {
-            addStraightVertices(mesh, infill);
+            addStraightVertices(vertices);
+        }
+        
+        if (infill) {
+            addInfillVertices(vertices);
+        }
+        
+        vector<ofVec3f>::iterator v;
+        for (v = vertices.begin(); v != vertices.end(); ++v) {
+            mesh.addVertex(*v);
         }
     }
-    void addInterpolatedVertices(ofMesh& mesh, bool infill) {
-        mesh.usingColors();
+    
+    void addInfillVertices(vector<ofVec3f>& vertices) {
+        ofVec3f p1, p2, p3, p4;
         switch (state) {
-            case 5:
-            case 10:
-                mesh.addColor(ofFloatColor(1.f, 1.f, 1.f, 1.f));
-                mesh.addColor(ofFloatColor(1.f, 1.f, 1.f, 1.f));
-                mesh.addColor(ofFloatColor(1.f, 1.f, 1.f, 1.f));
-                mesh.addColor(ofFloatColor(1.f, 1.f, 1.f, 1.f));
+            /*////|\\\\\\
+            //         \\
+            //  ○   ○  \\
+            //         \\
+            //  ○   ○  \\
+            //         \\
+            //////|\\\\*/
+            case 0:
                 break;
-            default:
-                mesh.addColor(ofFloatColor(1.f, 1.f, 1.f, 1.f));
-                mesh.addColor(ofFloatColor(1.f, 1.f, 1.f, 1.f));
+            /*////|\\\\\\
+            //         \\
+            //  ○   ○  \\
+            //  \      \\
+            //  ●\  ○  \\
+            //         \\
+            //////|\\\\*/
+            case 1:
+                // complete line to triangle
+                vertices.push_back(bl->position);
+                break;
+            /*////|\\\\\\
+            //         \\
+            //  ○   ○  \\
+            //      /  \\
+            //  ○  /●  \\
+            //         \\
+            //////|\\\\*/
+            case 2:
+                // complete line to triangle
+                vertices.push_back(br->position);
+                break;
+            /*////|\\\\\\
+            //         \\
+            //  ○   ○  \\
+            //  -----  \\
+            //  ●   ●  \\
+            //         \\
+            //////|\\\\*/
+            case 3:
+                // complete line to triangle
+                vertices.push_back(br->position);
+                
+                // add missing triangle
+                vertices.push_back(br->position);
+                vertices.push_back(bl->position);
+                vertices.push_back(vertices.at(0));
+                break;
+            /*////|\\\\\\
+            //         \\
+            //  ○  \●  \\
+            //      \  \\
+            //  ○   ○  \\
+            //         \\
+            //////|\\\\*/
+            case 4:
+                // complete line to triangle
+                vertices.push_back(tr->position);
+                break;
+            /*////|\\\\\\
+            //         \\
+            //  ○/  ●  \\
+            //  /   /  \\
+            //  ●  /○  \\
+            //         \\
+            //////|\\\\*/
+            case 5:
+                // store vertices for reference
+                p1 = ofVec3f(vertices.at(0));
+                p2 = ofVec3f(vertices.at(1));
+                p3 = ofVec3f(vertices.at(2));
+                p4 = ofVec3f(vertices.at(3));
+                
+                // clear vector
+                vertices.clear();
+                
+                // add triangles
+                vertices.push_back(bl->position);
+                vertices.push_back(p1);
+                vertices.push_back(p3);
+                
+                vertices.push_back(p1);
+                vertices.push_back(p2);
+                vertices.push_back(p3);
+                
+                vertices.push_back(p2);
+                vertices.push_back(p3);
+                vertices.push_back(p4);
+                
+                vertices.push_back(p2);
+                vertices.push_back(p4);
+                vertices.push_back(tr->position);
+                break;
+            /*////|\\\\\\
+            //         \\
+            //  ○ | ●  \\
+            //    |    \\
+            //  ○ | ●  \\
+            //         \\
+            //////|\\\\*/
+            case 6:
+                // complete line to triangle
+                vertices.push_back(br->position);
+                
+                // add missing triangle
+                vertices.push_back(br->position);
+                vertices.push_back(tr->position);
+                vertices.push_back(vertices.at(0));
+                break;
+            /*////|\\\\\\
+            //         \\
+            //  ○/  ●  \\
+            //  /      \\
+            //  ●   ●  \\
+            //         \\
+            //////|\\\\*/
+            case 7:
+                // complete line to triangle
+                vertices.push_back(br->position);
+                
+                // add missing triangle
+                vertices.push_back(br->position);
+                vertices.push_back(bl->position);
+                vertices.push_back(vertices.at(0));
+                
+                vertices.push_back(br->position);
+                vertices.push_back(tr->position);
+                vertices.push_back(vertices.at(1));
+                break;
+            /*////|\\\\\\
+            //         \\
+            //  ●/  ○  \\
+            //  /      \\
+            //  ○   ○  \\
+            //         \\
+            //////|\\\\*/
+            case 8:
+                // complete line to triangle
+                vertices.push_back(tl->position);
+                break;
+            /*////|\\\\\\
+            //         \\
+            //  ● | ○  \\
+            //    |    \\
+            //  ● | ○  \\
+            //         \\
+            //////|\\\\*/
+            case 9:
+                // complete line to triangle
+                vertices.push_back(bl->position);
+                
+                // add missing triangle
+                vertices.push_back(bl->position);
+                vertices.push_back(tl->position);
+                vertices.push_back(vertices.at(0));
+                break;
+            /*////|\\\\\\
+            //         \\
+            //  ●  \○  \\
+            //  \   \  \\
+            //  ○\  ●  \\
+            //         \\
+            //////|\\\\*/
+            case 10:
+                // store vertices for reference
+                p1 = ofVec3f(vertices.at(0));
+                p2 = ofVec3f(vertices.at(1));
+                p3 = ofVec3f(vertices.at(2));
+                p4 = ofVec3f(vertices.at(3));
+                
+                // clear vector
+                vertices.clear();
+                
+                // add triangles
+                vertices.push_back(tl->position);
+                vertices.push_back(p1);
+                vertices.push_back(p3);
+                
+                vertices.push_back(p1);
+                vertices.push_back(p2);
+                vertices.push_back(p3);
+                
+                vertices.push_back(p2);
+                vertices.push_back(p3);
+                vertices.push_back(p4);
+                
+                vertices.push_back(p2);
+                vertices.push_back(p4);
+                vertices.push_back(br->position);
+                break;
+            /*////|\\\\\\
+            //         \\
+            //  ●  \○  \\
+            //      \  \\
+            //  ●   ●  \\
+            //         \\
+            //////|\\\\*/
+            case 11:
+                // complete line to triangle
+                vertices.push_back(bl->position);
+                
+                // add missing triangles
+                vertices.push_back(tl->position);
+                vertices.push_back(bl->position);
+                vertices.push_back(vertices.at(0));
+                
+                vertices.push_back(bl->position);
+                vertices.push_back(br->position);
+                vertices.push_back(vertices.at(1));
+                break;
+            /*////|\\\\\\
+            //         \\
+            //  ●   ●  \\
+            //  -----  \\
+            //  ○   ○  \\
+            //         \\
+            //////|\\\\*/
+            case 12:
+                // complete line to triangle
+                vertices.push_back(tl->position);
+                
+                // add missing triangle
+                vertices.push_back(tl->position);
+                vertices.push_back(tr->position);
+                vertices.push_back(vertices.at(1));
+                break;
+            /*////|\\\\\\
+            //         \\
+            //  ●   ●  \\
+            //      /  \\
+            //  ●  /○  \\
+            //         \\
+            //////|\\\\*/
+            case 13:
+                // complete line to triangle
+                vertices.push_back(tl->position);
+                
+                // add missing triangles
+                vertices.push_back(tl->position);
+                vertices.push_back(bl->position);
+                vertices.push_back(vertices.at(0));
+                
+                vertices.push_back(tl->position);
+                vertices.push_back(tr->position);
+                vertices.push_back(vertices.at(1));
+                break;
+            /*////|\\\\\\
+            //         \\
+            //  ●   ●  \\
+            //  \      \\
+            //  ○\  ●  \\
+            //         \\
+            //////|\\\\*/
+            case 14:
+                // complete line to triangle
+                vertices.push_back(tr->position);
+                
+                // add missing triangles
+                vertices.push_back(tr->position);
+                vertices.push_back(br->position);
+                vertices.push_back(vertices.at(1));
+                
+                vertices.push_back(vertices.at(0));
+                vertices.push_back(tl->position);
+                vertices.push_back(tr->position);
+                break;
+            /*////|\\\\\\
+            //         \\
+            //  ●   ●  \\
+            //         \\
+            //  ●   ●  \\
+            //         \\
+            //////|\\\\*/
+            case 15:
+                vertices.push_back(tl->position);
+                vertices.push_back(bl->position);
+                vertices.push_back(tr->position);
+                vertices.push_back(bl->position);
+                vertices.push_back(tr->position);
+                vertices.push_back(br->position);
                 break;
         }
+    }
+    
+    void addInterpolatedVertices(vector<ofVec3f>& vertices) {
+//        mesh.usingColors();
+//        switch (state) {
+//            case 5:
+//            case 10:
+//                mesh.addColor(ofFloatColor(1.f, 1.f, 1.f, 1.f));
+//                mesh.addColor(ofFloatColor(1.f, 1.f, 1.f, 1.f));
+//                mesh.addColor(ofFloatColor(1.f, 1.f, 1.f, 1.f));
+//                mesh.addColor(ofFloatColor(1.f, 1.f, 1.f, 1.f));
+//                break;
+//            default:
+//                mesh.addColor(ofFloatColor(1.f, 1.f, 1.f, 1.f));
+//                mesh.addColor(ofFloatColor(1.f, 1.f, 1.f, 1.f));
+//                break;
+//        }
         switch (state) {
             /*////|\\\\\\
             //         \\
@@ -97,11 +394,11 @@ struct Cell {
             ///////////||\\\\\\\\\*/
             case 1:
             case 14:
-                mesh.addVertex(ofVec3f(
+                vertices.push_back(ofVec3f(
                     bl->position.x,
                     tl->position.y + size * ((1.f - tl->value)/(bl->value - tl->value))
                 ));
-                mesh.addVertex(ofVec3f(
+                vertices.push_back(ofVec3f(
                     br->position.x - size * ((1.f - br->value)/(bl->value - br->value)),
                     bl->position.y
                 ));
@@ -115,11 +412,11 @@ struct Cell {
             ///////////||\\\\\\\\\*/
             case 2:
             case 13:
-                mesh.addVertex(ofVec3f(
+                vertices.push_back(ofVec3f(
                     bl->position.x + size * ((1.f - bl->value)/(br->value - bl->value)),
                     br->position.y
                 ));
-                mesh.addVertex(ofVec3f(
+                vertices.push_back(ofVec3f(
                     br->position.x,
                     tr->position.y + size * ((1.f - tr->value)/(br->value - tr->value))
                 ));
@@ -133,11 +430,11 @@ struct Cell {
             ///////////||\\\\\\\\\*/
             case 3:
             case 12:
-                mesh.addVertex(ofVec3f(
+                vertices.push_back(ofVec3f(
                     bl->position.x,
                     tl->position.y + size * ((1.f - tl->value)/(bl->value - tl->value))
                 ));
-                mesh.addVertex(ofVec3f(
+                vertices.push_back(ofVec3f(
                     br->position.x,
                     tr->position.y + size * ((1.f - tr->value)/(br->value - tr->value))
                 ));
@@ -151,11 +448,11 @@ struct Cell {
             ///////////||\\\\\\\\\*/
             case 4:
             case 11:
-                mesh.addVertex(ofVec3f(
+                vertices.push_back(ofVec3f(
                     tl->position.x + size * ((1.f - tl->value)/(tr->value - tl->value)),
                     tr->position.y
                 ));
-                mesh.addVertex(ofVec3f(
+                vertices.push_back(ofVec3f(
                     tr->position.x,
                     br->position.y - size * ((1.f - br->value)/(tr->value - br->value))
                 ));
@@ -168,19 +465,19 @@ struct Cell {
             //         \\
             //////|\\\\*/
             case 5: // saddle
-                mesh.addVertex(ofVec3f(
+                vertices.push_back(ofVec3f(
                     bl->position.x,
                     tl->position.y + size * ((1.f - tl->value)/(bl->value - tl->value))
                 ));
-                mesh.addVertex(ofVec3f(
+                vertices.push_back(ofVec3f(
                     tl->position.x + size * ((1.f - tl->value)/(tr->value - tl->value)),
                     tr->position.y
                 ));
-                mesh.addVertex(ofVec3f(
+                vertices.push_back(ofVec3f(
                     br->position.x - size * ((1.f - br->value)/(bl->value - br->value)),
                     bl->position.y
                 ));
-                mesh.addVertex(ofVec3f(
+                vertices.push_back(ofVec3f(
                     tr->position.x,
                     br->position.y - size * ((1.f - br->value)/(tr->value - br->value))
                 ));
@@ -194,11 +491,11 @@ struct Cell {
             ///////////||\\\\\\\\\*/
             case 6:
             case 9:
-                mesh.addVertex(ofVec3f(
+                vertices.push_back(ofVec3f(
                     tl->position.x + size * ((1.f - tl->value)/(tr->value - tl->value)),
                     tr->position.y
                 ));
-                mesh.addVertex(ofVec3f(
+                vertices.push_back(ofVec3f(
                     bl->position.x + size * ((1.f - bl->value)/(br->value - bl->value)),
                     br->position.y
                 ));
@@ -212,11 +509,11 @@ struct Cell {
             ///////////||\\\\\\\\\*/
             case 7:
             case 8:
-                mesh.addVertex(ofVec3f(
+                vertices.push_back(ofVec3f(
                     tl->position.x,
                     bl->position.y - size * ((1.f - bl->value)/(tl->value - bl->value))
                 ));
-                mesh.addVertex(ofVec3f(
+                vertices.push_back(ofVec3f(
                     tr->position.x - size * ((1.f - tr->value)/(tl->value - tr->value)),
                     tl->position.y
                 ));
@@ -229,19 +526,19 @@ struct Cell {
             //         \\
             //////|\\\\*/
             case 10: // saddle
-                mesh.addVertex(ofVec3f(
+                vertices.push_back(ofVec3f(
                     tl->position.x,
                     bl->position.y - size * ((1.f - bl->value)/(tl->value - bl->value))
                 ));
-                mesh.addVertex(ofVec3f(
+                vertices.push_back(ofVec3f(
                     bl->position.x + size * ((1.f - bl->value)/(br->value - bl->value)),
                     br->position.y
                 ));
-                mesh.addVertex(ofVec3f(
+                vertices.push_back(ofVec3f(
                     tr->position.x - size * ((1.f - tr->value)/(tl->value - tr->value)),
                     tl->position.y
                 ));
-                mesh.addVertex(ofVec3f(
+                vertices.push_back(ofVec3f(
                     br->position.x,
                     tr->position.y + size * ((1.f - tr->value)/(br->value - tr->value))
                 ));
@@ -257,21 +554,21 @@ struct Cell {
                 break;
         }
     }
-    void addStraightVertices(ofMesh& mesh, bool infill) {
-        mesh.usingColors();
-        switch (state) {
-            case 5:
-            case 10:
-                mesh.addColor(ofFloatColor(0.f, 1.f, 0.f, 1.f));
-                mesh.addColor(ofFloatColor(0.f, 1.f, 0.f, 1.f));
-                mesh.addColor(ofFloatColor(0.f, 1.f, 0.f, 1.f));
-                mesh.addColor(ofFloatColor(0.f, 1.f, 0.f, 1.f));
-                break;
-            default:
-                mesh.addColor(ofFloatColor(0.f, 1.f, 0.f, 1.f));
-                mesh.addColor(ofFloatColor(0.f, 1.f, 0.f, 1.f));
-                break;
-        }
+    void addStraightVertices(vector<ofVec3f>& vertices) {
+//        mesh.usingColors();
+//        switch (state) {
+//            case 5:
+//            case 10:
+//                mesh.addColor(ofFloatColor(0.f, 1.f, 0.f, 1.f));
+//                mesh.addColor(ofFloatColor(0.f, 1.f, 0.f, 1.f));
+//                mesh.addColor(ofFloatColor(0.f, 1.f, 0.f, 1.f));
+//                mesh.addColor(ofFloatColor(0.f, 1.f, 0.f, 1.f));
+//                break;
+//            default:
+//                mesh.addColor(ofFloatColor(0.f, 1.f, 0.f, 1.f));
+//                mesh.addColor(ofFloatColor(0.f, 1.f, 0.f, 1.f));
+//                break;
+//        }
         switch (state) {
             /*////|\\\\\\
             //         \\
@@ -291,8 +588,10 @@ struct Cell {
             ///////////||\\\\\\\\\*/
             case 1:
             case 14:
-                mesh.addVertex(ofVec3f(bl->position.x, bl->position.y - half_size));
-                mesh.addVertex(ofVec3f(bl->position.x + half_size, bl->position.y));
+//                mesh.addVertex(ofVec3f(bl->position.x, bl->position.y - half_size));
+//                mesh.addVertex(ofVec3f(bl->position.x + half_size, bl->position.y));
+                vertices.push_back(ofVec3f(bl->position.x, bl->position.y - half_size));
+                vertices.push_back(ofVec3f(bl->position.x + half_size, bl->position.y));
                 break;
             /*/////////||\\\\\\\\\\\
             //         ||         \\
@@ -303,8 +602,10 @@ struct Cell {
             ///////////||\\\\\\\\\*/
             case 2:
             case 13:
-                mesh.addVertex(ofVec3f(br->position.x - half_size, br->position.y));
-                mesh.addVertex(ofVec3f(br->position.x, br->position.y - half_size));
+//                mesh.addVertex(ofVec3f(br->position.x - half_size, br->position.y));
+//                mesh.addVertex(ofVec3f(br->position.x, br->position.y - half_size));
+                vertices.push_back(ofVec3f(br->position.x - half_size, br->position.y));
+                vertices.push_back(ofVec3f(br->position.x, br->position.y - half_size));
                 break;
             /*/////////||\\\\\\\\\\\
             //         ||         \\
@@ -315,8 +616,10 @@ struct Cell {
             ///////////||\\\\\\\\\*/
             case 3:
             case 12:
-                mesh.addVertex(ofVec3f(bl->position.x, bl->position.y - half_size));
-                mesh.addVertex(ofVec3f(br->position.x, br->position.y - half_size));
+//                mesh.addVertex(ofVec3f(bl->position.x, bl->position.y - half_size));
+//                mesh.addVertex(ofVec3f(br->position.x, br->position.y - half_size));
+                vertices.push_back(ofVec3f(bl->position.x, bl->position.y - half_size));
+                vertices.push_back(ofVec3f(br->position.x, br->position.y - half_size));
                 break;
             /*/////////||\\\\\\\\\\\
             //         ||         \\
@@ -327,8 +630,10 @@ struct Cell {
             ///////////||\\\\\\\\\*/
             case 4:
             case 11:
-                mesh.addVertex(ofVec3f(tr->position.x - half_size, tr->position.y));
-                mesh.addVertex(ofVec3f(tr->position.x, tr->position.y + half_size));
+//                mesh.addVertex(ofVec3f(tr->position.x - half_size, tr->position.y));
+//                mesh.addVertex(ofVec3f(tr->position.x, tr->position.y + half_size));
+                vertices.push_back(ofVec3f(tr->position.x - half_size, tr->position.y));
+                vertices.push_back(ofVec3f(tr->position.x, tr->position.y + half_size));
                 break;
             /*////|\\\\\\
             //         \\
@@ -338,10 +643,14 @@ struct Cell {
             //         \\
             //////|\\\\*/
             case 5: // saddle
-                mesh.addVertex(ofVec3f(bl->position.x, bl->position.y - half_size));
-                mesh.addVertex(ofVec3f(tr->position.x - half_size, tr->position.y));
-                mesh.addVertex(ofVec3f(bl->position.x + half_size, bl->position.y));
-                mesh.addVertex(ofVec3f(tr->position.x, tr->position.y + half_size));
+//                mesh.addVertex(ofVec3f(bl->position.x, bl->position.y - half_size));
+//                mesh.addVertex(ofVec3f(tr->position.x - half_size, tr->position.y));
+//                mesh.addVertex(ofVec3f(bl->position.x + half_size, bl->position.y));
+//                mesh.addVertex(ofVec3f(tr->position.x, tr->position.y + half_size));
+                vertices.push_back(ofVec3f(bl->position.x, bl->position.y - half_size));
+                vertices.push_back(ofVec3f(tr->position.x - half_size, tr->position.y));
+                vertices.push_back(ofVec3f(bl->position.x + half_size, bl->position.y));
+                vertices.push_back(ofVec3f(tr->position.x, tr->position.y + half_size));
                 break;
             /*/////////||\\\\\\\\\\\
             //         ||         \\
@@ -352,8 +661,10 @@ struct Cell {
             ///////////||\\\\\\\\\*/
             case 6:
             case 9:
-                mesh.addVertex(ofVec3f(tl->position.x + half_size, tl->position.y));
-                mesh.addVertex(ofVec3f(bl->position.x + half_size, bl->position.y));
+//                mesh.addVertex(ofVec3f(tl->position.x + half_size, tl->position.y));
+//                mesh.addVertex(ofVec3f(bl->position.x + half_size, bl->position.y));
+                vertices.push_back(ofVec3f(tl->position.x + half_size, tl->position.y));
+                vertices.push_back(ofVec3f(bl->position.x + half_size, bl->position.y));
                 break;
             /*/////////||\\\\\\\\\\\
             //         ||         \\
@@ -364,8 +675,10 @@ struct Cell {
             ///////////||\\\\\\\\\*/
             case 7:
             case 8:
-                mesh.addVertex(ofVec3f(tl->position.x, tl->position.y + half_size));
-                mesh.addVertex(ofVec3f(tl->position.x + half_size, tl->position.y));
+//                mesh.addVertex(ofVec3f(tl->position.x, tl->position.y + half_size));
+//                mesh.addVertex(ofVec3f(tl->position.x + half_size, tl->position.y));
+                vertices.push_back(ofVec3f(tl->position.x, tl->position.y + half_size));
+                vertices.push_back(ofVec3f(tl->position.x + half_size, tl->position.y));
                 break;
             /*////|\\\\\\
             //         \\
@@ -375,10 +688,14 @@ struct Cell {
             //         \\
             //////|\\\\*/
             case 10: // saddle
-                mesh.addVertex(ofVec3f(bl->position.x, bl->position.y - half_size));
-                mesh.addVertex(ofVec3f(bl->position.x + half_size, bl->position.y));
-                mesh.addVertex(ofVec3f(tr->position.x - half_size, tr->position.y));
-                mesh.addVertex(ofVec3f(tr->position.x, tr->position.y + half_size));
+//                mesh.addVertex(ofVec3f(bl->position.x, bl->position.y - half_size));
+//                mesh.addVertex(ofVec3f(bl->position.x + half_size, bl->position.y));
+//                mesh.addVertex(ofVec3f(tr->position.x - half_size, tr->position.y));
+//                mesh.addVertex(ofVec3f(tr->position.x, tr->position.y + half_size));
+                vertices.push_back(ofVec3f(bl->position.x, bl->position.y - half_size));
+                vertices.push_back(ofVec3f(bl->position.x + half_size, bl->position.y));
+                vertices.push_back(ofVec3f(tr->position.x - half_size, tr->position.y));
+                vertices.push_back(ofVec3f(tr->position.x, tr->position.y + half_size));
                 break;
             /*////|\\\\\\
             //         \\
@@ -388,14 +705,6 @@ struct Cell {
             //         \\
             //////|\\\\*/
             case 15:
-//                if (infill) {
-//                    mesh.addVertex(tl->position);
-//                    mesh.addVertex(bl->position);
-//                    mesh.addVertex(tr->position);
-//                    mesh.addVertex(bl->position);
-//                    mesh.addVertex(tr->position);
-//                    mesh.addVertex(br->position);
-//                }
                 break;
         }
     }
