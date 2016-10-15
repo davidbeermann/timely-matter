@@ -1,46 +1,18 @@
 #include "ofApp.h"
 
-#define COUNT 15
-#define MIN_RADIUS 20
-#define MAX_RADIUS 50
+#define PARTICLE_COUNT 15
 #define X_SEGMENTS 60
 #define Y_SEGMENTS 60
 #define SEGMENT_SIZE 10
 
-typedef vector<Particle>::iterator PIt;
-typedef vector<CellUnit>::iterator CUIt;
-typedef vector<Cell>::iterator CIt;
 
-//--------------------------------------------------------------
 void ofApp::setup(){
+    ofSetWindowTitle("2D Metaballs");
     ofSetBackgroundColor(0);
     
-    m_particle_count = COUNT;
+    m_cell_grid.setup(X_SEGMENTS, Y_SEGMENTS);
     
-    for (unsigned int i = 0; i < m_particle_count; ++i) {
-        float radius = ofRandom(MIN_RADIUS, MAX_RADIUS);
-        float x = ofRandom(radius, ofGetWidth()-radius);
-        float y = ofRandom(radius, ofGetHeight()-radius);
-        m_particles.push_back(Particle(x, y, radius));
-    }
-    
-    for (float y = 0.f; y < Y_SEGMENTS + 1; ++y) {
-        for (float x = 0.f; x < X_SEGMENTS + 1; ++x) {
-            m_cell_units.push_back(CellUnit(x * SEGMENT_SIZE, y * SEGMENT_SIZE));
-        }
-    }
-    
-    for (float y = 0.f; y < Y_SEGMENTS; ++y) {
-        for (float x = 0.f; x < X_SEGMENTS; ++x) {
-            m_cells.push_back(Cell(SEGMENT_SIZE));
-            Cell& cell = m_cells[m_cells.size() - 1];
-            
-            cell.setTopLeftUnit(&m_cell_units[y * (Y_SEGMENTS + 1) + x]);
-            cell.setTopRightUnit(&m_cell_units[y * (Y_SEGMENTS + 1) + (x + 1)]);
-            cell.setBottomRightUnit(&m_cell_units[(y + 1) * (Y_SEGMENTS + 1) + (x + 1)]);
-            cell.setBottomLeftUnit(&m_cell_units[(y + 1) * (Y_SEGMENTS + 1) + x]);
-        }
-    }
+    m_particle_system.setup(PARTICLE_COUNT);
     
     m_show_gui = false;
     
@@ -55,101 +27,38 @@ void ofApp::setup(){
     m_panel.add(m_infill.set("infill", false));
 }
 
-//--------------------------------------------------------------
-void ofApp::update(){
-    ofSetWindowTitle(to_string((int) ofGetFrameRate()));
-    
-    if (m_move_particles) {
-        for (PIt p = m_particles.begin(); p != m_particles.end(); ++p) {
-            p->position += p->velocity;
-            if (p->position.x < p->radius || p->position.x > ofGetWidth() - p->radius) {
-                p->velocity.x *= -1.f;
-                p->position += p->velocity;
-            }
-            if (p->position.y < p->radius || p->position.y > ofGetHeight() - p->radius) {
-                p->velocity.y *= -1.f;
-                p->position += p->velocity;
-            }
-        }
-    }
-    
-    for (CUIt cu = m_cell_units.begin(); cu != m_cell_units.end(); ++cu) {
-        cu->reset();
-        
-        for (PIt p = m_particles.begin(); p != m_particles.end(); ++p) {
-            ofVec3f d = p->position - cu->position;
-//            float diff = p->radius / d.length();
-            float diff = p->radiusSquared / d.lengthSquared();
-            
-//            if (diff >= m_fitting) {
-                cu->value += diff;
-//            }
-        }
-    }
-    
-    m_mesh.clear();
-    
-    if (m_infill) {
-        m_mesh.setMode(OF_PRIMITIVE_TRIANGLES);
-    } else {
-        m_mesh.setMode(OF_PRIMITIVE_LINES);
-    }
-    
-    if (m_show_mesh) {
-        for (CIt c = m_cells.begin(); c != m_cells.end(); ++c) {
-            c->updateState();
-            c->appendLineVertices(m_mesh, m_interpolate, m_infill);
-        }
-    }
-}
 
-//--------------------------------------------------------------
-void ofApp::draw(){
-    if (m_show_particles) {
-        for (PIt p = m_particles.begin(); p != m_particles.end(); ++p) {
-            ofPushMatrix();
-            ofTranslate(p->position);
-            
-            ofPushStyle();
-            ofSetCircleResolution(64);
-            ofSetColor(255, 255, 255, 127);
-            ofDrawCircle(0.f, 0.f, p->radius);
-            ofPopStyle();
-            
-            ofPopMatrix();
-        }
-    }
-    
-    if (m_show_cells) {
-        for (CUIt cu = m_cell_units.begin(); cu != m_cell_units.end(); ++cu) {
-            ofPushMatrix();
-            ofTranslate(cu->position);
-            
-            ofPushStyle();
-            ofSetCircleResolution(12);
-            if (cu->value < 1.f) {
-                ofNoFill();
-            }
-            ofSetColor(255, 0, 0, 255);
-            ofDrawCircle(0.f, 0.f, 3.f);
-    //        ofDrawBitmapString(to_string(cu->value), 0.f, 12.f);
-            ofPopStyle();
-            
-            ofPopMatrix();
-        }
+void ofApp::update(){
+    if (m_move_particles) {
+        m_particle_system.update();
     }
     
     if (m_show_mesh) {
-        m_mesh.draw();
+        m_cell_grid.updateMesh(m_mesh, m_particle_system.getParticles(), m_interpolate, m_infill);
     }
     
-    string info = "";
+    info = "";
     info += "FPS: " + to_string((int) ofGetFrameRate());
     info += "\nNUM VERTICES: " + to_string((int) m_mesh.getNumVertices());
     if (m_infill) {
         info += "\nNUM TRIANGLES: " + to_string((int) (m_mesh.getNumVertices()/3));
     } else {
         info += "\nNUM LINES: " + to_string((int) (m_mesh.getNumVertices()/2));
+    }
+}
+
+
+void ofApp::draw(){
+    if (m_show_particles) {
+        m_particle_system.draw();
+    }
+    
+    if (m_show_cells) {
+        m_cell_grid.draw();
+    }
+    
+    if (m_show_mesh) {
+        m_mesh.draw();
     }
     
     ofPushStyle();
@@ -162,59 +71,11 @@ void ofApp::draw(){
     }
 }
 
-//--------------------------------------------------------------
+
 void ofApp::keyPressed(int key){
     if (key == 'g') {
         m_show_gui = !m_show_gui;
     }
 }
 
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key){
 
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
-}
