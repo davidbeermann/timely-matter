@@ -17,7 +17,6 @@ void ofApp::setup(){
     
     m_panel.setup();
     m_panel.setName("Metaballs");
-    m_panel.add(m_fitting.set("fitting", 1.f, 0.2f, 1.f));
     m_panel.add(m_show_particles.set("show particles", false));
     m_panel.add(m_move_particles.set("move particles", true));
     m_panel.add(m_show_cells.set("show cells", false));
