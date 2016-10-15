@@ -1,7 +1,7 @@
 #include "ParticleSystem.hpp"
 
-#define MIN_RADIUS 20
-#define MAX_RADIUS 50
+#define MIN_RADIUS 25
+#define MAX_RADIUS 70
 
 typedef vector<Particle>::iterator PIt;
 

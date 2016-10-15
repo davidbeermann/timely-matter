@@ -17,7 +17,7 @@ void CellGrid::setup(unsigned int columns, unsigned int rows) {
     
     for (float y = 0.f; y < rows; ++y) {
         for (float x = 0.f; x < columns; ++x) {
-            m_cells.push_back(Cell(m_segment_width));
+            m_cells.push_back(Cell(m_segment_width, m_segment_height));
             Cell& cell = m_cells[m_cells.size() - 1];
             
             cell.setTopLeftUnit(&m_cell_units[y * (columns + 1) + x]);

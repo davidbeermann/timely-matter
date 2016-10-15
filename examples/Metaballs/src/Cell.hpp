@@ -14,15 +14,19 @@ class Cell {
     CellUnit* m_tru = nullptr; // top right cell unit
     CellUnit* m_bru = nullptr; // bottom right cell unit
     CellUnit* m_blu = nullptr; // bottom left cell unit
-    float m_size;
-    float m_half_size;
+    float m_size_x;
+    float m_size_y;
+    float m_half_size_x;
+    float m_half_size_y;
     unsigned int m_state;
     
 public:
     
-    Cell(float cell_size){
-        m_size = cell_size;
-        m_half_size = cell_size * 0.5f;
+    Cell(float size_x, float size_y){
+        m_size_x = size_x;
+        m_size_y = size_y;
+        m_half_size_x = size_x * 0.5f;
+        m_half_size_y = size_y * 0.5f;
         m_state = 0;
     }
     

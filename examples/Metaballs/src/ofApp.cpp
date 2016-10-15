@@ -1,16 +1,15 @@
 #include "ofApp.h"
 
-#define PARTICLE_COUNT 15
-#define X_SEGMENTS 60
-#define Y_SEGMENTS 60
-#define SEGMENT_SIZE 10
+#define PARTICLE_COUNT 25
+#define COLUMNS 128
+#define ROWS 64
 
 
 void ofApp::setup(){
     ofSetWindowTitle("2D Metaballs");
     ofSetBackgroundColor(0);
     
-    m_cell_grid.setup(X_SEGMENTS, Y_SEGMENTS);
+    m_cell_grid.setup(COLUMNS, ROWS);
     
     m_particle_system.setup(PARTICLE_COUNT);
     
