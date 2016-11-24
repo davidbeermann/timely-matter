@@ -95,10 +95,30 @@ void ofApp::draw(){
 
 
 void ofApp::keyPressed(int key){
-    if (key == 'g') {
-        m_show_gui = !m_show_gui;
-    } else if (key == ' ') {
-        m_move_particles = !m_move_particles;
+    switch (key) {
+        case 'g':
+            m_show_gui = !m_show_gui;
+            break;
+        case ' ':
+            m_move_particles = !m_move_particles;
+            break;
+        case 'p':
+            m_show_particles = !m_show_particles;
+            break;
+        case 'c':
+            m_show_cells = !m_show_cells;
+            break;
+        case 'm':
+            m_show_mesh = !m_show_mesh;
+            break;
+        case 'i':
+            m_interpolate = !m_interpolate;
+            break;
+        case 'f':
+            m_infill = !m_infill;
+            break;
+        default:
+            break;
     }
 }
 
