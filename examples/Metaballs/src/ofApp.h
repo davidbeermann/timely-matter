@@ -5,11 +5,17 @@
 #include "CellGrid.hpp"
 #include "ParticleSystem.hpp"
 
+#define TEST_PARTICLE_SYSTEM
+
 
 class ofApp : public ofBaseApp {
     
     CellGrid m_cell_grid;
+#ifdef TEST_PARTICLE_SYSTEM
+    vector<Particle> m_mouse_particle;
+#else
     ParticleSystem m_particle_system;
+#endif
     ofMesh m_mesh;
     
     string info;

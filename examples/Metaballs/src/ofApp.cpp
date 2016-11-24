@@ -1,8 +1,8 @@
 #include "ofApp.h"
 
 #define PARTICLE_COUNT 25
-#define COLUMNS 128
-#define ROWS 64
+#define COLUMNS 32 //128
+#define ROWS 32 //64
 
 
 void ofApp::setup(){
@@ -11,7 +11,11 @@ void ofApp::setup(){
     
     m_cell_grid.setup(COLUMNS, ROWS);
     
+#ifdef TEST_PARTICLE_SYSTEM
+    m_mouse_particle.push_back(Particle(ofGetWidth()*0.5f, ofGetHeight()*0.5f, 75));
+#else
     m_particle_system.setup(PARTICLE_COUNT);
+#endif
     
     m_show_gui = false;
     
@@ -26,7 +30,12 @@ void ofApp::setup(){
 }
 
 
-void ofApp::update(){
+void ofApp::update() {
+#ifdef TEST_PARTICLE_SYSTEM
+    if (m_show_mesh) {
+        m_cell_grid.updateMesh(m_mesh, m_mouse_particle, m_interpolate, m_infill);
+    }
+#else
     if (m_move_particles) {
         m_particle_system.update();
     }
@@ -34,6 +43,7 @@ void ofApp::update(){
     if (m_show_mesh) {
         m_cell_grid.updateMesh(m_mesh, m_particle_system.getParticles(), m_interpolate, m_infill);
     }
+#endif
     
     info = "";
     info += "FPS: " + to_string((int) ofGetFrameRate());
@@ -47,8 +57,22 @@ void ofApp::update(){
 
 
 void ofApp::draw(){
+    
     if (m_show_particles) {
+    #ifdef TEST_PARTICLE_SYSTEM
+        ofPushMatrix();
+        ofTranslate(m_mouse_particle[0].getPosition());
+        
+        ofPushStyle();
+        ofSetCircleResolution(64);
+        ofSetColor(255, 255, 255, 127);
+        ofDrawCircle(0.f, 0.f, m_mouse_particle[0].getRadius());
+        ofPopStyle();
+        
+        ofPopMatrix();
+    #else
         m_particle_system.draw();
+    #endif
     }
     
     if (m_show_cells) {
