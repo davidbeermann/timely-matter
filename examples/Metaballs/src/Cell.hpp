@@ -74,6 +74,22 @@ public:
         m_nr = cell;
     }
     
+    Cell* getTopNeighbor() {
+        return m_nt;
+    }
+    
+    Cell* getBottomNeighbor() {
+        return m_nb;
+    }
+    
+    Cell* getLeftNeighbor() {
+        return m_nl;
+    }
+    
+    Cell* getRightNeighbor() {
+        return m_nr;
+    }
+    
     bool hasTopNeighbor() {
         return m_nt != nullptr;
     }
@@ -118,7 +134,8 @@ public:
             return m_tlu->getPosition();
         } else {
             ofLog() << "getPosition()";
-            return ofVec3f();
+            ofVec3f v;
+            return v;
         }
     }
     
@@ -140,7 +157,11 @@ public:
         }
     }
     
-    void updateState();
+    const unsigned int& getState() {
+        return m_state;
+    }
+    
+    const unsigned int& updateState();
     void calculateMesh(ofMesh& mesh, bool interpolated = false, bool infill = false);
     
 };

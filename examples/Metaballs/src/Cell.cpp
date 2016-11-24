@@ -1,12 +1,13 @@
 #include "Cell.hpp"
 
 
-void Cell::updateState() {
+const unsigned int& Cell::updateState() {
     m_state = 0;
     m_state += m_blu->getValue() >= 1.f ? 1 : 0;
     m_state += m_bru->getValue() >= 1.f ? 2 : 0;
     m_state += m_tru->getValue() >= 1.f ? 4 : 0;
     m_state += m_tlu->getValue() >= 1.f ? 8 : 0;
+    return m_state;
 }
 
 
