@@ -1,5 +1,7 @@
 #include "CellGrid.hpp"
 
+#define GRID_DEBUG
+
 typedef vector<CellUnit>::iterator CUIt;
 typedef vector<Cell>::iterator CIt;
 typedef vector<Particle>::iterator PIt;
@@ -26,10 +28,41 @@ void CellGrid::setup(unsigned int columns, unsigned int rows) {
             cell.setBottomLeftUnit(&m_cell_units[(y + 1) * (columns + 1) + x]);
         }
     }
+    
+    for (int y = 0; y < rows; ++y) {
+        for (int x = 0; x < columns; ++x) {
+            unsigned int index = y * columns + x;
+            Cell& cell = m_cells[index];
+            
+            // define edge conditions for cell
+            bool topRow = (y == 0);
+            bool bottomRow = (y == rows - 1);
+            bool leftColumn = (x == 0);
+            bool rightColumn = (x == columns - 1);
+            cell.setEdgeConditions(topRow, bottomRow, leftColumn, rightColumn);
+            
+//            ofLog() << "cell index: " << index << " - " << topRow << " " << bottomRow << " " << leftColumn << " " << rightColumn;
+            
+            // setup neighboring cells
+            if (!topRow) {
+                cell.setTopNeighbor(&m_cells[(y - 1) * columns + x]);
+            }
+            if (!bottomRow) {
+                cell.setBottomNeighbor(&m_cells[(y + 1) * columns + x]);
+            }
+            if (!leftColumn) {
+                cell.setLeftNeighbor(&m_cells[y * columns + (x - 1)]);
+            }
+            if (!rightColumn) {
+                cell.setRightNeighbor(&m_cells[y * columns + (x + 1)]);
+            }
+        }
+    }
 }
 
 
 void CellGrid::updateMesh(ofMesh& mesh, vector<Particle>& particles, const bool interpolate, const bool infill) {
+    // update cell units values based on particles
     for (CUIt cu = m_cell_units.begin(); cu != m_cell_units.end(); ++cu) {
         cu->reset();
         
@@ -42,6 +75,7 @@ void CellGrid::updateMesh(ofMesh& mesh, vector<Particle>& particles, const bool 
         }
     }
     
+    // clear all prior vertices in mesh
     mesh.clear();
     
     if (infill) {
@@ -58,6 +92,50 @@ void CellGrid::updateMesh(ofMesh& mesh, vector<Particle>& particles, const bool 
 
 
 void CellGrid::draw() {
+    
+#ifdef GRID_DEBUG
+    float w, h, w2, h2, r = 2, o = 3;
+    for (CIt c = m_cells.begin(); c != m_cells.end(); ++c) {
+        w = c->getWidth();
+        h = c->getHeight();
+        w2 = w * 0.5f;
+        h2 = h * 0.5f;
+        
+        ofPushMatrix();
+        ofTranslate(c->getPosition());
+        ofPushStyle();
+        
+        if (c->isInTopRow() || c->isInBottomRow()) {
+            ofSetColor(255, 255, 0, 64);
+            ofDrawRectangle(0, 0, w, h);
+        }
+        if (c->isInLeftColumn() || c->isInRightColumn()) {
+            ofSetColor(255, 0, 255, 64);
+            ofDrawRectangle(0, 0, w, h);
+        }
+        
+        if (c->hasTopNeighbor()) {
+            ofSetColor(191, 191, 0, 140);
+            ofDrawCircle(w2, o, r);
+        }
+        if (c->hasBottomNeighbor()) {
+            ofSetColor(191, 191, 0, 100);
+            ofDrawCircle(w2, h-o, r);
+        }
+        if (c->hasLeftNeighbor()) {
+            ofSetColor(191, 0, 191, 140);
+            ofDrawCircle(o, h2, r);
+        }
+        if (c->hasRightNeighbor()) {
+            ofSetColor(191, 0, 191, 100);
+            ofDrawCircle(w-o, h2, r);
+        }
+        
+        ofPopStyle();
+        ofPopMatrix();
+    }
+#endif
+    
     for (CUIt cu = m_cell_units.begin(); cu != m_cell_units.end(); ++cu) {
         ofPushMatrix();
         ofTranslate(cu->getPosition());
