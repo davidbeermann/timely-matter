@@ -73,6 +73,8 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
     if (key == 'g') {
         m_show_gui = !m_show_gui;
+    } else if (key == ' ') {
+        m_move_particles = !m_move_particles;
     }
 }
 
