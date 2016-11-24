@@ -12,6 +12,11 @@ Particle::Particle(float x, float y, float r) {
 }
 
 
+void Particle::setPosition(const ofVec3f& position) {
+    m_position.set(position);
+}
+
+
 ofVec3f& Particle::getPosition() {
     return m_position;
 }

@@ -36,7 +36,9 @@ public:
 
     void keyPressed(int key);
 //    void keyReleased(int key);
-//    void mouseMoved(int x, int y );
+#ifdef TEST_PARTICLE_SYSTEM
+    void mouseMoved(int x, int y );
+#endif
 //    void mouseDragged(int x, int y, int button);
 //    void mousePressed(int x, int y, int button);
 //    void mouseReleased(int x, int y, int button);

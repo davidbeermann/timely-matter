@@ -103,3 +103,12 @@ void ofApp::keyPressed(int key){
 }
 
 
+#ifdef TEST_PARTICLE_SYSTEM
+void ofApp::mouseMoved(int x, int y ) {
+    if (m_move_particles) {
+        m_mouse_particle[0].setPosition(ofVec3f(x,y,0.f));
+    }
+}
+#endif
+
+
