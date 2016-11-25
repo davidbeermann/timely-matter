@@ -20,7 +20,7 @@ class CellGrid {
     float m_segment_height;
     vector<CellUnit> m_cell_units;
     vector<Cell> m_cells;
-    vector<Cell *> m_active_cells;
+    vector<vector<Cell *>> m_active_cells;
     
     void findNeighbor(Cell * cell, vector<Cell *> & list, NeighborDirection prev_dir = NONE);
     

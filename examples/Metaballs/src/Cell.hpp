@@ -18,6 +18,7 @@ class Cell {
     Cell* m_nb = nullptr; // neighbor to the bottom
     Cell* m_nl = nullptr; // neighbor to the left
     Cell* m_nr = nullptr; // neighbor to the right
+    unsigned int m_id;
     float m_size_x;
     float m_size_y;
     float m_half_size_x;
@@ -30,7 +31,8 @@ class Cell {
     
 public:
     
-    Cell(float size_x, float size_y){
+    Cell(unsigned int id, float size_x, float size_y){
+        m_id = id;
         m_size_x = size_x;
         m_size_y = size_y;
         m_half_size_x = size_x * 0.5f;
@@ -40,6 +42,10 @@ public:
         m_in_bottom_row = false;
         m_in_left_column = false;
         m_in_right_column = false;
+    }
+    
+    const unsigned int& getId() {
+        return m_id;
     }
     
     void setTopLeftUnit(CellUnit* unit) {

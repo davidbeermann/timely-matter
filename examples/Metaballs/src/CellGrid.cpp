@@ -12,6 +12,7 @@ void CellGrid::findNeighbor(Cell * cell, vector<Cell *> & list, NeighborDirectio
         ofLog() << "findNeighbor() -> NULLPTR";
         return;
     }
+//    ofLog() << "ID: " << cell->getId();
     if (list.size() > 0 && cell == list[0]) {
         return;
     }
@@ -82,12 +83,12 @@ void CellGrid::findNeighbor(Cell * cell, vector<Cell *> & list, NeighborDirectio
             break;
         // saddle
         case 10:
-            if (prev_dir == RIGHT && cell->hasBottomNeighbor()) {
-                return findNeighbor(cell->getBottomNeighbor(), list, DOWN);
-            } else if (prev_dir == LEFT && cell->hasTopNeighbor()) {
-                return findNeighbor(cell->getTopNeighbor(), list, UP);
+            if (prev_dir == UP && cell->hasLeftNeighbor()) {
+                return findNeighbor(cell->getLeftNeighbor(), list, LEFT);
+            } else if (prev_dir == DOWN && cell->hasRightNeighbor()) {
+                return findNeighbor(cell->getRightNeighbor(), list, RIGHT);
             } else {
-                ofLog() << "DEAD END - 10";
+                ofLog() << "DEAD END - 10 - prev_dir:" << prev_dir;
                 return;
             }
             break;
@@ -143,7 +144,8 @@ void CellGrid::setup(unsigned int columns, unsigned int rows) {
     
     for (float y = 0.f; y < rows; ++y) {
         for (float x = 0.f; x < columns; ++x) {
-            m_cells.push_back(Cell(m_segment_width, m_segment_height));
+            unsigned int id = m_cells.size();
+            m_cells.push_back(Cell(id, m_segment_width, m_segment_height));
             Cell& cell = m_cells[m_cells.size() - 1];
             
             cell.setTopLeftUnit(&m_cell_units[y * (columns + 1) + x]);
@@ -223,18 +225,21 @@ void CellGrid::updateMesh(ofMesh& mesh, vector<Particle>& particles, const bool 
     // clear list of active cells for update
     m_active_cells.clear();
     
-//    int count = 0;
-//    do {
-//        ofLog() << count++ << " - " << "temp cells: " << temp.size();
+//    ofLog() << "temp cells: " << temp.size();
+    
+    int count = 0;
+    do {
+        m_active_cells.push_back(vector<Cell*>());
+        vector<Cell*> & current = m_active_cells[m_active_cells.size() - 1];
         
         // find all neighbors starting from first cell stored in temp vector.
         // store found cells in active cells vector.
-        findNeighbor(temp[0], m_active_cells);
+        findNeighbor(temp[0], current);
         
         vector<Cell *>::iterator t, a;
         for (t = temp.begin(); t != temp.end();) {
             bool match = false;
-            for (a = m_active_cells.begin(); a != m_active_cells.end(); ++a) {
+            for (a = current.begin(); a != current.end(); ++a) {
                 if (*t == *a) {
                     // when erasing position of t, t points automatically to the next position in the vector.
                     temp.erase(t);
@@ -247,10 +252,13 @@ void CellGrid::updateMesh(ofMesh& mesh, vector<Particle>& particles, const bool 
                 t++;
             }
         }
-//    } while (temp.size() > 0 && count < 2);
+        
+//        ofLog() << count++ << " - " << "current cells: " << current.size() << " - temp cells: " << temp.size();
+        
+    } while (temp.size() > 0);
     
 //    ofLog() << "temp cells: " << temp.size();
-    ofLog() << "active cells: " << m_active_cells.size();
+//    ofLog() << "active cells: " << m_active_cells.size();
 }
 
 
@@ -300,14 +308,16 @@ void CellGrid::draw() {
     if (m_active_cells.size() > 0) {
         Cell *c;
         for (int i = 0; i < m_active_cells.size(); ++i) {
-            c = m_active_cells[i];
-            ofPushMatrix();
-            ofTranslate(c->getPosition());
-            ofPushStyle();
-            ofSetColor(191, 0, 0, 128);
-            ofDrawRectangle(0, 0, c->getWidth(), c->getHeight());
-            ofPopStyle();
-            ofPopMatrix();
+            for (int j = 0; j < m_active_cells[i].size(); ++j) {
+                c = m_active_cells[i][j];
+                ofPushMatrix();
+                ofTranslate(c->getPosition());
+                ofPushStyle();
+                ofSetColor(191, 0, 0, 128);
+                ofDrawRectangle(0, 0, c->getWidth(), c->getHeight());
+                ofPopStyle();
+                ofPopMatrix();
+            }
         }
     }
 #endif
