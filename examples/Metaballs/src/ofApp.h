@@ -5,7 +5,7 @@
 #include "CellGrid.hpp"
 #include "ParticleSystem.hpp"
 
-//#define TEST_PARTICLE_SYSTEM
+#define TEST_PARTICLE_SYSTEM
 
 
 class ofApp : public ofBaseApp {

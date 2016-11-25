@@ -126,6 +126,12 @@ void ofApp::keyPressed(int key){
 #ifdef TEST_PARTICLE_SYSTEM
 void ofApp::mouseMoved(int x, int y ) {
     if (m_move_particles) {
+        if (x < m_mouse_particle[0].getRadius()) x = m_mouse_particle[0].getRadius();
+        else if (x > ofGetWidth() - m_mouse_particle[0].getRadius()) x = ofGetWidth() - m_mouse_particle[0].getRadius();
+        
+        if (y < m_mouse_particle[0].getRadius()) y = m_mouse_particle[0].getRadius();
+        else if (y > ofGetHeight() - m_mouse_particle[0].getRadius()) y = ofGetHeight() - m_mouse_particle[0].getRadius();
+        
         m_mouse_particle[0].setPosition(ofVec3f(x,y,0.f));
     }
 }
