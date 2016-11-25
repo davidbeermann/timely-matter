@@ -8,11 +8,11 @@ typedef vector<Particle>::iterator PIt;
 
 
 void CellGrid::findNeighbor(Cell * cell, vector<Cell *> & list, NeighborDirection prev_dir) {
-    if (list.size() > 0 && cell == list[0]) {
-        return;
-    }
     if (cell == nullptr) {
         ofLog() << "findNeighbor() -> NULLPTR";
+        return;
+    }
+    if (list.size() > 0 && cell == list[0]) {
         return;
     }
     list.push_back(cell);
@@ -71,11 +71,25 @@ void CellGrid::findNeighbor(Cell * cell, vector<Cell *> & list, NeighborDirectio
             break;
         // saddle
         case 5:
-            return;
+            if (prev_dir == RIGHT && cell->hasTopNeighbor()) {
+                return findNeighbor(cell->getTopNeighbor(), list, UP);
+            } else if (prev_dir == LEFT && cell->hasBottomNeighbor()) {
+                return findNeighbor(cell->getBottomNeighbor(), list, DOWN);
+            } else {
+                ofLog() << "DEAD END - 5";
+                return;
+            }
             break;
         // saddle
         case 10:
-            return;
+            if (prev_dir == RIGHT && cell->hasBottomNeighbor()) {
+                return findNeighbor(cell->getBottomNeighbor(), list, DOWN);
+            } else if (prev_dir == LEFT && cell->hasTopNeighbor()) {
+                return findNeighbor(cell->getTopNeighbor(), list, UP);
+            } else {
+                ofLog() << "DEAD END - 10";
+                return;
+            }
             break;
         // ?
         case 15:
@@ -194,28 +208,48 @@ void CellGrid::updateMesh(ofMesh& mesh, vector<Particle>& particles, const bool 
         mesh.setMode(OF_PRIMITIVE_LINES);
     }
     
+    // collect all cells which make the isolines
     vector<Cell *> temp;
     for (CIt c = m_cells.begin(); c != m_cells.end(); ++c) {
         const unsigned int &state = c->updateState();
-        if (state > 0 && state < 15) {
+        // ignore all outer and inner cells, and also saddle points!
+        if (state > 0 && state < 15 && state != 5 && state != 10) {
+            // store pointer to cell
             temp.push_back(&(*c));
         }
         c->calculateMesh(mesh, interpolate, infill);
     }
     
+    // clear list of active cells for update
     m_active_cells.clear();
     
-    Cell *cell = temp[0];
-    temp.erase(temp.begin());
+//    int count = 0;
+//    do {
+//        ofLog() << count++ << " - " << "temp cells: " << temp.size();
+        
+        // find all neighbors starting from first cell stored in temp vector.
+        // store found cells in active cells vector.
+        findNeighbor(temp[0], m_active_cells);
+        
+        vector<Cell *>::iterator t, a;
+        for (t = temp.begin(); t != temp.end();) {
+            bool match = false;
+            for (a = m_active_cells.begin(); a != m_active_cells.end(); ++a) {
+                if (*t == *a) {
+                    // when erasing position of t, t points automatically to the next position in the vector.
+                    temp.erase(t);
+                    match = true;
+                    break;
+                }
+            }
+            // only iterate if no match was found.
+            if(!match){
+                t++;
+            }
+        }
+//    } while (temp.size() > 0 && count < 2);
     
-    findNeighbor(cell, m_active_cells);
-    
-//    m_active_cells.push_back(&m_cells[1]);
-//    for (int i = 0; i < temp.size(); ++i) {
-//        m_active_cells.push_back(temp[i]);
-//    }
-//    temp.clear();
-    
+//    ofLog() << "temp cells: " << temp.size();
     ofLog() << "active cells: " << m_active_cells.size();
 }
 
