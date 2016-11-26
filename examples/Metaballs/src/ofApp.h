@@ -28,6 +28,8 @@ class ofApp : public ofBaseApp {
     ofParameter<bool> m_show_mesh;
     ofParameter<bool> m_interpolate;
     ofParameter<bool> m_infill;
+    ofParameter<bool> m_wireframe;
+    ofParameter<bool> m_show_path;
     
 public:
     void setup();

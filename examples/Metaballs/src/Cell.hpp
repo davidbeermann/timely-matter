@@ -28,6 +28,7 @@ class Cell {
     bool m_in_bottom_row;
     bool m_in_left_column;
     bool m_in_right_column;
+    vector<ofVec3f> m_vertices;
     
 public:
     
@@ -48,6 +49,10 @@ public:
         return m_id;
     }
     
+    const vector<ofVec3f>& getVertices() {
+        return m_vertices;
+    }
+    
     void setTopLeftUnit(CellUnit* unit) {
         m_tlu = unit;
     }
@@ -62,6 +67,22 @@ public:
     
     void setBottomLeftUnit(CellUnit* unit) {
         m_blu = unit;
+    }
+    
+    CellUnit* getTopLeftUnit() {
+        return m_tlu;
+    }
+    
+    CellUnit* getTopRightUnit() {
+        return m_tru;
+    }
+    
+    CellUnit* getBottomRightUnit() {
+        return m_bru;
+    }
+    
+    CellUnit* getBottomLeftUnit() {
+        return m_blu;
     }
     
     void setTopNeighbor(Cell* cell) {

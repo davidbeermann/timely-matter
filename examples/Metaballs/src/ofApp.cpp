@@ -1,8 +1,8 @@
 #include "ofApp.h"
 
-#define PARTICLE_COUNT 15 //25
-#define COLUMNS 32 //128
-#define ROWS 32 //64
+#define PARTICLE_COUNT 25 // 15 25
+#define COLUMNS 128 // 32 128
+#define ROWS 64 // 32 64
 
 
 void ofApp::setup(){
@@ -24,9 +24,12 @@ void ofApp::setup(){
     m_panel.add(m_show_particles.set("show particles", false));
     m_panel.add(m_move_particles.set("move particles", true));
     m_panel.add(m_show_cells.set("show cells", false));
-    m_panel.add(m_show_mesh.set("show mesh", true));
+    m_panel.add(m_show_mesh.set("show mesh", false));
     m_panel.add(m_interpolate.set("interpolate", false));
     m_panel.add(m_infill.set("infill", false));
+    m_panel.add(m_wireframe.set("wireframe", false));
+    m_panel.add(m_show_path.set("show path", true));
+    
 }
 
 
@@ -40,18 +43,25 @@ void ofApp::update() {
         m_particle_system.update();
     }
     
-    if (m_show_mesh) {
+//    if (m_show_mesh) {
         m_cell_grid.updateMesh(m_mesh, m_particle_system.getParticles(), m_interpolate, m_infill);
-    }
+//    }
 #endif
     
     info = "";
     info += "FPS: " + to_string((int) ofGetFrameRate());
-    info += "\nNUM VERTICES: " + to_string((int) m_mesh.getNumVertices());
-    if (m_infill) {
-        info += "\nNUM TRIANGLES: " + to_string((int) (m_mesh.getNumVertices()/3));
-    } else {
-        info += "\nNUM LINES: " + to_string((int) (m_mesh.getNumVertices()/2));
+    if (m_show_mesh) {
+        info += "\nNUM VERTICES: " + to_string((int) m_mesh.getNumVertices());
+        if (m_infill) {
+            info += "\nNUM TRIANGLES: " + to_string((int) (m_mesh.getNumVertices()/3));
+        } else {
+            info += "\nNUM LINES: " + to_string((int) (m_mesh.getNumVertices()/2));
+        }
+    }
+    if (m_show_path) {
+        const ofMesh& mesh = m_cell_grid.getPaths().getTessellation();
+        info += "\nNUM VERTICES: " + to_string((int) mesh.getNumVertices());
+        info += "\nNUM TRIANGLES: " + to_string((int) (mesh.getNumVertices()/3));
     }
 }
 
@@ -80,7 +90,22 @@ void ofApp::draw(){
     }
     
     if (m_show_mesh) {
-        m_mesh.draw();
+        if (m_wireframe) {
+            m_mesh.drawWireframe();
+        } else {
+            m_mesh.draw();
+        }
+    }
+    
+    if (m_show_path) {
+        if (m_wireframe) {
+            ofPushStyle();
+            ofSetColor(255, 0, 0, 255);
+            m_cell_grid.getPaths().getTessellation().drawWireframe();
+            ofPopStyle();
+        } else {
+            m_cell_grid.getPaths().draw();
+        }
     }
     
     ofPushStyle();
@@ -109,6 +134,7 @@ void ofApp::keyPressed(int key){
             m_show_cells = !m_show_cells;
             break;
         case 'm':
+            if (!m_show_mesh && m_show_path) m_show_path = false;
             m_show_mesh = !m_show_mesh;
             break;
         case 'i':
@@ -116,6 +142,13 @@ void ofApp::keyPressed(int key){
             break;
         case 'f':
             m_infill = !m_infill;
+            break;
+        case 'w':
+            m_wireframe = !m_wireframe;
+            break;
+        case 'n':
+            if (!m_show_path && m_show_mesh) m_show_mesh = false;
+            m_show_path = !m_show_path;
             break;
         default:
             break;

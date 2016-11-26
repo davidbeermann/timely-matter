@@ -7,7 +7,7 @@ typedef vector<Cell>::iterator CIt;
 typedef vector<Particle>::iterator PIt;
 
 
-void CellGrid::findNeighbor(Cell * cell, vector<Cell *> & list, NeighborDirection prev_dir) {
+void CellGrid::findNeighbor(Cell * cell, vector<Cell *> & list, ofPath & path, NeighborDirection prev_dir) {
     if (cell == nullptr) {
         ofLog() << "findNeighbor() -> NULLPTR";
         return;
@@ -22,10 +22,11 @@ void CellGrid::findNeighbor(Cell * cell, vector<Cell *> & list, NeighborDirectio
         case 1:
         case 9:
         case 13:
+            path.lineTo(cell->getVertices()[1]);
             if (cell->hasBottomNeighbor()) {
-                return findNeighbor(cell->getBottomNeighbor(), list, DOWN);
+                return findNeighbor(cell->getBottomNeighbor(), list, path, DOWN);
             } else if (cell->isInBottomRow() && cell->hasLeftNeighbor()) {
-                return findNeighbor(cell->getLeftNeighbor(), list, LEFT);
+                return findNeighbor(cell->getLeftNeighbor(), list, path, LEFT);
             } else {
                 ofLog() << "DEAD END - DOWN";
                 return;
@@ -35,10 +36,11 @@ void CellGrid::findNeighbor(Cell * cell, vector<Cell *> & list, NeighborDirectio
         case 4:
         case 6:
         case 7:
+            path.lineTo(cell->getVertices()[1]);
             if (cell->hasTopNeighbor()) {
-                return findNeighbor(cell->getTopNeighbor(), list, UP);
+                return findNeighbor(cell->getTopNeighbor(), list, path, UP);
             } else if (cell->isInTopRow() && cell->hasRightNeighbor()) {
-                return findNeighbor(cell->getRightNeighbor(), list, RIGHT);
+                return findNeighbor(cell->getRightNeighbor(), list, path, RIGHT);
             } else {
                 ofLog() << "DEAD END - UP";
                 return;
@@ -48,10 +50,11 @@ void CellGrid::findNeighbor(Cell * cell, vector<Cell *> & list, NeighborDirectio
         case 8:
         case 12:
         case 14:
+            path.lineTo(cell->getVertices()[1]);
             if (cell->hasLeftNeighbor()) {
-                return findNeighbor(cell->getLeftNeighbor(), list, LEFT);
+                return findNeighbor(cell->getLeftNeighbor(), list, path, LEFT);
             } else if (cell->isInLeftColumn() && cell->hasTopNeighbor()) {
-                return findNeighbor(cell->getTopNeighbor(), list, UP);
+                return findNeighbor(cell->getTopNeighbor(), list, path, UP);
             } else {
                 ofLog() << "DEAD END - LEFT";
                 return;
@@ -61,10 +64,11 @@ void CellGrid::findNeighbor(Cell * cell, vector<Cell *> & list, NeighborDirectio
         case 2:
         case 3:
         case 11:
+            path.lineTo(cell->getVertices()[1]);
             if (cell->hasRightNeighbor()) {
-                return findNeighbor(cell->getRightNeighbor(), list, RIGHT);
+                return findNeighbor(cell->getRightNeighbor(), list, path, RIGHT);
             } else if (cell->isInRightColumn() && cell->hasBottomNeighbor()) {
-                return findNeighbor(cell->getBottomNeighbor(), list, DOWN);
+                return findNeighbor(cell->getBottomNeighbor(), list, path, DOWN);
             } else {
                 ofLog() << "DEAD END - RIGHT";
                 return;
@@ -73,9 +77,11 @@ void CellGrid::findNeighbor(Cell * cell, vector<Cell *> & list, NeighborDirectio
         // saddle
         case 5:
             if (prev_dir == RIGHT && cell->hasTopNeighbor()) {
-                return findNeighbor(cell->getTopNeighbor(), list, UP);
+                path.lineTo(cell->getVertices()[1]);
+                return findNeighbor(cell->getTopNeighbor(), list, path, UP);
             } else if (prev_dir == LEFT && cell->hasBottomNeighbor()) {
-                return findNeighbor(cell->getBottomNeighbor(), list, DOWN);
+                path.lineTo(cell->getVertices()[3]);
+                return findNeighbor(cell->getBottomNeighbor(), list, path, DOWN);
             } else {
                 ofLog() << "DEAD END - 5";
                 return;
@@ -84,45 +90,84 @@ void CellGrid::findNeighbor(Cell * cell, vector<Cell *> & list, NeighborDirectio
         // saddle
         case 10:
             if (prev_dir == UP && cell->hasLeftNeighbor()) {
-                return findNeighbor(cell->getLeftNeighbor(), list, LEFT);
+                path.lineTo(cell->getVertices()[1]);
+                return findNeighbor(cell->getLeftNeighbor(), list, path, LEFT);
             } else if (prev_dir == DOWN && cell->hasRightNeighbor()) {
-                return findNeighbor(cell->getRightNeighbor(), list, RIGHT);
+                path.lineTo(cell->getVertices()[3]);
+                return findNeighbor(cell->getRightNeighbor(), list, path, RIGHT);
             } else {
                 ofLog() << "DEAD END - 10 - prev_dir:" << prev_dir;
                 return;
             }
             break;
-        // ?
+        // border cells
         case 15:
             switch (prev_dir) {
+                    
                 case LEFT:
+                    if (cell->isInTopRow()) {
+                        path.lineTo(cell->getTopLeftUnit()->getPosition());
+                    } else if (cell->isInBottomRow()) {
+                        path.lineTo(cell->getBottomLeftUnit()->getPosition());
+                    } else {
+                        ofLog() << "DEAD END - 15 - LEFT";
+                    }
+                    
                     if (cell->hasLeftNeighbor()) {
-                       return findNeighbor(cell->getLeftNeighbor(), list, LEFT);
+                        return findNeighbor(cell->getLeftNeighbor(), list, path, LEFT);
                     } else {
-                        return findNeighbor(cell->getTopNeighbor(), list, UP);
+                        return findNeighbor(cell->getTopNeighbor(), list, path, UP);
                     }
                     break;
+                    
                 case RIGHT:
+                    if (cell->isInTopRow()) {
+                        path.lineTo(cell->getTopRightUnit()->getPosition());
+                    } else if (cell->isInBottomRow()) {
+                        path.lineTo(cell->getBottomRightUnit()->getPosition());
+                    } else {
+                        ofLog() << "DEAD END - 15 - RIGHT";
+                    }
+                    
                     if (cell->hasRightNeighbor()) {
-                        return findNeighbor(cell->getRightNeighbor(), list, RIGHT);
+                        return findNeighbor(cell->getRightNeighbor(), list, path, RIGHT);
                     } else {
-                        return findNeighbor(cell->getBottomNeighbor(), list, DOWN);
+                        return findNeighbor(cell->getBottomNeighbor(), list, path, DOWN);
                     }
                     break;
+                    
                 case UP:
+                    if (cell->isInLeftColumn()) {
+                        path.lineTo(cell->getTopLeftUnit()->getPosition());
+                    } else if (cell->isInRightColumn()) {
+                        path.lineTo(cell->getTopRightUnit()->getPosition());
+                    } else {
+                        ofLog() << "DEAD END - 15 - UP";
+                    }
+                    
                     if (cell->hasTopNeighbor()) {
-                        return findNeighbor(cell->getTopNeighbor(), list, UP);
+                        return findNeighbor(cell->getTopNeighbor(), list, path, UP);
                     } else {
-                        return findNeighbor(cell->getRightNeighbor(), list, RIGHT);
+                        return findNeighbor(cell->getRightNeighbor(), list, path, RIGHT);
                     }
                     break;
+                    
                 case DOWN:
-                    if (cell->hasBottomNeighbor()) {
-                        return findNeighbor(cell->getBottomNeighbor(), list, DOWN);
+                    if (cell->isInLeftColumn()) {
+                        path.lineTo(cell->getBottomLeftUnit()->getPosition());
+                    } else if (cell->isInRightColumn()) {
+                        path.lineTo(cell->getBottomRightUnit()->getPosition());
                     } else {
-                        return findNeighbor(cell->getLeftNeighbor(), list, LEFT);
+                        ofLog() << "DEAD END - 15 - DOWN";
+                    }
+                    
+                    if (cell->hasBottomNeighbor()) {
+                        return findNeighbor(cell->getBottomNeighbor(), list, path, DOWN);
+                    } else {
+                        return findNeighbor(cell->getLeftNeighbor(), list, path, LEFT);
                     }
                     break;
+                    
                 default:
                     return;
                     break;
@@ -184,6 +229,9 @@ void CellGrid::setup(unsigned int columns, unsigned int rows) {
             }
         }
     }
+    
+    m_paths.setMode(ofPath::Mode::POLYLINES);
+    m_paths.setColor(ofColor(255, 0, 0, 64));
 }
 
 
@@ -227,14 +275,28 @@ void CellGrid::updateMesh(ofMesh& mesh, vector<Particle>& particles, const bool 
     
 //    ofLog() << "temp cells: " << temp.size();
     
+    m_paths.clear();
+    
     int count = 0;
     do {
         m_active_cells.push_back(vector<Cell*>());
         vector<Cell*> & current = m_active_cells[m_active_cells.size() - 1];
         
+//        m_paths.push_back(ofPath());
+//        ofPath& path = m_paths[m_paths.size()-1];
+        
+        ofPath current_path;
+        
+        Cell* first_cell = temp[0];
+        
+        current_path.moveTo(first_cell->getVertices()[0]);
+        
         // find all neighbors starting from first cell stored in temp vector.
         // store found cells in active cells vector.
-        findNeighbor(temp[0], current);
+        findNeighbor(first_cell, current, current_path);
+        
+        current_path.close();
+        m_paths.append(current_path);
         
         vector<Cell *>::iterator t, a;
         for (t = temp.begin(); t != temp.end();) {

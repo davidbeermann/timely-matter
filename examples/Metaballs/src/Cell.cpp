@@ -12,30 +12,38 @@ const unsigned int& Cell::updateState() {
 
 
 void Cell::calculateMesh(ofMesh& mesh, bool interpolated, bool infill) {
-    // create vector to temporarily store mesh vertices
-    vector<ofVec3f> vertices;
+//    // create vector to temporarily store mesh vertices
+//    vector<ofVec3f> vertices;
+    
+    // clear vertices
+    m_vertices.clear();
     
     // add line vertices
     if (interpolated) {
-        calculateInterpolatedLines(vertices);
+//        calculateInterpolatedLines(vertices);
+        calculateInterpolatedLines(m_vertices);
     } else {
-        calculateStraightLines(vertices);
+//        calculateStraightLines(vertices);
+        calculateStraightLines(m_vertices);
     }
     
     // m_truansform line vertices to m_truiangles to create solid mesh
     if (infill) {
-        transformLinesToInfill(vertices);
+//        transformLinesToInfill(vertices);
+        transformLinesToInfill(m_vertices);
     }
     
     // add vertices to mesh
     vector<ofVec3f>::iterator v;
-    for (v = vertices.begin(); v != vertices.end(); ++v) {
+//    for (v = vertices.begin(); v != vertices.end(); ++v) {
+    for (v = m_vertices.begin(); v != m_vertices.end(); ++v) {
         mesh.addVertex(*v);
     }
 }
 
 
 void Cell::calculateStraightLines(vector<ofVec3f>& vertices) {
+    ofVec3f p0, p1, p2, p3;
     switch (m_state) {
             /*////|\\\\\\
              //         \\
@@ -48,101 +56,141 @@ void Cell::calculateStraightLines(vector<ofVec3f>& vertices) {
             break;
             /*/////////||\\\\\\\\\\\
              //         ||         \\
-             //  ○   ○  ||  ●   ●  \\
+             // 0○   ○  || 1●   ●  \\
              //  \      ||  \      \\
              //  ●\  ○  ||  ○\  ●  \\
-             //         ||         \\
+             //    1    ||    0    \\
              ///////////||\\\\\\\\\*/
         case 1:
         case 14:
-            vertices.push_back(ofVec3f(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y));
-            vertices.push_back(ofVec3f(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y));
+//            vertices.push_back(ofVec3f(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y));
+//            vertices.push_back(ofVec3f(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y));
+            p0.set(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y);
+            p1.set(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y);
+            vertices.push_back(m_state == 1 ? p0 : p1);
+            vertices.push_back(m_state == 1 ? p1 : p0);
             break;
             /*/////////||\\\\\\\\\\\
              //         ||         \\
-             //  ○   ○  ||  ●   ●  \\
+             //  ○   ○1 ||  ●   ●0 \\
              //      /  ||      /  \\
              //  ○  /●  ||  ●  /○  \\
-             //         ||         \\
+             //    0    ||    1    \\
              ///////////||\\\\\\\\\*/
         case 2:
         case 13:
-            vertices.push_back(ofVec3f(m_bru->getPosition().x - m_half_size_x, m_bru->getPosition().y));
-            vertices.push_back(ofVec3f(m_bru->getPosition().x, m_bru->getPosition().y - m_half_size_y));
+//            vertices.push_back(ofVec3f(m_bru->getPosition().x - m_half_size_x, m_bru->getPosition().y));
+//            vertices.push_back(ofVec3f(m_bru->getPosition().x, m_bru->getPosition().y - m_half_size_y));
+            p0.set(m_bru->getPosition().x - m_half_size_x, m_bru->getPosition().y);
+            p1.set(m_bru->getPosition().x, m_bru->getPosition().y - m_half_size_y);
+            vertices.push_back(m_state == 2 ? p0 : p1);
+            vertices.push_back(m_state == 2 ? p1 : p0);
             break;
             /*/////////||\\\\\\\\\\\
              //         ||         \\
              //  ○   ○  ||  ●   ●  \\
-             //  -----  ||  -----  \\
+             // 0-----1 || 1-----0 \\
              //  ●   ●  ||  ○   ○  \\
              //         ||         \\
              ///////////||\\\\\\\\\*/
         case 3:
         case 12:
-            vertices.push_back(ofVec3f(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y));
-            vertices.push_back(ofVec3f(m_bru->getPosition().x, m_bru->getPosition().y - m_half_size_y));
+//            vertices.push_back(ofVec3f(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y));
+//            vertices.push_back(ofVec3f(m_bru->getPosition().x, m_bru->getPosition().y - m_half_size_y));
+            p0.set(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y);
+            p1.set(m_bru->getPosition().x, m_bru->getPosition().y - m_half_size_y);
+            vertices.push_back(m_state == 3 ? p0 : p1);
+            vertices.push_back(m_state == 3 ? p1 : p0);
             break;
             /*/////////||\\\\\\\\\\\
-             //         ||         \\
+             //    0    ||    1    \\
              //  ○  \●  ||  ●  \○  \\
              //      \  ||      \  \\
-             //  ○   ○  ||  ●   ●  \\
+             //  ○   ○1 ||  ●   ●0 \\
              //         ||         \\
              ///////////||\\\\\\\\\*/
         case 4:
         case 11:
-            vertices.push_back(ofVec3f(m_tru->getPosition().x - m_half_size_x, m_tru->getPosition().y));
-            vertices.push_back(ofVec3f(m_tru->getPosition().x, m_tru->getPosition().y + m_half_size_y));
+//            vertices.push_back(ofVec3f(m_tru->getPosition().x - m_half_size_x, m_tru->getPosition().y));
+//            vertices.push_back(ofVec3f(m_tru->getPosition().x, m_tru->getPosition().y + m_half_size_y));
+            p0.set(m_tru->getPosition().x - m_half_size_x, m_tru->getPosition().y);
+            p1.set(m_tru->getPosition().x, m_tru->getPosition().y + m_half_size_y);
+            vertices.push_back(m_state == 4 ? p0 : p1);
+            vertices.push_back(m_state == 4 ? p1 : p0);
             break;
             /*////|\\\\\\
-             //         \\
-             //  ○/  ●  \\
+             //    1    \\
+             //  ○/  ●2 \\
              //  /   /  \\
-             //  ●  /○  \\
-             //         \\
+             // 0●  /○  \\
+             //    3    \\
              //////|\\\\*/
         case 5: // saddle
-            vertices.push_back(ofVec3f(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y));
-            vertices.push_back(ofVec3f(m_tru->getPosition().x - m_half_size_x, m_tru->getPosition().y));
-            vertices.push_back(ofVec3f(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y));
-            vertices.push_back(ofVec3f(m_tru->getPosition().x, m_tru->getPosition().y + m_half_size_y));
+//            vertices.push_back(ofVec3f(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y));
+//            vertices.push_back(ofVec3f(m_tru->getPosition().x - m_half_size_x, m_tru->getPosition().y));
+//            vertices.push_back(ofVec3f(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y));
+//            vertices.push_back(ofVec3f(m_tru->getPosition().x, m_tru->getPosition().y + m_half_size_y));
+            p0.set(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y);
+            p1.set(m_tru->getPosition().x - m_half_size_x, m_tru->getPosition().y);
+            p2.set(m_tru->getPosition().x, m_tru->getPosition().y + m_half_size_y);
+            p3.set(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y);
+            vertices.push_back(p0);
+            vertices.push_back(p1);
+            vertices.push_back(p2);
+            vertices.push_back(p3);
             break;
             /*/////////||\\\\\\\\\\\
-             //         ||         \\
+             //    1    ||    0    \\
              //  ○ | ●  ||  ● | ○  \\
              //    |    ||    |    \\
              //  ○ | ●  ||  ● | ○  \\
-             //         ||         \\
+             //    0    ||    1    \\
              ///////////||\\\\\\\\\*/
         case 6:
         case 9:
-            vertices.push_back(ofVec3f(m_tlu->getPosition().x + m_half_size_x, m_tlu->getPosition().y));
-            vertices.push_back(ofVec3f(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y));
+//            vertices.push_back(ofVec3f(m_tlu->getPosition().x + m_half_size_x, m_tlu->getPosition().y));
+//            vertices.push_back(ofVec3f(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y));
+            p0.set(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y);
+            p1.set(m_tlu->getPosition().x + m_half_size_x, m_tlu->getPosition().y);
+            vertices.push_back(m_state == 6 ? p0 : p1);
+            vertices.push_back(m_state == 6 ? p1 : p0);
             break;
             /*/////////||\\\\\\\\\\\
-             //         ||         \\
+             //    1    ||    0    \\
              //  ○/  ●  ||  ●/  ○  \\
              //  /      ||  /      \\
-             //  ●   ●  ||  ○   ○  \\
+             // 0●   ●  || 1○   ○  \\
              //         ||         \\
              ///////////||\\\\\\\\\*/
         case 7:
         case 8:
-            vertices.push_back(ofVec3f(m_tlu->getPosition().x, m_tlu->getPosition().y + m_half_size_y));
-            vertices.push_back(ofVec3f(m_tlu->getPosition().x + m_half_size_x, m_tlu->getPosition().y));
+//            vertices.push_back(ofVec3f(m_tlu->getPosition().x, m_tlu->getPosition().y + m_half_size_y));
+//            vertices.push_back(ofVec3f(m_tlu->getPosition().x + m_half_size_x, m_tlu->getPosition().y));
+            p0.set(m_tlu->getPosition().x, m_tlu->getPosition().y + m_half_size_y);
+            p1.set(m_tlu->getPosition().x + m_half_size_x, m_tlu->getPosition().y);
+            vertices.push_back(m_state == 7 ? p0 : p1);
+            vertices.push_back(m_state == 7 ? p1 : p0);
             break;
             /*////|\\\\\\
-             //         \\
-             //  ●  \○  \\
+             //    2    \\
+             // 1●  \○  \\
              //  \   \  \\
-             //  ○\  ●  \\
-             //         \\
+             //  ○\  ●3 \\
+             //    0    \\
              //////|\\\\*/
         case 10: // saddle
-            vertices.push_back(ofVec3f(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y));
-            vertices.push_back(ofVec3f(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y));
-            vertices.push_back(ofVec3f(m_tru->getPosition().x - m_half_size_x, m_tru->getPosition().y));
-            vertices.push_back(ofVec3f(m_tru->getPosition().x, m_tru->getPosition().y + m_half_size_y));
+//            vertices.push_back(ofVec3f(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y));
+//            vertices.push_back(ofVec3f(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y));
+//            vertices.push_back(ofVec3f(m_tru->getPosition().x - m_half_size_x, m_tru->getPosition().y));
+//            vertices.push_back(ofVec3f(m_tru->getPosition().x, m_tru->getPosition().y + m_half_size_y));
+            p0.set(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y);
+            p1.set(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y);
+            p2.set(m_tru->getPosition().x - m_half_size_x, m_tru->getPosition().y);
+            p3.set(m_tru->getPosition().x, m_tru->getPosition().y + m_half_size_y);
+            vertices.push_back(p0);
+            vertices.push_back(p1);
+            vertices.push_back(p2);
+            vertices.push_back(p3);
             break;
             /*////|\\\\\\
              //         \\
