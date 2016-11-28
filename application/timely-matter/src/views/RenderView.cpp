@@ -3,6 +3,8 @@
 #include "KinectInput.hpp"
 #include "NoiseInput.hpp"
 
+#define PARTICLE_COUNT 200
+
 using namespace timelymatter;
 
 
@@ -22,7 +24,7 @@ void RenderView::m_onSetup() {
     m_vector_field.setup(m_projector_model.getWidth(), m_projector_model.getHeight(), m_input.getWidth(), m_input.getHeight(), 32);
     
     // setup particle system
-    m_particle_system.setup(100, ofVec3f(m_projector_model.getWidth(), m_projector_model.getHeight(), 0.f));
+    m_particle_system.setup(PARTICLE_COUNT, ofVec3f(m_projector_model.getWidth(), m_projector_model.getHeight(), 0.f));
     
     // compile gui params
     GuiUpdateArgs args;
