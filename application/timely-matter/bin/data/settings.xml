@@ -4,8 +4,8 @@
     <max>255</max>
   </Infrared_Normalization>
   <Depth_Clipping>
-    <near>1487</near>
-    <far>1767</far>
+    <near>1422</near>
+    <far>1620</far>
   </Depth_Clipping>
   <Calibrate_Depth_View>
     <show_depth_output>0</show_depth_output>
@@ -22,7 +22,7 @@
   </Noise_Input>
 	<Vector_Field>
     <edge_force>1.5</edge_force>
-		<field_force>8</field_force>
+		<field_force>3.18367</field_force>
 		<attract_threshold>0</attract_threshold>
 		<show_marks>0</show_marks>
 		<show_values>0</show_values>
@@ -34,4 +34,5 @@
 		<show_mark_ref>0</show_mark_ref>
 		<show_particles>1</show_particles>
 	</Particle_System>
+<Timely_Matter/>
 </Timely_Matter>
