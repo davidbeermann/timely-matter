@@ -235,7 +235,7 @@ void CellGrid::setup(unsigned int columns, unsigned int rows) {
 }
 
 
-void CellGrid::update(vector<Particle> & particles, const bool interpolate, const bool infill) {
+void CellGrid::update(vector<Particle> & particles, const bool interpolate, const bool infill, const float fitting) {
     // update cell units values based on distances to particles
     for (CUIt cu = m_cell_units.begin(); cu != m_cell_units.end(); ++cu) {
         cu->reset();
@@ -246,7 +246,7 @@ void CellGrid::update(vector<Particle> & particles, const bool interpolate, cons
             // length => sqrt( a*a + b*b );
 //            float diff = p->radius / d.length();
             // take the squared radius in order to avoid square root calculation!
-            float diff = p->getRadiusSquared() / d.lengthSquared();
+            float diff = (p->getRadiusSquared() / d.lengthSquared()) * fitting;
             
             cu->addValue(diff);
         }

@@ -24,6 +24,7 @@ class ofApp : public ofBaseApp {
     bool m_show_gui;
     
     ofxPanel m_panel;
+    ofParameter<float> m_fitting;
     ofParameter<bool> m_move_particles;
     ofParameter<bool> m_show_particles;
     ofParameter<bool> m_show_cells;

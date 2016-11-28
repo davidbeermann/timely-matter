@@ -24,6 +24,7 @@ void ofApp::setup(){
     
     m_panel.setup();
     m_panel.setName("Metaballs");
+    m_panel.add(m_fitting.set("contour fitting", 0.75f, 0.5f, 1.f));
     m_panel.add(m_move_particles.set("move particles", true));
     m_panel.add(m_show_particles.set("show particles", false));
     m_panel.add(m_show_cells.set("show cells", false));
@@ -36,13 +37,13 @@ void ofApp::setup(){
 
 void ofApp::update() {
 #ifdef TEST_PARTICLE_SYSTEM
-    m_cell_grid.update(m_mouse_particle, m_interpolate, m_infill);
+    m_cell_grid.update(m_mouse_particle, m_interpolate, m_infill, m_fitting);
 #else
     if (m_move_particles) {
         m_particle_system.update();
     }
     
-    m_cell_grid.update(m_particle_system.getParticles(), m_interpolate, m_infill);
+    m_cell_grid.update(m_particle_system.getParticles(), m_interpolate, m_infill, m_fitting);
 #endif
     
     float h = m_hsb_color.getHue() + ofRandom(-0.01f, 0.01f);

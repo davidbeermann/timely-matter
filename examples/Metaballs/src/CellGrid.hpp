@@ -36,7 +36,7 @@ class CellGrid {
 public:
     
     void setup(unsigned int columns, unsigned int rows);
-    void update(vector<Particle> & particles, const bool interpolate, const bool infill);
+    void update(vector<Particle> & particles, const bool interpolate, const bool infill, const float fitting);
     void draw();
     
     void setMode(CellGridMode mode) {
