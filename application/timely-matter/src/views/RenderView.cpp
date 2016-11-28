@@ -3,7 +3,7 @@
 #include "KinectInput.hpp"
 #include "NoiseInput.hpp"
 
-#define PARTICLE_COUNT 200
+#define PARTICLE_COUNT 100
 
 using namespace timelymatter;
 
@@ -26,11 +26,15 @@ void RenderView::m_onSetup() {
     // setup particle system
     m_particle_system.setup(PARTICLE_COUNT, ofVec3f(m_projector_model.getWidth(), m_projector_model.getHeight(), 0.f));
     
+    // setup metaballs
+    m_metaballs.setup(m_projector_model.getWidth(), m_projector_model.getHeight());
+    
     // compile gui params
     GuiUpdateArgs args;
     args.params.push_back(m_input.getParams());
     args.params.push_back(m_vector_field.getParams());
     args.params.push_back(m_particle_system.getParams());
+    args.params.push_back(m_metaballs.getParams());
     
     ofNotifyEvent(m_view_event.update_gui, args, this);
 }
@@ -48,6 +52,9 @@ void RenderView::m_onUpdate() {
 
     // ...and update all particles within the system.
     m_particle_system.update();
+    
+    // pass particles to metaballs to calculate contour lines
+    m_metaballs.update(m_particle_system.getParticles());
 }
 
 
@@ -63,6 +70,7 @@ void RenderView::m_onDraw() {
     m_input.draw(m_projector_model.getSize());
     m_vector_field.draw();
     m_particle_system.draw(m_vector_field);
+    m_metaballs.draw();
     
     ofPopMatrix();
 }

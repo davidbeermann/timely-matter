@@ -16,7 +16,9 @@ namespace timelymatter {
         ofFbo m_particles_fbo;
         ofFbo m_lines_fbo;
         ofFbo m_output_fbo;
+        
         ofParameterGroup m_params;
+        ofParameter<bool> m_move_particles;
         ofParameter<bool> m_show_particles;
         ofParameter<float> m_max_velocity;
         ofParameter<float> m_velocity_decay;
@@ -30,7 +32,8 @@ namespace timelymatter {
         void update();
         void draw(const VectorField& vectorField);
         
-        ofParameterGroup& getParams() { return m_params; }
+        ofParameterGroup & getParams() { return m_params; }
+        vector<Particle> & getParticles() { return m_particles; }
     };
 
 }
