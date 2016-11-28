@@ -7,6 +7,7 @@ class CellUnit {
     
     ofVec3f m_position;
     float m_value;
+    ofColor m_color;
     
 public:
     
@@ -15,5 +16,7 @@ public:
     const ofVec3f& getPosition();
     void addValue(const float value);
     const float getValue();
+    const ofColor & getColor();
+    void setColor(const ofColor & color);
     
 };

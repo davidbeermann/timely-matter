@@ -12,8 +12,17 @@ Particle::Particle(float x, float y, float r) {
 }
 
 
+void Particle::setColor(const ofColor& color) {
+    m_color.set(color);
+}
+
+
 void Particle::setPosition(const ofVec3f& position) {
     m_position.set(position);
+}
+
+const ofColor & Particle::getColor() {
+    return m_color;
 }
 
 

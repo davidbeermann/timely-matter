@@ -239,6 +239,7 @@ void CellGrid::update(vector<Particle> & particles, const bool interpolate, cons
     // update cell units values based on distances to particles
     for (CUIt cu = m_cell_units.begin(); cu != m_cell_units.end(); ++cu) {
         cu->reset();
+        bool first_color = true;
         
         for (PIt p = particles.begin(); p != particles.end(); ++p) {
             ofVec3f d = p->getPosition() - cu->getPosition();
@@ -249,6 +250,14 @@ void CellGrid::update(vector<Particle> & particles, const bool interpolate, cons
             float diff = (p->getRadiusSquared() / d.lengthSquared()) * fitting;
             
             cu->addValue(diff);
+            
+            // set color of cell unit
+            if (first_color) {
+                cu->setColor(p->getColor());
+                first_color = false;
+            } else {
+                cu->setColor(cu->getColor().getLerped(p->getColor(), CLAMP(diff,0.f, 1.f)));
+            }
         }
     }
     
@@ -421,8 +430,10 @@ void CellGrid::draw() {
         ofSetCircleResolution(12);
         if (cu->getValue() < 1.f) {
             ofNoFill();
+            ofSetColor(128, 255);
+        } else {
+            ofSetColor(cu->getColor());
         }
-        ofSetColor(255, 0, 0, 255);
         ofDrawCircle(0.f, 0.f, 3.f);
         //        ofDrawBitmapString(to_string(cu->value), 0.f, 12.f);
         ofPopStyle();

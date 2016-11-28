@@ -9,6 +9,7 @@ CellUnit::CellUnit(float x, float y) {
 
 void CellUnit::reset() {
     m_value = 0.f;
+    m_color.set(0, 0, 0, 0);
 }
 
 
@@ -24,5 +25,15 @@ void CellUnit::addValue(const float value) {
 
 const float CellUnit::getValue() {
     return m_value;
+}
+
+
+const ofColor & CellUnit::getColor() {
+    return m_color;
+}
+
+
+void CellUnit::setColor(const ofColor & color) {
+    m_color = color;
 }
 
