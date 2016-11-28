@@ -19,6 +19,7 @@ class ofApp : public ofBaseApp {
     ParticleSystem m_particle_system;
 #endif
     
+    ofFloatColor m_hsb_color;
     string info;
     bool m_show_gui;
     
