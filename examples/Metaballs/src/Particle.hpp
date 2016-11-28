@@ -13,6 +13,7 @@ class Particle {
 public:
     
     Particle(float x, float y, float r);
+    void setPosition(const ofVec3f& position);
     ofVec3f& getPosition();
     ofVec3f& getVelocity();
     const float& getRadius();
