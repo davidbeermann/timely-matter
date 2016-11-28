@@ -1,49 +1,28 @@
 #include "Cell.hpp"
 
 
-const unsigned int& Cell::updateState() {
+void Cell::update(bool interpolated) {
+    // update state of cell
     m_state = 0;
     m_state += m_blu->getValue() >= 1.f ? 1 : 0;
     m_state += m_bru->getValue() >= 1.f ? 2 : 0;
     m_state += m_tru->getValue() >= 1.f ? 4 : 0;
     m_state += m_tlu->getValue() >= 1.f ? 8 : 0;
-    return m_state;
-}
-
-
-void Cell::calculateMesh(ofMesh& mesh, bool interpolated, bool infill) {
-//    // create vector to temporarily store mesh vertices
-//    vector<ofVec3f> vertices;
     
     // clear vertices
     m_vertices.clear();
     
-    // add line vertices
+    // add appropriate line vertices
     if (interpolated) {
-//        calculateInterpolatedLines(vertices);
-        calculateInterpolatedLines(m_vertices);
+        calculateInterpolatedLines();
     } else {
-//        calculateStraightLines(vertices);
-        calculateStraightLines(m_vertices);
-    }
-    
-    // m_truansform line vertices to m_truiangles to create solid mesh
-    if (infill) {
-//        transformLinesToInfill(vertices);
-        transformLinesToInfill(m_vertices);
-    }
-    
-    // add vertices to mesh
-    vector<ofVec3f>::iterator v;
-//    for (v = vertices.begin(); v != vertices.end(); ++v) {
-    for (v = m_vertices.begin(); v != m_vertices.end(); ++v) {
-        mesh.addVertex(*v);
+        calculateStraightLines();
     }
 }
 
 
-void Cell::calculateStraightLines(vector<ofVec3f>& vertices) {
-    ofVec3f p0, p1, p2, p3;
+void Cell::calculateStraightLines() {
+    ofVec3f p0, p1;
     switch (m_state) {
             /*////|\\\\\\
              //         \\
@@ -63,12 +42,10 @@ void Cell::calculateStraightLines(vector<ofVec3f>& vertices) {
              ///////////||\\\\\\\\\*/
         case 1:
         case 14:
-//            vertices.push_back(ofVec3f(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y));
-//            vertices.push_back(ofVec3f(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y));
             p0.set(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y);
             p1.set(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y);
-            vertices.push_back(m_state == 1 ? p0 : p1);
-            vertices.push_back(m_state == 1 ? p1 : p0);
+            m_vertices.push_back(m_state == 1 ? p0 : p1);
+            m_vertices.push_back(m_state == 1 ? p1 : p0);
             break;
             /*/////////||\\\\\\\\\\\
              //         ||         \\
@@ -79,12 +56,10 @@ void Cell::calculateStraightLines(vector<ofVec3f>& vertices) {
              ///////////||\\\\\\\\\*/
         case 2:
         case 13:
-//            vertices.push_back(ofVec3f(m_bru->getPosition().x - m_half_size_x, m_bru->getPosition().y));
-//            vertices.push_back(ofVec3f(m_bru->getPosition().x, m_bru->getPosition().y - m_half_size_y));
             p0.set(m_bru->getPosition().x - m_half_size_x, m_bru->getPosition().y);
             p1.set(m_bru->getPosition().x, m_bru->getPosition().y - m_half_size_y);
-            vertices.push_back(m_state == 2 ? p0 : p1);
-            vertices.push_back(m_state == 2 ? p1 : p0);
+            m_vertices.push_back(m_state == 2 ? p0 : p1);
+            m_vertices.push_back(m_state == 2 ? p1 : p0);
             break;
             /*/////////||\\\\\\\\\\\
              //         ||         \\
@@ -95,12 +70,10 @@ void Cell::calculateStraightLines(vector<ofVec3f>& vertices) {
              ///////////||\\\\\\\\\*/
         case 3:
         case 12:
-//            vertices.push_back(ofVec3f(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y));
-//            vertices.push_back(ofVec3f(m_bru->getPosition().x, m_bru->getPosition().y - m_half_size_y));
             p0.set(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y);
             p1.set(m_bru->getPosition().x, m_bru->getPosition().y - m_half_size_y);
-            vertices.push_back(m_state == 3 ? p0 : p1);
-            vertices.push_back(m_state == 3 ? p1 : p0);
+            m_vertices.push_back(m_state == 3 ? p0 : p1);
+            m_vertices.push_back(m_state == 3 ? p1 : p0);
             break;
             /*/////////||\\\\\\\\\\\
              //    0    ||    1    \\
@@ -111,12 +84,10 @@ void Cell::calculateStraightLines(vector<ofVec3f>& vertices) {
              ///////////||\\\\\\\\\*/
         case 4:
         case 11:
-//            vertices.push_back(ofVec3f(m_tru->getPosition().x - m_half_size_x, m_tru->getPosition().y));
-//            vertices.push_back(ofVec3f(m_tru->getPosition().x, m_tru->getPosition().y + m_half_size_y));
             p0.set(m_tru->getPosition().x - m_half_size_x, m_tru->getPosition().y);
             p1.set(m_tru->getPosition().x, m_tru->getPosition().y + m_half_size_y);
-            vertices.push_back(m_state == 4 ? p0 : p1);
-            vertices.push_back(m_state == 4 ? p1 : p0);
+            m_vertices.push_back(m_state == 4 ? p0 : p1);
+            m_vertices.push_back(m_state == 4 ? p1 : p0);
             break;
             /*////|\\\\\\
              //    1    \\
@@ -126,18 +97,10 @@ void Cell::calculateStraightLines(vector<ofVec3f>& vertices) {
              //    3    \\
              //////|\\\\*/
         case 5: // saddle
-//            vertices.push_back(ofVec3f(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y));
-//            vertices.push_back(ofVec3f(m_tru->getPosition().x - m_half_size_x, m_tru->getPosition().y));
-//            vertices.push_back(ofVec3f(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y));
-//            vertices.push_back(ofVec3f(m_tru->getPosition().x, m_tru->getPosition().y + m_half_size_y));
-            p0.set(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y);
-            p1.set(m_tru->getPosition().x - m_half_size_x, m_tru->getPosition().y);
-            p2.set(m_tru->getPosition().x, m_tru->getPosition().y + m_half_size_y);
-            p3.set(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y);
-            vertices.push_back(p0);
-            vertices.push_back(p1);
-            vertices.push_back(p2);
-            vertices.push_back(p3);
+            m_vertices.push_back(ofVec3f(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y));
+            m_vertices.push_back(ofVec3f(m_tru->getPosition().x - m_half_size_x, m_tru->getPosition().y));
+            m_vertices.push_back(ofVec3f(m_tru->getPosition().x, m_tru->getPosition().y + m_half_size_y));
+            m_vertices.push_back(ofVec3f(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y));
             break;
             /*/////////||\\\\\\\\\\\
              //    1    ||    0    \\
@@ -148,12 +111,10 @@ void Cell::calculateStraightLines(vector<ofVec3f>& vertices) {
              ///////////||\\\\\\\\\*/
         case 6:
         case 9:
-//            vertices.push_back(ofVec3f(m_tlu->getPosition().x + m_half_size_x, m_tlu->getPosition().y));
-//            vertices.push_back(ofVec3f(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y));
             p0.set(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y);
             p1.set(m_tlu->getPosition().x + m_half_size_x, m_tlu->getPosition().y);
-            vertices.push_back(m_state == 6 ? p0 : p1);
-            vertices.push_back(m_state == 6 ? p1 : p0);
+            m_vertices.push_back(m_state == 6 ? p0 : p1);
+            m_vertices.push_back(m_state == 6 ? p1 : p0);
             break;
             /*/////////||\\\\\\\\\\\
              //    1    ||    0    \\
@@ -164,12 +125,10 @@ void Cell::calculateStraightLines(vector<ofVec3f>& vertices) {
              ///////////||\\\\\\\\\*/
         case 7:
         case 8:
-//            vertices.push_back(ofVec3f(m_tlu->getPosition().x, m_tlu->getPosition().y + m_half_size_y));
-//            vertices.push_back(ofVec3f(m_tlu->getPosition().x + m_half_size_x, m_tlu->getPosition().y));
             p0.set(m_tlu->getPosition().x, m_tlu->getPosition().y + m_half_size_y);
             p1.set(m_tlu->getPosition().x + m_half_size_x, m_tlu->getPosition().y);
-            vertices.push_back(m_state == 7 ? p0 : p1);
-            vertices.push_back(m_state == 7 ? p1 : p0);
+            m_vertices.push_back(m_state == 7 ? p0 : p1);
+            m_vertices.push_back(m_state == 7 ? p1 : p0);
             break;
             /*////|\\\\\\
              //    2    \\
@@ -179,18 +138,10 @@ void Cell::calculateStraightLines(vector<ofVec3f>& vertices) {
              //    0    \\
              //////|\\\\*/
         case 10: // saddle
-//            vertices.push_back(ofVec3f(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y));
-//            vertices.push_back(ofVec3f(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y));
-//            vertices.push_back(ofVec3f(m_tru->getPosition().x - m_half_size_x, m_tru->getPosition().y));
-//            vertices.push_back(ofVec3f(m_tru->getPosition().x, m_tru->getPosition().y + m_half_size_y));
-            p0.set(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y);
-            p1.set(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y);
-            p2.set(m_tru->getPosition().x - m_half_size_x, m_tru->getPosition().y);
-            p3.set(m_tru->getPosition().x, m_tru->getPosition().y + m_half_size_y);
-            vertices.push_back(p0);
-            vertices.push_back(p1);
-            vertices.push_back(p2);
-            vertices.push_back(p3);
+            m_vertices.push_back(ofVec3f(m_blu->getPosition().x + m_half_size_x, m_blu->getPosition().y));
+            m_vertices.push_back(ofVec3f(m_blu->getPosition().x, m_blu->getPosition().y - m_half_size_y));
+            m_vertices.push_back(ofVec3f(m_tru->getPosition().x - m_half_size_x, m_tru->getPosition().y));
+            m_vertices.push_back(ofVec3f(m_tru->getPosition().x, m_tru->getPosition().y + m_half_size_y));
             break;
             /*////|\\\\\\
              //         \\
@@ -205,7 +156,7 @@ void Cell::calculateStraightLines(vector<ofVec3f>& vertices) {
 }
 
 
-void Cell::calculateInterpolatedLines(vector<ofVec3f>& vertices) {
+void Cell::calculateInterpolatedLines() {
     switch (m_state) {
             
         /*////|\\\\\\
@@ -227,11 +178,11 @@ void Cell::calculateInterpolatedLines(vector<ofVec3f>& vertices) {
         ///////////||\\\\\\\\\*/
         case 1:
         case 14:
-            vertices.push_back(ofVec3f(
+            m_vertices.push_back(ofVec3f(
                 m_blu->getPosition().x,
                 m_tlu->getPosition().y + m_size_y * ((1.f - m_tlu->getValue())/(m_blu->getValue() - m_tlu->getValue()))
             ));
-            vertices.push_back(ofVec3f(
+            m_vertices.push_back(ofVec3f(
                 m_bru->getPosition().x - m_size_x * ((1.f - m_bru->getValue())/(m_blu->getValue() - m_bru->getValue())),
                 m_blu->getPosition().y
             ));
@@ -246,11 +197,11 @@ void Cell::calculateInterpolatedLines(vector<ofVec3f>& vertices) {
         ///////////||\\\\\\\\\*/
         case 2:
         case 13:
-            vertices.push_back(ofVec3f(
+            m_vertices.push_back(ofVec3f(
                 m_blu->getPosition().x + m_size_x * ((1.f - m_blu->getValue())/(m_bru->getValue() - m_blu->getValue())),
                 m_bru->getPosition().y
             ));
-            vertices.push_back(ofVec3f(
+            m_vertices.push_back(ofVec3f(
                 m_bru->getPosition().x,
                 m_tru->getPosition().y + m_size_y * ((1.f - m_tru->getValue())/(m_bru->getValue() - m_tru->getValue()))
             ));
@@ -265,11 +216,11 @@ void Cell::calculateInterpolatedLines(vector<ofVec3f>& vertices) {
         ///////////||\\\\\\\\\*/
         case 3:
         case 12:
-            vertices.push_back(ofVec3f(
+            m_vertices.push_back(ofVec3f(
                 m_blu->getPosition().x,
                 m_tlu->getPosition().y + m_size_y * ((1.f - m_tlu->getValue())/(m_blu->getValue() - m_tlu->getValue()))
             ));
-            vertices.push_back(ofVec3f(
+            m_vertices.push_back(ofVec3f(
                 m_bru->getPosition().x,
                 m_tru->getPosition().y + m_size_y * ((1.f - m_tru->getValue())/(m_bru->getValue() - m_tru->getValue()))
             ));
@@ -284,11 +235,11 @@ void Cell::calculateInterpolatedLines(vector<ofVec3f>& vertices) {
         ///////////||\\\\\\\\\*/
         case 4:
         case 11:
-            vertices.push_back(ofVec3f(
+            m_vertices.push_back(ofVec3f(
                 m_tlu->getPosition().x + m_size_x * ((1.f - m_tlu->getValue())/(m_tru->getValue() - m_tlu->getValue())),
                 m_tru->getPosition().y
             ));
-            vertices.push_back(ofVec3f(
+            m_vertices.push_back(ofVec3f(
                 m_tru->getPosition().x,
                 m_bru->getPosition().y - m_size_y * ((1.f - m_bru->getValue())/(m_tru->getValue() - m_bru->getValue()))
             ));
@@ -302,19 +253,19 @@ void Cell::calculateInterpolatedLines(vector<ofVec3f>& vertices) {
         //         \\
         //////|\\\\*/
         case 5: // saddle
-            vertices.push_back(ofVec3f(
+            m_vertices.push_back(ofVec3f(
                 m_blu->getPosition().x,
                 m_tlu->getPosition().y + m_size_y * ((1.f - m_tlu->getValue())/(m_blu->getValue() - m_tlu->getValue()))
             ));
-            vertices.push_back(ofVec3f(
+            m_vertices.push_back(ofVec3f(
                 m_tlu->getPosition().x + m_size_x * ((1.f - m_tlu->getValue())/(m_tru->getValue() - m_tlu->getValue())),
                 m_tru->getPosition().y
             ));
-            vertices.push_back(ofVec3f(
+            m_vertices.push_back(ofVec3f(
                 m_bru->getPosition().x - m_size_x * ((1.f - m_bru->getValue())/(m_blu->getValue() - m_bru->getValue())),
                 m_blu->getPosition().y
             ));
-            vertices.push_back(ofVec3f(
+            m_vertices.push_back(ofVec3f(
                 m_tru->getPosition().x,
                 m_bru->getPosition().y - m_size_y * ((1.f - m_bru->getValue())/(m_tru->getValue() - m_bru->getValue()))
             ));
@@ -329,11 +280,11 @@ void Cell::calculateInterpolatedLines(vector<ofVec3f>& vertices) {
         ///////////||\\\\\\\\\*/
         case 6:
         case 9:
-            vertices.push_back(ofVec3f(
+            m_vertices.push_back(ofVec3f(
                 m_tlu->getPosition().x + m_size_x * ((1.f - m_tlu->getValue())/(m_tru->getValue() - m_tlu->getValue())),
                 m_tru->getPosition().y
             ));
-            vertices.push_back(ofVec3f(
+            m_vertices.push_back(ofVec3f(
                 m_blu->getPosition().x + m_size_x * ((1.f - m_blu->getValue())/(m_bru->getValue() - m_blu->getValue())),
                 m_bru->getPosition().y
             ));
@@ -348,11 +299,11 @@ void Cell::calculateInterpolatedLines(vector<ofVec3f>& vertices) {
         ///////////||\\\\\\\\\*/
         case 7:
         case 8:
-            vertices.push_back(ofVec3f(
+            m_vertices.push_back(ofVec3f(
                 m_tlu->getPosition().x,
                 m_blu->getPosition().y - m_size_y * ((1.f - m_blu->getValue())/(m_tlu->getValue() - m_blu->getValue()))
             ));
-            vertices.push_back(ofVec3f(
+            m_vertices.push_back(ofVec3f(
                 m_tru->getPosition().x - m_size_x * ((1.f - m_tru->getValue())/(m_tlu->getValue() - m_tru->getValue())),
                 m_tlu->getPosition().y
             ));
@@ -366,19 +317,19 @@ void Cell::calculateInterpolatedLines(vector<ofVec3f>& vertices) {
         //         \\
         //////|\\\\*/
         case 10: // saddle
-            vertices.push_back(ofVec3f(
+            m_vertices.push_back(ofVec3f(
                 m_tlu->getPosition().x,
                 m_blu->getPosition().y - m_size_y * ((1.f - m_blu->getValue())/(m_tlu->getValue() - m_blu->getValue()))
             ));
-            vertices.push_back(ofVec3f(
+            m_vertices.push_back(ofVec3f(
                 m_blu->getPosition().x + m_size_x * ((1.f - m_blu->getValue())/(m_bru->getValue() - m_blu->getValue())),
                 m_bru->getPosition().y
             ));
-            vertices.push_back(ofVec3f(
+            m_vertices.push_back(ofVec3f(
                 m_tru->getPosition().x - m_size_x * ((1.f - m_tru->getValue())/(m_tlu->getValue() - m_tru->getValue())),
                 m_tlu->getPosition().y
             ));
-            vertices.push_back(ofVec3f(
+            m_vertices.push_back(ofVec3f(
                 m_bru->getPosition().x,
                 m_tru->getPosition().y + m_size_y * ((1.f - m_tru->getValue())/(m_bru->getValue() - m_tru->getValue()))
             ));
@@ -397,7 +348,7 @@ void Cell::calculateInterpolatedLines(vector<ofVec3f>& vertices) {
 }
 
 
-void Cell::transformLinesToInfill(vector<ofVec3f>& vertices) {
+void Cell::transformLinesToNaiveInfill() {
     ofVec3f p1, p2, p3, p4;
     switch (m_state) {
             
@@ -419,8 +370,8 @@ void Cell::transformLinesToInfill(vector<ofVec3f>& vertices) {
         //         \\
         //////|\\\\*/
         case 1:
-            // complete line to m_truiangle
-            vertices.push_back(m_blu->getPosition());
+            // complete line to triangle
+            m_vertices.push_back(m_blu->getPosition());
             break;
             
         /*////|\\\\\\
@@ -431,8 +382,8 @@ void Cell::transformLinesToInfill(vector<ofVec3f>& vertices) {
         //         \\
         //////|\\\\*/
         case 2:
-            // complete line to m_truiangle
-            vertices.push_back(m_bru->getPosition());
+            // complete line to triangle
+            m_vertices.push_back(m_bru->getPosition());
             break;
             
         /*////|\\\\\\
@@ -443,13 +394,13 @@ void Cell::transformLinesToInfill(vector<ofVec3f>& vertices) {
         //         \\
         //////|\\\\*/
         case 3:
-            // complete line to m_truiangle
-            vertices.push_back(m_bru->getPosition());
+            // complete line to triangle
+            m_vertices.push_back(m_bru->getPosition());
             
-            // add missing m_truiangle
-            vertices.push_back(m_bru->getPosition());
-            vertices.push_back(m_blu->getPosition());
-            vertices.push_back(vertices.at(0));
+            // add missing triangle
+            m_vertices.push_back(m_bru->getPosition());
+            m_vertices.push_back(m_blu->getPosition());
+            m_vertices.push_back(m_vertices.at(0));
             break;
             
         /*////|\\\\\\
@@ -460,8 +411,8 @@ void Cell::transformLinesToInfill(vector<ofVec3f>& vertices) {
         //         \\
         //////|\\\\*/
         case 4:
-            // complete line to m_truiangle
-            vertices.push_back(m_tru->getPosition());
+            // complete line to triangle
+            m_vertices.push_back(m_tru->getPosition());
             break;
             
         /*////|\\\\\\
@@ -473,30 +424,30 @@ void Cell::transformLinesToInfill(vector<ofVec3f>& vertices) {
         //////|\\\\*/
         case 5:
             // store vertices for reference
-            p1 = ofVec3f(vertices.at(0));
-            p2 = ofVec3f(vertices.at(1));
-            p3 = ofVec3f(vertices.at(2));
-            p4 = ofVec3f(vertices.at(3));
+            p1 = ofVec3f(m_vertices.at(0));
+            p2 = ofVec3f(m_vertices.at(1));
+            p3 = ofVec3f(m_vertices.at(2));
+            p4 = ofVec3f(m_vertices.at(3));
             
             // clear vector
-            vertices.clear();
+            m_vertices.clear();
             
-            // add m_truiangles
-            vertices.push_back(m_blu->getPosition());
-            vertices.push_back(p1);
-            vertices.push_back(p3);
+            // add triangles
+            m_vertices.push_back(m_blu->getPosition());
+            m_vertices.push_back(p1);
+            m_vertices.push_back(p3);
             
-            vertices.push_back(p1);
-            vertices.push_back(p2);
-            vertices.push_back(p3);
+            m_vertices.push_back(p1);
+            m_vertices.push_back(p2);
+            m_vertices.push_back(p3);
             
-            vertices.push_back(p2);
-            vertices.push_back(p3);
-            vertices.push_back(p4);
+            m_vertices.push_back(p2);
+            m_vertices.push_back(p3);
+            m_vertices.push_back(p4);
             
-            vertices.push_back(p2);
-            vertices.push_back(p4);
-            vertices.push_back(m_tru->getPosition());
+            m_vertices.push_back(p2);
+            m_vertices.push_back(p4);
+            m_vertices.push_back(m_tru->getPosition());
             break;
             
         /*////|\\\\\\
@@ -507,13 +458,13 @@ void Cell::transformLinesToInfill(vector<ofVec3f>& vertices) {
         //         \\
         //////|\\\\*/
         case 6:
-            // complete line to m_truiangle
-            vertices.push_back(m_bru->getPosition());
+            // complete line to triangle
+            m_vertices.push_back(m_bru->getPosition());
             
-            // add missing m_truiangle
-            vertices.push_back(m_bru->getPosition());
-            vertices.push_back(m_tru->getPosition());
-            vertices.push_back(vertices.at(0));
+            // add missing triangle
+            m_vertices.push_back(m_bru->getPosition());
+            m_vertices.push_back(m_tru->getPosition());
+            m_vertices.push_back(m_vertices.at(0));
             break;
             
         /*////|\\\\\\
@@ -524,17 +475,17 @@ void Cell::transformLinesToInfill(vector<ofVec3f>& vertices) {
         //         \\
         //////|\\\\*/
         case 7:
-            // complete line to m_truiangle
-            vertices.push_back(m_bru->getPosition());
+            // complete line to triangle
+            m_vertices.push_back(m_bru->getPosition());
             
-            // add missing m_truiangle
-            vertices.push_back(m_bru->getPosition());
-            vertices.push_back(m_blu->getPosition());
-            vertices.push_back(vertices.at(0));
+            // add missing triangle
+            m_vertices.push_back(m_bru->getPosition());
+            m_vertices.push_back(m_blu->getPosition());
+            m_vertices.push_back(m_vertices.at(0));
             
-            vertices.push_back(m_bru->getPosition());
-            vertices.push_back(m_tru->getPosition());
-            vertices.push_back(vertices.at(1));
+            m_vertices.push_back(m_bru->getPosition());
+            m_vertices.push_back(m_tru->getPosition());
+            m_vertices.push_back(m_vertices.at(1));
             break;
             
         /*////|\\\\\\
@@ -545,8 +496,8 @@ void Cell::transformLinesToInfill(vector<ofVec3f>& vertices) {
         //         \\
         //////|\\\\*/
         case 8:
-            // complete line to m_truiangle
-            vertices.push_back(m_tlu->getPosition());
+            // complete line to triangle
+            m_vertices.push_back(m_tlu->getPosition());
             break;
             
         /*////|\\\\\\
@@ -557,13 +508,13 @@ void Cell::transformLinesToInfill(vector<ofVec3f>& vertices) {
         //         \\
         //////|\\\\*/
         case 9:
-            // complete line to m_truiangle
-            vertices.push_back(m_blu->getPosition());
+            // complete line to triangle
+            m_vertices.push_back(m_blu->getPosition());
             
-            // add missing m_truiangle
-            vertices.push_back(m_blu->getPosition());
-            vertices.push_back(m_tlu->getPosition());
-            vertices.push_back(vertices.at(0));
+            // add missing triangle
+            m_vertices.push_back(m_blu->getPosition());
+            m_vertices.push_back(m_tlu->getPosition());
+            m_vertices.push_back(m_vertices.at(0));
             break;
             
         /*////|\\\\\\
@@ -575,30 +526,30 @@ void Cell::transformLinesToInfill(vector<ofVec3f>& vertices) {
         //////|\\\\*/
         case 10:
             // store vertices for reference
-            p1 = ofVec3f(vertices.at(0));
-            p2 = ofVec3f(vertices.at(1));
-            p3 = ofVec3f(vertices.at(2));
-            p4 = ofVec3f(vertices.at(3));
+            p1 = ofVec3f(m_vertices.at(0));
+            p2 = ofVec3f(m_vertices.at(1));
+            p3 = ofVec3f(m_vertices.at(2));
+            p4 = ofVec3f(m_vertices.at(3));
             
             // clear vector
-            vertices.clear();
+            m_vertices.clear();
             
-            // add m_truiangles
-            vertices.push_back(m_tlu->getPosition());
-            vertices.push_back(p1);
-            vertices.push_back(p3);
+            // add triangles
+            m_vertices.push_back(m_tlu->getPosition());
+            m_vertices.push_back(p1);
+            m_vertices.push_back(p3);
             
-            vertices.push_back(p1);
-            vertices.push_back(p2);
-            vertices.push_back(p3);
+            m_vertices.push_back(p1);
+            m_vertices.push_back(p2);
+            m_vertices.push_back(p3);
             
-            vertices.push_back(p2);
-            vertices.push_back(p3);
-            vertices.push_back(p4);
+            m_vertices.push_back(p2);
+            m_vertices.push_back(p3);
+            m_vertices.push_back(p4);
             
-            vertices.push_back(p2);
-            vertices.push_back(p4);
-            vertices.push_back(m_bru->getPosition());
+            m_vertices.push_back(p2);
+            m_vertices.push_back(p4);
+            m_vertices.push_back(m_bru->getPosition());
             break;
             
         /*////|\\\\\\
@@ -609,17 +560,17 @@ void Cell::transformLinesToInfill(vector<ofVec3f>& vertices) {
         //         \\
         //////|\\\\*/
         case 11:
-            // complete line to m_truiangle
-            vertices.push_back(m_blu->getPosition());
+            // complete line to triangle
+            m_vertices.push_back(m_blu->getPosition());
             
-            // add missing m_truiangles
-            vertices.push_back(m_tlu->getPosition());
-            vertices.push_back(m_blu->getPosition());
-            vertices.push_back(vertices.at(0));
+            // add missing triangles
+            m_vertices.push_back(m_tlu->getPosition());
+            m_vertices.push_back(m_blu->getPosition());
+            m_vertices.push_back(m_vertices.at(0));
             
-            vertices.push_back(m_blu->getPosition());
-            vertices.push_back(m_bru->getPosition());
-            vertices.push_back(vertices.at(1));
+            m_vertices.push_back(m_blu->getPosition());
+            m_vertices.push_back(m_bru->getPosition());
+            m_vertices.push_back(m_vertices.at(1));
             break;
             
         /*////|\\\\\\
@@ -630,13 +581,13 @@ void Cell::transformLinesToInfill(vector<ofVec3f>& vertices) {
         //         \\
         //////|\\\\*/
         case 12:
-            // complete line to m_truiangle
-            vertices.push_back(m_tlu->getPosition());
+            // complete line to triangle
+            m_vertices.push_back(m_tlu->getPosition());
             
-            // add missing m_truiangle
-            vertices.push_back(m_tlu->getPosition());
-            vertices.push_back(m_tru->getPosition());
-            vertices.push_back(vertices.at(1));
+            // add missing triangle
+            m_vertices.push_back(m_tlu->getPosition());
+            m_vertices.push_back(m_tru->getPosition());
+            m_vertices.push_back(m_vertices.at(1));
             break;
             
         /*////|\\\\\\
@@ -647,17 +598,17 @@ void Cell::transformLinesToInfill(vector<ofVec3f>& vertices) {
         //         \\
         //////|\\\\*/
         case 13:
-            // complete line to m_truiangle
-            vertices.push_back(m_tlu->getPosition());
+            // complete line to triangle
+            m_vertices.push_back(m_tlu->getPosition());
             
-            // add missing m_truiangles
-            vertices.push_back(m_tlu->getPosition());
-            vertices.push_back(m_blu->getPosition());
-            vertices.push_back(vertices.at(0));
+            // add missing triangles
+            m_vertices.push_back(m_tlu->getPosition());
+            m_vertices.push_back(m_blu->getPosition());
+            m_vertices.push_back(m_vertices.at(0));
             
-            vertices.push_back(m_tlu->getPosition());
-            vertices.push_back(m_tru->getPosition());
-            vertices.push_back(vertices.at(1));
+            m_vertices.push_back(m_tlu->getPosition());
+            m_vertices.push_back(m_tru->getPosition());
+            m_vertices.push_back(m_vertices.at(1));
             break;
             
         /*////|\\\\\\
@@ -668,17 +619,17 @@ void Cell::transformLinesToInfill(vector<ofVec3f>& vertices) {
         //         \\
         //////|\\\\*/
         case 14:
-            // complete line to m_truiangle
-            vertices.push_back(m_tru->getPosition());
+            // complete line to triangle
+            m_vertices.push_back(m_tru->getPosition());
             
-            // add missing m_truiangles
-            vertices.push_back(m_tru->getPosition());
-            vertices.push_back(m_bru->getPosition());
-            vertices.push_back(vertices.at(1));
+            // add missing triangles
+            m_vertices.push_back(m_tru->getPosition());
+            m_vertices.push_back(m_bru->getPosition());
+            m_vertices.push_back(m_vertices.at(1));
             
-            vertices.push_back(vertices.at(0));
-            vertices.push_back(m_tlu->getPosition());
-            vertices.push_back(m_tru->getPosition());
+            m_vertices.push_back(m_vertices.at(0));
+            m_vertices.push_back(m_tlu->getPosition());
+            m_vertices.push_back(m_tru->getPosition());
             break;
             
         /*////|\\\\\\
@@ -689,12 +640,12 @@ void Cell::transformLinesToInfill(vector<ofVec3f>& vertices) {
         //         \\
         //////|\\\\*/
         case 15:
-            vertices.push_back(m_tlu->getPosition());
-            vertices.push_back(m_blu->getPosition());
-            vertices.push_back(m_tru->getPosition());
-            vertices.push_back(m_blu->getPosition());
-            vertices.push_back(m_tru->getPosition());
-            vertices.push_back(m_bru->getPosition());
+            m_vertices.push_back(m_tlu->getPosition());
+            m_vertices.push_back(m_blu->getPosition());
+            m_vertices.push_back(m_tru->getPosition());
+            m_vertices.push_back(m_blu->getPosition());
+            m_vertices.push_back(m_tru->getPosition());
+            m_vertices.push_back(m_bru->getPosition());
             break;
     }
 }

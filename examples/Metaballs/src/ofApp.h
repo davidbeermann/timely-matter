@@ -5,6 +5,8 @@
 #include "CellGrid.hpp"
 #include "ParticleSystem.hpp"
 
+// uncomment this macro in order to activate
+// single debug particle steered by the mouse.
 //#define TEST_PARTICLE_SYSTEM
 
 
@@ -16,20 +18,18 @@ class ofApp : public ofBaseApp {
 #else
     ParticleSystem m_particle_system;
 #endif
-    ofMesh m_mesh;
     
     string info;
     bool m_show_gui;
     
     ofxPanel m_panel;
-    ofParameter<bool> m_show_particles;
     ofParameter<bool> m_move_particles;
+    ofParameter<bool> m_show_particles;
     ofParameter<bool> m_show_cells;
     ofParameter<bool> m_show_mesh;
     ofParameter<bool> m_interpolate;
     ofParameter<bool> m_infill;
     ofParameter<bool> m_wireframe;
-    ofParameter<bool> m_show_path;
     
 public:
     void setup();

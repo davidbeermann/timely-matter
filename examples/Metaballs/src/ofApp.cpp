@@ -10,6 +10,7 @@ void ofApp::setup(){
     ofSetBackgroundColor(0);
     
     m_cell_grid.setup(COLUMNS, ROWS);
+    m_cell_grid.setMode(PATH);
     
 #ifdef TEST_PARTICLE_SYSTEM
     m_mouse_particle.push_back(Particle(ofGetWidth()*0.5f, ofGetHeight()*0.5f, 75));
@@ -21,47 +22,39 @@ void ofApp::setup(){
     
     m_panel.setup();
     m_panel.setName("Metaballs");
-    m_panel.add(m_show_particles.set("show particles", false));
     m_panel.add(m_move_particles.set("move particles", true));
+    m_panel.add(m_show_particles.set("show particles", false));
     m_panel.add(m_show_cells.set("show cells", false));
-    m_panel.add(m_show_mesh.set("show mesh", false));
+    m_panel.add(m_show_mesh.set("show mesh", true));
     m_panel.add(m_interpolate.set("interpolate", false));
     m_panel.add(m_infill.set("infill", false));
     m_panel.add(m_wireframe.set("wireframe", false));
-    m_panel.add(m_show_path.set("show path", true));
-    
 }
 
 
 void ofApp::update() {
 #ifdef TEST_PARTICLE_SYSTEM
-    if (m_show_mesh) {
-        m_cell_grid.updateMesh(m_mesh, m_mouse_particle, m_interpolate, m_infill);
-    }
+    m_cell_grid.update(m_mouse_particle, m_interpolate, m_infill);
 #else
     if (m_move_particles) {
         m_particle_system.update();
     }
     
-//    if (m_show_mesh) {
-        m_cell_grid.updateMesh(m_mesh, m_particle_system.getParticles(), m_interpolate, m_infill);
-//    }
+    m_cell_grid.update(m_particle_system.getParticles(), m_interpolate, m_infill);
 #endif
     
-    info = "";
-    info += "FPS: " + to_string((int) ofGetFrameRate());
+    info = "FPS: " + to_string((int) ofGetFrameRate());
+    info += " - MODE: ";
+    info += m_cell_grid.inPathMode() ? "PATH" : "MESH";
     if (m_show_mesh) {
-        info += "\nNUM VERTICES: " + to_string((int) m_mesh.getNumVertices());
+        info += "\nNUM VERTICES: " + to_string((int) m_cell_grid.getMesh().getNumVertices());
         if (m_infill) {
-            info += "\nNUM TRIANGLES: " + to_string((int) (m_mesh.getNumVertices()/3));
+            info += "\nNUM TRIANGLES: " + to_string((int) (m_cell_grid.getMesh().getNumVertices()/3));
         } else {
-            info += "\nNUM LINES: " + to_string((int) (m_mesh.getNumVertices()/2));
+            if (m_cell_grid.inMeshMode()) {
+                info += "\nNUM LINES: " + to_string((int) (m_cell_grid.getMesh().getNumVertices()/2));
+            }
         }
-    }
-    if (m_show_path) {
-        const ofMesh& mesh = m_cell_grid.getPaths().getTessellation();
-        info += "\nNUM VERTICES: " + to_string((int) mesh.getNumVertices());
-        info += "\nNUM TRIANGLES: " + to_string((int) (mesh.getNumVertices()/3));
     }
 }
 
@@ -88,24 +81,23 @@ void ofApp::draw(){
     if (m_show_cells) {
         m_cell_grid.draw();
     }
-    
+
     if (m_show_mesh) {
-        if (m_wireframe) {
-            m_mesh.drawWireframe();
+        if (m_cell_grid.inPathMode() && !m_infill) {
+            m_cell_grid.getPath().setStrokeColor(ofColor(255, 0, 0));
+            m_cell_grid.getPath().setStrokeWidth(1);
+            m_cell_grid.getPath().draw();
         } else {
-            m_mesh.draw();
-        }
-    }
-    
-    if (m_show_path) {
-        if (m_wireframe) {
             ofPushStyle();
             ofSetColor(255, 0, 0, 255);
-            m_cell_grid.getPaths().getTessellation().drawWireframe();
+            if (m_wireframe) {
+                m_cell_grid.getMesh().drawWireframe();
+            } else {
+                m_cell_grid.getMesh().draw();
+            }
             ofPopStyle();
-        } else {
-            m_cell_grid.getPaths().draw();
         }
+        
     }
     
     ofPushStyle();
@@ -134,7 +126,6 @@ void ofApp::keyPressed(int key){
             m_show_cells = !m_show_cells;
             break;
         case 'm':
-            if (!m_show_mesh && m_show_path) m_show_path = false;
             m_show_mesh = !m_show_mesh;
             break;
         case 'i':
@@ -146,9 +137,12 @@ void ofApp::keyPressed(int key){
         case 'w':
             m_wireframe = !m_wireframe;
             break;
-        case 'n':
-            if (!m_show_path && m_show_mesh) m_show_mesh = false;
-            m_show_path = !m_show_path;
+        case OF_KEY_TAB:
+            if (m_cell_grid.inPathMode()) {
+                m_cell_grid.setMode(MESH);
+            } else {
+                m_cell_grid.setMode(PATH);
+            }
             break;
         default:
             break;

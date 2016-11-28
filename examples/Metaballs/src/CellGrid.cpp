@@ -1,6 +1,7 @@
 #include "CellGrid.hpp"
 
-#define GRID_DEBUG
+// this macro enables additional visual information on the grid
+//#define GRID_DEBUG
 
 typedef vector<CellUnit>::iterator CUIt;
 typedef vector<Cell>::iterator CIt;
@@ -180,6 +181,7 @@ void CellGrid::findNeighbor(Cell * cell, vector<Cell *> & list, ofPath & path, N
 void CellGrid::setup(unsigned int columns, unsigned int rows) {
     m_segment_width = (float) ofGetWidth() / (float) columns;
     m_segment_height = (float) ofGetHeight() / (float) rows;
+    m_mode = MESH;
     
     for (float y = 0.f; y < rows + 1; ++y) {
         for (float x = 0.f; x < columns + 1; ++x) {
@@ -212,8 +214,6 @@ void CellGrid::setup(unsigned int columns, unsigned int rows) {
             bool rightColumn = (x == columns - 1);
             cell.setEdgeConditions(topRow, bottomRow, leftColumn, rightColumn);
             
-//            ofLog() << "cell index: " << index << " - " << topRow << " " << bottomRow << " " << leftColumn << " " << rightColumn;
-            
             // setup neighboring cells
             if (!topRow) {
                 cell.setTopNeighbor(&m_cells[(y - 1) * columns + x]);
@@ -230,102 +230,131 @@ void CellGrid::setup(unsigned int columns, unsigned int rows) {
         }
     }
     
-    m_paths.setMode(ofPath::Mode::POLYLINES);
-    m_paths.setColor(ofColor(255, 0, 0, 64));
+    m_path.setMode(ofPath::Mode::POLYLINES);
+    m_path.setColor(ofColor(255, 0, 0, 64));
 }
 
 
-void CellGrid::updateMesh(ofMesh& mesh, vector<Particle>& particles, const bool interpolate, const bool infill) {
-    // update cell units values based on particles
+void CellGrid::update(vector<Particle> & particles, const bool interpolate, const bool infill) {
+    // update cell units values based on distances to particles
     for (CUIt cu = m_cell_units.begin(); cu != m_cell_units.end(); ++cu) {
         cu->reset();
         
         for (PIt p = particles.begin(); p != particles.end(); ++p) {
             ofVec3f d = p->getPosition() - cu->getPosition();
+            // this calculation involves a square root operation:
+            // length => sqrt( a*a + b*b );
 //            float diff = p->radius / d.length();
+            // take the squared radius in order to avoid square root calculation!
             float diff = p->getRadiusSquared() / d.lengthSquared();
             
             cu->addValue(diff);
         }
     }
     
-    // clear all prior vertices in mesh
-    mesh.clear();
-    
-    if (infill) {
-        mesh.setMode(OF_PRIMITIVE_TRIANGLES);
-    } else {
-        mesh.setMode(OF_PRIMITIVE_LINES);
-    }
-    
-    // collect all cells which make the isolines
-    vector<Cell *> temp;
-    for (CIt c = m_cells.begin(); c != m_cells.end(); ++c) {
-        const unsigned int &state = c->updateState();
-        // ignore all outer and inner cells, and also saddle points!
-        if (state > 0 && state < 15 && state != 5 && state != 10) {
-            // store pointer to cell
-            temp.push_back(&(*c));
+    if (inMeshMode()) {
+        // remove all prior vertices from mesh
+        m_mesh.clear();
+        
+        // set correct mode for mesh
+        if (infill) {
+            m_mesh.setMode(OF_PRIMITIVE_TRIANGLES);
+        } else {
+            m_mesh.setMode(OF_PRIMITIVE_LINES);
         }
-        c->calculateMesh(mesh, interpolate, infill);
     }
     
-    // clear list of active cells for update
-    m_active_cells.clear();
+    if (inPathMode()) {
+        // this vector collects all cells which are part of the contours.
+        // except for ambiguous cases which are not useful to find closed contours.
+        m_contour_cells.clear();
+    }
+        
+    for (CIt c = m_cells.begin(); c != m_cells.end(); ++c) {
+        // update cell after each cell unit was updated
+        c->update(interpolate);
+        
+        if (inPathMode()) {
+            // get marching square state of cell
+            const unsigned int &state = c->getState();
+            
+            // ignore all outer and inner cells, and also saddle points!
+            if (state > 0 && state < 15 && state != 5 && state != 10) {
+                // store pointer to cell
+                m_contour_cells.push_back(&(*c));
+            }
+        }
+        
+        if (inMeshMode()) {
+            if (infill) {
+                c->addNaiveInfillVertices();
+            }
+            
+            // transfer cell vertices to mesh
+            m_mesh.addVertices(c->getVertices());
+        }
+    }
     
-//    ofLog() << "temp cells: " << temp.size();
-    
-    m_paths.clear();
-    
-    int count = 0;
-    do {
-        m_active_cells.push_back(vector<Cell*>());
-        vector<Cell*> & current = m_active_cells[m_active_cells.size() - 1];
+    if (inPathMode()) {
+        // clear all previous paths
+        m_path.clear();
         
-//        m_paths.push_back(ofPath());
-//        ofPath& path = m_paths[m_paths.size()-1];
+        m_path.setFilled(infill);
+        if (!infill) {
+            m_path.setStrokeWidth(1);
+        }
         
-        ofPath current_path;
+        // clear all previous path cells
+        m_path_cells.clear();
         
-        Cell* first_cell = temp[0];
-        
-        current_path.moveTo(first_cell->getVertices()[0]);
-        
-        // find all neighbors starting from first cell stored in temp vector.
-        // store found cells in active cells vector.
-        findNeighbor(first_cell, current, current_path);
-        
-        current_path.close();
-        m_paths.append(current_path);
-        
-        vector<Cell *>::iterator t, a;
-        for (t = temp.begin(); t != temp.end();) {
-            bool match = false;
-            for (a = current.begin(); a != current.end(); ++a) {
-                if (*t == *a) {
-                    // when erasing position of t, t points automatically to the next position in the vector.
-                    temp.erase(t);
-                    match = true;
-                    break;
+        // loop over contour cells to find all connected cells for each path
+        do {
+            // create new vector to store path cells
+            m_path_cells.push_back(vector<Cell*>());
+            vector<Cell*> & current = m_path_cells[m_path_cells.size() - 1];
+
+            // create new temporary path
+            ofPath current_path;
+            
+            // select first contoru cell as starting point for recursive function
+            Cell* first_cell = m_contour_cells[0];
+            
+            // set sarting point of current path
+            current_path.moveTo(first_cell->getVertices()[0]);
+            
+            // find all neighbors starting from first cell.
+            // all cells defining a single path will be stored in vector.
+            findNeighbor(first_cell, current, current_path);
+            
+            // close path and append it to main path object
+            current_path.close();
+            m_path.append(current_path);
+            
+            // remove all cells found in current path from contour cell vector
+            vector<Cell *>::iterator t, a;
+            for (t = m_contour_cells.begin(); t != m_contour_cells.end();) {
+                bool match = false;
+                for (a = current.begin(); a != current.end(); ++a) {
+                    if (*t == *a) {
+                        // when erasing position of t, t points automatically to the next position in the vector.
+                        m_contour_cells.erase(t);
+                        match = true;
+                        break;
+                    }
+                }
+                // only iterate if no match was found!!!
+                if(!match){
+                    t++;
                 }
             }
-            // only iterate if no match was found.
-            if(!match){
-                t++;
-            }
         }
-        
-//        ofLog() << count++ << " - " << "current cells: " << current.size() << " - temp cells: " << temp.size();
-        
-    } while (temp.size() > 0);
-    
-//    ofLog() << "temp cells: " << temp.size();
-//    ofLog() << "active cells: " << m_active_cells.size();
+        // only stop loop once all contour cells are removed
+        while (m_contour_cells.size() > 0);
+    }
 }
 
 
 void CellGrid::draw() {
-    
 #ifdef GRID_DEBUG
     float w, h, w2, h2, r = 2, o = 3;
     for (CIt c = m_cells.begin(); c != m_cells.end(); ++c) {
@@ -367,11 +396,11 @@ void CellGrid::draw() {
         ofPopStyle();
         ofPopMatrix();
     }
-    if (m_active_cells.size() > 0) {
+    if (m_path_cells.size() > 0) {
         Cell *c;
-        for (int i = 0; i < m_active_cells.size(); ++i) {
-            for (int j = 0; j < m_active_cells[i].size(); ++j) {
-                c = m_active_cells[i][j];
+        for (int i = 0; i < m_path_cells.size(); ++i) {
+            for (int j = 0; j < m_path_cells[i].size(); ++j) {
+                c = m_path_cells[i][j];
                 ofPushMatrix();
                 ofTranslate(c->getPosition());
                 ofPushStyle();

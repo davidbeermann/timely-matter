@@ -6,9 +6,9 @@
 
 class Cell {
     
-    void calculateStraightLines(vector<ofVec3f>& vertices);
-    void calculateInterpolatedLines(vector<ofVec3f>& vertices);
-    void transformLinesToInfill(vector<ofVec3f>& vertices);
+    void calculateStraightLines();
+    void calculateInterpolatedLines();
+    void transformLinesToNaiveInfill();
     
     CellUnit* m_tlu = nullptr; // top left cell unit
     CellUnit* m_tru = nullptr; // top right cell unit
@@ -188,7 +188,10 @@ public:
         return m_state;
     }
     
-    const unsigned int& updateState();
-    void calculateMesh(ofMesh& mesh, bool interpolated = false, bool infill = false);
+    void addNaiveInfillVertices() {
+        transformLinesToNaiveInfill();
+    }
+    
+    void update(bool interpolated = false);
     
 };
