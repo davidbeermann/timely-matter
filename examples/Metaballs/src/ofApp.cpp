@@ -109,7 +109,6 @@ void ofApp::draw(){
             }
             ofPopStyle();
         }
-        
     }
     
     ofPushStyle();
