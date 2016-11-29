@@ -4,14 +4,14 @@
     <max>255</max>
   </Infrared_Normalization>
   <Depth_Clipping>
-    <near>1422</near>
+    <near>1544</near>
     <far>1620</far>
   </Depth_Clipping>
   <Calibrate_Depth_View>
-    <show_depth_output>0</show_depth_output>
+    <show_depth_output>1</show_depth_output>
   </Calibrate_Depth_View>
   <Kinect_Input>
-    <show_output>0</show_output>
+    <show_output>1</show_output>
   </Kinect_Input>
   <Noise_Input>
     <offset_x>5.43</offset_x>
@@ -32,7 +32,7 @@
 		<max_velocity>5</max_velocity>
 		<velocity_decay>0.99</velocity_decay>
 		<show_mark_ref>0</show_mark_ref>
-		<show_particles>0</show_particles>
+		<show_particles>1</show_particles>
 	<move_particles>1</move_particles>
 		<draw_lines>0</draw_lines>
 		<draw_fading>0</draw_fading>
