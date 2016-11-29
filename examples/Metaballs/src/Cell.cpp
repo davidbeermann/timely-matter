@@ -80,16 +80,16 @@ void Cell::calculateStraightLines() {
             break;
             
         /*/////////||\\\\\\\\\\\
-        //    0    ||    1    \\
+        //    1    ||    0    \\
         //  ○  \●  ||  ●  \○  \\
         //      \  ||      \  \\
-        //  ○   ○1 ||  ●   ●0 \\
+        //  ○   ○0 ||  ●   ●1 \\
         //         ||         \\
         ///////////||\\\\\\\\\*/
         case 4:
         case 11:
-            p0.set(m_tru->getPosition().x - m_half_size_x, m_tru->getPosition().y);
-            p1.set(m_tru->getPosition().x, m_tru->getPosition().y + m_half_size_y);
+            p0.set(m_tru->getPosition().x, m_tru->getPosition().y + m_half_size_y);
+            p1.set(m_tru->getPosition().x - m_half_size_x, m_tru->getPosition().y);
             m_vertices.push_back(m_state == 4 ? p0 : p1);
             m_vertices.push_back(m_state == 4 ? p1 : p0);
             break;
@@ -230,18 +230,18 @@ void Cell::calculateInterpolatedLines() {
             break;
             
         /*/////////||\\\\\\\\\\\
-        //    0    ||    1    \\
+        //    1    ||    0    \\
         //  ○  \●  ||  ●  \○  \\
         //      \  ||      \  \\
-        //  ○   ○1 ||  ●   ●0 \\
+        //  ○   ○0 ||  ●   ●1 \\
         //         ||         \\
         ///////////||\\\\\\\\\*/
         case 4:
         case 11:
-            p0.x = m_tlu->getPosition().x + m_size_x * ((1.f - m_tlu->getValue())/(m_tru->getValue() - m_tlu->getValue()));
-            p0.y = m_tru->getPosition().y;
-            p1.x = m_tru->getPosition().x;
-            p1.y = m_bru->getPosition().y - m_size_y * ((1.f - m_bru->getValue())/(m_tru->getValue() - m_bru->getValue()));
+            p0.x = m_tru->getPosition().x;
+            p0.y = m_bru->getPosition().y - m_size_y * ((1.f - m_bru->getValue())/(m_tru->getValue() - m_bru->getValue()));
+            p1.x = m_tlu->getPosition().x + m_size_x * ((1.f - m_tlu->getValue())/(m_tru->getValue() - m_tlu->getValue()));
+            p1.y = m_tru->getPosition().y;
             m_vertices.push_back(m_state == 4 ? p0 : p1);
             m_vertices.push_back(m_state == 4 ? p1 : p0);
             break;
@@ -400,10 +400,10 @@ void Cell::transformLinesToNaiveInfill() {
             break;
             
         /*////|\\\\\\
-        //    0    \\
+        //    1    \\
         //  ○  \●  \\
         //      \  \\
-        //  ○   ○1 \\
+        //  ○   ○0 \\
         //         \\
         //////|\\\\*/
         case 4:
@@ -549,10 +549,10 @@ void Cell::transformLinesToNaiveInfill() {
             break;
             
         /*////|\\\\\\
-        //    1    \\
+        //    0    \\
         //  ●  \○  \\
         //      \  \\
-        //  ●   ●0 \\
+        //  ●   ●1 \\
         //         \\
         //////|\\\\*/
         case 11:
@@ -562,11 +562,11 @@ void Cell::transformLinesToNaiveInfill() {
             // add missing triangles
             m_vertices.push_back(m_tlu->getPosition());
             m_vertices.push_back(m_blu->getPosition());
-            m_vertices.push_back(m_vertices.at(1));
+            m_vertices.push_back(m_vertices.at(0));
             
             m_vertices.push_back(m_blu->getPosition());
             m_vertices.push_back(m_bru->getPosition());
-            m_vertices.push_back(m_vertices.at(0));
+            m_vertices.push_back(m_vertices.at(1));
             break;
             
         /*////|\\\\\\
