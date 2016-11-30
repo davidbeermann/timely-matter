@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
-#define PARTICLE_COUNT 25 // 15 25
-#define COLUMNS 128 // 32 128
+#define PARTICLE_COUNT 100 // 15 25
+#define COLUMNS 64 // 32 64 128
 #define ROWS 64 // 32 64
 
 
