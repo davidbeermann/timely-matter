@@ -1,5 +1,8 @@
 #include "ParticleSystem.hpp"
 
+#define MIN_RADIUS 20
+#define MAX_RADIUS 40
+
 using namespace timelymatter;
 
 typedef vector<Particle>::iterator PIt;
@@ -32,7 +35,8 @@ void ParticleSystem::setup(const unsigned int num_particles, const ofVec3f size)
     
     // setup GUI parameters
     m_params.setName("Particle System");
-    m_params.add(m_show_particles.set("show particles", true));
+    m_params.add(m_move_particles.set("move particles", true));
+    m_params.add(m_show_particles.set("show particles", false));
     m_params.add(m_max_velocity.set("max velocity", 5.f, 1.f, 10.f));
     m_params.add(m_velocity_decay.set("velocity decay", 0.99f, 0.9f, 0.999f));
     m_params.add(m_show_mark_reference.set("show mark ref", false));
@@ -43,7 +47,7 @@ void ParticleSystem::setup(const unsigned int num_particles, const ofVec3f size)
     // this has to happen after the GUI setup, due to the max velocity parameter.
     for (unsigned int i = 0; i < num_particles; ++i) {
         Particle p = Particle(m_max_velocity, m_velocity_decay);
-        p.setup(ofVec3f(ofRandom(size.x), ofRandom(size.y), 0.f));
+        p.setup(ofVec3f(ofRandom(size.x), ofRandom(size.y), 0.f), ofRandom(MIN_RADIUS, MAX_RADIUS));
         m_particles.push_back(p);
     }
     
@@ -51,7 +55,7 @@ void ParticleSystem::setup(const unsigned int num_particles, const ofVec3f size)
     m_particle_mesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
     m_particle_mesh.addVertex(ofVec3f(0.f, 0.f, 0.f));
     int steps = 12;
-    float radius = 1.5f;
+    float radius = 1.f;
     double inc = TWO_PI / (double) steps;
     for (int i = 0; i <= steps; ++i) {
         double radian = i * inc;
@@ -61,7 +65,7 @@ void ParticleSystem::setup(const unsigned int num_particles, const ofVec3f size)
 
 
 void ParticleSystem::applyVectorField(VectorField& vectorField) {
-    if (m_show_particles) {
+    if (m_move_particles) {
         for (PIt p = m_particles.begin(); p != m_particles.end(); ++p) {
             ofVec3f force = vectorField.getForceForPosition(p->getPosition());
             p->applyForce(force);
@@ -71,7 +75,7 @@ void ParticleSystem::applyVectorField(VectorField& vectorField) {
 
 
 void ParticleSystem::update() {
-    if (m_show_particles) {
+    if (m_move_particles) {
         for (PIt p = m_particles.begin(); p != m_particles.end(); ++p) {
             p->update(m_bounds);
         }
@@ -104,7 +108,10 @@ void ParticleSystem::draw(const VectorField& vectorField) {
                 }
             }
             
+//            ofPushMatrix();
+//            ofScale(p->getRadius()/10, p->getRadius()/10);
             p->draw(m_particle_mesh);
+//            ofPopMatrix();
             
             if(m_show_mark_reference) {
                 ofVec3f pos = vectorField.getMeterPointForPosition(p->getPosition());

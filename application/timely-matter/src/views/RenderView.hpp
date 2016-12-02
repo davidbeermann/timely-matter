@@ -6,6 +6,7 @@
 #include "VectorFieldInput.hpp"
 #include "VectorField.hpp"
 #include "ParticleSystem.hpp"
+#include "Metaballs.hpp"
 
 
 namespace timelymatter
@@ -15,6 +16,7 @@ namespace timelymatter
         VectorFieldInput& m_input;
         VectorField m_vector_field;
         ParticleSystem m_particle_system;
+        Metaballs m_metaballs;
         ofVec2f m_center_position;
     protected:
         void m_onWindowResized(const int width, const int height);

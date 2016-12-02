@@ -1,8 +1,8 @@
 #include "ofApp.h"
 #include "AppState.hpp"
 
-#define PROJECTOR_WIDTH 1024
-#define PROJECTOR_HEIGHT 768
+#define PROJECTOR_WIDTH 1920 // 1024 1280 1920 960
+#define PROJECTOR_HEIGHT 1080 // 768 800 1080 540
 
 
 ofApp::ofApp() :

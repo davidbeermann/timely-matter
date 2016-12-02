@@ -9,8 +9,10 @@ Particle::Particle(ofParameter<float>& maxVelocity, ofParameter<float>& velocity
 }
 
 
-void Particle::setup(ofVec3f position) {
+void Particle::setup(const ofVec3f & position, const float & radius) {
     m_position = position;
+    m_radius = radius;
+    m_radius_squared = radius * radius;
 }
 
 
@@ -32,12 +34,12 @@ void Particle::update(const ofRectangle& bounds) {
     
     m_velocity *= m_decay;
     
-    if (m_position.x < bounds.x || m_position.x > bounds.width) {
-        m_position.x = m_position.x < bounds.x ? bounds.x : bounds.width;
+    if (m_position.x < bounds.x + m_radius || m_position.x > bounds.width - m_radius) {
+        m_position.x = m_position.x < bounds.x + m_radius ? bounds.x + m_radius : bounds.width - m_radius;
         m_velocity.x *= -1;
     }
-    if (m_position.y < bounds.y || m_position.y > bounds.height) {
-        m_position.y = m_position.y < bounds.y ? bounds.y : bounds.height;
+    if (m_position.y < bounds.y + m_radius || m_position.y > bounds.height - m_radius) {
+        m_position.y = m_position.y < bounds.y + m_radius ? bounds.y + m_radius : bounds.height - m_radius;
         m_velocity.y *= -1;
     }
     
@@ -55,6 +57,8 @@ void Particle::draw(const ofVboMesh& mesh) {
     // vbo mesh drawing
     ofPushMatrix();
     ofTranslate(m_position.x, m_position.y);
+    float scale = m_radius * 2 / 10.f;
+    ofScale(scale, scale);
     mesh.draw();
     ofPopMatrix();
 }
