@@ -1,7 +1,7 @@
 #include "Metaballs.hpp"
 
-#define COLUMNS 128 // 32 128
-#define ROWS 64 // 32 64
+#define COLUMNS 64 // 32 128
+#define ROWS 36 // 32 64
 
 using namespace timelymatter;
 
