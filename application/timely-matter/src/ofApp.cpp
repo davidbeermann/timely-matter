@@ -1,5 +1,6 @@
 #include "ofApp.h"
 #include "AppState.hpp"
+#include "AppConfig.hpp"
 
 #define PROJECTOR_WIDTH 1920 // 1024 1280 1920 960
 #define PROJECTOR_HEIGHT 1080 // 768 800 1080 540
@@ -17,6 +18,26 @@ ofApp::ofApp() :
 void ofApp::setup() {
     ofSetFrameRate(60);
     ofSetBackgroundColor(33);
+    
+    AppConfig& c = AppConfig::get();
+    if (!c.load()) {
+        ofLogError() << "Configuration file could not be loaded!";
+    } else {
+        ofLog() << "Configuration file sucessfully loaded.";
+        ofLog() << "- - - - - - - - - - - - - - - - - - - -";
+        ofLog() << "Kinect Crop Ratio: " << c.getKinectCropRatio();
+        ofLog() << "Projector Width: " << c.getProjectorWidth();
+        ofLog() << "Projector Height: " << c.getProjectorHeight();
+        ofLog() << "Projector Render Ratio: " << c.getProjectorRenderRatio();
+        ofLog() << "Projector Render Width: " << c.getProjectorRenderWidth();
+        ofLog() << "Projector Render Height: " << c.getProjectorRenderHeight();
+        ofLog() << "Particle System Count: " << c.getParticleSystemCount();
+        ofLog() << "Particle System Min Radius: " << c.getParticleSystemMinRadius();
+        ofLog() << "Particle System Max Radius: " << c.getParticleSystemMaxRadius();
+        ofLog() << "Marching Squares Columns: " << c.getMarchingSquaresColumns();
+        ofLog() << "Marching Squares Rows: " << c.getMarchingSquaresRows();
+        ofLog() << "- - - - - - - - - - - - - - - - - - - -";
+    }
     
     // configure models
     m_projector_model.setSize(PROJECTOR_WIDTH, PROJECTOR_HEIGHT);

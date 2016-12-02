@@ -1,0 +1,33 @@
+<AppConfig>
+
+  <!-- *_*_* KINECT *_*_* -->
+  <kinect>
+    <crop_ratio>0.75</crop_ratio>
+  </kinect>
+
+  <!-- *_*_* PROJECTOR *_*_* -->
+  <projector>
+    <!-- output resolution of the projector -->
+    <width>1920</width>
+    <height>1080</height>
+    <!-- factor by which the resolution is multiplied to set the buffer size of the rendering -->
+    <render_ratio>0.5</render_ratio>
+  </projector>
+
+  <!-- *_*_* PARTICLE SYSTEM *_*_* -->
+  <particle_system>
+    <!-- amount of particles -->
+    <count>100</count>
+    <!-- range of each particle radius -->
+    <min_radius>20.0</min_radius>
+    <max_radius>40.0</max_radius>
+  </particle_system>
+
+  <!-- *_*_* MARCHING SQUARES *_*_* -->
+  <marching_squares>
+    <!-- subdivision of output buffer resolution -->
+    <columns>64</columns>
+    <rows>36</rows>
+  </marching_squares>
+
+</AppConfig>
