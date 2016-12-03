@@ -26,11 +26,14 @@ void CalibrateProjectionView::m_onSelectionUpdated() {
 
 
 void CalibrateProjectionView::m_onWindowResized(const int width, const int height) {
+    // calculate position of view title
+    m_title_rect.setPosition((ofGetWidth() - m_title_rect.getWidth()) * 0.5f, PADDING + BITMAP_TEXT_LINE_HEIGHT);
+    
     // calculate position of confirmation message
     m_confirm_rect.setPosition((ofGetWidth() - m_confirm_rect.getWidth()) * 0.5f, ofGetHeight() - PADDING - m_confirm_rect.getHeight());
     
     // calculate position of selection with infrared image
-    m_selection_position.set(PADDING, PADDING + BITMAP_TEXT_LINE_HEIGHT + BITMAP_TEXT_OFFSET_Y);
+    m_selection_position.set(PADDING, (ofGetHeight() - m_infrared_buffer.getHeight()) * 0.5f);
     m_selection.updatePosition(m_selection_position);
     
     // calculate position of scaled depth preview
@@ -70,7 +73,8 @@ void CalibrateProjectionView::m_onSetup() {
     int h = (m_depth_rect.getWidth() / m_crop_buffer.getWidth()) * m_crop_buffer.getHeight();
     m_crop_rect.setSize(m_depth_rect.getWidth(), h);
     
-    // set rectangle for confirmation message
+    // set text rectangles
+    m_title_rect = getBitmapStringBoundingBox(m_view_title);
     m_confirm_rect = getBitmapStringBoundingBox(m_confirm_msg);
     
     // define GUI parameters
@@ -131,6 +135,11 @@ void CalibrateProjectionView::m_onDraw() {
     m_selection.draw();
     m_depth_buffer.draw(m_depth_rect);
     m_crop_buffer.draw(m_crop_rect);
+    
+    ofPushMatrix();
+    ofTranslate(m_title_rect.getTopLeft());
+    ofDrawBitmapString(m_view_title, 0, 0);
+    ofPopMatrix();
     
     ofPushMatrix();
     ofTranslate(m_selection_position);

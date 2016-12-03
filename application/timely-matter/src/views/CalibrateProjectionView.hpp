@@ -12,10 +12,12 @@ namespace timelymatter
         void m_onSelectionUpdated();
         
         shared_ptr<ofxKinect> m_kinect_sptr;
+        string m_view_title = "CALIBRATE DEPTH AREA TO PROJECTION";
         string m_infrared_title = "Infrared camera";
         string m_buffer_title = "Depth buffer";
         string m_extract_title = "Cropped depth buffer";
         string m_confirm_msg = "Press <Enter> to confirm selection";
+        ofRectangle m_title_rect;
         ofRectangle m_confirm_rect;
         ofVec2f m_selection_position;
         ofRectangle m_depth_rect;
