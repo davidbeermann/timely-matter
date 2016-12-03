@@ -13,13 +13,14 @@ using namespace cv;
 
 
 void CalibrateProjectionView::m_onSelectionUpdated() {
+    vector<ofVec2f> points = m_selection.getPoints();
     m_selection_path.clear();
     m_selection_path.setFilled(true);
     m_selection_path.setFillColor(m_selection_color);
-    m_selection_path.moveTo(m_selection.getPoints()[0]);
-    m_selection_path.lineTo(m_selection.getPoints()[1]);
-    m_selection_path.lineTo(m_selection.getPoints()[2]);
-    m_selection_path.lineTo(m_selection.getPoints()[3]);
+    m_selection_path.moveTo(points[0]);
+    m_selection_path.lineTo(points[1]);
+    m_selection_path.lineTo(points[2]);
+    m_selection_path.lineTo(points[3]);
     m_selection_path.close();
 }
 

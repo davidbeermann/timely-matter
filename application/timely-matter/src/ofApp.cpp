@@ -43,6 +43,7 @@ void ofApp::setup() {
         
         // configure models
         m_projector_model.setSize(config.getOutputProjectorWidth(), config.getOutputProjectorHeight(), config.getOutputBufferWidth(), config.getOutputBufferHeight());
+        // THIS METHOD CALL IS MANDATORY!!!!
         m_kinect_model.setDepthBufferSize(config.getKinectCropBufferWidth(), config.getKinectCropBufferHeight());
         
         // setup command mapping
