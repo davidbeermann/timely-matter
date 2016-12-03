@@ -14,11 +14,12 @@ namespace timelymatter
         shared_ptr<ofxKinect> m_kinect_sptr;
         string m_infrared_title = "Infrared camera";
         string m_buffer_title = "Depth buffer";
-        string m_extract_title = "Depth buffer extract via homography transformation";
+        string m_extract_title = "Cropped depth buffer";
         string m_confirm_msg = "Press <Enter> to confirm selection";
+        ofRectangle m_confirm_rect;
         ofVec2f m_selection_position;
-        ofVec2f m_depth_position;
-        ofVec2f m_crop_position;
+        ofRectangle m_depth_rect;
+        ofRectangle m_crop_rect;
         ImageSelection m_selection;
         ofImage m_infrared_buffer;
         ofImage m_depth_buffer;

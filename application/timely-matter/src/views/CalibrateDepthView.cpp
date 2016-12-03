@@ -11,9 +11,9 @@ using namespace ofxCv;
 
 
 void CalibrateDepthView::m_onWindowResized(const int width, const int height) {
-    float combined_width = m_fbo_output_size.getWidth() + BOX_MARGIN + m_projector_model.getWidth();
+    float combined_width = m_fbo_output_size.getWidth() + BOX_MARGIN + m_projector_model.getBufferWidth();
     float x = (ofGetWindowWidth() - combined_width) * 0.5f + m_fbo_output_size.getWidth() + BOX_MARGIN;
-    float y = (ofGetWindowHeight() - m_projector_model.getHeight()) * 0.5f;
+    float y = (ofGetWindowHeight() - m_projector_model.getOutputHeight()) * 0.5f;
     m_center_position.set(x, y);
 }
 
@@ -45,7 +45,7 @@ void CalibrateDepthView::m_onSetup() {
     m_selection_fbo.end();
     
     // setup vector field
-    m_vector_field.setup(m_projector_model.getWidth(), m_projector_model.getHeight(), m_kinect_model.getDepthBufferWidth(), m_kinect_model.getDepthBufferHeight(), 32);
+    m_vector_field.setup(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight(), m_kinect_model.getDepthBufferWidth(), m_kinect_model.getDepthBufferHeight(), 32);
     
     // setup gui parameters
     GuiUpdateArgs args;
@@ -99,17 +99,17 @@ void CalibrateDepthView::m_onDraw() {
     
     string avg = "Average Datum: " + to_string(m_vector_field.getAverageDatum());
     ofRectangle bounds_avg = getBitmapStringBoundingBox(avg);
-    ofDrawBitmapString(avg, (m_projector_model.getWidth() - bounds_avg.getWidth()) * 0.5f, -BOX_MARGIN);
+    ofDrawBitmapString(avg, (m_projector_model.getBufferWidth() - bounds_avg.getWidth()) * 0.5f, -BOX_MARGIN);
     
     ofRectangle bounds_confirm = getBitmapStringBoundingBox(m_confirm_msg);
-    ofDrawBitmapString(m_confirm_msg, (m_projector_model.getWidth() - bounds_confirm.getWidth()) * 0.5f,  m_projector_model.getHeight() + BITMAP_TEXT_LINE_HEIGHT + BOX_MARGIN);
+    ofDrawBitmapString(m_confirm_msg, (m_projector_model.getBufferWidth() - bounds_confirm.getWidth()) * 0.5f,  m_projector_model.getBufferHeight() + BITMAP_TEXT_LINE_HEIGHT + BOX_MARGIN);
     
     ofPushStyle();
     ofSetColor(0);
-    ofDrawRectangle(0, 0, m_projector_model.getWidth(), m_projector_model.getHeight());
+    ofDrawRectangle(0, 0, m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight());
     ofPopStyle();
     if (m_param_show_depth) {
-        m_depth_image.draw(m_projector_model.getSize());
+        m_depth_image.draw(m_projector_model.getBufferSize());
     }
     m_vector_field.draw();
     

@@ -13,7 +13,7 @@ RenderView::RenderView() : m_input(m_input_factory.get(m_app_model.getMode())) {
 
 
 void RenderView::m_onWindowResized(const int width, const int height) {
-    m_center_position.set((width - m_projector_model.getWidth()) * 0.5f, (height - m_projector_model.getHeight()) * 0.5f);
+    m_center_position.set((width - m_projector_model.getOutputWidth()) * 0.5f, (height - m_projector_model.getOutputHeight()) * 0.5f);
 }
 
 
@@ -21,13 +21,13 @@ void RenderView::m_onSetup() {
     m_input.setup();
     
     // setup vector field
-    m_vector_field.setup(m_projector_model.getWidth(), m_projector_model.getHeight(), m_input.getWidth(), m_input.getHeight(), 32);
+    m_vector_field.setup(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight(), m_input.getWidth(), m_input.getHeight(), 32);
     
     // setup particle system
-    m_particle_system.setup(PARTICLE_COUNT, ofVec3f(m_projector_model.getWidth(), m_projector_model.getHeight(), 0.f));
+    m_particle_system.setup(PARTICLE_COUNT, ofVec3f(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight(), 0.f));
     
     // setup metaballs
-    m_metaballs.setup(m_projector_model.getWidth(), m_projector_model.getHeight());
+    m_metaballs.setup(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight());
     
     // compile gui params
     GuiUpdateArgs args;
@@ -64,10 +64,10 @@ void RenderView::m_onDraw() {
     
     ofPushStyle();
     ofSetColor(0);
-    ofDrawRectangle(m_projector_model.getSize());
+    ofDrawRectangle(m_projector_model.getOutputSize());
     ofPopStyle();
     
-    m_input.draw(m_projector_model.getSize());
+    m_input.draw(m_projector_model.getOutputSize());
     m_vector_field.draw();
     m_particle_system.draw(m_vector_field);
     m_metaballs.draw();
