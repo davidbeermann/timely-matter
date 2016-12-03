@@ -25,15 +25,21 @@ void ofApp::setup() {
     } else {
         ofLog() << "Configuration file sucessfully loaded.";
         ofLog() << "- - - - - - - - - - - - - - - - - - - -";
-        ofLog() << "Kinect Crop Ratio: " << c.getKinectCropRatio();
-        ofLog() << "Projector Width: " << c.getProjectorWidth();
-        ofLog() << "Projector Height: " << c.getProjectorHeight();
-        ofLog() << "Projector Render Ratio: " << c.getProjectorRenderRatio();
-        ofLog() << "Projector Render Width: " << c.getProjectorRenderWidth();
-        ofLog() << "Projector Render Height: " << c.getProjectorRenderHeight();
+        ofLog() << "Output Projector Width: " << c.getOutputProjectorWidth();
+        ofLog() << "Output Projector Height: " << c.getOutputProjectorHeight();
+        ofLog() << "Output Buffer Width: " << c.getOutputBufferWidth();
+        ofLog() << "Output Buffer Height: " << c.getOutputBufferHeight();
+        
+        ofLog() << "Kinect Crop Buffer Width: " << c.getKinectCropBufferWidth();
+        ofLog() << "Kinect Crop Buffer Height: " << c.getKinectCropBufferHeight();
+        
+        ofLog() << "Vector Field Subdivision X: " << c.getVectorFieldSubdivisionX();
+        ofLog() << "Vector Field Subdivision Y: " << c.getVectorFieldSubdivisionY();
+        
         ofLog() << "Particle System Count: " << c.getParticleSystemCount();
         ofLog() << "Particle System Min Radius: " << c.getParticleSystemMinRadius();
         ofLog() << "Particle System Max Radius: " << c.getParticleSystemMaxRadius();
+        
         ofLog() << "Marching Squares Columns: " << c.getMarchingSquaresColumns();
         ofLog() << "Marching Squares Rows: " << c.getMarchingSquaresRows();
         ofLog() << "- - - - - - - - - - - - - - - - - - - -";

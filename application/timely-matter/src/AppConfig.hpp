@@ -19,12 +19,14 @@ namespace timelymatter {
         bool m_loaded;
         
         // variable to store setting values
-        float m_kinect_crop_ratio;
-        int m_projector_width;
-        int m_projector_height;
-        float m_projector_render_ratio;
-        int m_projector_render_width;
-        int m_projector_render_height;
+        int m_output_projector_width;
+        int m_output_projector_height;
+        int m_output_buffer_width;
+        int m_output_buffer_height;
+        int m_kinect_crop_buffer_width;
+        int m_kinect_crop_buffer_height;
+        int m_vector_field_subdivision_x;
+        int m_vector_field_subdivision_y;
         int m_particle_system_count;
         float m_particle_system_min_radius;
         float m_particle_system_max_radius;
@@ -34,18 +36,24 @@ namespace timelymatter {
         void parseXml() {
             m_settings.pushTag("AppConfig");
             
-            // parse Kinect values
-            m_settings.pushTag("kinect");
-            m_kinect_crop_ratio = m_settings.getValue("crop_ratio", 0.0);
+            // parse output values
+            m_settings.pushTag("output");
+            m_output_projector_width = m_settings.getValue("projector_width", 0);
+            m_output_projector_height = m_settings.getValue("projector_height", 0);
+            m_output_buffer_width = m_settings.getValue("buffer_width", 0);
+            m_output_buffer_height = m_settings.getValue("buffer_height", 0);
             m_settings.popTag();
             
-            // parse projector values
-            m_settings.pushTag("projector");
-            m_projector_width = m_settings.getValue("width", 0);
-            m_projector_height = m_settings.getValue("height", 0);
-            m_projector_render_ratio = m_settings.getValue("render_ratio", 0.0);
-            m_projector_render_width = m_projector_width * m_projector_render_ratio;
-            m_projector_render_height = m_projector_height * m_projector_render_ratio;
+            // parse Kinect values
+            m_settings.pushTag("kinect");
+            m_kinect_crop_buffer_width = m_settings.getValue("crop_buffer_width", 0);
+            m_kinect_crop_buffer_height = m_settings.getValue("crop_buffer_height", 0);
+            m_settings.popTag();
+            
+            // parse vector field values
+            m_settings.pushTag("vector_field");
+            m_vector_field_subdivision_x = m_settings.getValue("subdivision_x", 0);
+            m_vector_field_subdivision_y = m_settings.getValue("subdivision_y", 0);
             m_settings.popTag();
             
             // parse particle system values
@@ -86,24 +94,33 @@ namespace timelymatter {
         }
         
         // methods to retrieve values from settings file
-        const float& getKinectCropRatio() {
-            return m_kinect_crop_ratio;
+        const int& getOutputProjectorWidth() {
+            return m_output_projector_width;
         }
-        const int& getProjectorWidth() {
-            return m_projector_width;
+        const int& getOutputProjectorHeight() {
+            return m_output_projector_height;
         }
-        const int& getProjectorHeight() {
-            return m_projector_height;
+        const int& getOutputBufferWidth() {
+            return m_output_buffer_width;
         }
-        const float& getProjectorRenderRatio() {
-            return m_projector_render_ratio;
+        const int& getOutputBufferHeight() {
+            return m_output_buffer_height;
         }
-        const int& getProjectorRenderWidth() {
-            return m_projector_render_width;
+        
+        const int& getKinectCropBufferWidth() {
+            return m_kinect_crop_buffer_width;
         }
-        const int& getProjectorRenderHeight() {
-            return m_projector_render_height;
+        const int& getKinectCropBufferHeight() {
+            return m_kinect_crop_buffer_height;
         }
+        
+        const int& getVectorFieldSubdivisionX() {
+            return m_vector_field_subdivision_x;
+        }
+        const int& getVectorFieldSubdivisionY() {
+            return m_vector_field_subdivision_y;
+        }
+        
         const int& getParticleSystemCount() {
             return m_particle_system_count;
         }
@@ -113,6 +130,7 @@ namespace timelymatter {
         const float& getParticleSystemMaxRadius() {
             return m_particle_system_max_radius;
         }
+        
         const int& getMarchingSquaresColumns() {
             return m_marching_squares_columns;
         }
