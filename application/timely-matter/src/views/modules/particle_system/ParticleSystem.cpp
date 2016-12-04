@@ -1,21 +1,18 @@
 #include "ParticleSystem.hpp"
 
-#define MIN_RADIUS 20
-#define MAX_RADIUS 40
-
 using namespace timelymatter;
 
 typedef vector<Particle>::iterator PIt;
 
 
-void ParticleSystem::setup(const unsigned int num_particles, const ofVec3f size) {
+void ParticleSystem::setup(const unsigned int & width, const unsigned int & height, const unsigned int & num_particles, const unsigned int & min_radius, const unsigned int & max_radius) {
     // define bounding box for particles
-    m_bounds.set(0, 0, size.x, size.y);
+    m_bounds.set(0, 0, width, height);
     
     // allocate buffers
-    m_particles_fbo.allocate(size.x, size.y);
-    m_lines_fbo.allocate(size.x, size.y);
-    m_output_fbo.allocate(size.x, size.y);
+    m_particles_fbo.allocate(width, height);
+    m_lines_fbo.allocate(width, height);
+    m_output_fbo.allocate(width, height);
     
     // clear buffers
     m_particles_fbo.begin();
@@ -47,7 +44,7 @@ void ParticleSystem::setup(const unsigned int num_particles, const ofVec3f size)
     // this has to happen after the GUI setup, due to the max velocity parameter.
     for (unsigned int i = 0; i < num_particles; ++i) {
         Particle p = Particle(m_max_velocity, m_velocity_decay);
-        p.setup(ofVec3f(ofRandom(size.x), ofRandom(size.y), 0.f), ofRandom(MIN_RADIUS, MAX_RADIUS));
+        p.setup(ofVec3f(ofRandom(width), ofRandom(height), 0.f), ofRandom(min_radius, max_radius));
         m_particles.push_back(p);
     }
     

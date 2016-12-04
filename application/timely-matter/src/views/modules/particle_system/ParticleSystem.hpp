@@ -27,7 +27,7 @@ namespace timelymatter {
         ofParameter<bool> m_draw_fading;
         
     public:
-        void setup(const unsigned int num_particles, const ofVec3f size);
+        void setup(const unsigned int & width, const unsigned int & height, const unsigned int & num_particles, const unsigned int & min_radius, const unsigned int & max_radius);
         void applyVectorField(VectorField& vectorField);
         void update();
         void draw(const VectorField& vectorField);

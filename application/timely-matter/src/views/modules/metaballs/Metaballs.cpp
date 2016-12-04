@@ -1,13 +1,10 @@
 #include "Metaballs.hpp"
 
-#define COLUMNS 64 // 32 128
-#define ROWS 36 // 32 64
-
 using namespace timelymatter;
 
 
-void Metaballs::setup(const unsigned int & width, const unsigned int & height){
-    m_cell_grid.setup(width, height, COLUMNS, ROWS);
+void Metaballs::setup(const unsigned int & width, const unsigned int & height, const unsigned int & columns, const unsigned int & rows){
+    m_cell_grid.setup(width, height, columns, rows);
     m_cell_grid.setMode(MESH);
     
     m_hsb_color.set(ofRandom(1.f), ofRandom(0.2f, 0.8f), 0.9f, 0.75f);

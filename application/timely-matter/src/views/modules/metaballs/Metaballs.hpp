@@ -21,7 +21,7 @@ namespace timelymatter {
         ofParameter<bool> m_wireframe;
         
     public:
-        void setup(const unsigned int & width, const unsigned int & height);
+        void setup(const unsigned int & width, const unsigned int & height, const unsigned int & columns, const unsigned int & rows);
         void update(vector<Particle> & particles);
         void draw();
         

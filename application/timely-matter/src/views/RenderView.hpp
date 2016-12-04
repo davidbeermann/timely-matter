@@ -17,7 +17,10 @@ namespace timelymatter
         VectorField m_vector_field;
         ParticleSystem m_particle_system;
         Metaballs m_metaballs;
-        ofVec2f m_center_position;
+        ofRectangle m_output_rect;
+        ofFbo m_vector_field_fbo;
+        ofFbo m_particle_system_fbo;
+        ofFbo m_metaballs_fbo;
     protected:
         void m_onWindowResized(const int width, const int height);
         void m_onSetup();
