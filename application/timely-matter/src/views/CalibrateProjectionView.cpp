@@ -66,7 +66,7 @@ void CalibrateProjectionView::m_onSetup() {
     m_infrared_buffer.allocate(m_kinect_sptr->width, m_kinect_sptr->height, OF_IMAGE_COLOR);
     m_grayscale.allocate(m_kinect_sptr->width, m_kinect_sptr->height);
     m_depth_buffer.allocate(m_kinect_sptr->width, m_kinect_sptr->height, OF_IMAGE_GRAYSCALE);
-    m_crop_buffer.allocate(m_kinect_model.getDepthBufferWidth(), m_kinect_model.getDepthBufferHeight(), OF_IMAGE_GRAYSCALE);
+    m_crop_buffer.allocate(m_kinect_model.getCropBufferWidth(), m_kinect_model.getCropBufferHeight(), OF_IMAGE_GRAYSCALE);
     
     // set rectangle sizes to draw scaled buffers
     m_depth_rect.setSize(m_kinect_sptr->width * 0.5, m_kinect_sptr->height * 0.5);

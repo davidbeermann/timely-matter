@@ -20,6 +20,8 @@ namespace timelymatter {
                         break;
                     case AppMode::KINECT:
                         m_app_model.setState(AppState::CALIBRATE_PROJECTION);
+                        // shortcut to skip a config view
+                        //m_app_model.setState(AppState::CALIBRATE_DEPTH);
                         break;
                     default:
                         ofLog() << "The logic for the mode " << (int) mode << " is not implemented.";

@@ -8,7 +8,7 @@ void NoiseInput::m_onSetup() {
     m_shader.load("perlin");
     
     // allocate memory for FBO
-    m_fbo.allocate(m_kinect_model.getDepthBufferWidth(), m_kinect_model.getDepthBufferHeight());
+    m_fbo.allocate(m_kinect_model.getCropBufferWidth(), m_kinect_model.getCropBufferHeight());
     
     // clear FBO contents
     m_fbo.begin();
