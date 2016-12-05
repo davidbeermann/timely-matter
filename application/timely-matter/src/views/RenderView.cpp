@@ -85,9 +85,20 @@ void RenderView::m_onUpdate() {
     
     m_particle_system_fbo.begin();
     ofClear(0);
+    //TODO fix 'accidental' transform...
+    // without the following transform the particle system is drawn
+    // flipped on the y-axis, although it is drawn correct when not
+    // drawn into a fbo.
+    ofPushMatrix();
+    ofTranslate(0, m_projector_model.getBufferHeight());
+    ofScale(1.0, -1.0);
+//    ofPushStyle();
+//    ofSetColor(255, 0, 0);
     m_particle_system.draw(m_vector_field);
+//    ofPopStyle();
+    ofPopMatrix();
     m_particle_system_fbo.end();
-    
+
     m_metaballs_fbo.begin();
     ofClear(0);
     m_metaballs.draw();

@@ -10,9 +10,9 @@ void ParticleSystem::setup(const unsigned int & width, const unsigned int & heig
     m_bounds.set(0, 0, width, height);
     
     // allocate buffers
-    m_particles_fbo.allocate(width, height);
-    m_lines_fbo.allocate(width, height);
-    m_output_fbo.allocate(width, height);
+    m_particles_fbo.allocate(width, height, GL_RGBA, 4);
+    m_lines_fbo.allocate(width, height, GL_RGBA, 4);
+    m_output_fbo.allocate(width, height, GL_RGBA, 4);
     
     // clear buffers
     m_particles_fbo.begin();
