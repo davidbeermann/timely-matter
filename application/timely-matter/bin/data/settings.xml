@@ -49,4 +49,8 @@
 		<infill>1</infill>
 		<wireframe>0</wireframe>
 	</Metaballs>
+<Gaussian_Blur>
+		<enabled>0</enabled>
+		<strength>1</strength>
+	</Gaussian_Blur>
 </Timely_Matter>

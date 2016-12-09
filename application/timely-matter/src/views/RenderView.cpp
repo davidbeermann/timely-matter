@@ -48,12 +48,23 @@ void RenderView::m_onSetup() {
     // allocate FBOs
     m_vector_field_fbo.allocate(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight(), GL_RGBA, 4);
     
+    // setup shader
+    m_blur_fbo.allocate(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight());
+    m_blur_fbo.clear();
+    m_blur_shader.load("gaussian_blur.vert", "gaussian_blur.frag");
+    
     // compile gui params
     GuiUpdateArgs args;
     args.params.push_back(m_input.getParams());
     args.params.push_back(m_vector_field.getParams());
     args.params.push_back(m_particle_system.getParams());
     args.params.push_back(m_metaballs.getParams());
+    
+    ofParameterGroup blur_params;
+    blur_params.setName("Gaussian Blur");
+    blur_params.add(m_param_enabled.set("enabled", false));
+    blur_params.add(m_param_strength.set("strength", 1, 0, 7));
+    args.params.push_back(blur_params);
     
     ofNotifyEvent(m_view_event.update_gui, args, this);
 }
@@ -100,6 +111,42 @@ void RenderView::m_onDraw() {
     
     // draw particle system
     m_particle_system.getOutputFbo().draw(m_output_rect);
-        m_metaballs.getFbo().draw(m_output_rect);
+    
+    if (m_param_enabled) {
+        // draw blurred metaballs
+        // ----------------------
+        m_blur_fbo.clear();
+        
+        // first pass of shader: horizontal blur
+        m_blur_fbo.getPing().begin();
+        m_blur_shader.begin();
+        m_blur_shader.setUniform1i("uVertical", false); // HORIZONTAL
+        m_blur_shader.setUniform1i("uStrength", m_param_strength);
+        m_metaballs.getFbo().draw(0, 0);
+        m_blur_shader.end();
+        m_blur_fbo.getPing().end();
+        
+        // second pass of shader: vertical blur
+        m_blur_fbo.getPong().begin();
+        m_blur_shader.begin();
+        m_blur_shader.setUniform1i("uVertical", true); // VERTICAL
+        m_blur_shader.setUniform1i("uStrength", m_param_strength);
+        m_blur_fbo.getPing().draw(0, 0);
+        m_blur_shader.end();
+        m_blur_fbo.getPong().end();
+        
+        // swap buffers: pong -> ping
+        //TODO swapping causes visual jitter and somehow neglects metaballs updates.
+//        m_blur_fbo.swap();
+        
+        // draw result of shader back to input fbo
+        m_metaballs.getFbo().begin();
+        ofClear(0.f);
+//        m_blur_fbo.getPing().draw(0, 0);
+        m_blur_fbo.getPong().draw(0,0);
+        m_metaballs.getFbo().end();
+    }
+    
+    m_metaballs.getFbo().draw(m_output_rect);
 }
 
