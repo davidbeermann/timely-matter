@@ -21,6 +21,8 @@ namespace timelymatter {
         void applyForce(const ofVec3f& force);
         void update(const ofRectangle& bounds);
         void draw(const ofVboMesh& mesh);
+        void drawArea(const ofVboMesh& mesh);
+        void drawCore(const ofVboMesh& mesh);
         
         const ofVec3f & getPosition() const {
             return m_position;

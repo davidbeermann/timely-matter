@@ -27,10 +27,10 @@
   <!-- *_*_* PARTICLE SYSTEM *_*_* -->
   <particle_system>
     <!-- The total amount of particles in the system. -->
-    <count>100</count>
+    <count>150</count>
     <!-- Range for the random generation of the radius for each particle. -->
     <min_radius>20.0</min_radius>
-    <max_radius>40.0</max_radius>
+    <max_radius>30.0</max_radius>
   </particle_system>
 
   <!-- *_*_* MARCHING SQUARES *_*_* -->

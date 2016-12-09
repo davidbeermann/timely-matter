@@ -47,7 +47,6 @@ void RenderView::m_onSetup() {
     
     // allocate FBOs
     m_vector_field_fbo.allocate(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight(), GL_RGBA, 4);
-    m_particle_system_fbo.allocate(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight(), GL_RGBA, 4);
     m_metaballs_fbo.allocate(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight(), GL_RGBA, 4);
     
     // compile gui params
@@ -72,6 +71,7 @@ void RenderView::m_onUpdate() {
     m_particle_system.applyVectorField(m_vector_field);
 
     // ...and update all particles within the system.
+    // this alaso updates the output FBO.
     m_particle_system.update();
     
     // pass particles to metaballs to calculate contour lines
@@ -82,22 +82,6 @@ void RenderView::m_onUpdate() {
     ofClear(0);
     m_vector_field.draw();
     m_vector_field_fbo.end();
-    
-    m_particle_system_fbo.begin();
-    ofClear(0);
-    //TODO fix 'accidental' transform...
-    // without the following transform the particle system is drawn
-    // flipped on the y-axis, although it is drawn correct when not
-    // drawn into a fbo.
-    ofPushMatrix();
-    ofTranslate(0, m_projector_model.getBufferHeight());
-    ofScale(1.0, -1.0);
-//    ofPushStyle();
-//    ofSetColor(255, 0, 0);
-    m_particle_system.draw(m_vector_field);
-//    ofPopStyle();
-    ofPopMatrix();
-    m_particle_system_fbo.end();
 
     m_metaballs_fbo.begin();
     ofClear(0);
@@ -118,7 +102,9 @@ void RenderView::m_onDraw() {
     
     // draw output layers
     m_vector_field_fbo.draw(m_output_rect);
-    m_particle_system_fbo.draw(m_output_rect);
     m_metaballs_fbo.draw(m_output_rect);
+    
+    // draw particle system
+    m_particle_system.getOutputFbo().draw(m_output_rect);
 }
 

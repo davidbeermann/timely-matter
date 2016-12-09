@@ -1,4 +1,7 @@
 #include "Particle.hpp"
+#include "AppConfig.hpp"
+
+#define CORE_SIZE 3
 
 using namespace timelymatter;
 
@@ -48,17 +51,39 @@ void Particle::update(const ofRectangle& bounds) {
 
 
 void Particle::draw(const ofVboMesh& mesh) {
-    // regular style drawing
-//    ofPushStyle();
-//    ofSetColor(255);
-//    ofDrawCircle(m_position.x, m_position.y, 2.5f);
-//    ofPopStyle();
     
-    // vbo mesh drawing
+    drawArea(mesh);
+    drawCore(mesh);
+    
+}
+
+
+void Particle::drawArea(const ofVboMesh& mesh) {
     ofPushMatrix();
+    ofPushStyle();
     ofTranslate(m_position.x, m_position.y);
-    float scale = m_radius * 2 / 10.f;
+    
+    float scale = m_radius / AppConfig::get().getParticleSystemMaxRadius();
     ofScale(scale, scale);
+    ofSetColor(255, 0, 0, 128);
     mesh.draw();
+    
+    ofPopStyle();
     ofPopMatrix();
 }
+
+
+void Particle::drawCore(const ofVboMesh& mesh) {
+    ofPushMatrix();
+    ofPushStyle();
+    ofTranslate(m_position.x, m_position.y);
+    
+    float scale = (float) CORE_SIZE / AppConfig::get().getParticleSystemMaxRadius();
+    ofScale(scale, scale);
+    ofSetColor(255, 255, 255, 255);
+    mesh.draw();
+    
+    ofPopStyle();
+    ofPopMatrix();
+}
+

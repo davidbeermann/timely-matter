@@ -19,7 +19,6 @@ namespace timelymatter
         Metaballs m_metaballs;
         ofRectangle m_output_rect;
         ofFbo m_vector_field_fbo;
-        ofFbo m_particle_system_fbo;
         ofFbo m_metaballs_fbo;
     protected:
         void m_onWindowResized(const int width, const int height);

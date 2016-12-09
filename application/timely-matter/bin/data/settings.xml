@@ -32,10 +32,13 @@
 		<max_velocity>5</max_velocity>
 		<velocity_decay>0.99</velocity_decay>
 		<show_mark_ref>0</show_mark_ref>
-		<show_particles>1</show_particles>
+		<show_particles>0</show_particles>
 	<move_particles>1</move_particles>
 		<draw_lines>0</draw_lines>
 		<draw_fading>0</draw_fading>
+	<show_particle_areas>1</show_particle_areas>
+		<show_particle_cores>1</show_particle_cores>
+		<draw_trail>0</draw_trail>
 	</Particle_System>
 <Timely_Matter/>
 <Metaballs>
