@@ -4,12 +4,13 @@
     <max>255</max>
   </Infrared_Normalization>
   <Depth_Clipping>
-    <near>1544</near>
-    <far>1620</far>
+    <near>2189</near>
+    <far>2240</far>
   </Depth_Clipping>
   <Calibrate_Depth_View>
-    <show_depth_output>1</show_depth_output>
-  </Calibrate_Depth_View>
+    <show_depth_output>0</show_depth_output>
+  <show_selection_output>0</show_selection_output>
+	</Calibrate_Depth_View>
   <Kinect_Input>
     <show_output>1</show_output>
   </Kinect_Input>
