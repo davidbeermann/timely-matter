@@ -30,19 +30,20 @@ void ParticleSystem::setup(const unsigned int & width, const unsigned int & heig
     
     // setup GUI parameters
     m_params.setName("Particle System");
-    m_params.add(m_move_particles.set("move particles", true));
-    m_params.add(m_show_particles.set("show particles", false));
-    m_params.add(m_show_particle_areas.set("show particle areas", true));
-    m_params.add(m_show_particle_cores.set("show particle cores", true));
-    m_params.add(m_max_velocity.set("max velocity", 5.f, 1.f, 10.f));
-    m_params.add(m_velocity_decay.set("velocity decay", 0.99f, 0.9f, 0.999f));
-    m_params.add(m_show_mark_reference.set("show mark ref", false));
-    m_params.add(m_draw_trail.set("draw trail", false));
+    m_params.add(m_param_move_particles.set("move particles", true));
+    m_params.add(m_param_show_particles.set("show particles", false));
+    m_params.add(m_param_show_particle_areas.set("show particle areas", true));
+    m_params.add(m_param_show_particle_cores.set("show particle cores", true));
+    m_params.add(m_param_max_velocity.set("max velocity", 5.f, 1.f, 10.f));
+    m_params.add(m_param_velocity_decay.set("velocity decay", 0.99f, 0.9f, 0.999f));
+    m_params.add(m_param_gravity.set("gravity", 0.01f, 0.001f, 0.1f));
+    m_params.add(m_param_show_mark_ref.set("show mark ref", false));
+    m_params.add(m_param_draw_trail.set("draw trail", false));
     
     // add particles to system.
     // this has to happen after the GUI setup, due to the max velocity parameter.
     for (unsigned int i = 0; i < num_particles; ++i) {
-        Particle p = Particle(m_max_velocity, m_velocity_decay);
+        Particle p = Particle(m_param_max_velocity, m_param_velocity_decay);
         p.setup(ofVec3f(ofRandom(width), ofRandom(height), 0.f), ofRandom(min_radius, max_radius));
         m_particles.push_back(p);
     }
@@ -60,10 +61,16 @@ void ParticleSystem::setup(const unsigned int & width, const unsigned int & heig
 
 
 void ParticleSystem::applyVectorField(VectorField& vectorField) {
-    if (m_move_particles) {
+    if (m_param_move_particles) {
+        // update gravity based on gui
+        m_gravity.set(0.f, m_param_gravity, 0.f);
+        
         for (PIt p = m_particles.begin(); p != m_particles.end(); ++p) {
-            ofVec3f force = vectorField.getForceForPosition(p->getPosition());
-            p->applyForce(force);
+            // apply force from vector field
+            ofVec3f field = vectorField.getForceForPosition(p->getPosition());
+            p->applyForce(field);
+            // apply gravity
+            p->applyForce(m_gravity);
         }
     }
 }
@@ -76,20 +83,20 @@ void ParticleSystem::update() {
     clearBuffer(m_cores_fbo);
     
     // evaluate updates
-    if (m_move_particles || m_show_particles) {
+    if (m_param_move_particles || m_param_show_particles) {
         for (PIt p = m_particles.begin(); p != m_particles.end(); ++p) {
             
-            if (m_move_particles) {
+            if (m_param_move_particles) {
                 p->update(m_bounds);
             }
             
-            if (m_show_particles) {
-                if (m_show_particle_areas) {
+            if (m_param_show_particles) {
+                if (m_param_show_particle_areas) {
                     m_areas_fbo.begin();
                     p->drawArea(m_particle_mesh);
                     m_areas_fbo.end();
                 }
-                if (m_show_particle_cores) {
+                if (m_param_show_particle_cores) {
                     m_cores_fbo.begin();
                     p->drawCore(m_particle_mesh);
                     m_cores_fbo.end();
@@ -103,7 +110,7 @@ void ParticleSystem::update() {
     m_output_fbo.begin();
     
     // draw trail or clear fbo
-    if (m_draw_trail) {
+    if (m_param_draw_trail) {
         ofPushStyle();
         ofSetColor(0, 0, 0, 9);
         ofDrawRectangle(0, 0, m_output_fbo.getWidth(), m_output_fbo.getHeight());

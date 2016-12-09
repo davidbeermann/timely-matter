@@ -41,6 +41,7 @@
 	<show_particle_areas>1</show_particle_areas>
 		<show_particle_cores>1</show_particle_cores>
 		<draw_trail>0</draw_trail>
+	<gravity>0.075351</gravity>
 	</Particle_System>
 <Timely_Matter/>
 <Metaballs>
