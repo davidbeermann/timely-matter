@@ -20,7 +20,8 @@
     <scale>0.0055</scale>
     <speed>0.5</speed>
     <draw_FBO>0</draw_FBO>
-  </Noise_Input>
+  <enable_noise>1</enable_noise>
+	</Noise_Input>
 	<Vector_Field>
     <edge_force>1.5</edge_force>
 		<field_force>3.18367</field_force>

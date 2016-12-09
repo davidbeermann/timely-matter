@@ -14,6 +14,7 @@ namespace timelymatter {
         ofFbo m_fbo;
         ofImage m_image;
         ofParameterGroup m_params;
+        ofParameter<bool> m_enabled;
         ofParameter<float> m_offset_x;
         ofParameter<float> m_offset_y;
         ofParameter<float> m_scale;
