@@ -10,7 +10,9 @@ namespace timelymatter {
     class Metaballs {
 
         CellGrid m_cell_grid;
-        ofFloatColor m_hsb_color;
+        ofFloatColor m_mesh_color;
+        ofFloatColor m_clear_color;
+        ofFbo m_comp_fbo;
         
         ofParameterGroup m_params;
         ofParameter<float> m_fitting;
@@ -23,8 +25,8 @@ namespace timelymatter {
     public:
         void setup(const unsigned int & width, const unsigned int & height, const unsigned int & columns, const unsigned int & rows);
         void update(vector<Particle> & particles);
-        void draw();
         
+        ofFbo & getFbo() { return m_comp_fbo; }
         ofParameterGroup & getParams() { return m_params; }
 
     };

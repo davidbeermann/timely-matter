@@ -47,7 +47,6 @@ void RenderView::m_onSetup() {
     
     // allocate FBOs
     m_vector_field_fbo.allocate(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight(), GL_RGBA, 4);
-    m_metaballs_fbo.allocate(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight(), GL_RGBA, 4);
     
     // compile gui params
     GuiUpdateArgs args;
@@ -71,10 +70,11 @@ void RenderView::m_onUpdate() {
     m_particle_system.applyVectorField(m_vector_field);
 
     // ...and update all particles within the system.
-    // this alaso updates the output FBO.
+    // This also updates the output FBO.
     m_particle_system.update();
     
-    // pass particles to metaballs to calculate contour lines
+    // Pass particles to metaballs to calculate contour lines.
+    // This also updates the output FBO.
     m_metaballs.update(m_particle_system.getParticles());
     
     // update FBOs
@@ -82,11 +82,6 @@ void RenderView::m_onUpdate() {
     ofClear(0);
     m_vector_field.draw();
     m_vector_field_fbo.end();
-
-    m_metaballs_fbo.begin();
-    ofClear(0);
-    m_metaballs.draw();
-    m_metaballs_fbo.end();
 }
 
 
@@ -102,9 +97,9 @@ void RenderView::m_onDraw() {
     
     // draw output layers
     m_vector_field_fbo.draw(m_output_rect);
-    m_metaballs_fbo.draw(m_output_rect);
     
     // draw particle system
     m_particle_system.getOutputFbo().draw(m_output_rect);
+        m_metaballs.getFbo().draw(m_output_rect);
 }
 
