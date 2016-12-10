@@ -15,6 +15,7 @@ ofApp::ofApp() :
 void ofApp::setup() {
     ofSetFrameRate(60);
     ofSetBackgroundColor(33);
+    ofEnableAlphaBlending();
     
     AppConfig& config = AppConfig::get();
     if (!config.load()) {

@@ -7,10 +7,8 @@ void Metaballs::setup(const unsigned int & width, const unsigned int & height, c
     m_cell_grid.setup(width, height, columns, rows);
     m_cell_grid.setMode(MESH);
     
-    //TODO transparency causes problems with rendering of shaders
-    m_mesh_color.set(1.f, 1.f, 1.f, 1.f);//, 0.85f);
-    m_clear_color.set(1.f, 1.f, 1.f, 0.f);
-//    m_mesh_color(ofRandom(1.f), ofRandom(0.2f, 0.8f), 0.9f, 0.75f);
+    m_mesh_color.set(255, 255, 255, 255);
+    m_clear_color.set(255, 255, 255, 0);
     
     // allocate memory for fbo.
     m_comp_fbo.allocate( width, height, GL_RGBA, 4 );
@@ -27,15 +25,6 @@ void Metaballs::setup(const unsigned int & width, const unsigned int & height, c
 
 void Metaballs::update(vector<Particle> & particles){
     m_cell_grid.update(particles, m_interpolate, m_infill, m_fitting);
-    
-//    float h = m_mesh_color.getHue() + ofRandom(-0.01f, 0.01f);
-//    if (h < 0.f) h = 1 + h;
-//    if (h > 1.f) h = h - 1;
-//    m_mesh_color.setHue(h);
-//    float b = m_mesh_color.getBrightness() + ofRandom(-0.01f, 0.01f);
-//    if (b < 0.2f) b = 0.2f;
-//    if (b > 0.8f) b = 0.8f;
-//    m_mesh_color.setBrightness(b);
     
     // update output fbo
     m_comp_fbo.begin();

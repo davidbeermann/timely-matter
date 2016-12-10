@@ -10,8 +10,8 @@ namespace timelymatter {
     class Metaballs {
 
         CellGrid m_cell_grid;
-        ofFloatColor m_mesh_color;
-        ofFloatColor m_clear_color;
+        ofColor m_mesh_color;
+        ofColor m_clear_color;
         ofFbo m_comp_fbo;
         
         ofParameterGroup m_params;

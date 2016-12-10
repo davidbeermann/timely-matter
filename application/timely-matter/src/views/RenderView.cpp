@@ -58,7 +58,12 @@ void RenderView::m_onSetup() {
     args.params.push_back(m_input.getParams());
     args.params.push_back(m_vector_field.getParams());
     args.params.push_back(m_particle_system.getParams());
-    args.params.push_back(m_metaballs.getParams());
+    
+    // add params for metaballs
+//    args.params.push_back(m_metaballs.getParams());
+    ofParameterGroup & metaballs_params = m_metaballs.getParams();
+    metaballs_params.add(m_metaballs_color.set("color", ofColor(217, 217, 217, 255), ofColor(0, 0, 0, 0), ofColor(255, 255, 255, 255)));
+    args.params.push_back(metaballs_params);
     
     ofParameterGroup blur_params;
     blur_params.setName("Gaussian Blur");
@@ -147,6 +152,10 @@ void RenderView::m_onDraw() {
         m_metaballs.getFbo().end();
     }
     
+    // draw metaball fbo with correct color
+    ofPushStyle();
+    ofSetColor(m_metaballs_color);
     m_metaballs.getFbo().draw(m_output_rect);
+    ofPopStyle();
 }
 

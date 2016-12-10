@@ -21,10 +21,13 @@ namespace timelymatter
         ofRectangle m_output_rect;
         ofFbo m_vector_field_fbo;
         
+        ofParameter<ofColor> m_metaballs_color;
+        
         PingPongFbo m_blur_fbo;
         ofShader m_blur_shader;
         ofParameter<bool> m_param_enabled;
         ofParameter<int> m_param_strength;
+        
     protected:
         void m_onWindowResized(const int width, const int height);
         void m_onSetup();
