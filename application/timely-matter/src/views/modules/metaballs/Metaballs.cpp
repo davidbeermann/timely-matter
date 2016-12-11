@@ -11,7 +11,8 @@ void Metaballs::setup(const unsigned int & width, const unsigned int & height, c
     m_clear_color.set(255, 255, 255, 0);
     
     // allocate memory for fbo.
-    m_comp_fbo.allocate( width, height, GL_RGBA, 4 );
+    m_output_fbo.allocate( width, height, GL_RGBA, 4 );
+    m_wireframe_fbo.allocate( width, height, GL_RGBA, 4 );
     
     m_params.setName("Metaballs");
     m_params.add(m_cell_grid.getThresholdParam());
@@ -28,7 +29,7 @@ void Metaballs::update(vector<Particle> & particles){
     m_cell_grid.update(particles);
     
     // update output fbo
-    m_comp_fbo.begin();
+    m_output_fbo.begin();
     ofClear(m_clear_color);
     
     if (m_show_cells) {
@@ -43,15 +44,22 @@ void Metaballs::update(vector<Particle> & particles){
         } else {
             ofPushStyle();
             ofSetColor(m_mesh_color);
-            if (m_wireframe) {
-                m_cell_grid.getMesh().drawWireframe();
-            } else {
-                m_cell_grid.getMesh().draw();
-            }
+            m_cell_grid.getMesh().draw();
             ofPopStyle();
         }
     }
     
-    m_comp_fbo.end();
+    m_output_fbo.end();
+    
+    // update wireframe fbo
+    m_wireframe_fbo.begin();
+    ofClear(m_clear_color);
+    if (m_wireframe) {
+        ofPushStyle();
+        ofSetColor(m_mesh_color);
+        m_cell_grid.getMesh().drawWireframe();
+        ofPopStyle();
+    }
+    m_wireframe_fbo.end();
 };
 

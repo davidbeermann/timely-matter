@@ -123,7 +123,7 @@ void RenderView::m_onDraw() {
         m_blur_shader.begin();
         m_blur_shader.setUniform1i("uVertical", false); // HORIZONTAL
         m_blur_shader.setUniform1i("uStrength", m_param_strength);
-        m_metaballs.getFbo().draw(0, 0);
+        m_metaballs.getOutputFbo().draw(0, 0);
         m_blur_shader.end();
         m_blur_fbo.getPing().end();
         
@@ -141,17 +141,19 @@ void RenderView::m_onDraw() {
 //        m_blur_fbo.swap();
         
         // draw result of shader back to input fbo
-        m_metaballs.getFbo().begin();
+        m_metaballs.getOutputFbo().begin();
         ofClear(AppConfig::get().getBackgroundClearColor());
 //        m_blur_fbo.getPing().draw(0, 0);
         m_blur_fbo.getPong().draw(0,0);
-        m_metaballs.getFbo().end();
+        m_metaballs.getOutputFbo().end();
     }
     
     // draw metaball fbo with correct color
     ofPushStyle();
+    ofSetColor(ofColor(255, 0, 0, 128));
+    m_metaballs.getWireframeFbo().draw(m_output_rect);
     ofSetColor(m_metaballs_color);
-    m_metaballs.getFbo().draw(m_output_rect);
+    m_metaballs.getOutputFbo().draw(m_output_rect);
     ofPopStyle();
 }
 

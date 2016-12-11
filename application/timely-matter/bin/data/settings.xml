@@ -52,7 +52,7 @@
     <wireframe>0</wireframe>
 	<distance_threshold>0.0693878</distance_threshold>
     <dampening_factor>0.910204</dampening_factor>
-    <color>216, 216, 216, 59</color>
+    <color>216, 216, 216, 255</color>
 </Metaballs>
 <Gaussian_Blur>
     <enabled>0</enabled>
