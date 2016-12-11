@@ -13,26 +13,34 @@ using namespace cv;
 
 
 void CalibrateProjectionView::m_onSelectionUpdated() {
+    vector<ofVec2f> points = m_selection.getPoints();
     m_selection_path.clear();
     m_selection_path.setFilled(true);
     m_selection_path.setFillColor(m_selection_color);
-    m_selection_path.moveTo(m_selection.getPoints()[0]);
-    m_selection_path.lineTo(m_selection.getPoints()[1]);
-    m_selection_path.lineTo(m_selection.getPoints()[2]);
-    m_selection_path.lineTo(m_selection.getPoints()[3]);
+    m_selection_path.moveTo(points[0]);
+    m_selection_path.lineTo(points[1]);
+    m_selection_path.lineTo(points[2]);
+    m_selection_path.lineTo(points[3]);
     m_selection_path.close();
 }
 
 
 void CalibrateProjectionView::m_onWindowResized(const int width, const int height) {
-    m_selection_position.set(PADDING, PADDING + BITMAP_TEXT_LINE_HEIGHT + BITMAP_TEXT_OFFSET_Y);
+    // calculate position of view title
+    m_title_rect.setPosition((ofGetWidth() - m_title_rect.getWidth()) * 0.5f, PADDING + BITMAP_TEXT_LINE_HEIGHT);
+    
+    // calculate position of confirmation message
+    m_confirm_rect.setPosition((ofGetWidth() - m_confirm_rect.getWidth()) * 0.5f, ofGetHeight() - PADDING - m_confirm_rect.getHeight());
+    
+    // calculate position of selection with infrared image
+    m_selection_position.set(PADDING, (ofGetHeight() - m_infrared_buffer.getHeight()) * 0.5f);
     m_selection.updatePosition(m_selection_position);
     
-    m_depth_position.set(width - PADDING - m_depth_buffer.getWidth(), PADDING + BITMAP_TEXT_LINE_HEIGHT + BITMAP_TEXT_OFFSET_Y);
+    // calculate position of scaled depth preview
+    m_depth_rect.setPosition(width - PADDING - m_depth_rect.getWidth(), m_selection_position.y);
     
-    float crop_x = (width - m_crop_buffer.getWidth()) * 0.5f;
-    float crop_y = height - PADDING - m_crop_buffer.getHeight() - BITMAP_TEXT_LINE_HEIGHT - BITMAP_TEXT_OFFSET_Y;
-    m_crop_position.set(crop_x, crop_y);
+    // calculate position for cropped depth output
+    m_crop_rect.setPosition(m_depth_rect.getX(), m_depth_rect.getY() + m_depth_rect.getHeight() + PADDING);
     
     // apply loaded settings at first window resize,
     // due to internal absolute positioning of ImageSelection
@@ -58,7 +66,16 @@ void CalibrateProjectionView::m_onSetup() {
     m_infrared_buffer.allocate(m_kinect_sptr->width, m_kinect_sptr->height, OF_IMAGE_COLOR);
     m_grayscale.allocate(m_kinect_sptr->width, m_kinect_sptr->height);
     m_depth_buffer.allocate(m_kinect_sptr->width, m_kinect_sptr->height, OF_IMAGE_GRAYSCALE);
-    m_crop_buffer.allocate(m_kinect_model.getDepthBufferWidth(), m_kinect_model.getDepthBufferHeight(), OF_IMAGE_GRAYSCALE);
+    m_crop_buffer.allocate(m_kinect_model.getCropBufferWidth(), m_kinect_model.getCropBufferHeight(), OF_IMAGE_GRAYSCALE);
+    
+    // set rectangle sizes to draw scaled buffers
+    m_depth_rect.setSize(m_kinect_sptr->width * 0.5, m_kinect_sptr->height * 0.5);
+    int h = (m_depth_rect.getWidth() / m_crop_buffer.getWidth()) * m_crop_buffer.getHeight();
+    m_crop_rect.setSize(m_depth_rect.getWidth(), h);
+    
+    // set text rectangles
+    m_title_rect = getBitmapStringBoundingBox(m_view_title);
+    m_confirm_rect = getBitmapStringBoundingBox(m_confirm_msg);
     
     // define GUI parameters
     GuiUpdateArgs args;
@@ -116,8 +133,13 @@ void CalibrateProjectionView::m_onUpdate() {
 
 void CalibrateProjectionView::m_onDraw() {
     m_selection.draw();
-    m_depth_buffer.draw(m_depth_position);
-    m_crop_buffer.draw(m_crop_position);
+    m_depth_buffer.draw(m_depth_rect);
+    m_crop_buffer.draw(m_crop_rect);
+    
+    ofPushMatrix();
+    ofTranslate(m_title_rect.getTopLeft());
+    ofDrawBitmapString(m_view_title, 0, 0);
+    ofPopMatrix();
     
     ofPushMatrix();
     ofTranslate(m_selection_position);
@@ -125,16 +147,20 @@ void CalibrateProjectionView::m_onDraw() {
     ofPopMatrix();
     
     ofPushMatrix();
-    ofTranslate(m_depth_position);
+    ofTranslate(m_depth_rect.getTopLeft());
     ofDrawBitmapString(m_buffer_title, 0, -BITMAP_TEXT_OFFSET_Y);
+    ofScale(0.5f, 0.5f);
     m_selection_path.draw();
     ofPopMatrix();
     
     ofPushMatrix();
-    ofTranslate(m_crop_position);
+    ofTranslate(m_crop_rect.getTopLeft());
     ofDrawBitmapString(m_extract_title, 0, -BITMAP_TEXT_OFFSET_Y);
-    ofTranslate(0, m_crop_buffer.getHeight());
-    ofDrawBitmapString(m_confirm_msg, 0, BITMAP_TEXT_LINE_HEIGHT + BITMAP_TEXT_OFFSET_Y);
+    ofPopMatrix();
+    
+    ofPushMatrix();
+    ofTranslate(m_confirm_rect.getTopLeft());
+    ofDrawBitmapString(m_confirm_msg, 0, 0);
     ofPopMatrix();
 }
 

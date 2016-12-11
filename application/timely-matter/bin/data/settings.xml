@@ -4,12 +4,13 @@
     <max>255</max>
   </Infrared_Normalization>
   <Depth_Clipping>
-    <near>1544</near>
-    <far>1620</far>
+    <near>2189</near>
+    <far>2240</far>
   </Depth_Clipping>
   <Calibrate_Depth_View>
-    <show_depth_output>1</show_depth_output>
-  </Calibrate_Depth_View>
+    <show_depth_output>0</show_depth_output>
+  <show_selection_output>0</show_selection_output>
+	</Calibrate_Depth_View>
   <Kinect_Input>
     <show_output>1</show_output>
   </Kinect_Input>
@@ -19,7 +20,8 @@
     <scale>0.0055</scale>
     <speed>0.5</speed>
     <draw_FBO>0</draw_FBO>
-  </Noise_Input>
+  <enable_noise>1</enable_noise>
+	</Noise_Input>
 	<Vector_Field>
     <edge_force>1.5</edge_force>
 		<field_force>3.18367</field_force>
@@ -32,10 +34,14 @@
 		<max_velocity>5</max_velocity>
 		<velocity_decay>0.99</velocity_decay>
 		<show_mark_ref>0</show_mark_ref>
-		<show_particles>1</show_particles>
+		<show_particles>0</show_particles>
 	<move_particles>1</move_particles>
 		<draw_lines>0</draw_lines>
 		<draw_fading>0</draw_fading>
+	<show_particle_areas>1</show_particle_areas>
+		<show_particle_cores>1</show_particle_cores>
+		<draw_trail>0</draw_trail>
+	<gravity>0.075351</gravity>
 	</Particle_System>
 <Timely_Matter/>
 <Metaballs>
@@ -46,4 +52,8 @@
 		<infill>1</infill>
 		<wireframe>0</wireframe>
 	</Metaballs>
+<Gaussian_Blur>
+		<enabled>0</enabled>
+		<strength>1</strength>
+	</Gaussian_Blur>
 </Timely_Matter>

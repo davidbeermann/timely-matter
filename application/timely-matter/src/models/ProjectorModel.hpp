@@ -12,7 +12,8 @@ namespace timelymatter {
         // private constructor
         ProjectorModel();
         
-        ofRectangle m_size;
+        ofRectangle m_output;
+        ofRectangle m_buffer;
         
     public:
         // static method to retrieve singleton instance
@@ -23,10 +24,13 @@ namespace timelymatter {
         void operator=(ProjectorModel const&) = delete;
         
         // public interface methods
-        const unsigned int getWidth() const;
-        const unsigned int getHeight() const;
-        const ofRectangle getSize() const;
-        void setSize(const unsigned int& width, const unsigned int& height);
+        const unsigned int getOutputWidth() const;
+        const unsigned int getOutputHeight() const;
+        const ofRectangle & getOutputSize() const;
+        const unsigned int getBufferWidth() const;
+        const unsigned int getBufferHeight() const;
+        const ofRectangle & getBufferSize() const;
+        void setSize(const unsigned int& output_width, const unsigned int& output_height, const unsigned int& buffer_width, const unsigned int& buffer_height);
     };
     
 }

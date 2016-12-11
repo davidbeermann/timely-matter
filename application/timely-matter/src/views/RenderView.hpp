@@ -7,6 +7,7 @@
 #include "VectorField.hpp"
 #include "ParticleSystem.hpp"
 #include "Metaballs.hpp"
+#include "PingPongFbo.hpp"
 
 
 namespace timelymatter
@@ -17,7 +18,16 @@ namespace timelymatter
         VectorField m_vector_field;
         ParticleSystem m_particle_system;
         Metaballs m_metaballs;
-        ofVec2f m_center_position;
+        ofRectangle m_output_rect;
+        ofFbo m_vector_field_fbo;
+        
+        ofParameter<ofColor> m_metaballs_color;
+        
+        PingPongFbo m_blur_fbo;
+        ofShader m_blur_shader;
+        ofParameter<bool> m_param_enabled;
+        ofParameter<int> m_param_strength;
+        
     protected:
         void m_onWindowResized(const int width, const int height);
         void m_onSetup();

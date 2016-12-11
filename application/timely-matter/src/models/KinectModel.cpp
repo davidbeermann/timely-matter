@@ -18,8 +18,8 @@ KinectModel::KinectModel() {
     m_depth_clip_far = 1900;
     m_depth_clip_far_min = 1000;
     m_depth_clip_far_max = 3000;
-    m_depth_buffer_width = m_kinect_sptr->width * 0.75;
-    m_depth_buffer_height = m_kinect_sptr->height * 0.75;
+    m_crop_buffer_width = 0;
+    m_crop_buffer_height = 0;
     
     m_selection_points.push_back(ofVec2f(0.f, 0.f));
     m_selection_points.push_back(ofVec2f(0.f, 0.f));
@@ -32,9 +32,9 @@ KinectModel::KinectModel() {
     m_cv_selection_points.push_back(Point2f(0.f, 0.f));
     
     m_cv_output_points.push_back(Point2f(0.f, 0.f));
-    m_cv_output_points.push_back(Point2f(getDepthBufferWidth(), 0.f));
-    m_cv_output_points.push_back(Point2f(getDepthBufferWidth(), getDepthBufferHeight()));
-    m_cv_output_points.push_back(Point2f(0.f, getDepthBufferHeight()));
+    m_cv_output_points.push_back(Point2f(0.f, 0.f));
+    m_cv_output_points.push_back(Point2f(0.f, 0.f));
+    m_cv_output_points.push_back(Point2f(0.f, 0.f));
 }
 
 
@@ -85,9 +85,14 @@ void KinectModel::setDepthClipFar(const unsigned int& value) {
 }
 
 
-void KinectModel::setDepthBufferSize(const unsigned int& width, const unsigned int& height) {
-    m_depth_buffer_width = width;
-    m_depth_buffer_height = height;
+void KinectModel::setCropBufferSize(const unsigned int& width, const unsigned int& height) {
+    m_crop_buffer_width = width;
+    m_crop_buffer_height = height;
+    
+    m_cv_output_points[1].x = width;
+    m_cv_output_points[2].x = width;
+    m_cv_output_points[2].y = height;
+    m_cv_output_points[3].y = height;
 }
 
 

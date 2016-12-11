@@ -20,7 +20,7 @@ void KinectInput::m_onSetup() {
     m_kinect_sptr->setDepthClipping(m_kinect_model.getDepthClipNear(), m_kinect_model.getDepthClipFar());
     
     m_depth_source_image.allocate(m_kinect_sptr->width, m_kinect_sptr->height, OF_IMAGE_GRAYSCALE);
-    m_depth_output_image.allocate(m_kinect_model.getDepthBufferWidth(), m_kinect_model.getDepthBufferHeight(), OF_IMAGE_GRAYSCALE);
+    m_depth_output_image.allocate(m_kinect_model.getCropBufferWidth(), m_kinect_model.getCropBufferHeight(), OF_IMAGE_GRAYSCALE);
     
     m_homography_matrix = findHomography(Mat(m_kinect_model.getCvSelectionPoints()), Mat(m_kinect_model.getCvOutputPoints()));
     
