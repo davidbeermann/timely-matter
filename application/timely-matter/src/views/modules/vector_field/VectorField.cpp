@@ -1,6 +1,7 @@
 #include "VectorField.hpp"
 #include "VectorFieldDirections.hpp"
 #include "ParameterUtils.hpp"
+#include "AppConfig.hpp"
 
 using namespace timelymatter;
 
@@ -52,6 +53,9 @@ void VectorField::setup(const unsigned int fieldWidth, const unsigned int fieldH
     m_marks_per_row = subdivisionX + 1;
     m_marks_per_column = subdivisionY + 1;
     
+    // allocate fbo for draign output
+    m_output_fbo.allocate(fieldWidth, fieldHeight, GL_RGBA, 4);
+    
     // setup measuring marks
     m_setupMarks();
 }
@@ -66,12 +70,12 @@ void VectorField::update(const ofPixels &pixels) {
     // reset average datum across all marks
     m_average_datum = 0;
     
-    vector<VectorFieldMark>::iterator it;
-    for (it = m_marks.begin(); it != m_marks.end(); ++it) {
+    MIt mark;
+    for (mark = m_marks.begin(); mark != m_marks.end(); ++mark) {
         // reset force and datum of mark
-        it->reset();
-        float x = it->getGridPosition().x * m_input_inc_x;
-        float y = it->getGridPosition().y * m_input_inc_y;
+        mark->reset();
+        float x = mark->getGridPosition().x * m_input_inc_x;
+        float y = mark->getGridPosition().y * m_input_inc_y;
         // little hack to get values for the last row of pixels
         if (y >= m_input_height) {
             y -= 1;
@@ -82,7 +86,7 @@ void VectorField::update(const ofPixels &pixels) {
         if (index < pixels.size()) {
             int pixelValue = (int) pixels[index];
             // update datum
-            it->setDatum(pixelValue);
+            mark->setDatum(pixelValue);
             
             m_average_datum += pixelValue;
         } else {
@@ -94,21 +98,17 @@ void VectorField::update(const ofPixels &pixels) {
     // calculate avreage
     m_average_datum /= m_marks.size();
     
-    //TODO refactor to one loop!
-    for (it = m_marks.begin(); it != m_marks.end(); ++it) {
-        it->update(m_field_force, m_edge_force, m_attract_threshold);
-    }
-}
-
-
-void VectorField::draw() {
-    if (m_show_marks || m_show_values || m_show_vectors) {
-        ofPushStyle();
-        ofSetLineWidth(0.5f);
-        ofNoFill();
+    //update marks and fbo
+    m_output_fbo.begin();
+    ofClear(AppConfig::get().getBackgroundClearColor());
+    ofPushStyle();
+    ofSetLineWidth(0.5f);
+    ofNoFill();
+    
+    for (mark = m_marks.begin(); mark != m_marks.end(); ++mark) {
+        mark->update(m_field_force, m_edge_force, m_attract_threshold);
         
-        MIt mark;
-        for (mark = m_marks.begin(); mark != m_marks.end(); ++mark) {
+        if (m_show_marks || m_show_values || m_show_vectors) {
             ofPushStyle();
             ofPushMatrix();
             ofTranslate(mark->getPosition());
@@ -131,9 +131,10 @@ void VectorField::draw() {
             ofPopMatrix();
             ofPopStyle();
         }
-        
-        ofPopStyle();
     }
+    
+    ofPopStyle();
+    m_output_fbo.end();
 }
 
 

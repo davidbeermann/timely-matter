@@ -125,13 +125,15 @@ void CalibrateDepthView::m_onDraw() {
     ofTranslate(m_output_rect.getTopLeft());
     
     ofPushStyle();
-    ofSetColor(0);
-    ofDrawRectangle(0, 0, m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight());
+    ofSetColor(AppConfig::get().getBackgroundColor());
+    ofDrawRectangle(m_projector_model.getBufferSize());
     ofPopStyle();
+    
     if (m_param_show_depth) {
         m_depth_image.draw(m_projector_model.getBufferSize());
     }
-    m_vector_field.draw();
+    
+    m_vector_field.getOutputFbo().draw(m_projector_model.getBufferSize());
     
     if (m_param_show_selection) {
         m_depth_selection_fbo.draw(m_selection_rect);

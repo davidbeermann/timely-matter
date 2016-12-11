@@ -47,9 +47,6 @@ void RenderView::m_onSetup() {
     // setup metaballs
     m_metaballs.setup(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight(), config.getMarchingSquaresColumns(), config.getMarchingSquaresRows());
     
-    // allocate FBOs
-    m_vector_field_fbo.allocate(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight(), GL_RGBA, 4);
-    
     // setup shader
     m_blur_fbo.allocate(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight());
     m_blur_fbo.clear();
@@ -94,12 +91,6 @@ void RenderView::m_onUpdate() {
     // Pass particles to metaballs to calculate contour lines.
     // This also updates the output FBO.
     m_metaballs.update(m_particle_system.getParticles());
-    
-    // update FBOs
-    m_vector_field_fbo.begin();
-    ofClear(0);
-    m_vector_field.draw();
-    m_vector_field_fbo.end();
 }
 
 
@@ -108,7 +99,7 @@ void RenderView::m_onDraw() {
     m_input.draw(m_output_rect);
     
     // draw output layers
-    m_vector_field_fbo.draw(m_output_rect);
+    m_vector_field.getOutputFbo().draw(m_output_rect);
     
     // draw particle system
     m_particle_system.getOutputFbo().draw(m_output_rect);

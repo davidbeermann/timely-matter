@@ -19,7 +19,6 @@ namespace timelymatter
         ParticleSystem m_particle_system;
         Metaballs m_metaballs;
         ofRectangle m_output_rect;
-        ofFbo m_vector_field_fbo;
         
         ofParameter<ofColor> m_metaballs_color;
         

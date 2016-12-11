@@ -23,6 +23,8 @@ namespace timelymatter
         unsigned int m_average_datum;
         vector<VectorFieldMark> m_marks;
         ofVec3f m_edge_vector;
+        ofFbo m_output_fbo;
+        
         ofParameterGroup m_params;
         ofParameter<float> m_edge_force;
         ofParameter<float> m_field_force;
@@ -36,13 +38,14 @@ namespace timelymatter
         void setup(const unsigned int fieldWidth, const unsigned int fieldHeight, const unsigned int inputWidth, const unsigned int inputHeight, const unsigned int subdivision);
         void setup(const unsigned int fieldWidth, const unsigned int fieldHeight, const unsigned int inputWidth, const unsigned int inputHeight, const unsigned int subdivisionX, const unsigned int subdivisionY);
         void update(const ofPixels &pixels);
-        void draw();
         const ofVec3f& getForceForPosition(const ofVec3f& position);
         const ofVec3f getMeterPointForPosition(const ofVec3f& position) const;
+        
         ofParameterGroup& getParams() { return m_params; };
         const unsigned int getAverageDatum() const { return m_average_datum; };
         const float getMaxEdgeForce() const { return m_edge_force; };
         const float getMaxFieldForce() const { return m_field_force; };
+        ofFbo & getOutputFbo() { return m_output_fbo; }
     };
 
 }
