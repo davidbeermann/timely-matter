@@ -34,7 +34,7 @@
 		<max_velocity>5</max_velocity>
 		<velocity_decay>0.99</velocity_decay>
 		<show_mark_ref>0</show_mark_ref>
-		<show_particles>0</show_particles>
+		<show_particles>1</show_particles>
 	<move_particles>1</move_particles>
 		<draw_lines>0</draw_lines>
 		<draw_fading>0</draw_fading>
@@ -45,15 +45,17 @@
 	</Particle_System>
 <Timely_Matter/>
 <Metaballs>
-		<contour_fitting>0.5</contour_fitting>
-		<show_cells>0</show_cells>
-		<show_mesh>1</show_mesh>
-		<interpolate>1</interpolate>
-		<infill>1</infill>
-		<wireframe>0</wireframe>
-	</Metaballs>
+    <show_cells>0</show_cells>
+    <show_mesh>1</show_mesh>
+	<interpolate>1</interpolate>
+    <infill>1</infill>
+    <wireframe>0</wireframe>
+	<distance_threshold>0.0693878</distance_threshold>
+    <dampening_factor>0.910204</dampening_factor>
+    <color>216, 216, 216, 59</color>
+</Metaballs>
 <Gaussian_Blur>
-		<enabled>0</enabled>
-		<strength>1</strength>
-	</Gaussian_Blur>
+    <enabled>0</enabled>
+    <strength>1</strength>
+</Gaussian_Blur>
 </Timely_Matter>

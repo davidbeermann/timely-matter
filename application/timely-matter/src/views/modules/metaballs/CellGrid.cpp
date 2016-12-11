@@ -234,23 +234,31 @@ void CellGrid::setup(const unsigned int & width, const unsigned int & height, co
     
     m_path.setMode(ofPath::Mode::POLYLINES);
     m_path.setColor(ofColor(255, 0, 0, 64));
+    
+    m_threshold_param.set("distance threshold", 0.f, 0.f, 1.f);
+    m_dampening_param.set("dampening factor", 0.5f, 0.f, 1.f);
+    m_interpolate_param.set("interpolate", false);
+    m_infill_param.set("infill", false);
 }
 
 
-void CellGrid::update(vector<Particle> & particles, const bool interpolate, const bool infill, const float fitting) {
+void CellGrid::update(vector<Particle> & particles) {
     // update cell units values based on distances to particles
     for (CUIt cu = m_cell_units.begin(); cu != m_cell_units.end(); ++cu) {
         cu->reset();
         
         for (PIt p = particles.begin(); p != particles.end(); ++p) {
             ofVec3f d = p->getPosition() - cu->getPosition();
+            
             // this calculation involves a square root operation:
             // length => sqrt( a*a + b*b );
 //            float diff = p->radius / d.length();
             // take the squared radius in order to avoid square root calculation!
-            float diff = (p->getRadiusSquared() / d.lengthSquared()) * fitting;
+            float diff = p->getRadiusSquared() / d.lengthSquared();
             
-            cu->addValue(diff);
+            if (diff >= m_threshold_param) {
+                cu->addValue(diff * m_dampening_param);
+            }
         }
     }
     
@@ -259,7 +267,7 @@ void CellGrid::update(vector<Particle> & particles, const bool interpolate, cons
         m_mesh.clear();
         
         // set correct mode for mesh
-        if (infill) {
+        if (m_infill_param) {
             m_mesh.setMode(OF_PRIMITIVE_TRIANGLES);
         } else {
             m_mesh.setMode(OF_PRIMITIVE_LINES);
@@ -274,7 +282,7 @@ void CellGrid::update(vector<Particle> & particles, const bool interpolate, cons
         
     for (CIt c = m_cells.begin(); c != m_cells.end(); ++c) {
         // update cell after each cell unit was updated
-        c->update(interpolate);
+        c->update(m_interpolate_param);
         
         if (inPathMode()) {
             // get marching square state of cell
@@ -288,7 +296,7 @@ void CellGrid::update(vector<Particle> & particles, const bool interpolate, cons
         }
         
         if (inMeshMode()) {
-            if (infill) {
+            if (m_infill_param) {
                 c->addNaiveInfillVertices();
             }
             
@@ -301,8 +309,8 @@ void CellGrid::update(vector<Particle> & particles, const bool interpolate, cons
         // clear all previous paths
         m_path.clear();
         
-        m_path.setFilled(infill);
-        if (!infill) {
+        m_path.setFilled(m_infill_param);
+        if (!m_infill_param) {
             m_path.setStrokeWidth(1);
         }
         

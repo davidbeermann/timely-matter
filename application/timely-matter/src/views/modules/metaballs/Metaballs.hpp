@@ -15,11 +15,8 @@ namespace timelymatter {
         ofFbo m_comp_fbo;
         
         ofParameterGroup m_params;
-        ofParameter<float> m_fitting;
         ofParameter<bool> m_show_cells;
         ofParameter<bool> m_show_mesh;
-        ofParameter<bool> m_interpolate;
-        ofParameter<bool> m_infill;
         ofParameter<bool> m_wireframe;
         
     public:

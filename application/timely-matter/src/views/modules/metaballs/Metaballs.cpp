@@ -14,17 +14,18 @@ void Metaballs::setup(const unsigned int & width, const unsigned int & height, c
     m_comp_fbo.allocate( width, height, GL_RGBA, 4 );
     
     m_params.setName("Metaballs");
-    m_params.add(m_fitting.set("contour fitting", 0.75f, 0.5f, 1.f));
+    m_params.add(m_cell_grid.getThresholdParam());
+    m_params.add(m_cell_grid.getDampeningParam());
+    m_params.add(m_cell_grid.getInterpolateParam());
+    m_params.add(m_cell_grid.getInfillParam());
     m_params.add(m_show_cells.set("show cells", false));
     m_params.add(m_show_mesh.set("show mesh", true));
-    m_params.add(m_interpolate.set("interpolate", false));
-    m_params.add(m_infill.set("infill", false));
     m_params.add(m_wireframe.set("wireframe", false));
 };
 
 
 void Metaballs::update(vector<Particle> & particles){
-    m_cell_grid.update(particles, m_interpolate, m_infill, m_fitting);
+    m_cell_grid.update(particles);
     
     // update output fbo
     m_comp_fbo.begin();
@@ -35,7 +36,7 @@ void Metaballs::update(vector<Particle> & particles){
     }
     
     if (m_show_mesh) {
-        if (m_cell_grid.inPathMode() && !m_infill) {
+        if (m_cell_grid.inPathMode() && !m_cell_grid.getInfillParam()) {
             m_cell_grid.getPath().setStrokeColor(m_mesh_color);
             m_cell_grid.getPath().setStrokeWidth(1);
             m_cell_grid.getPath().draw();
