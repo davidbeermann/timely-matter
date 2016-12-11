@@ -32,6 +32,9 @@ namespace timelymatter {
         float m_particle_system_max_radius;
         int m_marching_squares_columns;
         int m_marching_squares_rows;
+        ofColor m_background_color;
+        ofColor m_background_clear_color;
+        ofColor m_metaballs_color;
         
         void parseXml() {
             m_settings.pushTag("AppConfig");
@@ -69,7 +72,22 @@ namespace timelymatter {
             m_marching_squares_rows = m_settings.getValue("rows", 0);
             m_settings.popTag();
             
+            m_settings.pushTag("colors");
+            parseHsb(m_background_color, "background");
+            parseHsb(m_metaballs_color, "metaballs");
+            m_background_clear_color.set(m_background_color);
+            m_background_clear_color.a = 0.f;
             m_settings.popTag();
+            
+            m_settings.popTag();
+        }
+        
+        void parseHsb(ofColor & color, string attribute) {
+            double h = m_settings.getAttribute(attribute, "hue", 0.0);
+            double s = m_settings.getAttribute(attribute, "saturation", 0.0);
+            double b = m_settings.getAttribute(attribute, "brightness", 0.0);
+            double a = m_settings.getAttribute(attribute, "alpha", 1.0);
+            color.setHsb(h * 255.f, s * 255.f, b * 255.f, a * 255.f);
         }
         
         
@@ -90,6 +108,10 @@ namespace timelymatter {
             if (m_loaded) {
                 parseXml();
             }
+            return m_loaded;
+        }
+        
+        const bool & isLoaded() {
             return m_loaded;
         }
         
@@ -136,6 +158,15 @@ namespace timelymatter {
         }
         const int& getMarchingSquaresRows() {
             return m_marching_squares_rows;
+        }
+        
+        const ofColor & getBackgroundColor() {
+            return m_background_color;
+        }const ofColor & getBackgroundClearColor() {
+            return m_background_clear_color;
+        }
+        const ofColor & getMetaballsColor() {
+            return m_metaballs_color;
         }
     
     };

@@ -36,14 +36,16 @@ void RenderView::m_onWindowResized(const int width, const int height) {
 void RenderView::m_onSetup() {
     m_input.setup();
     
+    AppConfig & config = AppConfig::get();
+    
     // setup vector field
-    m_vector_field.setup(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight(), m_input.getWidth(), m_input.getHeight(), AppConfig::get().getVectorFieldSubdivisionX(), AppConfig::get().getVectorFieldSubdivisionY());
+    m_vector_field.setup(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight(), m_input.getWidth(), m_input.getHeight(), config.getVectorFieldSubdivisionX(), config.getVectorFieldSubdivisionY());
     
     // setup particle system
-    m_particle_system.setup(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight(), AppConfig::get().getParticleSystemCount(), AppConfig::get().getParticleSystemMinRadius(), AppConfig::get().getParticleSystemMaxRadius());
+    m_particle_system.setup(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight(), config.getParticleSystemCount(), config.getParticleSystemMinRadius(), config.getParticleSystemMaxRadius());
     
     // setup metaballs
-    m_metaballs.setup(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight(), AppConfig::get().getMarchingSquaresColumns(), AppConfig::get().getMarchingSquaresRows());
+    m_metaballs.setup(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight(), config.getMarchingSquaresColumns(), config.getMarchingSquaresRows());
     
     // allocate FBOs
     m_vector_field_fbo.allocate(m_projector_model.getBufferWidth(), m_projector_model.getBufferHeight(), GL_RGBA, 4);
@@ -62,7 +64,7 @@ void RenderView::m_onSetup() {
     // add params for metaballs
 //    args.params.push_back(m_metaballs.getParams());
     ofParameterGroup & metaballs_params = m_metaballs.getParams();
-    metaballs_params.add(m_metaballs_color.set("color", ofColor(217, 217, 217, 255), ofColor(0, 0, 0, 0), ofColor(255, 255, 255, 255)));
+    metaballs_params.add(m_metaballs_color.set("color", config.getMetaballsColor(), ofColor(0, 0, 0, 0), ofColor(255, 255, 255, 255)));
     args.params.push_back(metaballs_params);
     
     ofParameterGroup blur_params;
@@ -102,13 +104,7 @@ void RenderView::m_onUpdate() {
 
 
 void RenderView::m_onDraw() {
-    // draw black background
-    ofPushStyle();
-    ofSetColor(0);
-    ofDrawRectangle(m_output_rect);
-    ofPopStyle();
-    
-    // draw data input to background
+    // draw data input
     m_input.draw(m_output_rect);
     
     // draw output layers
@@ -146,7 +142,7 @@ void RenderView::m_onDraw() {
         
         // draw result of shader back to input fbo
         m_metaballs.getFbo().begin();
-        ofClear(0.f);
+        ofClear(AppConfig::get().getBackgroundClearColor());
 //        m_blur_fbo.getPing().draw(0, 0);
         m_blur_fbo.getPong().draw(0,0);
         m_metaballs.getFbo().end();

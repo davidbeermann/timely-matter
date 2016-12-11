@@ -13,14 +13,15 @@ ofApp::ofApp() :
 
 
 void ofApp::setup() {
-    ofSetFrameRate(60);
-    ofSetBackgroundColor(33);
-    ofEnableAlphaBlending();
-    
     AppConfig& config = AppConfig::get();
     if (!config.load()) {
         ofLogError() << "Configuration file could not be loaded!";
     } else {
+        
+        ofSetFrameRate(60);
+        ofSetBackgroundColor(AppConfig::get().getBackgroundColor());
+        ofEnableAlphaBlending();
+        
         ofLog() << "Configuration file sucessfully loaded.";
         ofLog() << "- - - - - - - - - - - - - - - - - - - -";
         ofLog() << "Output Projector Width: " << config.getOutputProjectorWidth();
@@ -70,13 +71,17 @@ void ofApp::setup() {
 
 
 void ofApp::update() {
-    m_view_manager.update();
-    m_gui_view.update();
+    if (AppConfig::get().isLoaded()) {
+        m_view_manager.update();
+        m_gui_view.update();
+    }
 }
 
 
 void ofApp::draw() {
-    m_view_manager.draw();
-    m_gui_view.draw();
+    if (AppConfig::get().isLoaded()) {
+        m_view_manager.draw();
+        m_gui_view.draw();
+    }
 }
 
