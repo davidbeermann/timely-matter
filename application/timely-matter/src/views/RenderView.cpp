@@ -96,7 +96,7 @@ void RenderView::m_onUpdate() {
 
 void RenderView::m_onDraw() {
     // draw data input
-    m_input.draw(m_output_rect);
+    m_input.getOutputFbo().draw(m_output_rect);
     
     // draw output layers
     m_vector_field.getOutputFbo().draw(m_output_rect);

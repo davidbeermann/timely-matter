@@ -25,7 +25,6 @@ void NoiseInput::m_onSetup() {
     m_params.add(m_offset_y.set("offset y", 2.34, 0.0, 15.0));
     m_params.add(m_scale.set("scale", 0.0055, 0.001, 0.01));
     m_params.add(m_speed.set("speed", 0.5, 0.05, 0.95));
-    m_params.add(m_draw_output.set("draw FBO", false));
 }
 
 
@@ -50,38 +49,6 @@ void NoiseInput::m_onUpdate() {
     }
     
     m_fbo.end();
-}
-
-
-void NoiseInput::m_onDraw() {
-    if(m_draw_output) {
-        m_onDraw(ofRectangle(0, 0, m_fbo.getWidth(), m_fbo.getHeight()));
-    }
-}
-
-
-void NoiseInput::m_onDraw(const ofRectangle& size) {
-    if(m_draw_output) {
-        // draw FBO to stage
-        m_fbo.draw(size.getX(), size.getY(), size.getWidth(), size.getHeight());
-    }
-}
-
-
-const ofPixels& NoiseInput::m_onGetPixels() {
-    // write FBO pixel data into image buffer
-    m_fbo.readToPixels(m_image.getPixels());
-    return m_image.getPixels();
-}
-
-
-const unsigned int NoiseInput::m_onGetWidth() {
-    return m_fbo.getWidth();
-}
-
-
-const unsigned int NoiseInput::m_onGetHeight() {
-    return m_fbo.getHeight();
 }
 
 

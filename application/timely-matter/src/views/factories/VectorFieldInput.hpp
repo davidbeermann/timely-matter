@@ -21,6 +21,7 @@ namespace timelymatter {
         virtual const unsigned int m_onGetHeight() = 0;
         virtual const AppMode m_onGetType() = 0;
         virtual const string m_onGetName() = 0;
+        virtual ofFbo & m_onGetOutputFbo() = 0;
         
     public:
         // always define virtual destructors for base classes
@@ -36,6 +37,7 @@ namespace timelymatter {
         const unsigned int getHeight() { return m_onGetHeight(); };
         const AppMode getType() { return m_onGetType(); };
         const string getName() { return m_onGetName(); };
+        ofFbo & getOutputFbo() { return m_onGetOutputFbo(); };
     };
 
 }

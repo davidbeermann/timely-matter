@@ -6,14 +6,6 @@ using namespace ofxCv;
 using namespace cv;
 
 
-KinectInput::KinectInput() {
-}
-
-
-KinectInput::~KinectInput() {
-}
-
-
 void KinectInput::m_onSetup() {
     m_kinect_sptr = m_kinect_model.getKinect();
     
@@ -24,8 +16,9 @@ void KinectInput::m_onSetup() {
     
     m_homography_matrix = findHomography(Mat(m_kinect_model.getCvSelectionPoints()), Mat(m_kinect_model.getCvOutputPoints()));
     
+    m_fbo.allocate(m_kinect_model.getCropBufferWidth(), m_kinect_model.getCropBufferHeight());
+    
     m_params.setName("Kinect Input");
-    m_params.add(m_show_output.set("show output", false));
 }
 
 
@@ -41,36 +34,12 @@ void KinectInput::m_onUpdate() {
         
         // update depth image for drawing
         m_depth_output_image.update();
+        
+        // write output image data to fbo
+        m_fbo.begin();
+        ofClear(0.f);
+        m_depth_output_image.draw(0, 0);
+        m_fbo.end();
     }
-}
-
-
-void KinectInput::m_onDraw() {
-    if(m_show_output) {
-        m_onDraw(ofRectangle(0, 0, m_depth_output_image.getWidth(), m_depth_output_image.getHeight()));
-    }
-}
-
-
-void KinectInput::m_onDraw(const ofRectangle& size) {
-    if(m_show_output) {
-        // draw image to stage
-        m_depth_output_image.draw(size);
-    }
-}
-
-
-const ofPixels& KinectInput::m_onGetPixels() {
-    return m_depth_output_image.getPixels();
-}
-
-
-const unsigned int KinectInput::m_onGetWidth() {
-    return (unsigned int) m_depth_output_image.getWidth();
-}
-
-
-const unsigned int KinectInput::m_onGetHeight() {
-    return (unsigned int) m_depth_output_image.getHeight();
 }
 
