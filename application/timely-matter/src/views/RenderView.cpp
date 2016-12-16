@@ -70,6 +70,14 @@ void RenderView::m_onSetup() {
     blur_params.add(m_param_strength.set("strength", 1, 0, 7));
     args.params.push_back(blur_params);
     
+    ofParameterGroup render_params;
+    render_params.setName("Rendering");
+    render_params.add(m_param_input_visible.set("input visible", false));
+    render_params.add(m_param_input_alpha.set("input alpha", 0.f, 0.f, 255.f));
+    args.params.push_back(render_params);
+    
+    m_input_color.setHsb(0.f, 200.f, 255.f);
+    
     ofNotifyEvent(m_view_event.update_gui, args, this);
 }
 
@@ -77,6 +85,7 @@ void RenderView::m_onSetup() {
 void RenderView::m_onUpdate() {
     // update input pixels
     m_input.update();
+    m_input_color.a = m_param_input_alpha;
     
     // ... before retrieving pixel data to update vector field.
     m_vector_field.update(m_input.getPixels());
@@ -96,7 +105,12 @@ void RenderView::m_onUpdate() {
 
 void RenderView::m_onDraw() {
     // draw data input
-    m_input.getOutputFbo().draw(m_output_rect);
+    if (m_param_input_visible) {
+        ofPushStyle();
+        ofSetColor(m_input_color);
+        m_input.getOutputFbo().draw(m_output_rect);
+        ofPopStyle();
+    }
     
     // draw output layers
     m_vector_field.getOutputFbo().draw(m_output_rect);

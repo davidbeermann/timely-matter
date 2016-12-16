@@ -8,6 +8,7 @@
 #include "ParticleSystem.hpp"
 #include "Metaballs.hpp"
 #include "PingPongFbo.hpp"
+#include "RenderControls.hpp"
 
 
 namespace timelymatter
@@ -26,6 +27,13 @@ namespace timelymatter
         ofShader m_blur_shader;
         ofParameter<bool> m_param_enabled;
         ofParameter<int> m_param_strength;
+        
+        ofParameter<bool> m_param_input_visible;
+        ofParameter<float> m_param_input_alpha;
+        
+        ofColor m_input_color;
+        
+        RenderControls m_controls = RenderControls(m_param_input_visible, m_param_input_alpha);
         
     protected:
         void m_onWindowResized(const int width, const int height);
