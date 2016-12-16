@@ -110,7 +110,11 @@ void GuiView::onGuiUpdate(GuiUpdateArgs& args) {
     // add parameters send via event
     if (args.params.size() > 0) {
         for (int i = 0; i < args.params.size(); ++i) {
-            m_panel.add(args.params[i]);
+            // check if parameter group contains parameters ...
+            if (args.params[i].size() > 0) {
+                // ... add the group to the panel.
+                m_panel.add(args.params[i]);
+            }
         }
     }
     
