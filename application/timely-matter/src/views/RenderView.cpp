@@ -16,19 +16,24 @@ void RenderView::m_onWindowResized(const int width, const int height) {
     // set default output area
     m_output_rect.setSize(m_projector_model.getOutputWidth(), m_projector_model.getOutputHeight());
     
-    // calculate scaling for smaller screens/windows
-    float scale = 1.f; // default scale
-    if (width < m_output_rect.getWidth() || height < m_output_rect.getHeight()) {
-        float scale_x = (float) width / m_output_rect.getWidth();
-        float scale_y = (float) height / m_output_rect.getHeight();
-        scale = scale_x < scale_y ? scale_x : scale_y;
-        m_output_rect.scale(scale);
+    if (m_output_rect.getWidth() == width && m_output_rect.getHeight() == height) {
+        // reset position when output size matches window size
+        m_output_rect.setPosition(0, 0);
+    } else {
+        // calculate scaling for smaller screens/windows
+        float scale = 1.f; // default scale
+        if (width < m_output_rect.getWidth() || height < m_output_rect.getHeight()) {
+            float scale_x = (float) width / m_output_rect.getWidth();
+            float scale_y = (float) height / m_output_rect.getHeight();
+            scale = scale_x < scale_y ? scale_x : scale_y;
+            m_output_rect.scale(scale);
+        }
+        
+        // calculate centered position
+        int x = (width - m_output_rect.getWidth()) * 0.5f;
+        int y = (height - m_output_rect.getHeight()) * 0.5f;
+        m_output_rect.setPosition(x, y);
     }
-    
-    // calculate centered position
-    int x = (width - m_output_rect.getWidth()) * 0.5f;
-    int y = (height - m_output_rect.getHeight()) * 0.5f;
-    m_output_rect.setPosition(x, y);
     
 }
 
