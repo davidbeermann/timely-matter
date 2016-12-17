@@ -64,10 +64,7 @@ void RenderView::m_onSetup() {
     args.params.push_back(m_particle_system.getParams());
     
     // add params for metaballs
-//    args.params.push_back(m_metaballs.getParams());
-    ofParameterGroup & metaballs_params = m_metaballs.getParams();
-    metaballs_params.add(m_metaballs_color.set("color", config.getMetaballsColor(), ofColor(0, 0, 0, 0), ofColor(255, 255, 255, 255)));
-    args.params.push_back(metaballs_params);
+    args.params.push_back(m_metaballs.getParams());
     
     ofParameterGroup blur_params;
     blur_params.setName("Gaussian Blur");
@@ -77,16 +74,22 @@ void RenderView::m_onSetup() {
     
     ofParameterGroup render_params;
     render_params.setName("Rendering");
-    render_params.add(m_param_input_visible.set("input visible", false));
-    render_params.add(m_param_input_alpha.set("input alpha", 0.f, 0.f, 255.f));
-    render_params.add(m_param_particles_update.set("particles update", true));
-    render_params.add(m_param_particle_areas_visible.set("particle areas visible", false));
-    render_params.add(m_param_particle_areas_alpha.set("particle areas alpha", 0.f, 0.f, 255.f));
-    render_params.add(m_param_particle_cores_visible.set("particle cores visible", false));
+    render_params.add(m_controls.getParamInputVisible());
+    render_params.add(m_controls.getParamInputAlpha());
+    render_params.add(m_controls.getParamParticlesUpdate());
+    render_params.add(m_controls.getParamParticleAreasVisible());
+    render_params.add(m_controls.getParamParticleAreasAlpha());
+    render_params.add(m_controls.getParamParticleCoresVisible());
+    render_params.add(m_controls.getParamMetaballsMeshVisible());
+    render_params.add(m_controls.getParamMetaballsMeshAlpha());
+    render_params.add(m_controls.getParamMetaballsWireframeVisible());
+    render_params.add(m_controls.getParamMetaballsInterpolate());
+    render_params.add(m_controls.getParamMetaballsInfill());
     args.params.push_back(render_params);
     
-    m_input_color.setHsb(0.f, 200.f, 255.f);
-    m_particle_color.setHsb(0.f, 0.f, 255.f);
+    m_input_color.setHsb(0.f, 200.f, 255.f); // desaturated red
+    m_particle_color.setHsb(0.f, 0.f, 255.f); // bright white
+    m_metaballs_color.setHsb(0.f, 0.f, 255.f); // bright white
     
     ofNotifyEvent(m_view_event.update_gui, args, this);
 }
@@ -95,29 +98,34 @@ void RenderView::m_onSetup() {
 void RenderView::m_onUpdate() {
     // update input pixels
     m_input.update();
-    m_input_color.a = m_param_input_alpha;
+    m_input_color.a = m_controls.getParamInputAlpha();
     
     // ... before retrieving pixel data to update vector field.
     m_vector_field.update(m_input.getPixels());
     
-    if (m_param_particles_update) {
+    if (m_controls.getParamParticlesUpdate()) {
         // apply forces of vector field to particl system...
         m_particle_system.applyVectorField(m_vector_field);
 
         // ...and update all particles within the system.
         // This also updates the output FBO.
         m_particle_system.update();
-    
+        
+        // set metaballs parameters
+        m_metaballs.setInterpolation(m_controls.getParamMetaballsInterpolate());
+        m_metaballs.setInfill(m_controls.getParamMetaballsInfill());
+        
         // Pass particles to metaballs to calculate contour lines.
         // This also updates the output FBO.
         m_metaballs.update(m_particle_system.getParticles());
+        m_metaballs_color.a = m_controls.getParamMetaballsMeshAlpha();
     }
 }
 
 
 void RenderView::m_onDraw() {
     // draw data input
-    if (m_param_input_visible) {
+    if (m_controls.getParamInputVisible()) {
         ofPushStyle();
         ofSetColor(m_input_color);
         m_input.getOutputFbo().draw(m_output_rect);
@@ -128,21 +136,20 @@ void RenderView::m_onDraw() {
     m_vector_field.getOutputFbo().draw(m_output_rect);
     
     // draw particle system
-    if (m_param_particle_areas_visible) {
-        m_particle_color.a = m_param_particle_areas_alpha;
+    if (m_controls.getParamParticleAreasVisible()) {
+        m_particle_color.a = m_controls.getParamParticleAreasAlpha();
         ofPushStyle();
         ofSetColor(m_particle_color);
         m_particle_system.getAreasFbo().draw(m_output_rect);
         ofPopStyle();
     }
-    if (m_param_particle_cores_visible) {
+    if (m_controls.getParamParticleCoresVisible()) {
         m_particle_color.a = 255.f;
         ofPushStyle();
         ofSetColor(m_particle_color);
         m_particle_system.getCoresFbo().draw(m_output_rect);
         ofPopStyle();
     }
-//    m_particle_system.getOutputFbo().draw(m_output_rect);
     
     if (m_param_enabled) {
         // draw blurred metaballs
@@ -154,7 +161,7 @@ void RenderView::m_onDraw() {
         m_blur_shader.begin();
         m_blur_shader.setUniform1i("uVertical", false); // HORIZONTAL
         m_blur_shader.setUniform1i("uStrength", m_param_strength);
-        m_metaballs.getOutputFbo().draw(0, 0);
+        m_metaballs.getMeshFbo().draw(0, 0);
         m_blur_shader.end();
         m_blur_fbo.getPing().end();
         
@@ -172,19 +179,22 @@ void RenderView::m_onDraw() {
 //        m_blur_fbo.swap();
         
         // draw result of shader back to input fbo
-        m_metaballs.getOutputFbo().begin();
+        m_metaballs.getMeshFbo().begin();
         ofClear(AppConfig::get().getBackgroundClearColor());
 //        m_blur_fbo.getPing().draw(0, 0);
         m_blur_fbo.getPong().draw(0,0);
-        m_metaballs.getOutputFbo().end();
+        m_metaballs.getMeshFbo().end();
     }
     
-    // draw metaball fbo with correct color
+    // draw metaball fbos with correct color
     ofPushStyle();
-    ofSetColor(ofColor(255, 0, 0, 128));
-    m_metaballs.getWireframeFbo().draw(m_output_rect);
     ofSetColor(m_metaballs_color);
-    m_metaballs.getOutputFbo().draw(m_output_rect);
+    if (m_controls.getParamMetaballsWireframeVisible()) {
+        m_metaballs.getWireframeFbo().draw(m_output_rect);
+    }
+    if (m_controls.getParamMetaballsMeshVisible()) {
+        m_metaballs.getMeshFbo().draw(m_output_rect);
+    }
     ofPopStyle();
 }
 

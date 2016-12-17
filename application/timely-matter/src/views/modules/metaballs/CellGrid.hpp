@@ -35,8 +35,9 @@ namespace timelymatter {
         
         ofParameter<float> m_threshold_param;
         ofParameter<float> m_dampening_param;
-        ofParameter<bool> m_interpolate_param;
-        ofParameter<bool> m_infill_param;
+        
+        bool m_interpolate;
+        bool m_infill;
         
         void findNeighbor(Cell* cell, vector<Cell*> & list, ofPath & path, NeighborDirection prev_dir = NONE);
         
@@ -80,11 +81,18 @@ namespace timelymatter {
         ofParameter<float> & getDampeningParam() {
             return m_dampening_param;
         }
-        ofParameter<bool> & getInterpolateParam() {
-            return m_interpolate_param;
+        
+        const bool & getInterpolate() {
+            return m_interpolate;
         }
-        ofParameter<bool> & getInfillParam() {
-            return m_infill_param;
+        const bool & getInfill() {
+            return m_infill;
+        }
+        void setInterpolate(const bool value) {
+            m_interpolate = value;
+        }
+        void setInfill(const bool value) {
+            m_infill = value;
         }
     };
 

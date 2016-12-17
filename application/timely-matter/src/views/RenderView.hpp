@@ -21,24 +21,16 @@ namespace timelymatter
         Metaballs m_metaballs;
         ofRectangle m_output_rect;
         
-        ofParameter<ofColor> m_metaballs_color;
-        
         PingPongFbo m_blur_fbo;
         ofShader m_blur_shader;
         ofParameter<bool> m_param_enabled;
         ofParameter<int> m_param_strength;
         
-        ofParameter<bool> m_param_input_visible;
-        ofParameter<float> m_param_input_alpha;
-        ofParameter<bool> m_param_particles_update;
-        ofParameter<bool> m_param_particle_areas_visible;
-        ofParameter<float> m_param_particle_areas_alpha;
-        ofParameter<bool> m_param_particle_cores_visible;
-        
         ofColor m_input_color;
         ofColor m_particle_color;
+        ofColor m_metaballs_color;
         
-        RenderControls m_controls = RenderControls(m_param_input_visible, m_param_input_alpha, m_param_particles_update, m_param_particle_areas_visible, m_param_particle_areas_alpha, m_param_particle_cores_visible);
+        RenderControls m_controls;
         
     protected:
         void m_onWindowResized(const int width, const int height);
