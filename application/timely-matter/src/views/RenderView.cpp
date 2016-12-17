@@ -79,9 +79,14 @@ void RenderView::m_onSetup() {
     render_params.setName("Rendering");
     render_params.add(m_param_input_visible.set("input visible", false));
     render_params.add(m_param_input_alpha.set("input alpha", 0.f, 0.f, 255.f));
+    render_params.add(m_param_particles_update.set("particles update", true));
+    render_params.add(m_param_particle_areas_visible.set("particle areas visible", false));
+    render_params.add(m_param_particle_areas_alpha.set("particle areas alpha", 0.f, 0.f, 255.f));
+    render_params.add(m_param_particle_cores_visible.set("particle cores visible", false));
     args.params.push_back(render_params);
     
     m_input_color.setHsb(0.f, 200.f, 255.f);
+    m_particle_color.setHsb(0.f, 0.f, 255.f);
     
     ofNotifyEvent(m_view_event.update_gui, args, this);
 }
@@ -94,17 +99,19 @@ void RenderView::m_onUpdate() {
     
     // ... before retrieving pixel data to update vector field.
     m_vector_field.update(m_input.getPixels());
-
-    // apply forces of vector field to particl system...
-    m_particle_system.applyVectorField(m_vector_field);
-
-    // ...and update all particles within the system.
-    // This also updates the output FBO.
-    m_particle_system.update();
     
-    // Pass particles to metaballs to calculate contour lines.
-    // This also updates the output FBO.
-    m_metaballs.update(m_particle_system.getParticles());
+    if (m_param_particles_update) {
+        // apply forces of vector field to particl system...
+        m_particle_system.applyVectorField(m_vector_field);
+
+        // ...and update all particles within the system.
+        // This also updates the output FBO.
+        m_particle_system.update();
+    
+        // Pass particles to metaballs to calculate contour lines.
+        // This also updates the output FBO.
+        m_metaballs.update(m_particle_system.getParticles());
+    }
 }
 
 
@@ -121,7 +128,21 @@ void RenderView::m_onDraw() {
     m_vector_field.getOutputFbo().draw(m_output_rect);
     
     // draw particle system
-    m_particle_system.getOutputFbo().draw(m_output_rect);
+    if (m_param_particle_areas_visible) {
+        m_particle_color.a = m_param_particle_areas_alpha;
+        ofPushStyle();
+        ofSetColor(m_particle_color);
+        m_particle_system.getAreasFbo().draw(m_output_rect);
+        ofPopStyle();
+    }
+    if (m_param_particle_cores_visible) {
+        m_particle_color.a = 255.f;
+        ofPushStyle();
+        ofSetColor(m_particle_color);
+        m_particle_system.getCoresFbo().draw(m_output_rect);
+        ofPopStyle();
+    }
+//    m_particle_system.getOutputFbo().draw(m_output_rect);
     
     if (m_param_enabled) {
         // draw blurred metaballs

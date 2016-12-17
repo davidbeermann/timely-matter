@@ -14,8 +14,10 @@ namespace timelymatter {
         ofParameter<float>& m_max_velocity;
         ofParameter<float>& m_decay;
         float m_max_velocity_squared;
+        ofColor m_area_color;
         
     public:
+        static const ofColor COLOR;
         Particle(ofParameter<float>& maxVelocity, ofParameter<float>& velocityDecay);
         void setup(const ofVec3f & position, const float & radius);
         void applyForce(const ofVec3f& force);

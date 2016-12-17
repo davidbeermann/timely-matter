@@ -9,7 +9,7 @@ typedef vector<Particle>::iterator PIt;
 
 void ParticleSystem::clearBuffer(ofFbo & fbo) {
     fbo.begin();
-    ofClear(0);
+    ofClear(m_clear_color);
     fbo.end();
 }
 
@@ -21,24 +21,20 @@ void ParticleSystem::setup(const unsigned int & width, const unsigned int & heig
     // allocate buffers
     m_areas_fbo.allocate(width, height, GL_RGBA, 4);
     m_cores_fbo.allocate(width, height, GL_RGBA, 4);
-    m_output_fbo.allocate(width, height, GL_RGBA, 4);
+    
+    // set color to clear fbos
+    m_clear_color = Particle::COLOR;
+    m_clear_color.a = 0.f;
     
     // clear buffers
     clearBuffer(m_areas_fbo);
     clearBuffer(m_cores_fbo);
-    clearBuffer(m_output_fbo);
     
     // setup GUI parameters
     m_params.setName("Particle System");
-    m_params.add(m_param_move_particles.set("move particles", true));
-    m_params.add(m_param_show_particles.set("show particles", false));
-    m_params.add(m_param_show_particle_areas.set("show particle areas", true));
-    m_params.add(m_param_show_particle_cores.set("show particle cores", true));
     m_params.add(m_param_max_velocity.set("max velocity", 5.f, 1.f, 10.f));
     m_params.add(m_param_velocity_decay.set("velocity decay", 0.99f, 0.9f, 0.999f));
     m_params.add(m_param_gravity.set("gravity", 0.01f, 0.001f, 0.1f));
-    m_params.add(m_param_show_mark_ref.set("show mark ref", false));
-    m_params.add(m_param_draw_trail.set("draw trail", false));
     
     // add particles to system.
     // this has to happen after the GUI setup, due to the max velocity parameter.
@@ -61,17 +57,15 @@ void ParticleSystem::setup(const unsigned int & width, const unsigned int & heig
 
 
 void ParticleSystem::applyVectorField(VectorField& vectorField) {
-    if (m_param_move_particles) {
-        // update gravity based on gui
-        m_gravity.set(0.f, m_param_gravity, 0.f);
-        
-        for (PIt p = m_particles.begin(); p != m_particles.end(); ++p) {
-            // apply force from vector field
-            ofVec3f field = vectorField.getForceForPosition(p->getPosition());
-            p->applyForce(field);
-            // apply gravity
-            p->applyForce(m_gravity);
-        }
+    // update gravity based on gui
+    m_gravity.set(0.f, m_param_gravity, 0.f);
+    
+    for (PIt p = m_particles.begin(); p != m_particles.end(); ++p) {
+        // apply force from vector field
+        ofVec3f field = vectorField.getForceForPosition(p->getPosition());
+        p->applyForce(field);
+        // apply gravity
+        p->applyForce(m_gravity);
     }
 }
 
@@ -83,46 +77,17 @@ void ParticleSystem::update() {
     clearBuffer(m_cores_fbo);
     
     // evaluate updates
-    if (m_param_move_particles || m_param_show_particles) {
-        for (PIt p = m_particles.begin(); p != m_particles.end(); ++p) {
-            
-            if (m_param_move_particles) {
-                p->update(m_bounds);
-            }
-            
-            if (m_param_show_particles) {
-                if (m_param_show_particle_areas) {
-                    m_areas_fbo.begin();
-                    p->drawArea(m_particle_mesh);
-                    m_areas_fbo.end();
-                }
-                if (m_param_show_particle_cores) {
-                    m_cores_fbo.begin();
-                    p->drawCore(m_particle_mesh);
-                    m_cores_fbo.end();
-                }
-            }
-            
-        }
+    for (PIt p = m_particles.begin(); p != m_particles.end(); ++p) {
+        
+        p->update(m_bounds);
+
+        m_areas_fbo.begin();
+        p->drawArea(m_particle_mesh);
+        m_areas_fbo.end();
+
+        m_cores_fbo.begin();
+        p->drawCore(m_particle_mesh);
+        m_cores_fbo.end();
+        
     }
-    
-    // draw output fbo
-    m_output_fbo.begin();
-    
-    // draw trail or clear fbo
-    if (m_param_draw_trail) {
-        ofPushStyle();
-        ofSetColor(0, 0, 0, 9);
-        ofDrawRectangle(0, 0, m_output_fbo.getWidth(), m_output_fbo.getHeight());
-        ofPopStyle();
-    }
-    else {
-        ofClear(0);
-    }
-    
-    // draw particle cores on top of particle areas
-    m_areas_fbo.draw(0, 0);
-    m_cores_fbo.draw(0, 0);
-    
-    m_output_fbo.end();
 }
