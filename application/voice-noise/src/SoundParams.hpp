@@ -12,9 +12,14 @@ class SoundParams {
     ofParameter<bool> m_playing;
     ofParameter<float> m_volume;
     
+    bool m_random;
+    
     // private constructor
     SoundParams() {
+        m_playing.set("start", false);
         m_volume.set("volume", 0.f, 0.f, 1.f);
+        
+        m_random = false;
     }
     
 public:
@@ -35,5 +40,16 @@ public:
     ofParameter<bool> & getPlaying() {
         return m_playing;
     }
+    
+    void triggerRandom(bool const value) {
+        if (m_random != value) {
+            if (value) {
+                ofNotifyEvent(play_random_sample, this);
+            }
+            m_random = value;
+        }
+    }
+    
+    ofEvent<void> play_random_sample;
 
 };

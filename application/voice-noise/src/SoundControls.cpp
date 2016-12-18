@@ -92,6 +92,9 @@ void SoundControls::update() {
         else if (msg.getAddress() == ADDR_VOLUME) {
             m_params.getVolume() = msg.getArgAsFloat(0);
         }
+        else if (msg.getAddress() == ADDR_RANDOM) {
+            m_params.triggerRandom(msg.getArgAsBool(0));
+        }
     }
     
 }

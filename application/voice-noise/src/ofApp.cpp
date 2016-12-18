@@ -26,6 +26,8 @@ void ofApp::setup() {
     
     ofSoundStreamSetup(2, 0, m_sample_rate, m_buffer_size, 4);
     
+    ofAddListener(m_params.play_random_sample, this, & ofApp::onPlayRandomSample);
+    
 }
 
 
@@ -33,9 +35,11 @@ void ofApp::update() {
     
     m_controls.update();
     
-    vector<VoiceSynthesis>::iterator voice;
-    for (voice = m_voices.begin(); voice != m_voices.end(); ++voice) {
-        voice->update();
+    if (m_params.getPlaying()) {
+        vector<VoiceSynthesis>::iterator voice;
+        for (voice = m_voices.begin(); voice != m_voices.end(); ++voice) {
+            voice->update();
+        }
     }
     
 }
@@ -43,7 +47,7 @@ void ofApp::update() {
 
 void ofApp::draw() {
     
-    ofDrawBitmapString("FPS: " + to_string((int) ofGetFrameRate()), 10, 21);
+//    ofDrawBitmapString("FPS: " + to_string((int) ofGetFrameRate()), 10, 21);
     
     ofPushMatrix();
     ofTranslate(ofGetWidth() * 0.5, ofGetHeight() * 0.5);
@@ -57,13 +61,15 @@ void ofApp::draw() {
         ofDrawEllipse(0, 0, amplitude, amplitude);
     }
     
-    for (voice = m_voices.begin(); voice != m_voices.end(); ++voice) {
-        ofSetColor(191, 191, 191, 128);
-        voice->getOscillator().getMesh().draw();
-        
-        ofSetColor(191, 191, 191, 255);
-        float head_radius = 5.f;
-        ofDrawEllipse(voice->getOscillator().getOscillator().getPosition(), head_radius, head_radius);
+    if (m_params.getPlaying()) {
+        for (voice = m_voices.begin(); voice != m_voices.end(); ++voice) {
+            ofSetColor(191, 191, 191, 128);
+            voice->getOscillator().getMesh().draw();
+            
+            ofSetColor(191, 191, 191, 255);
+            float head_radius = 5.f;
+            ofDrawEllipse(voice->getOscillator().getOscillator().getPosition(), head_radius, head_radius);
+        }
     }
     
     ofPopStyle();
@@ -81,27 +87,29 @@ void ofApp::exit() {
 
 void ofApp::audioOut(float *output, int buffer_size, int channels) {
     
-    double sample;
-    vector<VoiceSynthesis>::iterator voice;
-    for (unsigned int i = 0; i < buffer_size; ++i) {
-        
-        sample = 0.0;
-        for (voice = m_voices.begin(); voice != m_voices.end(); ++voice) {
-            sample += voice->getSample();
+    if (m_params.getPlaying()) {
+        double sample;
+        vector<VoiceSynthesis>::iterator voice;
+        for (unsigned int i = 0; i < buffer_size; ++i) {
+            
+            sample = 0.0;
+            for (voice = m_voices.begin(); voice != m_voices.end(); ++voice) {
+                sample += voice->getSample();
+            }
+            
+            // apply volume (amplitude modulation)
+            sample *= m_params.getVolume();
+            
+            output[i * channels] = sample;
+            output[i * channels + 1] = sample;
+            
         }
-        
-        // apply volume (amplitude modulation)
-        sample *= m_params.getVolume();
-        
-        output[i * channels] = sample;
-        output[i * channels + 1] = sample;
-        
     }
     
 }
 
 
-void ofApp::mousePressed(int x, int y, int button) {
+void ofApp::onPlayRandomSample() {
     
     unsigned int voice_index = (unsigned int) ofRandom(0, m_voices.size());
     unsigned int num_loops = (unsigned int) ofRandom(1, 5);
