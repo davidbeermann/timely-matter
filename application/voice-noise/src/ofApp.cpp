@@ -9,6 +9,8 @@ void ofApp::setup() {
     m_sample_rate = 44100;
     m_buffer_size = 512;
     
+    m_controls.setup();
+    
     ofLog() << "number of samples: " << m_file_names.size();
     
     m_voices = vector<VoiceSynthesis>(m_file_names.size());
@@ -28,6 +30,8 @@ void ofApp::setup() {
 
 
 void ofApp::update() {
+    
+    m_controls.update();
     
     vector<VoiceSynthesis>::iterator voice;
     for (voice = m_voices.begin(); voice != m_voices.end(); ++voice) {
@@ -85,6 +89,9 @@ void ofApp::audioOut(float *output, int buffer_size, int channels) {
         for (voice = m_voices.begin(); voice != m_voices.end(); ++voice) {
             sample += voice->getSample();
         }
+        
+        // apply volume (amplitude modulation)
+        sample *= m_params.getVolume();
         
         output[i * channels] = sample;
         output[i * channels + 1] = sample;

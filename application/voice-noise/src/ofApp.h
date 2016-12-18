@@ -2,10 +2,15 @@
 
 #include "ofMain.h"
 #include "ofxMaxim.h"
+#include "SoundParams.hpp"
+#include "SoundControls.hpp"
 #include "VoiceSynthesis.hpp"
 
 
 class ofApp : public ofBaseApp {
+    
+    SoundParams & m_params;
+    SoundControls m_controls;
     
     unsigned int m_sample_rate;
     unsigned int m_buffer_size;
@@ -24,6 +29,8 @@ class ofApp : public ofBaseApp {
     vector<VoiceSynthesis> m_voices;
     
 public:
+    ofApp() : m_params(SoundParams::get()) {}
+    
     void setup();
     void update();
     void draw();

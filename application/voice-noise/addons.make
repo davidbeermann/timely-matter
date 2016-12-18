@@ -1,2 +1,4 @@
 ofxEasing
 ofxMaxim
+ofxOsc
+ofxXmlSettings

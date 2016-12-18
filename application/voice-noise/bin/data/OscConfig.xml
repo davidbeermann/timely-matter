@@ -1,0 +1,12 @@
+<OscConfig>
+    
+    <sender>
+        <address>192.168.178.33</address>
+        <port>9998</port>
+    </sender>
+    
+    <receiver>
+        <port>9999</port>
+    </receiver>
+
+</OscConfig>
