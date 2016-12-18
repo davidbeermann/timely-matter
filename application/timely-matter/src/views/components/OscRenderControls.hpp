@@ -10,6 +10,7 @@ namespace timelymatter {
     class OscRenderControls : public RenderControls {
         
         ofxOscReceiver m_receiver;
+        ofxOscSender m_sender;
         
     protected:
         // implementation of abstract class methods
