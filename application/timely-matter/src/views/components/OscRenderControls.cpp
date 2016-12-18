@@ -1,8 +1,6 @@
 #include "OscRenderControls.hpp"
 
-#define RECEIVE_PORT 9999
-#define SEND_PORT 9998
-#define SEND_HOST "192.168.178.33"
+#define CONFIG_FILE "OscConfig.xml"
 
 #define ADDR_DEPTH_VISIBLE "/tm/depthvisible"
 #define ADDR_DEPTH_ALPHA "/tm/depthalpha"
@@ -20,14 +18,7 @@
 using namespace timelymatter;
 
 
-void OscRenderControls::m_onSetup() {
-    // setup receiver
-    m_receiver.setup(RECEIVE_PORT);
-    
-    // setup sender
-    m_sender.setup(SEND_HOST, SEND_PORT);
-    
-    // send out initial states
+void OscRenderControls::sendInitialStatus() {
     ofxOscMessage msg;
     
     msg.setAddress(ADDR_DEPTH_VISIBLE);
@@ -60,10 +51,10 @@ void OscRenderControls::m_onSetup() {
     m_sender.sendMessage(msg);
     msg.clear();
     
-//    msg.setAddress(ADDR_PS_CORESALPHA);
-//    msg.addFloatArg(m_params.getInputAlpha());
-//    m_sender.sendMessage(msg);
-//    msg.clear();
+    //    msg.setAddress(ADDR_PS_CORESALPHA);
+    //    msg.addFloatArg(m_params.getInputAlpha());
+    //    m_sender.sendMessage(msg);
+    //    msg.clear();
     
     msg.setAddress(ADDR_MB_SHOWMESH);
     msg.addBoolArg(m_params.getMetaballsMeshVisible());
@@ -89,6 +80,45 @@ void OscRenderControls::m_onSetup() {
     msg.addFloatArg(m_params.getMetaballsMeshAlpha());
     m_sender.sendMessage(msg);
     msg.clear();
+}
+
+
+void OscRenderControls::m_onSetup() {
+    
+    bool config_loaded = m_config.load(CONFIG_FILE);
+    if (config_loaded) {
+        m_config.pushTag("OscConfig");
+        
+        // configure sender interface
+        string sender_address;
+        unsigned int sender_port;
+        
+        m_config.pushTag("sender");
+        sender_address = m_config.getValue("address", "");
+        sender_port = m_config.getValue("port", 0);
+        m_config.popTag();
+        
+        if (sender_address != "" && sender_port != 0) {
+            m_sender.setup(sender_address, sender_port);
+            sendInitialStatus();
+        }
+        
+        // configure receiver interface
+        unsigned int receiver_port;
+        
+        m_config.pushTag("receiver");
+        receiver_port = m_config.getValue("port", 0);
+        m_config.popTag();
+        
+        if (receiver_port != 0) {
+            m_receiver.setup(receiver_port);
+        }
+        
+        m_config.popTag();
+        
+    } else {
+        ofLogError() << "OSC configurtation could not be loaded!";
+    }
     
 }
 
