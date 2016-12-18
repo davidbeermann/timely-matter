@@ -1,69 +1,33 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxMidi.h"
+#include "RenderParams.hpp"
 
 
 namespace timelymatter {
-
-    class RenderControls : public ofxMidiListener {
-        void evalKeyEvent(const int & pitch, const int & velocity);
-        void evalControlEvent(const int & control, const int & value);
+    
+    // Base view class to be extended by concrete views managed by ViewManager class.
+    // Implementation for NVI Non-Virtual Interface derived from here:
+    // http://stackoverflow.com/questions/14323595/best-way-to-declare-an-interface-in-c11#answer-14324500
+    class RenderControls {
         
-        ofxMidiIn midiIn;
+    protected:
+        // provide easy access to parameters
+        RenderParams & m_params = RenderParams::get();
         
-        ofParameter<bool> m_input_visible;
-        ofParameter<float> m_input_alpha;
-        ofParameter<bool> m_particles_update;
-        ofParameter<bool> m_particle_areas_visible;
-        ofParameter<float> m_particle_areas_alpha;
-        ofParameter<bool> m_particle_cores_visible;
-        ofParameter<bool> m_metaballs_mesh_visible;
-        ofParameter<float> m_metaballs_mesh_alpha;
-        ofParameter<bool> m_metaballs_wireframe_visible;
-        ofParameter<bool> m_metaballs_interpolate;
-        ofParameter<bool> m_metaballs_infill;
+        // Methods to be implemented by concrete view.
+        virtual void m_onSetup() = 0;
+        virtual void m_onUpdate() = 0;
         
     public:
-        RenderControls();
-        ~RenderControls();
+        // always define virtual destructors for base classes
+        // http://stackoverflow.com/questions/461203/when-to-use-virtual-destructors#461224
+        // C++11 style
+        virtual ~RenderControls() = default;
         
-        void newMidiMessage(ofxMidiMessage& msg);
-        
-        ofParameter<bool> & getParamInputVisible() {
-            return m_input_visible;
-        }
-        ofParameter<float> & getParamInputAlpha() {
-            return m_input_alpha;
-        }
-        ofParameter<bool> & getParamParticlesUpdate() {
-            return m_particles_update;
-        }
-        ofParameter<bool> & getParamParticleAreasVisible() {
-            return m_particle_areas_visible;
-        }
-        ofParameter<float> & getParamParticleAreasAlpha() {
-            return m_particle_areas_alpha;
-        }
-        ofParameter<bool> & getParamParticleCoresVisible() {
-            return m_particle_cores_visible;
-        }
-        ofParameter<bool> & getParamMetaballsMeshVisible() {
-            return m_metaballs_mesh_visible;
-        }
-        ofParameter<float> & getParamMetaballsMeshAlpha() {
-            return m_metaballs_mesh_alpha;
-        }
-        ofParameter<bool> & getParamMetaballsWireframeVisible() {
-            return m_metaballs_wireframe_visible;
-        }
-        ofParameter<bool> & getParamMetaballsInterpolate() {
-            return m_metaballs_interpolate;
-        }
-        ofParameter<bool> & getParamMetaballsInfill() {
-            return m_metaballs_infill;
-        }
+        // Non-Virtual Interface methods
+        void setup() { m_onSetup(); };
+        void update() { m_onUpdate(); };
     };
     
 }
-

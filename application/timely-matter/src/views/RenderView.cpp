@@ -7,7 +7,7 @@
 using namespace timelymatter;
 
 
-RenderView::RenderView() : m_input(m_input_factory.get(m_app_model.getMode())) {
+RenderView::RenderView() : m_params(RenderParams::get()), m_input(m_input_factory.get(m_app_model.getMode())) {
 }
 
 
@@ -39,6 +39,11 @@ void RenderView::m_onWindowResized(const int width, const int height) {
 
 
 void RenderView::m_onSetup() {
+    
+#ifdef USING_OSC
+    m_osc_controls.setup();
+#endif
+    
     m_input.setup();
     
     AppConfig & config = AppConfig::get();
@@ -74,17 +79,19 @@ void RenderView::m_onSetup() {
     
     ofParameterGroup render_params;
     render_params.setName("Rendering");
-    render_params.add(m_controls.getParamInputVisible());
-    render_params.add(m_controls.getParamInputAlpha());
-    render_params.add(m_controls.getParamParticlesUpdate());
-    render_params.add(m_controls.getParamParticleAreasVisible());
-    render_params.add(m_controls.getParamParticleAreasAlpha());
-    render_params.add(m_controls.getParamParticleCoresVisible());
-    render_params.add(m_controls.getParamMetaballsMeshVisible());
-    render_params.add(m_controls.getParamMetaballsMeshAlpha());
-    render_params.add(m_controls.getParamMetaballsWireframeVisible());
-    render_params.add(m_controls.getParamMetaballsInterpolate());
-    render_params.add(m_controls.getParamMetaballsInfill());
+    render_params.add(m_params.getInputVisible());
+    render_params.add(m_params.getInputAlpha());
+    render_params.add(m_params.getInputVisible());
+    render_params.add(m_params.getInputAlpha());
+    render_params.add(m_params.getParticlesUpdate());
+    render_params.add(m_params.getParticleAreasVisible());
+    render_params.add(m_params.getParticleAreasAlpha());
+    render_params.add(m_params.getParticleCoresVisible());
+    render_params.add(m_params.getMetaballsMeshVisible());
+    render_params.add(m_params.getMetaballsMeshAlpha());
+    render_params.add(m_params.getMetaballsWireframeVisible());
+    render_params.add(m_params.getMetaballsInterpolate());
+    render_params.add(m_params.getMetaballsInfill());
     args.params.push_back(render_params);
     
     m_input_color.setHsb(0.f, 200.f, 255.f); // desaturated red
@@ -96,14 +103,21 @@ void RenderView::m_onSetup() {
 
 
 void RenderView::m_onUpdate() {
+    
+#ifdef USING_OSC
+    // update controls before anything else.
+    // it updates the parameters!
+    m_osc_controls.update();
+#endif
+    
     // update input pixels
     m_input.update();
-    m_input_color.a = m_controls.getParamInputAlpha();
+    m_input_color.a = m_params.getInputAlpha();
     
     // ... before retrieving pixel data to update vector field.
     m_vector_field.update(m_input.getPixels());
     
-    if (m_controls.getParamParticlesUpdate()) {
+    if (m_params.getParticlesUpdate()) {
         // apply forces of vector field to particl system...
         m_particle_system.applyVectorField(m_vector_field);
 
@@ -112,20 +126,20 @@ void RenderView::m_onUpdate() {
         m_particle_system.update();
         
         // set metaballs parameters
-        m_metaballs.setInterpolation(m_controls.getParamMetaballsInterpolate());
-        m_metaballs.setInfill(m_controls.getParamMetaballsInfill());
+        m_metaballs.setInterpolation(m_params.getMetaballsInterpolate());
+        m_metaballs.setInfill(m_params.getMetaballsInfill());
         
         // Pass particles to metaballs to calculate contour lines.
         // This also updates the output FBO.
         m_metaballs.update(m_particle_system.getParticles());
-        m_metaballs_color.a = m_controls.getParamMetaballsMeshAlpha();
+        m_metaballs_color.a = m_params.getMetaballsMeshAlpha();
     }
 }
 
 
 void RenderView::m_onDraw() {
     // draw data input
-    if (m_controls.getParamInputVisible()) {
+    if (m_params.getInputVisible()) {
         ofPushStyle();
         ofSetColor(m_input_color);
         m_input.getOutputFbo().draw(m_output_rect);
@@ -136,14 +150,14 @@ void RenderView::m_onDraw() {
     m_vector_field.getOutputFbo().draw(m_output_rect);
     
     // draw particle system
-    if (m_controls.getParamParticleAreasVisible()) {
-        m_particle_color.a = m_controls.getParamParticleAreasAlpha();
+    if (m_params.getParticleAreasVisible()) {
+        m_particle_color.a = m_params.getParticleAreasAlpha();
         ofPushStyle();
         ofSetColor(m_particle_color);
         m_particle_system.getAreasFbo().draw(m_output_rect);
         ofPopStyle();
     }
-    if (m_controls.getParamParticleCoresVisible()) {
+    if (m_params.getParticleCoresVisible()) {
         m_particle_color.a = 255.f;
         ofPushStyle();
         ofSetColor(m_particle_color);
@@ -189,10 +203,10 @@ void RenderView::m_onDraw() {
     // draw metaball fbos with correct color
     ofPushStyle();
     ofSetColor(m_metaballs_color);
-    if (m_controls.getParamMetaballsWireframeVisible()) {
+    if (m_params.getMetaballsWireframeVisible()) {
         m_metaballs.getWireframeFbo().draw(m_output_rect);
     }
-    if (m_controls.getParamMetaballsMeshVisible()) {
+    if (m_params.getMetaballsMeshVisible()) {
         m_metaballs.getMeshFbo().draw(m_output_rect);
     }
     ofPopStyle();

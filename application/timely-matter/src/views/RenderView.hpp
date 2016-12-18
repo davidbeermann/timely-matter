@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "BaseView.hpp"
+#include "RenderParams.hpp"
 #include "VectorFieldInputFactory.hpp"
 #include "VectorFieldInput.hpp"
 #include "VectorField.hpp"
@@ -9,11 +10,16 @@
 #include "Metaballs.hpp"
 #include "PingPongFbo.hpp"
 #include "RenderControls.hpp"
+#include "OscRenderControls.hpp"
+#include "MidiRenderControls.hpp"
+
+#define USING_OSC
 
 
 namespace timelymatter
 {
     class RenderView : public BaseView {
+        RenderParams & m_params;
         VectorFieldInputFactory m_input_factory;
         VectorFieldInput& m_input;
         VectorField m_vector_field;
@@ -30,7 +36,9 @@ namespace timelymatter
         ofColor m_particle_color;
         ofColor m_metaballs_color;
         
-        RenderControls m_controls;
+#ifdef USING_OSC
+        OscRenderControls m_osc_controls = OscRenderControls();
+#endif
         
     protected:
         void m_onWindowResized(const int width, const int height);
