@@ -15,16 +15,12 @@ namespace timelymatter {
         ofFbo m_mesh_fbo;
         ofFbo m_wireframe_fbo;
         
-        ofParameterGroup m_params;
-//        ofParameter<bool> m_show_cells;
-        
     public:
         void setup(const unsigned int & width, const unsigned int & height, const unsigned int & columns, const unsigned int & rows);
         void update(vector<Particle> & particles);
         
         ofFbo & getMeshFbo() { return m_mesh_fbo; }
         ofFbo & getWireframeFbo() { return m_wireframe_fbo; }
-        ofParameterGroup & getParams() { return m_params; }
         
         void setThreshold(float const value) {
             m_cell_grid.setThreshold(value);

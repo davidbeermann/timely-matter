@@ -3,7 +3,8 @@
 using namespace timelymatter;
 
 
-void Metaballs::setup(const unsigned int & width, const unsigned int & height, const unsigned int & columns, const unsigned int & rows){
+void Metaballs::setup(const unsigned int & width, const unsigned int & height, const unsigned int & columns, const unsigned int & rows) {
+    
     m_cell_grid.setup(width, height, columns, rows);
     m_cell_grid.setMode(MESH);
     
@@ -14,14 +15,11 @@ void Metaballs::setup(const unsigned int & width, const unsigned int & height, c
     m_mesh_fbo.allocate( width, height, GL_RGBA, 4 );
     m_wireframe_fbo.allocate( width, height, GL_RGBA, 4 );
     
-    m_params.setName("Metaballs");
-//    m_params.add(m_cell_grid.getThresholdParam());
-//    m_params.add(m_cell_grid.getDampeningParam());
-//    m_params.add(m_show_cells.set("show cells", false));
 }
 
 
-void Metaballs::update(vector<Particle> & particles){
+void Metaballs::update(vector<Particle> & particles) {
+    
     m_cell_grid.update(particles);
     
     // update output fbo

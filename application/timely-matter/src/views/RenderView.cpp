@@ -68,30 +68,18 @@ void RenderView::m_onSetup() {
     args.params.push_back(m_vector_field.getParams());
     args.params.push_back(m_particle_system.getParams());
     
-    // add params for metaballs
-    args.params.push_back(m_metaballs.getParams());
-    
     ofParameterGroup blur_params;
     blur_params.setName("Gaussian Blur");
     blur_params.add(m_param_enabled.set("enabled", false));
     blur_params.add(m_param_strength.set("strength", 1, 0, 7));
     args.params.push_back(blur_params);
     
+    // add rendering params
     ofParameterGroup render_params;
     render_params.setName("Rendering");
-    render_params.add(m_params.getInputVisible());
-    render_params.add(m_params.getInputAlpha());
-    render_params.add(m_params.getInputVisible());
-    render_params.add(m_params.getInputAlpha());
-    render_params.add(m_params.getParticlesUpdate());
-    render_params.add(m_params.getParticleAreasVisible());
-    render_params.add(m_params.getParticleAreasAlpha());
-    render_params.add(m_params.getParticleCoresVisible());
-    render_params.add(m_params.getMetaballsMeshVisible());
-    render_params.add(m_params.getMetaballsMeshAlpha());
-    render_params.add(m_params.getMetaballsWireframeVisible());
-    render_params.add(m_params.getMetaballsInterpolate());
-    render_params.add(m_params.getMetaballsInfill());
+    render_params.add(m_params.getInputParams());
+    render_params.add(m_params.getParticleParams());
+    render_params.add(m_params.getMetaballParams());
     args.params.push_back(render_params);
     
     m_input_color.setHsb(0.f, 200.f, 255.f); // desaturated red

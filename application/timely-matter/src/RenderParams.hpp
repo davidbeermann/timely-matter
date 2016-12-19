@@ -16,21 +16,43 @@ namespace timelymatter {
             m_input_visible.set("input visible", false);
             m_input_alpha.set("input alpha", 0.f, 0.f, 255.f);
             
-            m_particles_update.set("particles update", true);
-            m_particle_areas_visible.set("particle areas visible", false);
-            m_particle_areas_alpha.set("particle areas alpha", 0.f, 0.f, 255.f);
-            m_particle_cores_visible.set("particle cores visible", false);
-            m_particle_cores_alpha.set("particle cores alpha", 0.f, 0.f, 255.f);
+            m_particles_update.set("update", true);
+            m_particle_areas_visible.set("areas visible", false);
+            m_particle_areas_alpha.set("areas alpha", 0.f, 0.f, 255.f);
+            m_particle_cores_visible.set("cores visible", false);
+            m_particle_cores_alpha.set("cores alpha", 0.f, 0.f, 255.f);
             
-            m_metaballs_infill.set("metaballs infill", true);
-            m_metaballs_mesh_visible.set("metaballs mesh visible", true);
-            m_metaballs_mesh_alpha.set("metaballs mesh alpha", 0.f, 0.f, 255.f);
-            m_metaballs_wireframe_visible.set("metaballs wireframe visible", false);
-            m_metaballs_wireframe_alpha.set("metaballs wireframe alpha", 0.f, 0.f, 255.f);
-            m_metaballs_interpolate.set("metaballs interpolate", true);
-            m_metaballs_fitness.set("metaballs fitness", 0.f, 0.f, 1.f);
-            m_metaballs_threshold.set("metaballs threshold", 0.f, 0.f, 1.f);
-            m_metaballs_dampening.set("metaballs dampening", 0.5f, 0.f, 1.f);
+            m_metaballs_infill.set("infill", true);
+            m_metaballs_mesh_visible.set("mesh visible", true);
+            m_metaballs_mesh_alpha.set("mesh alpha", 0.f, 0.f, 255.f);
+            m_metaballs_wireframe_visible.set("wireframe visible", false);
+            m_metaballs_wireframe_alpha.set("wireframe alpha", 0.f, 0.f, 255.f);
+            m_metaballs_interpolate.set("interpolate", true);
+            m_metaballs_fitness.set("fitness", 0.f, 0.f, 1.f);
+            m_metaballs_threshold.set("threshold", 0.f, 0.f, 1.f);
+            m_metaballs_dampening.set("dampening", 0.5f, 0.f, 1.f);
+            
+            m_input_params.setName("Depth Input");
+            m_input_params.add(m_input_visible);
+            m_input_params.add(m_input_alpha);
+            
+            m_particle_params.setName("Particles");
+            m_particle_params.add(m_particles_update);
+            m_particle_params.add(m_particle_areas_visible);
+            m_particle_params.add(m_particle_areas_alpha);
+            m_particle_params.add(m_particle_cores_visible);
+            m_particle_params.add(m_particle_cores_alpha);
+            
+            m_metaball_params.setName("Metaballs");
+            m_metaball_params.add(m_metaballs_infill);
+            m_metaball_params.add(m_metaballs_mesh_visible);
+            m_metaball_params.add(m_metaballs_mesh_alpha);
+            m_metaball_params.add(m_metaballs_wireframe_visible);
+            m_metaball_params.add(m_metaballs_wireframe_alpha);
+            m_metaball_params.add(m_metaballs_interpolate);
+            m_metaball_params.add(m_metaballs_fitness);
+            m_metaball_params.add(m_metaballs_threshold);
+            m_metaball_params.add(m_metaballs_dampening);
         }
         
         // available parameters
@@ -52,6 +74,10 @@ namespace timelymatter {
         ofParameter<float> m_metaballs_fitness;
         ofParameter<float> m_metaballs_threshold;
         ofParameter<float> m_metaballs_dampening;
+        
+        ofParameterGroup m_input_params;
+        ofParameterGroup m_particle_params;
+        ofParameterGroup m_metaball_params;
 
     public:
         // static method to retrieve singleton instance
@@ -113,6 +139,16 @@ namespace timelymatter {
         }
         ofParameter<float> & getMetaballsDampening() {
             return m_metaballs_dampening;
+        }
+        
+        ofParameterGroup & getInputParams() {
+            return m_input_params;
+        }
+        ofParameterGroup & getParticleParams() {
+            return m_particle_params;
+        }
+        ofParameterGroup & getMetaballParams() {
+            return m_metaball_params;
         }
         
     };
