@@ -14,10 +14,10 @@ KinectModel::KinectModel() {
     // set  default values
     m_depth_clip_near = 1200;
     m_depth_clip_near_min = 500;
-    m_depth_clip_near_max = 2500;
+    m_depth_clip_near_max = 4000;
     m_depth_clip_far = 1900;
     m_depth_clip_far_min = 1000;
-    m_depth_clip_far_max = 3000;
+    m_depth_clip_far_max = 4000;
     m_crop_buffer_width = 0;
     m_crop_buffer_height = 0;
     

@@ -58,4 +58,50 @@
     <enabled>0</enabled>
     <strength>1</strength>
 </Gaussian_Blur>
+<group>
+		<Kinect_Input>
+			<show_output>0</show_output>
+		</Kinect_Input>
+		<Vector_Field>
+			<edge_force>1.5</edge_force>
+			<field_force>8</field_force>
+			<attract_threshold>0</attract_threshold>
+			<show_marks>0</show_marks>
+			<show_values>0</show_values>
+			<show_vectors>0</show_vectors>
+		</Vector_Field>
+		<Particle_System>
+			<move_particles>1</move_particles>
+			<show_particles>1</show_particles>
+			<show_particle_areas>1</show_particle_areas>
+			<show_particle_cores>1</show_particle_cores>
+			<max_velocity>5</max_velocity>
+			<velocity_decay>0.99</velocity_decay>
+			<gravity>0.01</gravity>
+			<show_mark_ref>0</show_mark_ref>
+			<draw_trail>0</draw_trail>
+		</Particle_System>
+		<Metaballs>
+			<distance_threshold>0</distance_threshold>
+			<dampening_factor>0.5</dampening_factor>
+			<interpolate>0</interpolate>
+			<infill>0</infill>
+			<show_cells>0</show_cells>
+			<show_mesh>1</show_mesh>
+			<wireframe>0</wireframe>
+			<color>216, 216, 216, 255</color>
+		</Metaballs>
+		<Gaussian_Blur>
+			<enabled>0</enabled>
+			<strength>1</strength>
+		</Gaussian_Blur>
+	<Infrared_Normalization>
+			<min>33</min>
+			<max>255</max>
+		</Infrared_Normalization>
+		<Depth_Clipping>
+			<near>3357</near>
+			<far>3387</far>
+		</Depth_Clipping>
+	</group>
 </Timely_Matter>
