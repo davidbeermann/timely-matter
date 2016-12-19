@@ -84,7 +84,7 @@ void RenderView::m_onSetup() {
     
     m_input_color.setHsb(0.f, 200.f, 255.f); // desaturated red
     m_particle_color.setHsb(0.f, 0.f, 255.f); // bright white
-    m_metaballs_color.setHsb(0.f, 0.f, 255.f); // bright white
+    m_metaballs_color.set(config.getMetaballsColor());
     
     ofNotifyEvent(m_view_event.update_gui, args, this);
 }
