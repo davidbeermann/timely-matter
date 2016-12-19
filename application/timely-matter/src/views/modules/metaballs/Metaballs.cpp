@@ -15,8 +15,8 @@ void Metaballs::setup(const unsigned int & width, const unsigned int & height, c
     m_wireframe_fbo.allocate( width, height, GL_RGBA, 4 );
     
     m_params.setName("Metaballs");
-    m_params.add(m_cell_grid.getThresholdParam());
-    m_params.add(m_cell_grid.getDampeningParam());
+//    m_params.add(m_cell_grid.getThresholdParam());
+//    m_params.add(m_cell_grid.getDampeningParam());
 //    m_params.add(m_show_cells.set("show cells", false));
 }
 

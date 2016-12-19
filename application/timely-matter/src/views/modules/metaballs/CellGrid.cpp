@@ -10,6 +10,12 @@ typedef vector<Cell>::iterator CIt;
 typedef vector<Particle>::iterator PIt;
 
 
+float const CellGrid::THRESHOLD_MIN = 0.f;
+float const CellGrid::THRESHOLD_MAX = 1.f;
+float const CellGrid::DAMPENING_MIN = 0.f;
+float const CellGrid::DAMPENING_MAX = 1.f;
+
+
 void CellGrid::findNeighbor(Cell * cell, vector<Cell *> & list, ofPath & path, NeighborDirection prev_dir) {
     if (cell == nullptr) {
         ofLog() << "findNeighbor() -> NULLPTR";
@@ -235,9 +241,6 @@ void CellGrid::setup(const unsigned int & width, const unsigned int & height, co
     m_path.setMode(ofPath::Mode::POLYLINES);
     m_path.setColor(ofColor(255, 0, 0, 64));
     
-    m_threshold_param.set("distance threshold", 0.f, 0.f, 1.f);
-    m_dampening_param.set("dampening factor", 0.5f, 0.f, 1.f);
-    
     m_interpolate = true;
     m_infill = true;
 }
@@ -257,8 +260,8 @@ void CellGrid::update(vector<Particle> & particles) {
             // take the squared radius in order to avoid square root calculation!
             float diff = p->getRadiusSquared() / d.lengthSquared();
             
-            if (diff >= m_threshold_param) {
-                cu->addValue(diff * m_dampening_param);
+            if (diff >= m_threshold) {
+                cu->addValue(diff * m_dampening);
             }
         }
     }

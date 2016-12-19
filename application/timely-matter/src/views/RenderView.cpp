@@ -126,13 +126,14 @@ void RenderView::m_onUpdate() {
         m_particle_system.update();
         
         // set metaballs parameters
+        m_metaballs.setThreshold(m_params.getMetaballsThreshold());
+        m_metaballs.setDampening(m_params.getMetaballsDampening());
         m_metaballs.setInterpolation(m_params.getMetaballsInterpolate());
         m_metaballs.setInfill(m_params.getMetaballsInfill());
         
         // Pass particles to metaballs to calculate contour lines.
         // This also updates the output FBO.
         m_metaballs.update(m_particle_system.getParticles());
-        m_metaballs_color.a = m_params.getMetaballsMeshAlpha();
     }
 }
 
@@ -158,7 +159,7 @@ void RenderView::m_onDraw() {
         ofPopStyle();
     }
     if (m_params.getParticleCoresVisible()) {
-        m_particle_color.a = 255.f;
+        m_particle_color.a = m_params.getParticleCoresAlpha();
         ofPushStyle();
         ofSetColor(m_particle_color);
         m_particle_system.getCoresFbo().draw(m_output_rect);
@@ -202,11 +203,14 @@ void RenderView::m_onDraw() {
     
     // draw metaball fbos with correct color
     ofPushStyle();
-    ofSetColor(m_metaballs_color);
     if (m_params.getMetaballsWireframeVisible()) {
+        m_metaballs_color.a = m_params.getMetaballsWireframeAlpha();
+        ofSetColor(m_metaballs_color);
         m_metaballs.getWireframeFbo().draw(m_output_rect);
     }
     if (m_params.getMetaballsMeshVisible()) {
+        m_metaballs_color.a = m_params.getMetaballsMeshAlpha();
+        ofSetColor(m_metaballs_color);
         m_metaballs.getMeshFbo().draw(m_output_rect);
     }
     ofPopStyle();

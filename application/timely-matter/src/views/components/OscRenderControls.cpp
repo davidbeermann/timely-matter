@@ -2,8 +2,8 @@
 
 #define CONFIG_FILE "OscConfig.xml"
 
-#define ADDR_DEPTH_VISIBLE "/tm/depthvisible"
-#define ADDR_DEPTH_ALPHA "/tm/depthalpha"
+#define ADDR_INPUT_VISIBLE "/tm/input/show"
+#define ADDR_INPUT_ALPHA "/tm/input/alpha"
 #define ADDR_PS_UPDATE "/tm/particlesystem/update"
 #define ADDR_PS_SHOWAREAS "/tm/particlesystem/showareas"
 #define ADDR_PS_SHOWCORES "/tm/particlesystem/showcores"
@@ -14,6 +14,10 @@
 #define ADDR_MB_INTERPOLATE "/tm/metaballs/interpolate"
 #define ADDR_MB_INFILL "/tm/metaballs/infill"
 #define ADDR_MB_MESHALPHA "/tm/metaballs/meshalpha"
+#define ADDR_MB_WIREFRAMEALPHA "/tm/metaballs/wireframealpha"
+#define ADDR_MB_FITNESS "/tm/metaballs/fitness"
+#define ADDR_MB_THRESHOLD "/tm/metaballs/threshold"
+#define ADDR_MB_DAMPENING "/tm/metaballs/dampening"
 
 using namespace timelymatter;
 
@@ -21,12 +25,12 @@ using namespace timelymatter;
 void OscRenderControls::sendInitialStatus() {
     ofxOscMessage msg;
     
-    msg.setAddress(ADDR_DEPTH_VISIBLE);
+    msg.setAddress(ADDR_INPUT_VISIBLE);
     msg.addBoolArg(m_params.getInputVisible());
     m_sender.sendMessage(msg);
     msg.clear();
     
-    msg.setAddress(ADDR_DEPTH_ALPHA);
+    msg.setAddress(ADDR_INPUT_ALPHA);
     msg.addFloatArg(m_params.getInputAlpha());
     m_sender.sendMessage(msg);
     msg.clear();
@@ -51,10 +55,10 @@ void OscRenderControls::sendInitialStatus() {
     m_sender.sendMessage(msg);
     msg.clear();
     
-    //    msg.setAddress(ADDR_PS_CORESALPHA);
-    //    msg.addFloatArg(m_params.getInputAlpha());
-    //    m_sender.sendMessage(msg);
-    //    msg.clear();
+    msg.setAddress(ADDR_PS_CORESALPHA);
+    msg.addFloatArg(m_params.getParticleCoresAlpha());
+    m_sender.sendMessage(msg);
+    msg.clear();
     
     msg.setAddress(ADDR_MB_SHOWMESH);
     msg.addBoolArg(m_params.getMetaballsMeshVisible());
@@ -78,6 +82,26 @@ void OscRenderControls::sendInitialStatus() {
     
     msg.setAddress(ADDR_MB_MESHALPHA);
     msg.addFloatArg(m_params.getMetaballsMeshAlpha());
+    m_sender.sendMessage(msg);
+    msg.clear();
+    
+    msg.setAddress(ADDR_MB_WIREFRAMEALPHA);
+    msg.addFloatArg(m_params.getMetaballsWireframeAlpha());
+    m_sender.sendMessage(msg);
+    msg.clear();
+    
+    msg.setAddress(ADDR_MB_FITNESS);
+    msg.addFloatArg(m_params.getMetaballsFitness());
+    m_sender.sendMessage(msg);
+    msg.clear();
+    
+    msg.setAddress(ADDR_MB_THRESHOLD);
+    msg.addFloatArg(m_params.getMetaballsThreshold());
+    m_sender.sendMessage(msg);
+    msg.clear();
+    
+    msg.setAddress(ADDR_MB_DAMPENING);
+    msg.addFloatArg(m_params.getMetaballsDampening());
     m_sender.sendMessage(msg);
     msg.clear();
 }
@@ -133,10 +157,10 @@ void OscRenderControls::m_onUpdate() {
         m_receiver.getNextMessage(msg);
         
         // check if depth alpha has changed
-        if (msg.getAddress() == ADDR_DEPTH_VISIBLE) {
+        if (msg.getAddress() == ADDR_INPUT_VISIBLE) {
             m_params.getInputVisible() = msg.getArgAsBool(0);
         }
-        else if (msg.getAddress() == ADDR_DEPTH_ALPHA) {
+        else if (msg.getAddress() == ADDR_INPUT_ALPHA) {
             m_params.getInputAlpha() = msg.getArgAsFloat(0);
         }
         else if (msg.getAddress() == ADDR_PS_UPDATE) {
@@ -152,23 +176,34 @@ void OscRenderControls::m_onUpdate() {
             m_params.getParticleAreasAlpha() = msg.getArgAsFloat(0);
         }
         else if (msg.getAddress() == ADDR_PS_CORESALPHA) {
-            //TODO
-//            m_params.getInputAlpha() = msg.getArgAsFloat(0);
-        }
-        else if (msg.getAddress() == ADDR_MB_SHOWMESH) {
-            m_params.getMetaballsMeshVisible() = msg.getArgAsBool(0);
-        }
-        else if (msg.getAddress() == ADDR_MB_SHOWWIREFRAME) {
-            m_params.getMetaballsWireframeVisible() = msg.getArgAsBool(0);
-        }
-        else if (msg.getAddress() == ADDR_MB_INTERPOLATE) {
-            m_params.getMetaballsInterpolate() = msg.getArgAsBool(0);
+            m_params.getParticleCoresAlpha() = msg.getArgAsFloat(0);
         }
         else if (msg.getAddress() == ADDR_MB_INFILL) {
             m_params.getMetaballsInfill() = msg.getArgAsBool(0);
         }
+        else if (msg.getAddress() == ADDR_MB_SHOWMESH) {
+            m_params.getMetaballsMeshVisible() = msg.getArgAsBool(0);
+        }
         else if (msg.getAddress() == ADDR_MB_MESHALPHA) {
             m_params.getMetaballsMeshAlpha() = msg.getArgAsFloat(0);
+        }
+        else if (msg.getAddress() == ADDR_MB_SHOWWIREFRAME) {
+            m_params.getMetaballsWireframeVisible() = msg.getArgAsBool(0);
+        }
+        else if (msg.getAddress() == ADDR_MB_WIREFRAMEALPHA) {
+            m_params.getMetaballsWireframeAlpha() = msg.getArgAsFloat(0);
+        }
+        else if (msg.getAddress() == ADDR_MB_INTERPOLATE) {
+            m_params.getMetaballsInterpolate() = msg.getArgAsBool(0);
+        }
+        else if (msg.getAddress() == ADDR_MB_FITNESS) {
+            m_params.getMetaballsFitness() = msg.getArgAsFloat(0);
+        }
+        else if (msg.getAddress() == ADDR_MB_THRESHOLD) {
+            m_params.getMetaballsThreshold() = msg.getArgAsFloat(0);
+        }
+        else if (msg.getAddress() == ADDR_MB_DAMPENING) {
+            m_params.getMetaballsDampening() = msg.getArgAsFloat(0);
         }
     }
     

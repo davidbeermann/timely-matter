@@ -26,6 +26,12 @@ namespace timelymatter {
         ofFbo & getWireframeFbo() { return m_wireframe_fbo; }
         ofParameterGroup & getParams() { return m_params; }
         
+        void setThreshold(float const value) {
+            m_cell_grid.setThreshold(value);
+        }
+        void setDampening(float const value) {
+            m_cell_grid.setDampening(value);
+        }
         void setInterpolation(const bool value) {
             m_cell_grid.setInterpolate(value);
         }
