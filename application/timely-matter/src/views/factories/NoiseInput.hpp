@@ -19,20 +19,28 @@ namespace timelymatter {
         ofParameter<float> m_offset_y;
         ofParameter<float> m_scale;
         ofParameter<float> m_speed;
-        ofParameter<bool> m_draw_output;
         
     protected:
         // implementations of abstract class methods
         void m_onWindowResized(const int width, const int height) {};
         void m_onSetup();
         void m_onUpdate();
-        void m_onDraw();
         
-        void m_onDraw(const ofRectangle& size);
-        const ofPixels& m_onGetPixels();
-        const unsigned int m_onGetWidth();
-        const unsigned int m_onGetHeight();
+        // the draw methods are not needed for this class
+        void m_onDraw() {}
+        void m_onDraw(const ofRectangle& size) {}
         
+        const ofPixels& m_onGetPixels() {
+            // write FBO pixel data into image buffer
+            m_fbo.readToPixels(m_image.getPixels());
+            return m_image.getPixels();
+        }
+        const unsigned int m_onGetWidth() {
+            return m_fbo.getWidth();
+        }
+        const unsigned int m_onGetHeight() {
+            return m_fbo.getHeight();
+        }
         ofParameterGroup& m_onGetParams() {
             return m_params;
         }
@@ -42,6 +50,13 @@ namespace timelymatter {
         const string m_onGetName() {
             return "Perlin Noise";
         }
+        ofFbo & m_onGetOutputFbo() {
+            return m_fbo;
+        };
+        
+    public:
+        NoiseInput() {}
+        ~NoiseInput() {}
     };
 
 }

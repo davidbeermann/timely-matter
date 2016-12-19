@@ -162,7 +162,8 @@ namespace timelymatter {
         
         const ofColor & getBackgroundColor() {
             return m_background_color;
-        }const ofColor & getBackgroundClearColor() {
+        }
+        const ofColor & getBackgroundClearColor() {
             return m_background_clear_color;
         }
         const ofColor & getMetaballsColor() {

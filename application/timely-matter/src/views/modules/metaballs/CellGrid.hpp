@@ -4,6 +4,7 @@
 #include "CellUnit.hpp"
 #include "Cell.hpp"
 #include "Particle.hpp"
+#include "RenderParams.hpp"
 
 
 namespace timelymatter {
@@ -33,14 +34,19 @@ namespace timelymatter {
         ofPath m_path;
         ofMesh m_mesh;
         
-        ofParameter<float> m_threshold_param;
-        ofParameter<float> m_dampening_param;
-        ofParameter<bool> m_interpolate_param;
-        ofParameter<bool> m_infill_param;
+        float m_threshold;
+        float m_dampening;
+        bool m_interpolate;
+        bool m_infill;
         
         void findNeighbor(Cell* cell, vector<Cell*> & list, ofPath & path, NeighborDirection prev_dir = NONE);
         
     public:
+        
+        static float const THRESHOLD_MIN;
+        static float const THRESHOLD_MAX;
+        static float const DAMPENING_MIN;
+        static float const DAMPENING_MAX;
         
         void setup(const unsigned int & width, const unsigned int & height, const unsigned int & columns, const unsigned int & rows);
         void update(vector<Particle> & particles);
@@ -74,17 +80,34 @@ namespace timelymatter {
             return m_path;
         }
         
-        ofParameter<float> & getThresholdParam() {
-            return m_threshold_param;
+        float const & getThreshold() {
+            return m_threshold;
         }
-        ofParameter<float> & getDampeningParam() {
-            return m_dampening_param;
+        float const & getDampening() {
+            return m_dampening;
         }
-        ofParameter<bool> & getInterpolateParam() {
-            return m_interpolate_param;
+        const bool & getInterpolate() {
+            return m_interpolate;
         }
-        ofParameter<bool> & getInfillParam() {
-            return m_infill_param;
+        const bool & getInfill() {
+            return m_infill;
+        }
+        
+        void setThreshold(float const value) {
+            if (value > THRESHOLD_MAX) m_threshold = THRESHOLD_MAX;
+            else if (value < THRESHOLD_MIN) m_threshold = THRESHOLD_MIN;
+            else m_threshold = value;
+        }
+        void setDampening(float const value) {
+            if (value > DAMPENING_MAX) m_dampening = DAMPENING_MAX;
+            else if (value < DAMPENING_MIN) m_dampening = DAMPENING_MIN;
+            else m_dampening = value;
+        }
+        void setInterpolate(bool const value) {
+            m_interpolate = value;
+        }
+        void setInfill(bool const value) {
+            m_infill = value;
         }
     };
 

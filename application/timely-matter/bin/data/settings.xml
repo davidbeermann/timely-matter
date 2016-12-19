@@ -1,29 +1,28 @@
 <Timely_Matter>
-  <Infrared_Normalization>
-    <min>40.5918</min>
-    <max>255</max>
-  </Infrared_Normalization>
-  <Depth_Clipping>
-    <near>2189</near>
-    <far>2240</far>
-  </Depth_Clipping>
-  <Calibrate_Depth_View>
-    <show_depth_output>0</show_depth_output>
-  <show_selection_output>0</show_selection_output>
+    <Infrared_Normalization>
+        <min>40.5918</min>
+        <max>255</max>
+    </Infrared_Normalization>
+    <Depth_Clipping>
+        <near>2189</near>
+        <far>2240</far>
+    </Depth_Clipping>
+    <Calibrate_Depth_View>
+        <show_depth_output>0</show_depth_output>
+        <show_selection_output>0</show_selection_output>
 	</Calibrate_Depth_View>
-  <Kinect_Input>
-    <show_output>1</show_output>
-  </Kinect_Input>
-  <Noise_Input>
-    <offset_x>5.43</offset_x>
-    <offset_y>2.34</offset_y>
-    <scale>0.0055</scale>
-    <speed>0.5</speed>
-    <draw_FBO>0</draw_FBO>
-  <enable_noise>1</enable_noise>
+    <Kinect_Input>
+        <show_output>1</show_output>
+    </Kinect_Input>
+    <Noise_Input>
+        <offset_x>5.43</offset_x>
+        <offset_y>2.34</offset_y>
+        <scale>0.0055</scale>
+        <speed>0.5</speed>
+        <enable_noise>1</enable_noise>
 	</Noise_Input>
 	<Vector_Field>
-    <edge_force>1.5</edge_force>
+        <edge_force>1.5</edge_force>
 		<field_force>3.18367</field_force>
 		<attract_threshold>0</attract_threshold>
 		<show_marks>0</show_marks>
@@ -34,74 +33,34 @@
 		<max_velocity>5</max_velocity>
 		<velocity_decay>0.99</velocity_decay>
 		<show_mark_ref>0</show_mark_ref>
-		<show_particles>1</show_particles>
-	<move_particles>1</move_particles>
-		<draw_lines>0</draw_lines>
-		<draw_fading>0</draw_fading>
-	<show_particle_areas>1</show_particle_areas>
-		<show_particle_cores>1</show_particle_cores>
-		<draw_trail>0</draw_trail>
-	<gravity>0.075351</gravity>
+        <gravity>0.075351</gravity>
 	</Particle_System>
-<Timely_Matter/>
-<Metaballs>
-    <show_cells>0</show_cells>
-    <show_mesh>1</show_mesh>
-	<interpolate>1</interpolate>
-    <infill>1</infill>
-    <wireframe>0</wireframe>
-	<distance_threshold>0.0693878</distance_threshold>
-    <dampening_factor>0.910204</dampening_factor>
-    <color>216, 216, 216, 255</color>
-</Metaballs>
-<Gaussian_Blur>
-    <enabled>0</enabled>
-    <strength>1</strength>
-</Gaussian_Blur>
-<group>
-		<Kinect_Input>
-			<show_output>0</show_output>
-		</Kinect_Input>
-		<Vector_Field>
-			<edge_force>1.5</edge_force>
-			<field_force>8</field_force>
-			<attract_threshold>0</attract_threshold>
-			<show_marks>0</show_marks>
-			<show_values>0</show_values>
-			<show_vectors>0</show_vectors>
-		</Vector_Field>
-		<Particle_System>
-			<move_particles>1</move_particles>
-			<show_particles>1</show_particles>
-			<show_particle_areas>1</show_particle_areas>
-			<show_particle_cores>1</show_particle_cores>
-			<max_velocity>5</max_velocity>
-			<velocity_decay>0.99</velocity_decay>
-			<gravity>0.01</gravity>
-			<show_mark_ref>0</show_mark_ref>
-			<draw_trail>0</draw_trail>
-		</Particle_System>
-		<Metaballs>
-			<distance_threshold>0</distance_threshold>
-			<dampening_factor>0.5</dampening_factor>
-			<interpolate>0</interpolate>
-			<infill>0</infill>
-			<show_cells>0</show_cells>
-			<show_mesh>1</show_mesh>
-			<wireframe>0</wireframe>
-			<color>216, 216, 216, 255</color>
-		</Metaballs>
-		<Gaussian_Blur>
-			<enabled>0</enabled>
-			<strength>1</strength>
-		</Gaussian_Blur>
-	<Infrared_Normalization>
-			<min>33</min>
-			<max>255</max>
-		</Infrared_Normalization>
-		<Depth_Clipping>
-			<near>3357</near>
-			<far>3387</far>
-		</Depth_Clipping>
-	</group>
+    <Gaussian_Blur>
+        <enabled>0</enabled>
+        <strength>1</strength>
+    </Gaussian_Blur>
+    <Rendering>
+        <Depth_Input>
+            <input_visible>0</input_visible>
+            <input_alpha>0</input_alpha>
+        </Depth_Input>
+        <Particles>
+            <update>1</update>
+            <areas_visible>1</areas_visible>
+            <areas_alpha>214.642</areas_alpha>
+            <cores_visible>1</cores_visible>
+            <cores_alpha>255</cores_alpha>
+        </Particles>
+        <Metaballs>
+            <infill>1</infill>
+            <mesh_visible>1</mesh_visible>
+            <mesh_alpha>121.181</mesh_alpha>
+            <wireframe_visible>0</wireframe_visible>
+            <wireframe_alpha>50.0229</wireframe_alpha>
+            <interpolate>1</interpolate>
+            <fitness>0</fitness>
+            <threshold>0.0693878</threshold>
+            <dampening>0.910204</dampening>
+        </Metaballs>
+    </Rendering>
 </Timely_Matter>

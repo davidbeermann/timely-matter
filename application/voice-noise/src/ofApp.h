@@ -2,10 +2,15 @@
 
 #include "ofMain.h"
 #include "ofxMaxim.h"
+#include "SoundParams.hpp"
+#include "SoundControls.hpp"
 #include "VoiceSynthesis.hpp"
 
 
 class ofApp : public ofBaseApp {
+    
+    SoundParams & m_params;
+    SoundControls m_controls;
     
     unsigned int m_sample_rate;
     unsigned int m_buffer_size;
@@ -24,6 +29,8 @@ class ofApp : public ofBaseApp {
     vector<VoiceSynthesis> m_voices;
     
 public:
+    ofApp() : m_params(SoundParams::get()) {}
+    
     void setup();
     void update();
     void draw();
@@ -33,12 +40,14 @@ public:
     //    void keyReleased(int key);
     //    void mouseMoved(int x, int y );
     //    void mouseDragged(int x, int y, int button);
-    void mousePressed(int x, int y, int button);
+    //    void mousePressed(int x, int y, int button);
     //    void mouseReleased(int x, int y, int button);
     //    void mouseEntered(int x, int y);
     //    void mouseExited(int x, int y);
     //    void windowResized(int w, int h);
     //    void dragEvent(ofDragInfo dragInfo);
     //    void gotMessage(ofMessage msg);
+    
+    void onPlayRandomSample();
     
 };

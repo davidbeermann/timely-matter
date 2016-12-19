@@ -1,14 +1,21 @@
 #include "Particle.hpp"
 #include "AppConfig.hpp"
 
+#define AREA_ALPHA 0.9
 #define CORE_SIZE 3
 
 using namespace timelymatter;
 
 
+const ofColor Particle::COLOR = ofColor(255, 255, 255, 255);
+
+
 Particle::Particle(ofParameter<float>& maxVelocity, ofParameter<float>& velocityDecay)
 : m_max_velocity(maxVelocity), m_decay(velocityDecay) {
     m_max_velocity_squared = m_max_velocity * m_max_velocity;
+    
+    m_area_color = COLOR;
+    m_area_color.a = 255.f * (float) AREA_ALPHA; // 90% alpha for particle areas
 }
 
 
@@ -65,7 +72,7 @@ void Particle::drawArea(const ofVboMesh& mesh) {
     
     float scale = m_radius / AppConfig::get().getParticleSystemMaxRadius();
     ofScale(scale, scale);
-    ofSetColor(255, 0, 0, 128);
+    ofSetColor(m_area_color);
     mesh.draw();
     
     ofPopStyle();
@@ -80,7 +87,7 @@ void Particle::drawCore(const ofVboMesh& mesh) {
     
     float scale = (float) CORE_SIZE / AppConfig::get().getParticleSystemMaxRadius();
     ofScale(scale, scale);
-    ofSetColor(255, 255, 255, 255);
+    ofSetColor(COLOR);
     mesh.draw();
     
     ofPopStyle();
