@@ -42,7 +42,7 @@
   
   <!-- *_*_* COLORS *_*_* -->
   <colors>
-    <background hue="0.0" saturation="0.0" brightness="0.1" alpha="1.0" />
+    <background hue="0.0" saturation="0.0" brightness="0.0" alpha="1.0" />
     <metaballs hue="0.0" saturation="0.0" brightness="0.85" alpha="1.0" />
   </colors>
 
