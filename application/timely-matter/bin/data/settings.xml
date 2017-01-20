@@ -45,7 +45,7 @@
             <input_alpha>0</input_alpha>
         </Depth_Input>
         <Particles>
-            <update>1</update>
+            <update>0</update>
             <areas_visible>1</areas_visible>
             <areas_alpha>214.642</areas_alpha>
             <cores_visible>1</cores_visible>
@@ -69,8 +69,8 @@
 			<show_depth_output>1</show_depth_output>
 		</Calibrate_Depth_View>
 		<Depth_Clipping>
-			<near>3328</near>
-			<far>3351</far>
+			<near>3371</near>
+			<far>3387</far>
 		</Depth_Clipping>
 		<Vector_Field>
 			<edge_force>1.5</edge_force>
@@ -83,7 +83,7 @@
 	<Particle_System>
 			<max_velocity>5</max_velocity>
 			<velocity_decay>0.99</velocity_decay>
-			<gravity>0.01</gravity>
+			<gravity>0.00665714</gravity>
 		</Particle_System>
 		<Gaussian_Blur>
 			<enabled>0</enabled>
@@ -97,9 +97,9 @@
 			<Particles>
 				<update>1</update>
 				<areas_visible>0</areas_visible>
-				<areas_alpha>0</areas_alpha>
-				<cores_visible>0</cores_visible>
-				<cores_alpha>0</cores_alpha>
+				<areas_alpha>161.186</areas_alpha>
+				<cores_visible>1</cores_visible>
+				<cores_alpha>255</cores_alpha>
 			</Particles>
 			<Metaballs>
 				<infill>1</infill>

@@ -1,7 +1,7 @@
 <OscConfig>
     
     <sender>
-        <address>10.10.49.37</address>
+        <address>10.10.49.2</address>
         <port>9998</port>
     </sender>
     
