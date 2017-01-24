@@ -5,6 +5,9 @@
 #include "AppConfig.hpp"
 #include "Constants.hpp"
 
+#define PDF_RENDERER_TOTAL_PAGES 33
+#define PDF_RENDERER_CAPTURE_RATE 6
+
 using namespace timelymatter;
 
 
@@ -42,8 +45,8 @@ void RenderView::m_onWindowResized(const int width, const int height) {
 void RenderView::m_onSetup() {
     
     if (FLIPBOOK_ENABLED) {
-        // capture PDF every 6 frames for 10 frames in total
-        m_pdf_renderer.setup(10, 6);
+        // capture PDF every few frames for a number of total pages
+        m_pdf_renderer.setup(PDF_RENDERER_TOTAL_PAGES, PDF_RENDERER_CAPTURE_RATE);
     } else {
         // only setup OSC controls if not rendered for flipbook
         m_osc_controls.setup();
@@ -136,6 +139,8 @@ void RenderView::m_onUpdate() {
                 m_pdf_renderer.begin();
                 m_pdf_renderer.get().pushStyle();
                 m_pdf_renderer.get().setColor(255);
+                m_pdf_renderer.get().setFillMode(ofFillFlag::OF_FILLED);
+                // draw(const ofMesh &vertexData, ofPolyRenderMode mode, bool useColors, bool useTextures, bool useNormals);
                 m_pdf_renderer.get().draw(m_metaballs.getMesh(), ofPolyRenderMode::OF_MESH_FILL, false, false, false);
                 m_pdf_renderer.get().popStyle();
                 m_pdf_renderer.end();
