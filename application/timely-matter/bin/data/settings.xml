@@ -42,19 +42,19 @@
     <Rendering>
         <Depth_Input>
             <input_visible>0</input_visible>
-            <input_alpha>0</input_alpha>
+            <input_alpha>255</input_alpha>
         </Depth_Input>
         <Particles>
-            <update>0</update>
-            <areas_visible>1</areas_visible>
-            <areas_alpha>214.642</areas_alpha>
-            <cores_visible>1</cores_visible>
+            <update>1</update>
+            <areas_visible>0</areas_visible>
+            <areas_alpha>255</areas_alpha>
+            <cores_visible>0</cores_visible>
             <cores_alpha>255</cores_alpha>
         </Particles>
         <Metaballs>
             <infill>1</infill>
             <mesh_visible>1</mesh_visible>
-            <mesh_alpha>121.181</mesh_alpha>
+            <mesh_alpha>255</mesh_alpha>
             <wireframe_visible>0</wireframe_visible>
             <wireframe_alpha>50.0229</wireframe_alpha>
             <interpolate>1</interpolate>
@@ -114,4 +114,5 @@
 			</Metaballs>
 		</Rendering>
 	</group>
+<Timely_Matter/>
 </Timely_Matter>

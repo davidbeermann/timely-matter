@@ -13,8 +13,8 @@
   <!-- *_*_* KINECT *_*_* -->
   <kinect>
     <!-- This buffer should not be smaller than the depth buffer of the Kinect (640x480), and also have the same aspect ratio as the output depth buffer above. -->
-    <crop_buffer_width>560</crop_buffer_width>
-    <crop_buffer_height>315</crop_buffer_height>
+    <crop_buffer_width>300</crop_buffer_width>
+    <crop_buffer_height>600</crop_buffer_height>
   </kinect>
 
   <!-- *_*_* PARTICLE SYSTEM *_*_* -->
@@ -27,7 +27,7 @@
   <!-- *_*_* PARTICLE SYSTEM *_*_* -->
   <particle_system>
     <!-- The total amount of particles in the system. -->
-    <count>150</count>
+    <count>75</count>
     <!-- Range for the random generation of the radius for each particle. -->
     <min_radius>20.0</min_radius>
     <max_radius>30.0</max_radius>
