@@ -3,6 +3,7 @@
 #include "KinectInput.hpp"
 #include "NoiseInput.hpp"
 #include "AppConfig.hpp"
+#include "Constants.hpp"
 
 using namespace timelymatter;
 
@@ -40,7 +41,10 @@ void RenderView::m_onWindowResized(const int width, const int height) {
 
 void RenderView::m_onSetup() {
     
-    if (!FLIPBOOK_ENABLED) {
+    if (FLIPBOOK_ENABLED) {
+        // capture PDF every 6 frames for 10 frames in total
+        m_pdf_renderer.setup(10, 6);
+    } else {
         // only setup OSC controls if not rendered for flipbook
         m_osc_controls.setup();
     }
@@ -93,7 +97,9 @@ void RenderView::m_onSetup() {
 
 void RenderView::m_onUpdate() {
     
-    if (!FLIPBOOK_ENABLED) {
+    if (FLIPBOOK_ENABLED) {
+        m_pdf_renderer.update();
+    } else {
         // update controls before anything else.
         // it updates the parameters!
         m_osc_controls.update();
@@ -120,9 +126,21 @@ void RenderView::m_onUpdate() {
         m_metaballs.setInterpolation(m_params.getMetaballsInterpolate());
         m_metaballs.setInfill(m_params.getMetaballsInfill());
         
+        
         // Pass particles to metaballs to calculate contour lines.
         // This also updates the output FBO.
         m_metaballs.update(m_particle_system.getParticles());
+        
+        if (FLIPBOOK_ENABLED) {
+            if (m_pdf_renderer.isWritingFile()) {
+                m_pdf_renderer.begin();
+                m_pdf_renderer.get().pushStyle();
+                m_pdf_renderer.get().setColor(255);
+                m_pdf_renderer.get().draw(m_metaballs.getMesh(), ofPolyRenderMode::OF_MESH_FILL, false, false, false);
+                m_pdf_renderer.get().popStyle();
+                m_pdf_renderer.end();
+            }
+        }
     }
 }
 

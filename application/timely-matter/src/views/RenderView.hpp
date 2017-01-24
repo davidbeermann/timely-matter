@@ -12,7 +12,7 @@
 #include "RenderControls.hpp"
 #include "OscRenderControls.hpp"
 #include "MidiRenderControls.hpp"
-#include "Constants.hpp"
+#include "PdfRenderer.hpp"
 
 
 namespace timelymatter
@@ -37,6 +37,7 @@ namespace timelymatter
         ofColor m_metaballs_color;
         
         OscRenderControls m_osc_controls = OscRenderControls();
+        PdfRenderer m_pdf_renderer;
         
     protected:
         void m_onWindowResized(const int width, const int height);

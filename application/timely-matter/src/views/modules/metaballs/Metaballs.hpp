@@ -16,9 +16,11 @@ namespace timelymatter {
         ofFbo m_wireframe_fbo;
         
     public:
+        
         void setup(const unsigned int & width, const unsigned int & height, const unsigned int & columns, const unsigned int & rows);
         void update(vector<Particle> & particles);
         
+        ofMesh const & getMesh() { return m_cell_grid.getMesh(); }
         ofFbo & getMeshFbo() { return m_mesh_fbo; }
         ofFbo & getWireframeFbo() { return m_wireframe_fbo; }
         
