@@ -1,4 +1,5 @@
 #include "ParticleSystem.hpp"
+#include "Constants.hpp"
 
 #define PARTICLE_MESH_RESOLUTION 36
 
@@ -34,6 +35,7 @@ void ParticleSystem::setup(const unsigned int & width, const unsigned int & heig
     m_params.setName("Particle System");
     m_params.add(m_param_max_velocity.set("max velocity", 5.f, 1.f, 10.f));
     m_params.add(m_param_velocity_decay.set("velocity decay", 0.99f, 0.9f, 0.999f));
+    m_params.add(m_param_gravity_enabled.set("gravity enabled", !FLIPBOOK_ENABLED));
     m_params.add(m_param_gravity.set("gravity", 0.01f, 0.001f, 0.1f));
     
     // add particles to system.
@@ -65,7 +67,9 @@ void ParticleSystem::applyVectorField(VectorField& vectorField) {
         ofVec3f field = vectorField.getForceForPosition(p->getPosition());
         p->applyForce(field);
         // apply gravity
-        p->applyForce(m_gravity);
+        if (m_param_gravity_enabled) {
+            p->applyForce(m_gravity);
+        }
     }
 }
 

@@ -33,6 +33,7 @@
 		<max_velocity>5</max_velocity>
 		<velocity_decay>0.99</velocity_decay>
 		<show_mark_ref>0</show_mark_ref>
+        <gravity_enabled>0</gravity_enabled>
         <gravity>0.075351</gravity>
 	</Particle_System>
     <Gaussian_Blur>

@@ -22,6 +22,7 @@ namespace timelymatter {
         ofParameterGroup m_params;
         ofParameter<float> m_param_max_velocity;
         ofParameter<float> m_param_velocity_decay;
+        ofParameter<bool> m_param_gravity_enabled;
         ofParameter<float> m_param_gravity;
         
     public:
