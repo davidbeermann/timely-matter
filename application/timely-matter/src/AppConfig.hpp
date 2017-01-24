@@ -1,7 +1,9 @@
 #include "ofMain.h"
 #include "ofxXmlSettings.h"
+#include "Constants.hpp"
 
-#define APP_CONFIG_SETTINGS_FILE "AppConfig.xml"
+#define DEFAULT_SETTINGS_FILE "AppConfig.xml"
+#define FLIPBOOK_SETTINGS_FILE "AppConfigFlipbook.xml"
 
 
 namespace timelymatter {
@@ -104,10 +106,16 @@ namespace timelymatter {
         
         // main function to load settings from xml file
         bool load() {
-            m_loaded = m_settings.load(APP_CONFIG_SETTINGS_FILE);
+            if (FLIPBOOK_ENABLED) {
+                m_loaded = m_settings.load(FLIPBOOK_SETTINGS_FILE);
+            } else {
+                m_loaded = m_settings.load(DEFAULT_SETTINGS_FILE);
+            }
+            
             if (m_loaded) {
                 parseXml();
             }
+            
             return m_loaded;
         }
         
