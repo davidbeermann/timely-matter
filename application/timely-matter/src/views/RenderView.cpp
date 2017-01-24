@@ -40,9 +40,10 @@ void RenderView::m_onWindowResized(const int width, const int height) {
 
 void RenderView::m_onSetup() {
     
-#ifdef USING_OSC
-    m_osc_controls.setup();
-#endif
+    if (!FLIPBOOK_ENABLED) {
+        // only setup OSC controls if not rendered for flipbook
+        m_osc_controls.setup();
+    }
     
     m_input.setup();
     
@@ -92,11 +93,11 @@ void RenderView::m_onSetup() {
 
 void RenderView::m_onUpdate() {
     
-#ifdef USING_OSC
-    // update controls before anything else.
-    // it updates the parameters!
-    m_osc_controls.update();
-#endif
+    if (!FLIPBOOK_ENABLED) {
+        // update controls before anything else.
+        // it updates the parameters!
+        m_osc_controls.update();
+    }
     
     // update input pixels
     m_input.update();

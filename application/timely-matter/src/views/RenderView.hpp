@@ -12,13 +12,13 @@
 #include "RenderControls.hpp"
 #include "OscRenderControls.hpp"
 #include "MidiRenderControls.hpp"
-
-#define USING_OSC
+#include "Constants.hpp"
 
 
 namespace timelymatter
 {
     class RenderView : public BaseView {
+        
         RenderParams & m_params;
         VectorFieldInputFactory m_input_factory;
         VectorFieldInput& m_input;
@@ -36,16 +36,16 @@ namespace timelymatter
         ofColor m_particle_color;
         ofColor m_metaballs_color;
         
-#ifdef USING_OSC
         OscRenderControls m_osc_controls = OscRenderControls();
-#endif
         
     protected:
         void m_onWindowResized(const int width, const int height);
         void m_onSetup();
         void m_onUpdate();
         void m_onDraw();
+        
     public:
         RenderView();
+        
     };
 }
