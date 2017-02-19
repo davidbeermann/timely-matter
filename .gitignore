@@ -20,3 +20,4 @@ application/*/*
 
 # ignore folder with local tests
 tests
+/application/timely-matter/bin/data/**/*/
