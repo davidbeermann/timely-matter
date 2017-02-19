@@ -5,8 +5,8 @@
 #include "AppConfig.hpp"
 #include "Constants.hpp"
 
-#define PDF_RENDERER_TOTAL_PAGES 33
-#define PDF_RENDERER_CAPTURE_RATE 6
+#define PDF_RENDERER_TOTAL_PAGES 50
+#define PDF_RENDERER_CAPTURE_RATE 10
 
 using namespace timelymatter;
 
