@@ -4,9 +4,7 @@
 #include "NoiseInput.hpp"
 #include "AppConfig.hpp"
 #include "Constants.hpp"
-
-#define PDF_RENDERER_TOTAL_PAGES 50
-#define PDF_RENDERER_CAPTURE_RATE 10
+#include "FlipbookSettings.hpp"
 
 using namespace timelymatter;
 
@@ -45,8 +43,14 @@ void RenderView::m_onWindowResized(const int width, const int height) {
 void RenderView::m_onSetup() {
     
     if (FLIPBOOK_ENABLED) {
-        // capture PDF every few frames for a number of total pages
-        m_pdf_renderer.setup(PDF_RENDERER_TOTAL_PAGES, PDF_RENDERER_CAPTURE_RATE);
+        FlipbookSettings & settings = FlipbookSettings::get();
+        if (settings.isLoaded() || settings.load()) {
+            // capture PDF every few frames for a number of total pages
+            ofLog() << "Flipbook => total pages:" << settings.getTotalPages() << " - capture rate:" << settings.getCaptureRate();
+            m_pdf_renderer.setup(settings.getTotalPages(), settings.getCaptureRate());
+        } else {
+            ofLogError() << "There was an error loading the flipbook settings";
+        }
     } else {
         // only setup OSC controls if not rendered for flipbook
         m_osc_controls.setup();
