@@ -23,8 +23,8 @@ int main( ){
     settings.setGLVersion(3, 3); // OpenGL 3.3 - GLSL #version 330
     if (FLIPBOOK_ENABLED) {
         // DIN Lang portrait format aspect ratio
-        settings.width = 300;
-        settings.height = 600;
+        settings.width = 360;
+        settings.height = 700;
         settings.resizable = false;
     } else {
         settings.width = 1000;
