@@ -3,8 +3,8 @@
   <!-- *_*_* OUTPUT *_*_* -->
   <output>
     <!-- Output resolution of the projector -->
-    <projector_width>1920</projector_width>
-    <projector_height>1080</projector_height>
+    <projector_width>1280</projector_width>
+    <projector_height>720</projector_height>
     <!-- Internal buffer for projector output. The size and the aspect ratio of this buffer are key to the performance but also precision of the rendering. Depending on the projector resolution, usually half the resolution works well with the current implementation. -->
     <buffer_width>960</buffer_width>
     <buffer_height>540</buffer_height>
