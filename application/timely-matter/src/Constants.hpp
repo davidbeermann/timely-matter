@@ -6,6 +6,9 @@
 // http://stackoverflow.com/questions/641397/c-best-way-to-define-cross-file-constants
 
 namespace timelymatter {
-    bool const FLIPBOOK_ENABLED = true;
+    bool const FLIPBOOK_ENABLED = false;
+    // OSC should not be enabled together with flipbook option.
+    // OSC also requires an active network connection.
+    bool const OSC_ENABLED = false;
 }
 

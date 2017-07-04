@@ -51,7 +51,9 @@ void RenderView::m_onSetup() {
         } else {
             ofLogError() << "There was an error loading the flipbook settings";
         }
-    } else {
+    }
+    
+    if (OSC_ENABLED) {
         // only setup OSC controls if not rendered for flipbook
         m_osc_controls.setup();
     }
@@ -106,7 +108,9 @@ void RenderView::m_onUpdate() {
     
     if (FLIPBOOK_ENABLED) {
         m_pdf_renderer.update();
-    } else {
+    }
+    
+    if (OSC_ENABLED) {
         // update controls before anything else.
         // it updates the parameters!
         m_osc_controls.update();
