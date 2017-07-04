@@ -2,5 +2,5 @@
     <!-- Number of total PDF files captured -->
     <total_pages>51</total_pages>
     <!-- Number of frames between each captured state -->
-    <capture_rate>8</capture_rate>
+    <capture_rate>3</capture_rate>
 </flipbook_settings>
