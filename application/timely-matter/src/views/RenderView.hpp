@@ -13,7 +13,7 @@
 #include "OscRenderControls.hpp"
 #include "MidiRenderControls.hpp"
 
-#define USING_OSC
+//#define USING_OSC
 
 
 namespace timelymatter
