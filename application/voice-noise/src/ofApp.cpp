@@ -5,6 +5,7 @@ void ofApp::setup() {
     
     ofBackground(0);
     ofSetCircleResolution(120);
+    ofSetWindowTitle("voice noise");
     
     m_sample_rate = 44100;
     m_buffer_size = 512;
