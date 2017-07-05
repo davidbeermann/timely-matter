@@ -10,7 +10,9 @@ void ofApp::setup() {
     m_sample_rate = 44100;
     m_buffer_size = 512;
     
+#ifdef OSC_ENABLED
     m_controls.setup();
+#endif
     
     ofLog() << "number of samples: " << m_file_names.size();
     
@@ -34,7 +36,9 @@ void ofApp::setup() {
 
 void ofApp::update() {
     
+#ifdef OSC_ENABLED
     m_controls.update();
+#endif
     
     if (m_params.getPlaying()) {
         vector<VoiceSynthesis>::iterator voice;

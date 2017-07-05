@@ -6,11 +6,15 @@
 #include "SoundControls.hpp"
 #include "VoiceSynthesis.hpp"
 
+//#define OSC_ENABLED
+
 
 class ofApp : public ofBaseApp {
     
     SoundParams & m_params;
+#ifdef OSC_ENABLED
     SoundControls m_controls;
+#endif
     
     unsigned int m_sample_rate;
     unsigned int m_buffer_size;

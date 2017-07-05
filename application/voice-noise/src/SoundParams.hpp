@@ -17,7 +17,7 @@ class SoundParams {
     // private constructor
     SoundParams() {
         m_playing.set("start", true);
-        m_volume.set("volume", 0.5f, 0.f, 1.f);
+        m_volume.set("volume", 1.0f, 0.f, 1.f);
         
         m_random = false;
     }
