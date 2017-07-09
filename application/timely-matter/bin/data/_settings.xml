@@ -111,8 +111,8 @@
 				<wireframe_alpha>0</wireframe_alpha>
 				<interpolate>1</interpolate>
 				<fitness>0</fitness>
-				<threshold>0.0503957</threshold>
-				<dampening>0.970845</dampening>
+				<threshold>0.0212412</threshold>
+				<dampening>0.979175</dampening>
 			</Metaballs>
 		</Rendering>
 	</group>
